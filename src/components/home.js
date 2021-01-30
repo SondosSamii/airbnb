@@ -1,13 +1,15 @@
 import Navbar from "./navbar"
 import Slideshow from "./slideshow";
 
-const Home = ()=> {
+const Home = () => {
     document.title = "Home";
     return (
-        <section id="home">
+        <>
           <Navbar/>
-          <Slideshow/>
-        </section>
+          <section id="home">
+              <Slideshow/>
+          </section>
+        </>
     )
 }
 
