@@ -1,8 +1,13 @@
+import Navbar from "./navbar"
+import Slideshow from "./slideshow";
+
 const Home = ()=> {
+    document.title = "Home";
     return (
-        <div>
-          <h1>Home Works</h1>
-        </div>
+        <section id="home">
+          <Navbar/>
+          <Slideshow/>
+        </section>
     )
 }
 
