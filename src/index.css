@@ -50,3 +50,10 @@ p {
 }
 /* End Global Style */
 
+/* Start Home Style */
+/* Slideshow */
+.slick-slider {
+  height: 100vh;
+  overflow: hidden;
+}
+/* End Home Style */
