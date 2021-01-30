@@ -2,9 +2,7 @@ import Routes from "./components/routes"
 
 const App = ()=> {
     return (
-        <div>
-          <Routes/>
-        </div>
+        <Routes/>
     )
 }
 
