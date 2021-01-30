@@ -19,6 +19,34 @@ code {
     monospace;
 }
 
+/* Start Global Style */
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+  color: var(--primary-color);
+}
+
+.main-btn,
+.navbar-light .navbar-nav .nav-link.main-btn {
+  color: var(--primary-light-color);
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  transition: all 0.3s;
+}
+
+.main-btn:focus,
+.main-btn:hover,
+.navbar-light .navbar-nav .nav-link.main-btn:focus,
+.navbar-light .navbar-nav .nav-link.main-btn:hover {
+  color: var(--primary-color);
+  background-color: transparent;
+}
+
 h1 {
   color: var(--primary-dark-color);
 }
+
+p {
+  color: var(--primary-dark-color);
+}
+/* End Global Style */
+
