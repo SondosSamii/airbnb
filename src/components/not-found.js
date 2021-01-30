@@ -1,6 +1,7 @@
 import { NavLink as Link } from 'react-router-dom';
 
 const NotFound = ()=> {
+    document.title = 404;
     console.log("I did't make this page, I found it here");
     console.log("https://freefrontend.com/html-css-404-page-templates/");
     
