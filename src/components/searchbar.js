@@ -12,7 +12,7 @@ const SearchBar = () => {
             zIndex: 99
         }}>
             <div className="w-50 mx-auto">
-                <h1 className="text-center">Hello World!</h1>
+                <h1 className="text-center">Let's Explore</h1>
                 <p className="text-center">Search for your favourite country
                     <AiFillHeart/></p>
                 <div className="form-group d-flex">
