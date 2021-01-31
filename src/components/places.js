@@ -138,7 +138,7 @@ class Places extends Component {
         this.state = {
             places:[]
           }
-          this.baseURL = "http://localhost:4200/places";
+          this.baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
     }
      componentDidMount(){
          fetch(this.baseURL, { method: "GET" })
@@ -164,12 +164,11 @@ class Places extends Component {
             return this.state.places.slice(0, 1).map((place)=>{ //3
                 
                 console.log("dddddddddddd: " , i);
-                
                 // if(i== 0) {
                     // i++;
                 return (
                  <div className="row justify-content-center">
-                        <div className="col-10 col-md-5">
+                        <div className="col-11 col-md-5">
                             <div className="card-item card-item-lg">
                                 <Link
                                     to={`/places/${this.state.places[0].id}`}
@@ -183,8 +182,8 @@ class Places extends Component {
                                 </Link>
                             </div>
                         </div>
-                        <div className="col-10 col-md-7">
-                            <div className="row">
+                        <div className="col-11 col-md-7">
+                            <div className="row mt-4 mt-md-0">
                                 <div className="col-6">
                                     <div className="card-item card-item-sm">
                                         <Link
@@ -215,9 +214,8 @@ class Places extends Component {
                                 </div>
                             </div>
                             <div
-                                className="row"
+                                className="row mt-4"
                                 style={{
-                                marginTop: '30px'
                             }}>
                                 <div className="col-12">
                                     <div className="card-item card-item-sm">
