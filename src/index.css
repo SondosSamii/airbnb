@@ -2,6 +2,10 @@
   --primary-color: #156268;
   --primary-dark-color: hsl(184, 66%, 20%);
   --primary-light-color: hsl(184, 66%, 97%);
+  --card-border-radius: 20px;
+  --card-shadow: 0 0 20px 1px #aaa;
+  --card-dark-shadow: 0 0 20px 1px #333;
+  --card-transition: all 0.3s;
 }
 
 body {
@@ -48,6 +52,47 @@ h1 {
 p {
   color: var(--primary-dark-color);
 }
+
+.card-item {
+  width: 100%;
+  position: relative;
+}
+
+.card-item-lg {
+  height: 450px;
+}
+
+.card-item-sm {
+  height: 210px;
+}
+
+.card-item-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  transition: var(--card-transition);
+}
+
+.card-item-bg:hover,
+.card-item-bg:focus {
+  cursor: pointer;
+  transform: scale(1.01);
+  box-shadow: var(--card-dark-shadow);
+}
+
+.card-item-details {
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+  color: #fff;
+}
+
 /* End Global Style */
 
 /* Start Home Style */
@@ -56,4 +101,5 @@ p {
   height: 100vh;
   overflow: hidden;
 }
+
 /* End Home Style */
