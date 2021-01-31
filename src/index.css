@@ -2,6 +2,10 @@
   --primary-color: #156268;
   --primary-dark-color: hsl(184, 66%, 20%);
   --primary-light-color: hsl(184, 66%, 97%);
+  --card-border-radius: 20px;
+  --card-shadow: 0 0 20px 1px #aaa;
+  --card-dark-shadow: 0 0 20px 1px #333;
+  --card-transition: all 0.3s;
 }
 
 body {
@@ -19,6 +23,83 @@ code {
     monospace;
 }
 
+/* Start Global Style */
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+  color: var(--primary-color);
+}
+
+.main-btn,
+.navbar-light .navbar-nav .nav-link.main-btn {
+  color: var(--primary-light-color);
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  transition: all 0.3s;
+}
+
+.main-btn:focus,
+.main-btn:hover,
+.navbar-light .navbar-nav .nav-link.main-btn:focus,
+.navbar-light .navbar-nav .nav-link.main-btn:hover {
+  color: var(--primary-color);
+  background-color: transparent;
+}
+
 h1 {
   color: var(--primary-dark-color);
 }
+
+p {
+  color: var(--primary-dark-color);
+}
+
+.card-item {
+  width: 100%;
+  position: relative;
+}
+
+.card-item-lg {
+  height: 450px;
+}
+
+.card-item-sm {
+  height: 210px;
+}
+
+.card-item-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  transition: var(--card-transition);
+}
+
+.card-item-bg:hover,
+.card-item-bg:focus {
+  cursor: pointer;
+  transform: scale(1.01);
+  box-shadow: var(--card-dark-shadow);
+}
+
+.card-item-details {
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+  color: #fff;
+}
+
+/* End Global Style */
+
+/* Start Home Style */
+/* Slideshow */
+.slick-slider {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* End Home Style */
