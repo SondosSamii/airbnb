@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import "../../node_modules/slick-carousel/slick/slick.css";
-import "../../node_modules/slick-carousel/slick/slick-theme.css";
+import "../../../node_modules/slick-carousel/slick/slick.css";
+import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import SearchBar from "./searchbar";
 
