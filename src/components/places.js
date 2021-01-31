@@ -167,7 +167,7 @@ class Places extends Component {
                 // if(i== 0) {
                     // i++;
                 return (
-                 <div className="row justify-content-center">
+                 <div className="row justify-content-center" key={place.id}>
                         <div className="col-11 col-md-5">
                             <div className="card-item card-item-lg">
                                 <Link
