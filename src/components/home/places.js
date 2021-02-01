@@ -37,9 +37,7 @@ class Places extends Component {
                                         style={{
                                         backgroundImage: `url(images/places/${this.state.places[0].images[2]}.jpeg)`
                                     }}>
-                                        <div className="card-item-type">
-                                            <h3>{this.state.places[0].type}</h3>
-                                        </div>
+                                        <h3 className="card-item-type">{this.state.places[0].type}</h3>
                                     </Link>
                                 </div>
                             </div>
@@ -53,9 +51,7 @@ class Places extends Component {
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[1].images[0]}.jpeg)`
                                             }}>
-                                                <div className="card-item-type">
-                                                    <h3>{this.state.places[1].type}</h3>
-                                                </div>
+                                                <h3 className="card-item-type">{this.state.places[1].type}</h3>
                                             </Link>
                                         </div>
                                     </div>
@@ -67,9 +63,7 @@ class Places extends Component {
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[2].images[0]}.jpeg)`
                                             }}>
-                                                <div className="card-item-type">
-                                                    <h3>{this.state.places[2].type}</h3>
-                                                </div>
+                                                <h3 className="card-item-type">{this.state.places[2].type}</h3>
                                             </Link>
                                         </div>
                                     </div>
@@ -83,9 +77,7 @@ class Places extends Component {
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[0].images[1]}.jpeg)`
                                             }}>
-                                                <div className="card-item-type">
-                                                    <h3>{this.state.places[0].type}</h3>
-                                                </div>
+                                                <h3 className="card-item-type">{this.state.places[0].type}</h3>
                                             </Link>
                                         </div>
                                     </div>

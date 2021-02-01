@@ -38,9 +38,7 @@ class Highlights extends Component {
                                     style={{
                                     backgroundImage: `url(images/places/${highlight.images[1]}.jpeg)`
                                 }}>
-                                    <div className="card-item-type">
-                                        <h3>{highlight.type}</h3>
-                                    </div>
+                                    <h3 className="card-item-type">{highlight.type}</h3>
                                 </Link>
                                 {/* <AiOutlineHeart /> */}
                             </div>
