@@ -15,34 +15,16 @@ export default class Slideshow extends Component {
             autoplaySpeed: 2500
         };
         return (
-            <div style={{
-                position: 'relative'
+            <div
+                style={{
+                position: 'relative',
+                overflow: 'hidden'
             }}>
                 <Slider {...settings}>
-                    <div>
-                        <img
-                            src="images/home-slideshow/pexels-photo-3266523.jpeg"
-                            className="img-fluid"
-                            alt="Travel 1"/>
-                    </div>
-                    <div>
-                        <img
-                            src="images/home-slideshow/pexels-photo-1271619.jpeg"
-                            className="img-fluid"
-                            alt="Travel 2"/>
-                    </div>
-                    <div>
-                        <img
-                            src="images/home-slideshow/pexels-photo-59520.jpeg"
-                            className="img-fluid"
-                            alt="Travel 3"/>
-                    </div>
-                    <div>
-                        <img
-                            src="images/home-slideshow/pexels-photo-2398220.jpeg"
-                            className="img-fluid"
-                            alt="Travel 4"/>
-                    </div>
+                    <div className="slideshow-bg slideshow-bg1"></div>
+                    <div className="slideshow-bg slideshow-bg2"></div>
+                    <div className="slideshow-bg slideshow-bg3"></div>
+                    <div className="slideshow-bg slideshow-bg4"></div>
                 </Slider>
                 <SearchBar/>
             </div>

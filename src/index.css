@@ -23,7 +23,6 @@ code {
     monospace;
 }
 
-/* Start Global Style */
 .navbar-light .navbar-brand,
 .navbar-light .navbar-nav .nav-link {
   color: var(--primary-color);
@@ -43,6 +42,33 @@ code {
 .navbar-light .navbar-nav .nav-link.main-btn:hover {
   color: var(--primary-color);
   background-color: transparent;
+}
+
+.slick-slider > * {
+  height: 100vh;
+}
+
+.slideshow-bg {
+  height: 100vh;
+  background-size: center;
+  background-position: center;
+  cursor: grab;
+}
+
+.slideshow-bg1 {
+  background-image: url(./components/home/slideshow/pexels-photo-3266523.jpeg);
+}
+
+.slideshow-bg2 {
+  background-image: url(./components/home/slideshow/pexels-photo-1271619.jpeg);
+}
+
+.slideshow-bg3 {
+  background-image: url(./components/home/slideshow/pexels-photo-59520.jpeg);
+}
+
+.slideshow-bg4 {
+  background-image: url(./components/home/slideshow/pexels-photo-2398220.jpeg);
 }
 
 h1 {
@@ -92,14 +118,3 @@ p {
   bottom: 5%;
   color: #fff;
 }
-
-/* End Global Style */
-
-/* Start Home Style */
-/* Slideshow */
-.slick-slider {
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* End Home Style */
