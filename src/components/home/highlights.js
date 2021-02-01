@@ -28,7 +28,7 @@ class Highlights extends Component {
         if (this.state.highlights) {
             // console.log("Inside if");
             return this.state.highlights.slice(0, 6).map((highlight) => {
-                // console.log(highlight);
+                // console.log(highlight.images[0]);
                     return (
                         <div className="col-9 col-sm-6 col-md-4 col-lg-3 mt-4 mt-md-0" key={highlight.id}>
                             <div className="card-item card-item-md">
@@ -36,7 +36,7 @@ class Highlights extends Component {
                                     to={`/places/${highlight.id}`}
                                     className="card-item-bg"
                                     style={{
-                                    backgroundImage: `url(images/places/${highlight.images[0]}.jpeg)`
+                                    backgroundImage: `url(images/places/${highlight.images[1]}.jpeg)`
                                 }}>
                                     <div className="card-item-details">
                                         <h3>{highlight.type}</h3>

@@ -88,6 +88,10 @@ p {
   height: 450px;
 }
 
+.card-item-md {
+  height: 240px;
+}
+
 .card-item-sm {
   height: 210px;
 }
