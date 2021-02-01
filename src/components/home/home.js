@@ -1,4 +1,5 @@
-import Navbar from "./navbar"
+import Navbar from "../navbar"
+import Highlights from "./highlights";
 import Places from "./places";
 import Slideshow from "./slideshow";
 
@@ -10,6 +11,7 @@ const Home = () => {
           <section id="home">
               <Slideshow/>
               <Places/>
+              <Highlights/>
           </section>
         </>
     )
