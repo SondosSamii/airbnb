@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {NavLink as Link} from "react-router-dom";
-// import {AiOutlineHeart} from "react-icons/ia";
+// import {AiOutlineHeart} from "react-icons/ai";
 
 class Highlights extends Component {
     constructor(props) {
@@ -38,7 +38,7 @@ class Highlights extends Component {
                                     style={{
                                     backgroundImage: `url(images/places/${highlight.images[1]}.jpeg)`
                                 }}>
-                                    <div className="card-item-details">
+                                    <div className="card-item-type">
                                         <h3>{highlight.type}</h3>
                                     </div>
                                 </Link>
