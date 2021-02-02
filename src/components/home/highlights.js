@@ -1,21 +1,7 @@
 import {Component} from 'react';
-// import {NavLink as Link} from "react-router-dom";
 import {FaRegHeart, FaHeart, FaStar, FaTv, FaWifi, FaFan} from "react-icons/fa";
-// import {CgSmartHomeHeat} from "react-icons/cg";
 import {MdPets} from "react-icons/md";
 import {GiHeatHaze} from "react-icons/gi";
-
-// function plus(place) {
-//     return (
-//         <>
-//             {place.has_tv && <FaTv/>}
-//             {place.has_wifi && <FaWifi/>}
-//             {place.pets && <MdPets/>}
-//             {place.has_air_conditioner && <FaFan/>}
-//             {place.has_heating_system && <GiHeatHaze/>}
-//         </>
-//     )
-// }
 
 class Highlights extends Component {
     constructor(props) {
@@ -79,8 +65,6 @@ class Highlights extends Component {
                     return (
                         <div className="col-9 col-sm-6 col-lg-4 mt-4" key={highlight.id}>
                             <div className="card-item">
-                                {/* <Link */}
-                                    {/* to={`/places/${highlight.id}`} */}
                                 <div
                                     className="card-item-highlight"
                                     style={{
@@ -92,14 +76,12 @@ class Highlights extends Component {
                                         {this.icons(highlight)}
                                     </h3>
                                     {this.wishlist()}
-                                {/* </Link> */}
                                 </div>
                                 <div className="card-item-details">
                                     <h4>{highlight.address.city}, {highlight.address.country}</h4>
                                     <p className="desc">{highlight.description}</p>
                                     <p className="price">${highlight.price}</p>
                                     <p className="rating"><FaStar/>&nbsp;4.8</p>
-                                    
                                 </div>
                             </div>
                         </div>
