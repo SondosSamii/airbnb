@@ -1,12 +1,28 @@
-import React, {Component} from 'react';
-import {NavLink as Link} from "react-router-dom";
-// import {AiOutlineHeart} from "react-icons/ai";
+import {Component} from 'react';
+// import {NavLink as Link} from "react-router-dom";
+import {FaRegHeart, FaHeart, FaStar, FaTv, FaWifi, FaFan} from "react-icons/fa";
+// import {CgSmartHomeHeat} from "react-icons/cg";
+import {MdPets} from "react-icons/md";
+import {GiHeatHaze} from "react-icons/gi";
+
+// function plus(place) {
+//     return (
+//         <>
+//             {place.has_tv && <FaTv/>}
+//             {place.has_wifi && <FaWifi/>}
+//             {place.pets && <MdPets/>}
+//             {place.has_air_conditioner && <FaFan/>}
+//             {place.has_heating_system && <GiHeatHaze/>}
+//         </>
+//     )
+// }
 
 class Highlights extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            highlights: []
+            highlights: [],
+            isWishlisted: false
         }
         this.baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
     }
@@ -23,6 +39,37 @@ class Highlights extends Component {
         });
     }
 
+    wishlist = () => {
+        if(this.state.isWishlisted) {
+            return (
+                <FaHeart
+                    className = "wishlist-icon"
+                    title = "Remove from wishlist"
+                    onClick={()=>this.setState({isWishlisted: !this.state.isWishlisted})}
+                />
+            )
+        }
+        return (
+            <FaRegHeart
+                className = "wishlist-icon"
+                title = "Add to wishlist"
+                onClick={()=>this.setState({isWishlisted: !this.state.isWishlisted})}
+            />
+        )
+    }
+
+    icons = (place) => {
+        return (
+            <>
+                {place.has_tv && <FaTv className="highlight-icon"/>}
+                {place.has_wifi && <FaWifi className="highlight-icon"/>}
+                {place.pets && <MdPets className="highlight-icon"/>}
+                {place.has_air_conditioner && <FaFan className="highlight-icon"/>}
+                {place.has_heating_system && <GiHeatHaze className="highlight-icon"/>}
+            </>
+        )
+    }
+
     renderHighlights = () => {
         // console.log("renderHighlights: ", this.state.highlights);
         if (this.state.highlights) {
@@ -30,17 +77,30 @@ class Highlights extends Component {
             return this.state.highlights.slice(0, 6).map((highlight) => {
                 // console.log(highlight.images[0]);
                     return (
-                        <div className="col-9 col-sm-6 col-md-4 col-lg-3 mt-4 mt-md-0" key={highlight.id}>
-                            <div className="card-item card-item-md">
-                                <Link
-                                    to={`/places/${highlight.id}`}
-                                    className="card-item-bg"
+                        <div className="col-9 col-sm-6 col-lg-4 mt-4" key={highlight.id}>
+                            <div className="card-item">
+                                {/* <Link */}
+                                    {/* to={`/places/${highlight.id}`} */}
+                                <div
+                                    className="card-item-highlight"
                                     style={{
                                     backgroundImage: `url(images/places/${highlight.images[1]}.jpeg)`
                                 }}>
-                                    <h3 className="card-item-type">{highlight.type}</h3>
-                                </Link>
-                                {/* <AiOutlineHeart /> */}
+                                    <h3 className="card-item-type">
+                                        {highlight.type}
+                                        <br/>
+                                        {this.icons(highlight)}
+                                    </h3>
+                                    {this.wishlist()}
+                                {/* </Link> */}
+                                </div>
+                                <div className="card-item-details">
+                                    <h4>{highlight.address.city}, {highlight.address.country}</h4>
+                                    <p className="desc">{highlight.description}</p>
+                                    <p className="price">${highlight.price}</p>
+                                    <p className="rating"><FaStar/>&nbsp;4.8</p>
+                                    
+                                </div>
                             </div>
                         </div>
                     )
@@ -55,7 +115,7 @@ class Highlights extends Component {
     render() {
         return (
             <div className="container my-5">
-                <h2 className="text-center mb-0 mb-md-4">Explore Our Highlights</h2>
+                <h2 className="text-center mb-0">Explore Our Highlights</h2>
                 <div className="row justify-content-center">
                     {this.renderHighlights()}
                 </div>
