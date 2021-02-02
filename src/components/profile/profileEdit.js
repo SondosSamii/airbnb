@@ -49,9 +49,11 @@ const ProfileEdit=()=>{
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                <div class="col-md-4">
+                                 <button type="submit" class="btnRegister" > Edit</button>
                 </div>
+
+
             </div>
             <div class="row">
                 {/* <div class="col-md-4">
