@@ -94,9 +94,7 @@ class SearchBar extends Component {
                     }} className="btn main-btn ml-2 px-2">
                             <AiOutlineSearch  className="mb-1" />
                         </Link>
-                        <button onClick={() =>{
-                            this.getlocation();
-                        }}>ClickMe</button>
+                     
                     </div>
                 </div>
             </div>
