@@ -1,4 +1,4 @@
-import "./ProfileView.css";
+import "./profileView";
 import 'bootstrap/dist/css/bootstrap.css';
 //import 'jquery/dist/jquery';
 // import 'popper.js/dist/popper';
