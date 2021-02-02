@@ -71,7 +71,7 @@
             },
             "location": {
                 "lat": 30.013056,
-                "long": 31.208853
+                "lng": 31.208853
             },
             "pets": true,
             "has_tv": true,
@@ -103,7 +103,7 @@
             },
             "location": {
                 "lat": 30.033333,
-                "long": 31.233334
+                "lng": 31.233334
             },
             "pets": false,
             "has_tv": true,
@@ -135,7 +135,7 @@
             },
             "location": {
                 "lat": 30.056021,
-                "long": 30.976639
+                "lng": 30.976639
             },
             "pets": true,
             "has_tv": true,
