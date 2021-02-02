@@ -180,3 +180,7 @@ p {
   font-size: 0.75em;
   margin-right: 0.25em;
 }
+
+footer .nav-link {
+  color: #fff;
+}

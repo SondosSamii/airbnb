@@ -1,7 +1,8 @@
-import Navbar from "../navbar"
-import Highlights from "./highlights";
-import Places from "./places";
+import Navbar from "../navbar";
 import Slideshow from "./slideshow";
+import Places from "./places";
+import Highlights from "./highlights";
+import Footer from "../footer";
 
 const Home = () => {
     document.title = "Home";
@@ -12,6 +13,7 @@ const Home = () => {
               <Slideshow/>
               <Places/>
               <Highlights/>
+              <Footer/>
           </section>
         </>
     )
