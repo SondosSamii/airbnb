@@ -29,7 +29,7 @@ class Places extends Component {
             return this.state.places.slice(0, 1).map((place) => {
                     return (
                         <div className="row justify-content-center" key={place.id}>
-                            <div className="col-11 col-md-5">
+                            <div className="col-12 col-md-5">
                                 <div className="card-item card-item-lg">
                                     <Link
                                         to={`/places/${this.state.places[0].id}`}
@@ -41,9 +41,9 @@ class Places extends Component {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="col-11 col-md-7">
-                                <div className="row mt-4 mt-md-0">
-                                    <div className="col-6">
+                            <div className="col-12 col-md-7">
+                                <div className="row mt-3 mt-md-0">
+                                    <div className="col-12 col-md-6">
                                         <div className="card-item card-item-sm">
                                             <Link
                                                 to={`/places/${this.state.places[1].id}`}
@@ -55,7 +55,7 @@ class Places extends Component {
                                             </Link>
                                         </div>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-12 col-md-6 mt-3 mt-md-0">
                                         <div className="card-item card-item-sm">
                                             <Link
                                                 to={`/places/${this.state.places[2].id}`}
@@ -68,7 +68,7 @@ class Places extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row mt-4">
+                                <div className="row mt-3">
                                     <div className="col-12">
                                         <div className="card-item card-item-sm">
                                             <Link

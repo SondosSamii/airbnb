@@ -20,7 +20,7 @@ const PlacesTry = () => {
         if (places) {
             return (
                 <div className="row justify-content-center">
-                        <div className="col-11 col-md-5">
+                        <div className="col-12 col-md-5">
                             <div className="card-item card-item-lg">
                                 <Link
                                     to={`/places/${places[0].id}`}
@@ -32,9 +32,9 @@ const PlacesTry = () => {
                                 </Link>
                             </div>
                         </div>
-                        <div className="col-11 col-md-7">
-                            <div className="row mt-4 mt-md-0">
-                                <div className="col-6">
+                        <div className="col-12 col-md-7">
+                            <div className="row mt-3 mt-md-0">
+                                <div className="col-12 col-md-6">
                                     <div className="card-item card-item-sm">
                                         <Link
                                             to={`/places/${places[1].id}`}
@@ -46,7 +46,7 @@ const PlacesTry = () => {
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="col-6">
+                                <div className="col-12 col-md-6 mt-3 mt-md-0">
                                     <div className="card-item card-item-sm">
                                         <Link
                                             to={`/places/${places[2].id}`}
@@ -59,7 +59,7 @@ const PlacesTry = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row mt-4">
+                            <div className="row mt-3">
                                 <div className="col-12">
                                     <div className="card-item card-item-sm">
                                         <Link
