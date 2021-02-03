@@ -8,18 +8,40 @@ class Highlights extends Component {
         super(props);
         this.state = {
             highlights: [],
-            isWishlisted: false
+            wishlist: [],
+            reviews: [],
+            userId: 3
         }
-        this.baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
+        this.baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb";
     }
 
     componentDidMount() {
-        fetch(this.baseURL, {method: "GET"})
+        fetch(`${this.baseURL}/places`, {method: "GET"})
         .then((resp) => {
             return resp.json();
         }).then((data) => {
             // console.log(data);
             this.setState({highlights: data});
+        }).catch((err) => {
+            console.log(err);
+        });
+
+        fetch(`${this.baseURL}/wishlist`, {method: "GET"})
+        .then((res) => {
+            return res.json();
+        }).then((data) => {
+            // console.log(data);
+            this.setState({wishlist: data});
+        }).catch((err) => {
+            console.log(err);
+        });
+
+        fetch(`${this.baseURL}/reviews`, {method: "GET"})
+        .then((res) => {
+            return res.json();
+        }).then((data) => {
+            // console.log(data);
+            this.setState({reviews: data});
         }).catch((err) => {
             console.log(err);
         });
@@ -42,6 +64,26 @@ class Highlights extends Component {
                 onClick={()=>this.setState({isWishlisted: !this.state.isWishlisted})}
             />
         )
+    }
+
+    // renderWishlist = (placeId) => {
+
+    // }
+
+    renderRating = (placeId) => {
+        const reviews = this.state.reviews
+        if(reviews) {
+            let rate = 0;
+            const result = reviews.filter(review => {
+                if(review.place_id === placeId) {
+                    return review.rating;
+                    // rate += review.rating;
+                }
+                // rate += review.rating;
+                // return(rate)
+            });
+            console.log(result)
+        }
     }
 
     icons = (place) => {
@@ -82,6 +124,7 @@ class Highlights extends Component {
                                     <p className="desc">{highlight.description}</p>
                                     <p className="price">${highlight.price}</p>
                                     <p className="rating"><FaStar/>&nbsp;4.8</p>
+                                    {this.renderRating(highlight.id)}
                                 </div>
                             </div>
                         </div>
