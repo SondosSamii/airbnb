@@ -425,13 +425,7 @@ class Host extends Component {
                             </div>
                             <div className="card-body" id="photos">
                                 <div className="form-label-group">
-                                    {/* <label className="ml-5">Uplode Photo 1:</label> */}
-                                    {/* <input type="file" className="custom-file-input" onChange={this.onFileChange} /> */}
-                                    {/* <label className="custom-file-upload">
-                                        <input type="file" onChange={this.onFileChange}/>
-                                        Custom Upload
-                                    </label>
-                                    <label id="lblcheck1" className="lblcheck"><BsCheckAll/></label> */}
+                                    
                                     <div id="lblfile">
                                         <label  htmlFor="files">
                                             <input name="photo" type="file" id="files" multiple onChange={this.onFileChange}/>
