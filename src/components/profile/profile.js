@@ -255,6 +255,7 @@ class ViewProfile extends Component {
                          <br></br>
                          <span className="about-text">My Email: {this.state.user.email}</span>
                          <br></br>
+                         
                          <FaFacebook className="icon"/>
                          <AiFillInstagram className="icon"/>
                          <GiEarthAfricaEurope className="icon"/>
