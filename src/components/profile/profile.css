@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+  .icon{
+    font-size: 2em;
+    margin: 0.5em;
+    color: var(--primary-dark-color);
+    transition: all 0.4s;
+  }
+  .icon:hover{
+    color:rgb(44, 42, 42);
+    cursor: pointer;
+  }
+  .about-text{
+    font-size: 1.6em;
+    font-weight: bolder;
+    color: rgb(122, 118, 118);
+    font-family: 'Dosis', sans-serif;
+  }
+  .hero{
+    overflow: hidden;
+    /* background-image: url("../../../public/images/places/hero.webp"); */
+  }
+  .about-content{
+    padding:2em
+  }
+
+  .wishlist_header{
+    font-size: 3em;
+    font-family:'Dosis' ;
+    font-weight: bolder;
+    color: var(--primary-dark-color);
+    display: block;
+  }
+
