@@ -94,7 +94,6 @@ p {
 
 .card-item:hover,
 .card-item:focus {
-  /* cursor: pointer; */
   transform: scale(1.01);
   box-shadow: var(--card-dark-shadow);
 }
