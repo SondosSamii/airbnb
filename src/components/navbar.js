@@ -13,7 +13,14 @@ const Navbar = () => {
                 zIndex: 9
             }}>
                 <Link to="/" className="navbar-brand">
-                    <img src="logo192.png" width="30" height="30" alt=""/>
+                    <img
+                        src="logo192.png"
+                        width="30"
+                        height="30"
+                        alt="Logo"
+                        style={{
+                        marginRight: '0.5em'
+                    }}/>
                     Airbnb</Link>
                 <button
                     className="navbar-toggler"

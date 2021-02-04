@@ -24,9 +24,16 @@ code {
     monospace;
 }
 
-.navbar-light .navbar-brand,
+.navbar-light .navbar-brand {
+  color: var(--primary-color);
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
 .navbar-light .navbar-nav .nav-link {
   color: var(--primary-color);
+  font-size: 1.15em;
+  font-weight: 500;
 }
 
 .main-btn,
