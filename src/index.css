@@ -53,7 +53,7 @@ code {
 }
 
 .user-icon{
-  font-size: 2em;
+  font-size: 1.75em;
   color:var(--primary-color);
 }
 .slick-slider > * {
