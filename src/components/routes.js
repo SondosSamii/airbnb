@@ -14,7 +14,7 @@ const Routes = ()=> {
             <Navbar/>
             <Switch>
                 <Route exact path="/" component={Home}></Route>
-                <Route exact path="/search/" component={Search}></Route>
+                <Route path="/search" component={Search}></Route>
                 <Route path="/about" component={About}></Route>
                 <Route path="/team" component={OurTeam}></Route>
                 <Route path="*" component={NotFound}></Route>
