@@ -163,8 +163,8 @@ getlocation =  () =>{
     <HMap
       style={{
         height: "400px",
-        width: "800px",
-        
+        // width: "800px",
+        width: "100%"        
       }}
       
       mapOptions={{ center: this.state.coords, zoom: 7 }}
