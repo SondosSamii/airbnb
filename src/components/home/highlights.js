@@ -74,15 +74,22 @@ class Highlights extends Component {
         const reviews = this.state.reviews
         if(reviews) {
             let rate = 0;
+            // eslint-disable-next-line
             const result = reviews.filter(review => {
                 if(review.place_id === placeId) {
                     return review.rating;
-                    // rate += review.rating;
                 }
-                // rate += review.rating;
-                // return(rate)
             });
-            console.log(result)
+            // console.log("Result", result);
+            // console.log("Result Length: ", result.length);
+            result.map(rev => {
+                rate += rev.rating;
+                return rate;
+                // return rev.rating;
+            });
+            const avg = rate / result.length
+            // console.log(avg);
+            return avg;
         }
     }
 
@@ -123,8 +130,7 @@ class Highlights extends Component {
                                     <h4>{highlight.address.city}, {highlight.address.country}</h4>
                                     <p className="desc">{highlight.description}</p>
                                     <p className="price">${highlight.price}</p>
-                                    <p className="rating"><FaStar/>&nbsp;4.8</p>
-                                    {this.renderRating(highlight.id)}
+                                    <p className="rating"><FaStar/>&nbsp;{this.renderRating(highlight.id)}</p>
                                 </div>
                             </div>
                         </div>
