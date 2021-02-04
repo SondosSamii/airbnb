@@ -52,6 +52,10 @@ code {
   background-color: transparent;
 }
 
+.user-icon{
+  font-size: 2em;
+  color:var(--primary-color);
+}
 .slick-slider > * {
   height: 100vh;
 }
