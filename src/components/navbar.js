@@ -1,4 +1,5 @@
 import {NavLink as Link} from 'react-router-dom';
+import { BsFillPersonFill } from "react-icons/bs";
 
 const Navbar = () => {
     return (
@@ -43,6 +44,11 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item">
                             <Link to="/login" className="nav-link btn main-btn">Log In</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/profile" className="nav-link btn ">
+                                <BsFillPersonFill className="user-icon" />
+                            </Link>
                         </li>
                     </ul>
                 </div>
