@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import Navbar from './navbar';
 import Home from './home/home';
-import OurTeam from './our-team';
+import OurTeam from './Team/our-team';
 import NotFound from './not-found';
 import Footer from './footer';
 
