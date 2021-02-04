@@ -5,6 +5,7 @@ import Home from './home/home';
 import About from './about/about'; 
 import NotFound from './not-found';
 import Footer from './footer';
+import Reservastion from './reservations/reservationForm';
 
 const Routes = ()=> {
     return(
@@ -13,6 +14,7 @@ const Routes = ()=> {
             <Switch>
                 <Route exact path="/" component={Home}></Route>
                 <Route path="/about" component={About}></Route>
+                <Route path="/reservation" component={Reservastion}></Route>
                 <Route path="*" component={NotFound}></Route>
             </Switch>
             <Footer/>
