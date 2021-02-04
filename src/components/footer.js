@@ -27,7 +27,7 @@ const Footer = () => {
                             rel="noreferrer">
                             Powered By&nbsp;<SiGithub/>
                         </a>
-                        <p className="text-white mt-3">
+                        <p className="text-white text-center mt-3">
                             <a
                                 href="https://github.com/SondosSamii/airbnb"
                                 className="text-white h5"
