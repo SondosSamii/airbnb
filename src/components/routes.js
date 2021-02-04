@@ -27,11 +27,9 @@ const Routes = ()=> {
                 <Route exact path="/" component={Home}></Route>
                 <Route exact path="/host" component={Host}></Route>
                 <Route exact path="/login" component={Login}></Route>
-                <Route exact path="/Place-details" component={PlaceD}></Route>
             </Switch>
         </Router>
         </SessionContext.Provider>
     )
 }
-
 export default Routes;
