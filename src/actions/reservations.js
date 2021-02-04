@@ -1,7 +1,9 @@
 import axios from "axios";
  
-const baseUrl = "http://localhost:1337/api/reservations";
-const Url = "http://localhost:1337/api/reservation";
+// const baseUrl = "http://localhost:1337/api/reservations";
+// const Url = "http://localhost:1337/api/reservation";
+
+const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/reservations";
 
 // const baseUrl = "http://localhost:4200/students";
 

@@ -1,7 +1,9 @@
 import axios from "axios";
  
-const baseUrl = "http://localhost:1337/api/places";
-const Url = "http://localhost:1337/api/place";
+// const baseUrl = "http://localhost:1337/api/places";
+// const Url = "http://localhost:1337/api/place";
+
+const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
 
 // const baseUrl = "http://localhost:4200/students";
 
@@ -46,7 +48,7 @@ export async function getAllPlaces(){
  export async function getPlaceById (id){
     var payload=null;
      try{
-         let response = await fetch(`${Url}/${id}`);
+         let response = await fetch(`${baseUrl}/${id}`);
          payload = await response.json();
           console.log("id", id , " " , payload);
          

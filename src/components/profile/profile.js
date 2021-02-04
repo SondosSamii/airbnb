@@ -109,7 +109,7 @@ class ViewProfile extends Component {
 
   getUser = async () => {
     // console.log("/////////////////////" , this.props.clients);
-    if(this.props.clients){
+    if(this.props.clients > 0){
         var user = this.props.clients.find(
           (client) => client._id === this.state.userId
         );
@@ -124,7 +124,7 @@ class ViewProfile extends Component {
     }
   };
   UserTrips = async () => {
-      if(this.state.Reservations){
+      if(this.state.Reservations > 0){
           var newArr = this.state.Reservations.filter(
             (reservation) => reservation.user_id === this.state.userId
           );
@@ -198,6 +198,7 @@ class ViewProfile extends Component {
     document.title = "Profile";
     var i = 0;
     // console.log("Wishlist_Places: " , this.state.Places);
+    if(this.state.wishlists > 0) {
     return this.state.Wishlists.slice(0, 3).map((wishlist_Element, index) => {
       // console.log("");
 
@@ -267,11 +268,13 @@ class ViewProfile extends Component {
         );
       }
     });
+    }
   };
   renderTrips = () => {
     var i = 0;
     // console.log("weeeeeee: " , this.state.reserve_Places);
     // console.log("######333333..................: " ,this.state.Reservations , "   " , this.state.reserve_Places.length);
+    if(this.state.Reservations > 0) {
     return this.state.Reservations.slice(0, 4).map(
       (reservation_Element, index) => {
         if (this.state.reserve_Places[index]) {
@@ -297,6 +300,7 @@ class ViewProfile extends Component {
         }
       }
     );
+    }
   };
 
   icons = (place) => {
