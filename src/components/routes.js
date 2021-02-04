@@ -6,7 +6,7 @@ import About from './about/about';
 import OurTeam from './our-team';
 import NotFound from './not-found';
 import Footer from './footer';
-import PlaceDetails from './place-details';
+import PlaceDetails from './PlaceD/place-details';
 
 const Routes = ()=> {
     return(
