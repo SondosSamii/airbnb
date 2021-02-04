@@ -5,8 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 const Reservastion=()=>{
     return(
 
-        <div id="login">
-        <h3 className="text-center text-white pt-5">Reservastion form</h3>
+        <section id="login" className="py-5">
         <div className="container">
             <div id="login-row" className="row justify-content-center align-items-center">
                 <div id="login-column" className="col-md-6">
@@ -46,7 +45,7 @@ const Reservastion=()=>{
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
         )
     }
