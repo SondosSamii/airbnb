@@ -89,7 +89,7 @@ class Signup extends Component {
                 <div className="col-sm-9 col-md-6 col-lg-4 mx-auto">
                     <div className="card card-signin my-5">
                     <div className="card-body">
-                        <h5 className="card-title text-center">Register</h5>
+                        <h5 className="card-title text-center mt-0">Register</h5>
                         <form  onSubmit={this.handelsignup} className="form-signin" method="POST">
                         <div className="form-label-group">
                             <input value={this.state.UserName} onChange={this.handelchange} name="UserName" type="text" className="form-control" placeholder="User Name"  /> 

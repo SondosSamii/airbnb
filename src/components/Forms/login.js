@@ -116,15 +116,19 @@ class Login extends Component {
     }
     render() { 
         return ( 
-            <div className="background" style={{ backgroundImage: "url(/bg.jpg)" }}>
+            <section 
+                className="background"
+                style={{backgroundImage: "url(/bg.jpg)"}}>
                 <div className="background p-3" >
-                    <div className="buttons-container mx-auto mt-3" style={{width:"220px"}}>
-                    <ul>
-                    <li  onClick={() => this.addActiveClass("1")} id="li1" className="active"><a id="a1" className="active-text"><FiLogIn /></a></li>
-                    
-                    <li onClick={() => this.addActiveClass("2")} id="li2"><a id="a2" ><i className="fas fa-user-plus"></i> </a></li>
+                    <div className="pt-4">
+                        <div className="buttons-container mx-auto mt-5" style={{width:"220px"}}>
+                        <ul>
+                        <li  onClick={() => this.addActiveClass("1")} id="li1" className="active"><a id="a1" className="active-text"><FiLogIn /></a></li>
 
-                    </ul>
+                        <li onClick={() => this.addActiveClass("2")} id="li2"><a id="a2" ><i className="fas fa-user-plus"></i> </a></li>
+
+                        </ul>
+                    </div>
                 </div>
 
 
@@ -133,7 +137,7 @@ class Login extends Component {
                     <div className="col-sm-9 col-md-6 col-lg-4 mx-auto">
                         <div className="card card-signin my-5">
                         <div className="card-body">
-                            <h5 className="card-title text-center">Welcome back!</h5>
+                            <h5 className="card-title text-center mt-0">Welcome back!</h5>
                             <form onSubmit={this.handelLogin} className="form-signin"  method="POST">
                             <div className="form-label-group">
                                 <input name="Email" value={this.state.Email} onChange={this.handelchange} type="email" className="form-control" placeholder="Email address"  />
@@ -166,7 +170,7 @@ class Login extends Component {
                         <Signup history={this.props.history}/>
                     </div>
                 </div>
-            </div>
+            </section>
          );
     }
 }
