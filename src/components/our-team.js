@@ -2,7 +2,9 @@ import {SiGithub, SiFacebook, SiTwitter, SiLinkedin, SiInstagram} from "react-ic
 
 const OurTeam = () => {
     return (
-        <section id="team">
+        <section id="team" style={{
+            marginTop: '63px' // Header Height
+        }}>
             <h1>Team Works</h1>
         </section>
     )
