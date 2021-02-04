@@ -1,19 +1,15 @@
-import Navbar from "../navbar"
-import Highlights from "./highlights";
-import Places from "./places";
 import Slideshow from "./slideshow";
+import Places from "./places";
+import Highlights from "./highlights";
 
 const Home = () => {
     document.title = "Home";
     return (
-        <>
-          <Navbar/>
-          <section id="home">
-              <Slideshow/>
-              <Places/>
-              <Highlights/>
-          </section>
-        </>
+        <section id="home">
+            <Slideshow/>
+            <Places/>
+            <Highlights/>
+        </section>
     )
 }
 
