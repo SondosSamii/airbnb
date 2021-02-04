@@ -1,18 +1,25 @@
-import { NavLink as Link } from 'react-router-dom';
-
 const NotFound = ()=> {
     document.title = 404;
     console.log("I did't make this page, I found it here");
     console.log("https://freefrontend.com/html-css-404-page-templates/");
     
     return(
-        <div style={{height: '100vh', overflow: 'hidden', backgroundColor: '#141019',
-        background: 'radial-gradient(at 50% -20%, #908392, #0d060e) fixed'}}>
-            <h1 className="text-center pt-3">Go to <Link to='/'>Home</Link></h1>
+        <section
+            style={{
+                // height: '100vh',
+                marginTop: '63px', // Header Height
+                overflow: 'hidden',
+                backgroundColor: '#141019',
+                background: 'radial-gradient(at 50% -20%, #908392, #0d060e) fixed'
+            }}>
             <a href="https://www.enationalelectronics.com/" target="_blank" rel="noreferrer">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12 pt-3">
+                <div
+                    className="container"
+                    style={{
+                        height: 'calc(100vh - 191px)' // Subtract height of Header and Footer
+                    }}>
+                    <div className="row justify-content-center align-items-center h-100">
+                        <div className="col-12 col-lg-8">
                           <svg width="100%" height="70%" viewBox="0 0 636 324" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="OBJECTS">
                             <g id="Group">
@@ -329,7 +336,7 @@ const NotFound = ()=> {
                     </div>
                 </div>
             </a>
-        </div>
+        </section>
     )
 }
 

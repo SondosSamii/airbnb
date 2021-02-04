@@ -2,16 +2,15 @@ import {NavLink as Link} from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <header>
-            <nav
-                className="navbar navbar-expand-lg navbar-light"
-                style={{
+        <header
+            style={{
                 position: 'absolute',
                 top: 0,
                 left: '3%',
                 right: '3%',
                 zIndex: 9
-            }}>
+        }}>
+            <nav className="navbar navbar-expand-lg navbar-light">
                 <Link to="/" className="navbar-brand">
                     <img
                         src="logo192.png"
