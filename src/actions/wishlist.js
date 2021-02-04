@@ -1,7 +1,10 @@
 import axios from "axios";
  
-const baseUrl = "http://localhost:1337/api/wishlists";
-const Url = "http://localhost:1337/api/wishlist";
+// const baseUrl = "http://localhost:1337/api/wishlists";
+// const Url = "http://localhost:1337/api/wishlist";
+
+const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
+
 // const baseUrl = "http://localhost:4200/students";
 
 export async function getAllWishlists(){
@@ -44,7 +47,7 @@ export async function deleteByID (id){
 
    var payload=null;
     try{
-        await axios.delete(`${Url}/${id}`)
+        await axios.delete(`${baseUrl}/${id}`)
         .then(res => {
           console.log(res);
           console.log(res.data);

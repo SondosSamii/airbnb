@@ -3,11 +3,17 @@ import {SiGithub, SiFacebook, SiTwitter, SiInstagram} from "react-icons/si";
 
 const Footer = () => {
     return (
-        <footer style={{
+        <footer
+            className="bg-dark py-3"
+            style={{
             overflow: 'hidden'
         }}>
-            <div className="bg-dark py-3">
-                <div className="row align-items-center" style={{justifyContent: 'space-evenly'}}>
+            <div className="container">
+                <div
+                    className="row align-items-center"
+                    style={{
+                    justifyContent: 'space-evenly'
+                }}>
                     <div>
                         <Link to="/about-us" className="nav-link">About Us</Link>
                         {/* <Link to="/contact-us" className="nav-link">Contact Us</Link> */}
@@ -15,19 +21,19 @@ const Footer = () => {
                     </div>
                     <div>
                         <Link to="/terms" className="nav-link">Terms and Conditions</Link>
-                        <p className="nav-link">
+                        <p className="nav-link mb-0">
                             All Rights Reserved &copy; {new Date().getFullYear()}
                         </p>
                     </div>
                     <div>
                         <a
                             href="https://github.com/SondosSamii/airbnb"
-                            className="text-white h5"
+                            className="nav-link h5 m-0"
                             target="_blank"
                             rel="noreferrer">
                             Powered By&nbsp;<SiGithub/>
                         </a>
-                        <p className="text-white text-center mt-3">
+                        <p className="nav-link text-center m-0">
                             <a
                                 href="https://github.com/SondosSamii/airbnb"
                                 className="text-white h5"

@@ -1,8 +1,8 @@
 import axios from "axios";
- 
-const baseUrl = "http://localhost:1337/api/clients";
-const Url = "http://localhost:1337/api/client";
 
+// const baseUrl = "http://localhost:1337/api/clients";
+// const Url = "http://localhost:1337/api/client";
+const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/users";
 
 // const baseUrl = "http://localhost:4200/students";
 
@@ -26,7 +26,7 @@ export async function getAllClients(){
     var payload=null;
      try{
          console.log("studentid: ",client);
-         await axios.put(`${Url}/${client._id}` , client )
+         await axios.put(`${baseUrl}/${client._id}` , client )
          .then(res => {
            console.log(res);
            console.log(res.data);
@@ -48,7 +48,7 @@ export async function getAllClients(){
  export async function getclientById (id){
     var payload=null;
      try{
-         let response = await fetch(`${Url}/${id}`);
+         let response = await fetch(`${baseUrl}/${id}`);
          payload = await response.json();
           console.log("id", id , " " , payload);
          
