@@ -15,12 +15,13 @@ class Search extends Component {
          }
     }
    async componentDidMount(){
-        await this.props.getLocation();
-        // console.log("here: " , this.props);
-        // console.log("position:    " , this.props.position);
-        await this.props.getAllPlaces();
-        // console.log("places:    " , this.props.places);
-        // this.setState({long:long , lat :lat})
+       document.title = "Search";
+       await this.props.getLocation();
+       // console.log("here: " , this.props);
+       // console.log("position:    " , this.props.position);
+       await this.props.getAllPlaces();
+       // console.log("places:    " , this.props.places);
+       // this.setState({long:long , lat :lat})
     }
 
     handleClick = async () => {
@@ -48,10 +49,11 @@ class Search extends Component {
         return (
             <section
                 id="search"
+                className="py-5"
                 style={{
                     marginTop: '63px', // Header Height
                 }}>
-                <div className="container py-5">
+                <div className="container">
                     <div className="row">
                         <div className="col-12 col-md-8 offset-md-1 col-lg-6">
                             <input
@@ -61,7 +63,7 @@ class Search extends Component {
                                 placeholder="Search..."/>
                         </div>
                     </div>
-                    <div className="row justify-content-between mt-5">
+                    <div className="row justify-content-between my-4">
                         <div className="col-8 col-md-8">
                             <div className="w-100">
                                 <Map currentLocation = {this.state.currentLocation}/>
@@ -139,8 +141,10 @@ class Search extends Component {
                                     className="custom-control-label">Air Conditioner
                                 </label>
                             </div>
-
                         </div>
+                    </div>
+                    <div className="row">
+
                     </div>
                 </div>
             </section>
