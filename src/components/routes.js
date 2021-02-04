@@ -1,5 +1,4 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import { createBrowserHistory } from "history";
 import React, { useEffect, useState } from "react";
 import { getSessionCookie, SessionContext } from "./session";
 
@@ -13,9 +12,7 @@ import Login from './Forms/login'
 import NotFound from './not-found';
 import Footer from './footer';
 
-
 const Routes = ()=> {
-    const history = createBrowserHistory();
     const [session, setSession] = useState(getSessionCookie());
     useEffect(
         () => {
@@ -29,7 +26,7 @@ const Routes = ()=> {
   );
     return(
         <SessionContext.Provider value={session}>
-            <Router history={history}>
+            <Router>
                 <Navbar/>
                 <Switch>
                     <Route exact path="/" component={Home}></Route>
