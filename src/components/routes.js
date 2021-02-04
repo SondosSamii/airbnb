@@ -6,6 +6,7 @@ import About from './about/about';
 import OurTeam from './our-team';
 import NotFound from './not-found';
 import Footer from './footer';
+import PlaceDetails from './place-details';
 
 const Routes = ()=> {
     return(
@@ -15,6 +16,7 @@ const Routes = ()=> {
                 <Route exact path="/" component={Home}></Route>
                 <Route path="/about" component={About}></Route>
                 <Route path="/team" component={OurTeam}></Route>
+                <Route path="/place-details" component={PlaceDetails}></Route>
                 <Route path="*" component={NotFound}></Route>
             </Switch>
             <Footer/>
