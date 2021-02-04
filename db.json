@@ -329,6 +329,32 @@
         "57041041-set-of-roman-numerals-vector-illustration.jpg"
       ],
       "id": 6
+    },
+    {
+      "user_id": 11,
+      "type": "",
+      "description": "",
+      "total_rooms": 3,
+      "total_kitchens": 0,
+      "total_bathrooms": 0,
+      "total_beds": 1,
+      "price": "",
+      "address": "",
+      "location": {
+        "lat": 30.013056,
+        "long": 31.208853
+      },
+      "pets": false,
+      "has_tv": true,
+      "has_wifi": true,
+      "has_heating_system": true,
+      "has_air_conditioner": false,
+      "max_guests": 0,
+      "images": [
+        "726eb5305ce3a655056ef38ff6c59b07.png",
+        "57041041-set-of-roman-numerals-vector-illustration.jpg"
+      ],
+      "id": 7
     }
   ],
   "reservastions": [

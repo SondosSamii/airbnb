@@ -6,6 +6,7 @@ import { getSessionCookie, SessionContext } from "./session";
 import Home from './home';
 import Host from '../components/Forms/host'
 import Login from '../components/Forms/login'
+import PlaceD from '../components/PlaceDetails/placeDetails'
 const Routes = ()=> {
     const history = createBrowserHistory();
     const [session, setSession] = useState(getSessionCookie());
@@ -26,6 +27,7 @@ const Routes = ()=> {
                 <Route exact path="/" component={Home}></Route>
                 <Route exact path="/host" component={Host}></Route>
                 <Route exact path="/login" component={Login}></Route>
+                <Route exact path="/Place-details" component={PlaceD}></Route>
             </Switch>
         </Router>
         </SessionContext.Provider>

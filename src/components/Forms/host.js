@@ -261,8 +261,8 @@ class Host extends Component {
     }
     render() { 
         return ( 
-            <div className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"2200px" }}>
-                <div className="background pb-5" style={{  height:"2200px" }} >
+            <div className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
+                <div className="background pb-5" style={{  height:"100%" }} >
                 <form  className="form-signin" action="" method="POST">
                 <div className="container signinClass">
                     <div className="row">
