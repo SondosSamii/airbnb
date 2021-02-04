@@ -225,6 +225,8 @@ class ViewProfile extends Component {
                   onClick={() => {
                     this.setState({ isWishlisted: !this.state.isWishlisted });
                     this.props.deleteByID(wishlist_Element._id);
+                    window.location.reload();
+
                   }}
                 />
               </div>
@@ -371,15 +373,19 @@ class ViewProfile extends Component {
 
         <div className="container pb-5">
           <div className="row justify-content-center">
+          {this.state.reserve_Places.length > 0 && (
             <div className="col-6 text-center m-5 ">
               <span className="wishlist_header ">My Trips</span>
               <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" />
             </div>
+            )}
+            {this.state.reserve_Places.length > 0 && (
             <div className="container">
               <div className="row justify-content-center">
                 {this.renderTrips()}
               </div>
             </div>
+            )}
             {this.state.UserPlaces.length > 0 && (
               <div className="col-6 text-center m-5 ">
                 <span className="wishlist_header ">My Places</span>
