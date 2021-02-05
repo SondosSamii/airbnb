@@ -406,7 +406,7 @@ class ViewProfile extends Component {
             <div
               className="modal fade"
               id="exampleModal"
-              tabindex="-1"
+              tabIndex="-1"
               role="dialog"
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
@@ -429,7 +429,7 @@ class ViewProfile extends Component {
                   <div className="modal-body">
                     <form className = "update-form">
                       <div className="form-group">
-                        <label for="exampleInputEmail1">Name</label>
+                        <label htmlFor="name">Name</label>
                         <input
                           id="name"
                           type="text"
@@ -442,10 +442,10 @@ class ViewProfile extends Component {
                         {/* <small  className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <label htmlFor="email">Email address</label>
                         <input
                           id="email"
-                          type="text"
+                          type="email"
                           placeholder={this.state.user.email}
                           className="form-control"
                           onChange={(e) => {
@@ -459,7 +459,7 @@ class ViewProfile extends Component {
                         </small>
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputEmail1">Password </label>
+                        <label htmlFor="pass">Password </label>
                         <input
                           id="pass"
                           type="password"
@@ -471,10 +471,10 @@ class ViewProfile extends Component {
                         />
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputEmail1">Phone</label>
+                        <label htmlFor="phone">Phone</label>
                         <input
                           id="phone"
-                          type="text"
+                          type="tel"
                           placeholder={this.state.user.phone}
                           className="form-control"
                           onChange={(e) => {
