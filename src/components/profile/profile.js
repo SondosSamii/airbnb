@@ -114,7 +114,7 @@ class ViewProfile extends Component {
     if(this.props.clients){
       // console.log("All Clients: ", this.props.clients);
         var user = this.props.clients.find((client) => {
-          if(client.id === this.state.userId){
+          if(client._id === this.state.userId){
             return client
           }
         });
