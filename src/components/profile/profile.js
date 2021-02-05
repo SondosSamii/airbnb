@@ -2,7 +2,7 @@ import { FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { GiEarthAfricaEurope } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa";
-import { Card, Button } from "react-bootstrap";
+// import { Card, Button } from "react-bootstrap";
 import "./profile.css";
 
 import { NavLink as Link } from "react-router-dom";
@@ -11,13 +11,14 @@ import { bindActionCreators } from "redux";
 import { getAllPlaces, getPlaceById } from "../../actions/places";
 import {
   getAllWishlists,
-  getwishlistById,
+  // getwishlistById,
   deleteByID,
 } from "../../actions/wishlist";
 import { getAllReservation } from "../../actions/reservations";
 import { getAllClients, updateClient } from "../../actions/clients";
 import React, { Component } from "react";
-import { FaRegHeart, FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
+import { FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
+// import { FaRegHeart, FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
 import { MdPets } from "react-icons/md";
 import { GiHeatHaze } from "react-icons/gi";
 import { AiFillEdit } from "react-icons/ai";
@@ -202,7 +203,7 @@ class ViewProfile extends Component {
 
   renderWishlist = () => {
     document.title = "Profile";
-    var i = 0;
+    // var i = 0;
     // console.log("Wishlist_Places: " , this.state.Places);
     // if(this.state.wishlists > 0) {
     if(this.state.wishlists) {
@@ -278,7 +279,7 @@ class ViewProfile extends Component {
     }
   };
   renderTrips = () => {
-    var i = 0;
+    // var i = 0;
     // console.log("weeeeeee: " , this.state.reserve_Places);
     // console.log("######333333..................: " ,this.state.Reservations , "   " , this.state.reserve_Places.length);
     // if(this.state.Reservations > 0) {
@@ -376,7 +377,7 @@ class ViewProfile extends Component {
         <div className="row justify-content-center p-4 ">
           <div className="col-6 text-center m-5 ">
             <span className="wishlist_header ">My WishList</span>
-            <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" />
+            <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" alt="" />
           </div>
 
           <div className="container ">
@@ -389,7 +390,7 @@ class ViewProfile extends Component {
           {this.state.reserve_Places.length > 0 && (
             <div className="col-6 text-center m-5 ">
               <span className="wishlist_header ">My Trips</span>
-              <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" />
+              <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" alt="" />
             </div>
             )}
             {this.state.reserve_Places.length > 0 && (
@@ -402,7 +403,7 @@ class ViewProfile extends Component {
             {this.state.UserPlaces.length > 0 && (
               <div className="col-6 text-center m-5 ">
                 <span className="wishlist_header ">My Places</span>
-                <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" />
+                <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" alt=""/>
               </div>
             )}
             <div className="container">
