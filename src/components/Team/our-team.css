@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&family=Yusei+Magic&display=swap');
-.header{
+#team .header{
     font-size: 3.4em;
     color: var(--primary-color);
     font-family: 'Dosis' , "sans-serif";
     
     }
 
-.about-team{
+#team .about-team{
     font-size: 1.5em;
     font-family: 'Sriracha', cursive;
     color: var(--secondary-color);
 
 }
 
-.teams{
+#team .teams{
     margin-top: 4em;
 }
-.member{
+#team .member{
     margin: 2em auto;
 }
 .div-image{
@@ -47,25 +47,25 @@
     color:#27a0a8;
 }
 
-.about-div{
+#team .about-div{
     margin-top: 0.4em;
 }
-.about-div p{
+#team .about-div p{
     font-size: 1.4em;
     color: var(--primary-light-light-color);
     /* font-weight: bold; */
     font-family: "Dosis","sans-serif";
 }
-.icons{
+#team .icons{
     margin-top: 1.3em;
 }
 
-.icons .Link .icon{
+#team .icons .Link .icon{
     font-size: 1.7em;
     margin: 0.5em;
     color:#1f878f;
     transition: all 0.4s;
 }
-.icons .Link .icon:hover{
+#team .icons .Link .icon:hover{
     color:var(--primary-color)
 }

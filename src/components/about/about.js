@@ -20,7 +20,7 @@ export default class About extends Component {
             autoplaySpeed: 1900
         };
         return (
-            <div
+            <section id="about"
                 style={{
                 position: 'relative',
                 overflow: 'hidden'
@@ -68,7 +68,7 @@ export default class About extends Component {
                 </div>
                 
                
-            </div>
+            </section>
         );
     }
 }
