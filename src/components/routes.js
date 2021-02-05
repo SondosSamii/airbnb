@@ -6,9 +6,9 @@ import Navbar from './navbar';
 import Home from './home/home';
 import Profile from "./profile/profile";
 import About from './about/about'; 
-import OurTeam from './our-team';
 import Host from './Forms/host'
 import Login from './Forms/login'
+import OurTeam from './Team/our-team';
 import NotFound from './not-found';
 import Footer from './footer';
 
