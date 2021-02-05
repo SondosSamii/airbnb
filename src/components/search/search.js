@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";  
 import {getAllPlaces , getLocation} from "../actions";
-import Map from "./map";
+import Mapp from "./map2";
+// import Mapping from './map3';
+// import Mapping from "./map3";
 
 class Search extends Component {
+
     constructor(props) {
         super(props);
         this.state = { 
@@ -66,7 +69,12 @@ class Search extends Component {
                     <div className="row justify-content-between my-4">
                         <div className="col-8 col-md-8">
                             <div className="w-100">
-                                <Map currentLocation = {this.state.currentLocation}/>
+                            <Mapp
+					// google={this.props.google}
+					// center={{lat: 18.5204, lng: 73.8567}}
+					// height='300px'
+					// zoom={15}
+				/>
                             </div>
                         </div>
                         <div className="col-4 col-md-4 col-lg-3">
