@@ -28,11 +28,11 @@ class Places extends Component {
             // console.log("Inside if");
             return this.state.places.slice(0, 1).map((place) => {
                     return (
-                        <div className="row justify-content-center" key={place.id}>
+                        <div className="row justify-content-center" key={place._id}>
                             <div className="col-12 col-md-5">
                                 <div className="card-item card-item-lg">
                                     <Link
-                                        to={`/places/${this.state.places[0].id}`}
+                                        to={`/places/${this.state.places[0]._id}`}
                                         className="card-item-bg"
                                         style={{
                                         backgroundImage: `url(images/places/${this.state.places[0].images[2]}.jpeg)`
@@ -46,7 +46,7 @@ class Places extends Component {
                                     <div className="col-12 col-md-6">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[1].id}`}
+                                                to={`/places/${this.state.places[1]._id}`}
                                                 className="card-item-bg"
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[1].images[0]}.jpeg)`
@@ -58,7 +58,7 @@ class Places extends Component {
                                     <div className="col-12 col-md-6 mt-3 mt-md-0">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[2].id}`}
+                                                to={`/places/${this.state.places[2]._id}`}
                                                 className="card-item-bg"
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[2].images[0]}.jpeg)`
@@ -72,7 +72,7 @@ class Places extends Component {
                                     <div className="col-12">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[0].id}`}
+                                                to={`/places/${this.state.places[0]._id}`}
                                                 className="card-item-bg"
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[0].images[1]}.jpeg)`
