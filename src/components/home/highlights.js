@@ -10,7 +10,7 @@ class Highlights extends Component {
             highlights: [],
             wishlist: [],
             reviews: [],
-            userId: 3
+            userId: 5
         }
         this.baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb";
     }
@@ -26,7 +26,7 @@ class Highlights extends Component {
             console.log(err);
         });
 
-        fetch(`${this.baseURL}/wishlist`, {method: "GET"})
+        fetch(`${this.baseURL}/wishlists`, {method: "GET"})
         .then((res) => {
             return res.json();
         }).then((data) => {
@@ -112,7 +112,7 @@ class Highlights extends Component {
             return this.state.highlights.slice(0, 6).map((highlight) => {
                 // console.log(highlight.images[0]);
                     return (
-                        <div className="col-9 col-sm-6 col-lg-4 mt-4" key={highlight.id}>
+                        <div className="col-9 col-sm-6 col-lg-4 mt-4" key={highlight._id}>
                             <div className="card-item">
                                 <div
                                     className="card-item-highlight"
@@ -130,7 +130,7 @@ class Highlights extends Component {
                                     <h4>{highlight.address.city}, {highlight.address.country}</h4>
                                     <p className="desc">{highlight.description}</p>
                                     <p className="price">${highlight.price}</p>
-                                    <p className="rating"><FaStar/>&nbsp;{this.renderRating(highlight.id)}</p>
+                                    <p className="rating"><FaStar/>&nbsp;{this.renderRating(highlight._id)}</p>
                                 </div>
                             </div>
                         </div>
