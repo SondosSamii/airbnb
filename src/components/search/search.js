@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";  
 import {getAllPlaces , getLocation} from "../actions";
-import Mapp from "./map2";
+import Mapp from "./map";
 // import Mapping from './map3';
 // import Mapping from "./map3";
 
@@ -14,7 +14,8 @@ class Search extends Component {
             currentLocation :{},
             lat:null,
             long:null,
-            filtered:[]
+            filtered:[],
+            seach_place:""
          }
     }
    async componentDidMount(){
@@ -63,18 +64,20 @@ class Search extends Component {
                                 type="search"
                                 name="search"
                                 className="form-control"
-                                placeholder="Search..."/>
+                                placeholder="Search..."
+                                onChange={(e)=>{
+                                    this.setState({seach_place : e.target.value})
+                                }}/>
+                            <input type="button" value="Search" 
+                            onClick={()=>{
+                                this.handleClick();
+                            }}/>
                         </div>
                     </div>
                     <div className="row justify-content-between my-4">
                         <div className="col-8 col-md-8">
                             <div className="w-100">
-                            <Mapp
-					// google={this.props.google}
-					// center={{lat: 18.5204, lng: 73.8567}}
-					// height='300px'
-					// zoom={15}
-				/>
+                            <Mapp />
                             </div>
                         </div>
                         <div className="col-4 col-md-4 col-lg-3">
@@ -86,7 +89,7 @@ class Search extends Component {
                                     value="TV"
                                     className="custom-control-input"
                                     onClick={()=>{
-                                        this.handleClick();
+                                        
                                 }}/>
                                 <label
                                     for="has_tv"
