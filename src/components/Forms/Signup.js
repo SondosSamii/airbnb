@@ -1,16 +1,18 @@
-import React, { Component,  createRef  }  from 'react';
+import React, { Component }  from 'react';
+// import React, { Component, createRef  }  from 'react';
 import './form.css';
-import { FiLogIn } from 'react-icons/fi';
-import { event } from 'jquery';
+// import { FiLogIn } from 'react-icons/fi';
+// import { event } from 'jquery';
 import Joi from 'joi-browser';
 import axios from "axios";
-import {setSessionCookie,getSessionCookie} from '../session'
+import {setSessionCookie} from '../session';
+// import {setSessionCookie, getSessionCookie} from '../session';
+import {NavLink as Link} from "react-router-dom";
 
 class Signup extends Component {
-    constructor(props) {
-        super(props);
-
-      }
+    // constructor(props) {
+    //     super(props);
+    //   }
     state={
         UserName:"",
         Email:"",
@@ -114,7 +116,7 @@ class Signup extends Component {
 
                         <div className="custom-control custom-checkbox text-center mt-2 mb-4">
                             <input type="checkbox" className="custom-control-input" id="customCheck2" />
-                            <label className="custom-control-label text-link" htmlFor="customCheck2">Agree to <a href="#">Terms and Conditions</a></label>
+                            <label className="custom-control-label text-link" htmlFor="customCheck2">Agree to <Link to="/terms">Terms and Conditions</Link></label>
                         </div>
 
                         <button className="mybtn btn-lg btn-block text-uppercase submit-button" type="submit">Register</button>
