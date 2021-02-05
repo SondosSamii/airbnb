@@ -238,8 +238,8 @@ class Host extends Component {
         "price":  this.state.price,
         "address": this.state.address,
         "location": {
-          "lat": 30.013056,
-          "long": 31.208853
+          "lat": "30.013056",
+          "long": "31.208853"
         },
         "pets":  this.state.pets,
         "has_tv":  this.state.tv,
@@ -262,8 +262,8 @@ class Host extends Component {
         this.props.history.push("/");   
     }
     render() { 
-        return ( 
-            <div className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
+        return (
+            <div id="host_form" className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
                 <div className="background pb-5" style={{  height:"100%" }} >
                 <form  className="form-signin" action="" method="POST">
                 <div className="container signinClass">

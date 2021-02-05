@@ -87,7 +87,7 @@ class Signup extends Component {
     render() { 
         return (     
 
-                <div className="row">
+                <div id="signup_form" className="row">
                 <div className="col-sm-9 col-md-6 col-lg-4 mx-auto">
                     <div className="card card-signin my-5">
                     <div className="card-body">

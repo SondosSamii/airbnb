@@ -119,7 +119,7 @@ class Login extends Component {
     }
     render() { 
         return ( 
-            <section 
+            <section id="login_form"
                 className="background"
                 style={{backgroundImage: "url(/bg.jpg)"}}>
                 <div className="background p-3" >
