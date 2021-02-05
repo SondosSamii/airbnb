@@ -1,11 +1,14 @@
-import React, {useContext, Component,  createRef  }  from 'react';
+import React, { Component }  from 'react';
+// import React, {useContext, Component,  createRef }  from 'react';
 import './form.css';
 import Signup from './Signup';
 import { FiLogIn } from 'react-icons/fi';
-import { event } from 'jquery';
-import Joi, { validate } from 'joi-browser';
+// import { event } from 'jquery';
+import Joi from 'joi-browser';
+// import Joi, { validate } from 'joi-browser';
 import axios from "axios";
-import {SessionContext ,setSessionCookie,getSessionCookie} from '../session'
+import { setSessionCookie } from '../session'
+// import {SessionContext ,setSessionCookie,getSessionCookie} from '../session'
 
 class Login extends Component {
     constructor(props) {
