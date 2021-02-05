@@ -28,64 +28,56 @@ class Places extends Component {
             // console.log("Inside if");
             return this.state.places.slice(0, 1).map((place) => {
                     return (
-                        <div className="row justify-content-center" key={place.id}>
-                            <div className="col-11 col-md-5">
+                        <div className="row justify-content-center" key={place._id}>
+                            <div className="col-12 col-md-5">
                                 <div className="card-item card-item-lg">
                                     <Link
-                                        to={`/places/${this.state.places[0].id}`}
+                                        to={`/places/${this.state.places[0]._id}`}
                                         className="card-item-bg"
                                         style={{
                                         backgroundImage: `url(images/places/${this.state.places[0].images[2]}.jpeg)`
                                     }}>
-                                        <div className="card-item-details">
-                                            <h3>{this.state.places[0].type}</h3>
-                                        </div>
+                                        <h3 className="card-item-type">{this.state.places[0].type}</h3>
                                     </Link>
                                 </div>
                             </div>
-                            <div className="col-11 col-md-7">
-                                <div className="row mt-4 mt-md-0">
-                                    <div className="col-6">
+                            <div className="col-12 col-md-7">
+                                <div className="row mt-3 mt-md-0">
+                                    <div className="col-12 col-md-6">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[1].id}`}
+                                                to={`/places/${this.state.places[1]._id}`}
                                                 className="card-item-bg"
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[1].images[0]}.jpeg)`
                                             }}>
-                                                <div className="card-item-details">
-                                                    <h3>{this.state.places[1].type}</h3>
-                                                </div>
+                                                <h3 className="card-item-type">{this.state.places[1].type}</h3>
                                             </Link>
                                         </div>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-12 col-md-6 mt-3 mt-md-0">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[2].id}`}
+                                                to={`/places/${this.state.places[2]._id}`}
                                                 className="card-item-bg"
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[2].images[0]}.jpeg)`
                                             }}>
-                                                <div className="card-item-details">
-                                                    <h3>{this.state.places[2].type}</h3>
-                                                </div>
+                                                <h3 className="card-item-type">{this.state.places[2].type}</h3>
                                             </Link>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row mt-4">
+                                <div className="row mt-3">
                                     <div className="col-12">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[0].id}`}
+                                                to={`/places/${this.state.places[0]._id}`}
                                                 className="card-item-bg"
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[0].images[1]}.jpeg)`
                                             }}>
-                                                <div className="card-item-details">
-                                                    <h3>{this.state.places[0].type}</h3>
-                                                </div>
+                                                <h3 className="card-item-type">{this.state.places[0].type}</h3>
                                             </Link>
                                         </div>
                                     </div>

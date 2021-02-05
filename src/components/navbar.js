@@ -1,19 +1,26 @@
 import {NavLink as Link} from 'react-router-dom';
+import { BsFillPersonFill } from "react-icons/bs";
 
 const Navbar = () => {
     return (
-        <header>
-            <nav
-                className="navbar navbar-expand-lg navbar-light"
-                style={{
+        <header
+            style={{
                 position: 'absolute',
                 top: 0,
                 left: '3%',
                 right: '3%',
                 zIndex: 9
-            }}>
+        }}>
+            <nav className="navbar navbar-expand-lg navbar-light">
                 <Link to="/" className="navbar-brand">
-                    <img src="logo192.png" width="30" height="30" alt=""/>
+                    <img
+                        src="logo192.png"
+                        width="30"
+                        height="30"
+                        alt="Logo"
+                        style={{
+                        marginRight: '0.5em'
+                    }}/>
                     Airbnb</Link>
                 <button
                     className="navbar-toggler"
@@ -36,6 +43,11 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item">
                             <Link to="/login" className="nav-link btn main-btn">Log In</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/profile" className="nav-link btn">
+                                <BsFillPersonFill className="user-icon"/>
+                            </Link>
                         </li>
                     </ul>
                 </div>
