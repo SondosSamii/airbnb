@@ -30,7 +30,7 @@ class Login extends Component {
     };
     data={};
     async componentDidMount(){
-        this.data=await axios.get("http://localhost:3000/users/");
+        this.data=await axios.get("http://localhost:3000/clients/");
         //const SessionContext = this.context;
     }
     ///start login form functions

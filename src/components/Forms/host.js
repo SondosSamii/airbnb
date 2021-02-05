@@ -67,7 +67,7 @@ class Host extends Component {
         };
         data={};
         async componentDidMount(){
-            this.data=await axios.get("http://localhost:3000/users/");
+            this.data=await axios.get("http://localhost:3000/clients/");
         }
          //renderfile
          Maping = ()=>{

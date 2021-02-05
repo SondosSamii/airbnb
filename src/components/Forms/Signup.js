@@ -36,7 +36,7 @@ class Signup extends Component {
     }
     data={};
     async componentDidMount(){
-        this.data=await axios.get("http://localhost:3000/users");
+        this.data=await axios.get("http://localhost:3000/clients");
     }
     
     signupValidations = () =>{
@@ -69,7 +69,7 @@ class Signup extends Component {
         }
         let date = new Date().getDate();
         const obj={ name: this.state.UserName, email: this.state.Email, password: this.state.Password, created_at: date, phone:'' ,profile_image:'', is_host:false };
-        await axios.post("http://localhost:3000/users/",obj)
+        await axios.post("http://localhost:3000/clients/",obj)
             .then(response => {
                 if (response.data.status === "created") {
                 this.props.handleSuccessfulAuth(response.data);
