@@ -288,7 +288,7 @@ class ViewProfile extends Component {
         if (this.state.reserve_Places[index]) {
           // console.log("jjjj: " ,this.state.reserve_Places[index]);
           return (
-            <div className=" col-9 col-sm-6  col-lg-4 mt-4 ">
+            <div className=" col-9 col-sm-6  col-lg-4 mt-4 " key={this.state.Reservations[index]._id}>
               <div className=" card-item card-item-sm ">
                 <Link
                   to=""
