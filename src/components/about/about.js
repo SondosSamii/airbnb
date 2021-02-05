@@ -33,31 +33,31 @@ export default class About extends Component {
                 <div className="icons">
                     
 
-                <div class="row banner">
-         <div class="banner-text">
-            <h1 class="responsive-headline">AirBnb</h1>
+                <div className="row banner">
+         <div className="banner-text">
+            <h1 className="responsive-headline">AirBnb</h1>
             <h3>I'm a Manila based <span>graphic designer</span>, <span>illustrator</span> and <span>webdesigner</span> creating awesome and
-            effective visual identities for companies of all sizes around the globe. Let's <a class="smoothscroll" href="#about">start scrolling</a>
-            and learn more <a class="smoothscroll" href="#about">about me</a>.</h3>
+            effective visual identities for companies of all sizes around the globe. Let's <a className="smoothscroll" href="#about">start scrolling</a>
+            and learn more <a className="smoothscroll" href="#about">about me</a>.</h3>
             <hr />
-            <div class="social">
-                <div class="d1">
-               <a href="#"><FaFacebook class="f"/></a>
+            <div className="social">
+                <div className="d1">
+               <a href="#"><FaFacebook className="f"/></a>
                </div>
                <hr />
-               <div class="d1">
+               <div className="d1">
                <a href="#"><AiFillTwitterCircle/></a>
                </div>
                <hr />
-               <div class="d1">
+               <div className="d1">
                <a href="#"><FcGoogle/></a>
                </div>
                <hr />
-               <div class="d1">
+               <div className="d1">
                <a href="#"><RiLinkedinBoxFill/></a>
                </div>
                <hr />
-               <div class="d1">
+               <div className="d1">
                <a href="#"><AiFillInstagram/></a>
                </div>
               
