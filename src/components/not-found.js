@@ -16,7 +16,7 @@ const NotFound = ()=> {
                 <div
                     className="container"
                     style={{
-                        height: 'calc(100vh - 191px)' // Subtract height of Header and Footer
+                        height: 'calc(100vh - 178px)' // Subtract height of Header and Footer
                     }}>
                     <div className="row justify-content-center align-items-center h-100">
                         <div className="col-12 col-lg-8">
