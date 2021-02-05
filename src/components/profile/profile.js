@@ -30,7 +30,8 @@ class ViewProfile extends Component {
       Places: [],
       reserve_Places: [],
       Reservations: [],
-      userId: "60044953de30a61a6c0ede19",
+      // userId: "60044953de30a61a6c0ede19",
+      userId: "5",
       user: {},
       hasPlaces: false,
       UserPlaces: [],
@@ -109,11 +110,15 @@ class ViewProfile extends Component {
 
   getUser = async () => {
     // console.log("/////////////////////" , this.props.clients);
-    if(this.props.clients > 0){
-        var user = this.props.clients.find(
-          (client) => client._id === this.state.userId
-        );
-        // console.log("/////////////////////" , user);
+    // if(this.props.clients > 0){
+    if(this.props.clients){
+      // console.log("All Clients: ", this.props.clients);
+        var user = this.props.clients.find((client) => {
+          if(client.id === this.state.userId){
+            return client
+          }
+        });
+        console.log("/////////////////////" , user);
         this.setState({
           user,
           name: user.name,
@@ -124,7 +129,8 @@ class ViewProfile extends Component {
     }
   };
   UserTrips = async () => {
-      if(this.state.Reservations > 0){
+      // if(this.state.Reservations > 0){
+        if(this.state.Reservations){
           var newArr = this.state.Reservations.filter(
             (reservation) => reservation.user_id === this.state.userId
           );
@@ -198,7 +204,8 @@ class ViewProfile extends Component {
     document.title = "Profile";
     var i = 0;
     // console.log("Wishlist_Places: " , this.state.Places);
-    if(this.state.wishlists > 0) {
+    // if(this.state.wishlists > 0) {
+    if(this.state.wishlists) {
     return this.state.Wishlists.slice(0, 3).map((wishlist_Element, index) => {
       // console.log("");
 
@@ -274,8 +281,9 @@ class ViewProfile extends Component {
     var i = 0;
     // console.log("weeeeeee: " , this.state.reserve_Places);
     // console.log("######333333..................: " ,this.state.Reservations , "   " , this.state.reserve_Places.length);
-    if(this.state.Reservations > 0) {
-    return this.state.Reservations.slice(0, 4).map(
+    // if(this.state.Reservations > 0) {
+    if(this.state.Reservations) {
+      return this.state.Reservations.slice(0, 4).map(
       (reservation_Element, index) => {
         if (this.state.reserve_Places[index]) {
           // console.log("jjjj: " ,this.state.reserve_Places[index]);
