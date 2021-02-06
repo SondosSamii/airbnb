@@ -11,7 +11,7 @@ import { bindActionCreators } from "redux";
 import { getAllPlaces, getPlaceById } from "../../actions/places";
 import {
   getAllWishlists,
-  // getWishlistsById,
+  // getWishlistsByUserId,
   deleteByID,
 } from "../../actions/wishlists";
 import { getAllReservation } from "../../actions/reservations";

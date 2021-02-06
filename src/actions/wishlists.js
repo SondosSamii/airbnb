@@ -27,7 +27,7 @@ export async function getAllWishlists(){
 
 
 
- export async function getWishlistsById(id){
+ export async function getWishlistsByUserId(id){
     var payload=null;
      try{
         //  let response = await fetch(`${baseUrl}/${id}`);
