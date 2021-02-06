@@ -72,12 +72,12 @@ class Places extends Component {
                                     <div className="col-12">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[0]._id}`}
+                                                to={`/places/${this.state.places[3]._id}`}
                                                 className="card-item-bg"
                                                 style={{
-                                                backgroundImage: `url(images/places/${this.state.places[0].images[1]}.jpeg)`
+                                                backgroundImage: `url(images/places/${this.state.places[3].images[1]}.jpeg)`
                                             }}>
-                                                <h3 className="card-item-type">{this.state.places[0].type}</h3>
+                                                <h3 className="card-item-type">{this.state.places[3].type}</h3>
                                             </Link>
                                         </div>
                                     </div>
