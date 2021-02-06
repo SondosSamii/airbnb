@@ -294,6 +294,20 @@
             "rating": 4,
             "comment": "Cupcake ipsum dolor. Sit amet pudding halvah. I love carrot cake gummi bears.",
             "place_id": "1"
+        },
+        {
+            "_id": "7",
+            "user_id": "5",
+            "rating": 5,
+            "comment": "Cupcake ipsum dolor. I love carrot cake gummi bears.",
+            "place_id": "4"
+        },
+        {
+            "_id": "8",
+            "user_id": "3",
+            "rating": 4,
+            "comment": "Cupcake ipsum dolor. Amet sweet Fruitcake icing jelly-o.",
+            "place_id": "5"
         }
     ],
 
