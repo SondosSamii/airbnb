@@ -149,6 +149,70 @@
                 "place3-3",
                 "place3-4"
             ]
+        },
+        {
+            "_id": "4",
+            "user_id": "5",
+            "type": "Room",
+            "description": "Cupcake ipsum dolor sit amet I love. Wafer pie gingerbread icing. Pastry tiramisu I love.",
+            "total_rooms": 1,
+            "total_kitchens": 1,
+            "total_bathrooms": 1,
+            "total_beds": 1,
+            "price": 300,
+            "address": {
+                "country": "Egypt",
+                "city": "New Cairo",
+                "zipcode": 11111,
+                "state": "Cairo"
+            },
+            "location": {
+                "lat": "30.005493",
+                "lng": "31.477898"
+            },
+            "pets": false,
+            "has_tv": true,
+            "has_wifi": true,
+            "has_heating_system": false,
+            "has_air_conditioner": true,
+            "max_guests": 2,
+            "images": [
+                "place4-1",
+                "place4-2",
+                "place4-3"
+            ]
+        },
+        {
+            "_id": "5",
+            "user_id": "1",
+            "type": "Home",
+            "description": "Cupcake ipsum dolor sit amet chocolate chocolate cake powder. Fruitcake tiramisu muffin tiramisu croissant.",
+            "total_rooms": 3,
+            "total_kitchens": 1,
+            "total_bathrooms": 2,
+            "total_beds": 5,
+            "price": 1200,
+            "address": {
+                "country": "Egypt",
+                "city": "Alex",
+                "zipcode": 12552,
+                "state": "Alexandria"
+            },
+            "location": {
+                "lat": "31.205753",
+                "lng": "29.924526"
+            },
+            "pets": true,
+            "has_tv": true,
+            "has_wifi": true,
+            "has_heating_system": true,
+            "has_air_conditioner": true,
+            "max_guests": 6,
+            "images": [
+                "place5-1",
+                "place5-2",
+                "place5-3"
+            ]
         }
     ],
 
