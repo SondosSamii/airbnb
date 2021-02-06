@@ -57,7 +57,7 @@
             "_id": "1",
             "user_id": "3",
             "type": "Home",
-            "description": "Cupcake ipsum dolor sit amet. Halvah dessert cupcake I love I love I love dessert I love. Croissant powder jelly-o soufflé fruitcake toffee donut. Sesame snaps macaroon I love dragée tart tootsie roll danish.",
+            "description": "Cupcake ipsum dolor sit amet. Halvah dessert cupcake I love dessert.",
             "total_rooms": 2,
             "total_kitchens": 1,
             "total_bathrooms": 2,
@@ -89,7 +89,7 @@
             "_id": "2",
             "user_id": "1",
             "type": "Room",
-            "description": "Cupcake ipsum dolor. Sit amet donut halvah ice cream sesame snaps pudding jelly-o cupcake. Ice cream lollipop chocolate bar tiramisu I love marzipan sugar plum chocolate cake. Oat cake ice cream cake cotton candy.",
+            "description": "Cupcake ipsum dolor. Ice cream lollipop chocolate bar tiramisu.",
             "total_rooms": 1,
             "total_kitchens": 0,
             "total_bathrooms": 1,
@@ -121,7 +121,7 @@
             "_id": "3",
             "user_id": "4",
             "type": "House",
-            "description": "Cupcake ipsum dolor sit amet. Bonbon ice cream icing caramels croissant cookie marzipan icing. Jelly-o icing sweet roll chocolate bar chupa chups biscuit. Cotton candy ice cream sweet roll gummies sesame snaps.",
+            "description": "Cupcake ipsum dolor sit amet. Bonbon ice cream icing caramels croissant.",
             "total_rooms": 5,
             "total_kitchens": 2,
             "total_bathrooms": 3,
@@ -154,7 +154,7 @@
             "_id": "4",
             "user_id": "5",
             "type": "Room",
-            "description": "Cupcake ipsum dolor sit amet I love. Wafer pie gingerbread icing. Pastry tiramisu I love.",
+            "description": "Cupcake ipsum dolor sit amet I love. Wafer pie gingerbread icing.",
             "total_rooms": 1,
             "total_kitchens": 1,
             "total_bathrooms": 1,
@@ -186,7 +186,7 @@
             "_id": "5",
             "user_id": "1",
             "type": "Home",
-            "description": "Cupcake ipsum dolor sit amet chocolate chocolate cake powder. Fruitcake tiramisu muffin tiramisu croissant.",
+            "description": "Cupcake ipsum dolor sit amet. Fruitcake tiramisu muffin tiramisu croissant.",
             "total_rooms": 3,
             "total_kitchens": 1,
             "total_bathrooms": 2,
@@ -257,42 +257,42 @@
             "_id": "1",
             "user_id": "3",
             "rating": 4,
-            "comment": "Cupcake ipsum dolor sit amet gingerbread apple pie. I love bonbon jelly. Candy gummi bears croissant sugar plum brownie I love powder cookie. Oat cake pastry I love I love pie.",
+            "comment": "Cupcake ipsum dolor sit amet gingerbread apple pie. I love bonbon jelly.",
             "place_id": "2"
         },
         {
             "_id": "2",
             "user_id": "2",
             "rating": 5,
-            "comment": "Cupcake ipsum dolor. Sit amet chocolate cake biscuit jelly. Donut soufflé dragée gummies oat cake tootsie roll jelly I love sweet.",
+            "comment": "Cupcake ipsum dolor. Sit amet donut soufflé dragée gummies.",
             "place_id": "1"
         },
         {
             "_id": "3",
             "user_id": "5",
             "rating": 5,
-            "comment": "Cupcake ipsum dolor sit amet biscuit chocolate. Gummies cookie pudding bear claw tiramisu danish I love jelly. Bonbon liquorice marshmallow sesame snaps tiramisu.",
+            "comment": "Cupcake ipsum dolor sit amet biscuit chocolate. Gummies cookie pudding.",
             "place_id": "3"
         },
         {
             "_id": "4",
             "user_id": "1",
             "rating": 3,
-            "comment": "Cupcake ipsum dolor sit amet. Cotton candy toffee marshmallow marzipan tart. Tart I love I love pie jujubes lollipop I love.",
+            "comment": "Cupcake ipsum dolor sit amet. Cotton candy toffee marshmallow tart.",
             "place_id": "2"
         },
         {
             "_id": "5",
             "user_id": "4",
             "rating": 5,
-            "comment": "Cupcake ipsum dolor sit. Amet sweet sweet donut I love jelly-o. Fruitcake muffin icing jelly-o danish soufflé pie.",
+            "comment": "Cupcake ipsum dolor sit. Amet sweet Fruitcake icing jelly-o.",
             "place_id": "3"
         },
         {
             "_id": "6",
             "user_id": "1",
             "rating": 4,
-            "comment": "Cupcake ipsum dolor. Sit amet pudding halvah. I love carrot cake gummi bears I love jelly chocolate cake halvah lemon drops biscuit.",
+            "comment": "Cupcake ipsum dolor. Sit amet pudding halvah. I love carrot cake gummi bears.",
             "place_id": "1"
         }
     ],
