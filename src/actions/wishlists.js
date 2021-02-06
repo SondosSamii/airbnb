@@ -27,10 +27,11 @@ export async function getAllWishlists(){
 
 
 
- export async function getwishlistById(id){
+ export async function getWishlistsById(id){
     var payload=null;
      try{
-         let response = await fetch(`${baseUrl}/${id}`);
+        //  let response = await fetch(`${baseUrl}/${id}`);
+         let response = await fetch(`${baseUrl}?user_id=${id}`);
          payload = await response.json();
          console.log("id", id , " " , payload);
          
@@ -60,7 +61,7 @@ export async function deleteByID (id){
         console.log("erorrrrrrrrrr");
     }
     return {
-        type:"deletebyid",
+        type:"deleteByID",
         payload
     }
     

@@ -11,9 +11,9 @@ import { bindActionCreators } from "redux";
 import { getAllPlaces, getPlaceById } from "../../actions/places";
 import {
   getAllWishlists,
-  // getwishlistById,
+  // getWishlistsById,
   deleteByID,
-} from "../../actions/wishlist";
+} from "../../actions/wishlists";
 import { getAllReservation } from "../../actions/reservations";
 import { getAllClients, updateClient } from "../../actions/clients";
 import React, { Component } from "react";
