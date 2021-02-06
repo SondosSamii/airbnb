@@ -1,5 +1,6 @@
 :root {
   --primary-color: #156268;
+  --primary-light-light-color: #24787e;
   --primary-dark-color: hsl(184, 66%, 20%);
   --primary-light-color: hsl(184, 66%, 97%);
   --secondary-color: #28BAC5;
@@ -52,6 +53,10 @@ code {
   background-color: transparent;
 }
 
+.user-icon{
+  font-size: 1.75em;
+  color:var(--primary-color);
+}
 .slick-slider > * {
   height: 100vh;
 }
@@ -190,3 +195,5 @@ p {
 footer .nav-link {
   color: #fff;
 }
+
+/* ///////////////////// for Team Page///////////////////////////////// */

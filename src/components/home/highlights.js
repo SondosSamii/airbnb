@@ -1,4 +1,12 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { getAllPlaces } from '../../actions/places';
+import { getAllWishlists, getWishlistsByUserId } from '../../actions/wishlists';
+import { getAllReviews } from '../../actions/reviews';
+
 import {FaRegHeart, FaHeart, FaStar, FaTv, FaWifi, FaFan} from "react-icons/fa";
 import {MdPets} from "react-icons/md";
 import {GiHeatHaze} from "react-icons/gi";
@@ -8,70 +16,104 @@ class Highlights extends Component {
         super(props);
         this.state = {
             highlights: [],
-            wishlist: [],
+            wishlists: [],
+            userWishlists: [],
+            isWishlisted: true,
             reviews: [],
-            userId: 3
+            userId: "5"
         }
-        this.baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb";
     }
 
-    componentDidMount() {
-        fetch(`${this.baseURL}/places`, {method: "GET"})
-        .then((resp) => {
-            return resp.json();
-        }).then((data) => {
-            // console.log(data);
-            this.setState({highlights: data});
-        }).catch((err) => {
-            console.log(err);
-        });
+    async componentDidMount() {
+        await this.props.getAllPlaces();
+        await this.setState({highlights: this.props.highlights});
+        // console.log("Highlights Places: ", this.state.highlights);
 
-        fetch(`${this.baseURL}/wishlist`, {method: "GET"})
-        .then((res) => {
-            return res.json();
-        }).then((data) => {
-            // console.log(data);
-            this.setState({wishlist: data});
-        }).catch((err) => {
-            console.log(err);
-        });
+        await this.props.getAllWishlists();
+        await this.setState({wishlists: this.props.wishlists});
+        // console.log("Highlights Wishlists: ", this.state.wishlists);
 
-        fetch(`${this.baseURL}/reviews`, {method: "GET"})
-        .then((res) => {
-            return res.json();
-        }).then((data) => {
-            // console.log(data);
-            this.setState({reviews: data});
-        }).catch((err) => {
-            console.log(err);
-        });
+        await this.props.getWishlistsByUserId(this.state.userId);
+        await this.setState({userWishlists: this.props.userWishlists});
+        // console.log("Highlights userWishlists: ", this.state.userWishlists);
+        
+        await this.props.getAllReviews();
+        await this.setState({reviews: this.props.reviews});
+        // console.log("Highlights Reviews: ", this.state.reviews);
     }
 
-    wishlist = () => {
-        if(this.state.isWishlisted) {
-            return (
-                <FaHeart
-                    className = "wishlist-icon"
-                    title = "Remove from wishlist"
-                    onClick={()=>this.setState({isWishlisted: !this.state.isWishlisted})}
-                />
-            )
+    renderWishlistIcon = (id) => {
+        // console.log(this.state.userWishlists);
+        let wishlisted = true;
+        for (const wishlist of this.state.userWishlists) {
+        // this.state.userWishlists.map(wishlist => {
+            // console.log(wishlist.place_id)
+            if(wishlist.place_id === id && wishlisted){
+                return (
+                    <FaHeart
+                        className = "wishlist-icon"
+                        title = "Remove from wishlist"
+                        onClick={()=> {
+                            // console.log(e.target);
+                            console.log("before");
+                            // wishlisted = !wishlisted;
+                            this.setState({isWishlisted: !this.state.isWishlisted});
+                            console.log("after");
+                        }}
+                    />
+                )
+            }
+        // });
         }
         return (
             <FaRegHeart
                 className = "wishlist-icon"
                 title = "Add to wishlist"
-                onClick={()=>this.setState({isWishlisted: !this.state.isWishlisted})}
+                onClick={()=> {
+                    // console.log(e.target);
+                    this.setState({isWishlisted: !this.state.isWishlisted});
+                }}
             />
         )
     }
 
-    // renderWishlist = (placeId) => {
-
-    // }
+    wishlist = (id) => {
+        // console.log(this.state.userWishlists);
+        for (const wishlist of this.state.userWishlists) {
+        // this.state.userWishlists.map(wishlist => {
+            // console.log(wishlist.place_id)
+            if(wishlist.place_id === id){
+                return(
+                <>
+                    {this.state.isWishlisted
+                        ?
+                        <FaHeart
+                            className = "wishlist-icon"
+                            title = "Remove from wishlist"
+                            onClick={()=> {
+                                // console.log(e.target);
+                                this.setState({isWishlisted: !this.state.isWishlisted});
+                            }}
+                        />
+                        :
+                        <FaRegHeart
+                            className = "wishlist-icon"
+                            title = "Add to wishlist"
+                            onClick={()=> {
+                                // console.log(e.target);
+                                this.setState({isWishlisted: !this.state.isWishlisted});
+                            }}
+                        />
+                    }
+                </>
+                )
+            }
+        }
+        // )};
+    }
 
     renderRating = (placeId) => {
-        const reviews = this.state.reviews
+        const reviews = this.state.reviews;
         if(reviews) {
             let rate = 0;
             // eslint-disable-next-line
@@ -112,7 +154,7 @@ class Highlights extends Component {
             return this.state.highlights.slice(0, 6).map((highlight) => {
                 // console.log(highlight.images[0]);
                     return (
-                        <div className="col-9 col-sm-6 col-lg-4 mt-4" key={highlight.id}>
+                        <div className="col-9 col-sm-6 col-lg-4 mt-4" key={highlight._id}>
                             <div className="card-item">
                                 <div
                                     className="card-item-highlight"
@@ -124,13 +166,14 @@ class Highlights extends Component {
                                         <br/>
                                         {this.icons(highlight)}
                                     </h3>
-                                    {this.wishlist()}
+                                    {/* {this.renderWishlistIcon(highlight._id)} */}
+                                    {this.wishlist(highlight._id)}
                                 </div>
                                 <div className="card-item-details">
                                     <h4>{highlight.address.city}, {highlight.address.country}</h4>
                                     <p className="desc">{highlight.description}</p>
                                     <p className="price">${highlight.price}</p>
-                                    <p className="rating"><FaStar/>&nbsp;{this.renderRating(highlight.id)}</p>
+                                    <p className="rating"><FaStar/>&nbsp;{this.renderRating(highlight._id)}</p>
                                 </div>
                             </div>
                         </div>
@@ -145,14 +188,29 @@ class Highlights extends Component {
 
     render() {
         return (
-            <div className="container my-5">
-                <h2 className="text-center mb-0">Explore Our Highlights</h2>
-                <div className="row justify-content-center">
-                    {this.renderHighlights()}
-                </div>
-            </div>
+            <>
+                {this.renderHighlights()}
+            </>
         );
     }
 }
 
-export default Highlights;
+const mapActionToProps = (dispatch) => {
+    return bindActionCreators({
+        getAllPlaces,
+        getAllWishlists,
+        getWishlistsByUserId,
+        getAllReviews
+    }, dispatch);
+};
+
+const mapStateToProps = (state) => {
+    return {
+        highlights: state.Places,
+        wishlists: state.Wishlists,
+        userWishlists: state.Wishlists,
+        reviews: state.Reviews
+    };
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Highlights);

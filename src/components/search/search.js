@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";  
-import {getAllPlaces , getLocation} from "../actions";
+import {getAllPlaces , getLocation} from "../../actions";
 import Mapp from "./map";
 // import Mapping from './map3';
 // import Mapping from "./map3";

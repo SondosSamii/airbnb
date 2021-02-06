@@ -1,8 +1,8 @@
 function Places(state = null , action) {
-    console.log("............" , action);
+    // console.log("............" , action);
     switch(action.type){
         case "AllPlaces": {
-            console.log("llllllyyyyyyyyyylll")
+            // console.log("llllllyyyyyyyyyylll")
             return action.payload;
         }
         case "Location": {
@@ -20,14 +20,13 @@ function Places(state = null , action) {
                 // }
             
         }
-        // case "PlaceDetails": {
-        //     console.log("lllllllllllllllllllllllllllllll")
-        //     return action.payload;
-        // }
+        case "PlaceDetails": {
+            console.log("lllllllllllllllllllllllllllllll" , action.payload);
+            return action.payload;
+        }
         default:{
             return state;
         }
-
     }
 }
-export default Places
+export default Places;
