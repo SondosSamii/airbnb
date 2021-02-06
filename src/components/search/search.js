@@ -92,7 +92,7 @@ class Search extends Component {
                                         
                                 }}/>
                                 <label
-                                    for="has_tv"
+                                    htmlFor="has_tv"
                                     className="custom-control-label">TV
                                 </label>
                             </div>
@@ -106,7 +106,7 @@ class Search extends Component {
                                     className="custom-control-input"
                                 />
                                 <label
-                                    for="has_wifi"
+                                    htmlFor="has_wifi"
                                     className="custom-control-label">Wi-Fi
                                 </label>
                             </div>
@@ -120,7 +120,7 @@ class Search extends Component {
                                     className="custom-control-input"
                                 />
                                 <label
-                                    for="pets"
+                                    htmlFor="pets"
                                     className="custom-control-label">Allow Pets
                                 </label>
                             </div>
@@ -134,7 +134,7 @@ class Search extends Component {
                                     className="custom-control-input"
                                 />
                                 <label
-                                    for="has_heating_system"
+                                    htmlFor="has_heating_system"
                                     className="custom-control-label">Heating System
                                 </label>
                             </div>
@@ -148,7 +148,7 @@ class Search extends Component {
                                     className="custom-control-input"
                                 />
                                 <label
-                                    for="has_air_conditioner"
+                                    htmlFor="has_air_conditioner"
                                     className="custom-control-label">Air Conditioner
                                 </label>
                             </div>
