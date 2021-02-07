@@ -56,7 +56,8 @@
         {
             "_id": "1",
             "user_id": "3",
-            "type": "Home",
+            "name": "Cupcake ipsum",
+            "type": "Apartment",
             "description": "Cupcake ipsum. Halvah dessert cupcake I love dessert.",
             "total_rooms": 2,
             "total_kitchens": 1,
@@ -66,8 +67,7 @@
             "address": {
                 "country": "Egypt",
                 "city": "Giza",
-                "zipcode": 12552,
-                "state": "Cairo"
+                "zipcode": 12552
             },
             "location": {
                 "lat": "30.013056",
@@ -88,6 +88,7 @@
         {
             "_id": "2",
             "user_id": "1",
+            "name": "Ice cream",
             "type": "Room",
             "description": "Cupcake ipsum. Ice cream lollipop chocolate bar tiramisu.",
             "total_rooms": 1,
@@ -98,8 +99,7 @@
             "address": {
                 "country": "Egypt",
                 "city": "Cairo",
-                "zipcode": 11221,
-                "state": "Cairo"
+                "zipcode": 11221
             },
             "location": {
                 "lat": "30.033333",
@@ -120,7 +120,8 @@
         {
             "_id": "3",
             "user_id": "4",
-            "type": "House",
+            "name": "Bonbon",
+            "type": "Apartment",
             "description": "Cupcake ipsum. Bonbon ice cream icing caramels croissant.",
             "total_rooms": 5,
             "total_kitchens": 2,
@@ -130,8 +131,7 @@
             "address": {
                 "country": "Egypt",
                 "city": "Sheikh Zayed",
-                "zipcode": 11111,
-                "state": "Cairo"
+                "zipcode": 11111
             },
             "location": {
                 "lat": "30.056021",
@@ -153,6 +153,7 @@
         {
             "_id": "4",
             "user_id": "5",
+            "name": "Wafer pie",
             "type": "Room",
             "description": "Cupcake ipsum I love. Wafer pie gingerbread icing.",
             "total_rooms": 1,
@@ -163,8 +164,7 @@
             "address": {
                 "country": "Egypt",
                 "city": "New Cairo",
-                "zipcode": 11111,
-                "state": "Cairo"
+                "zipcode": 11111
             },
             "location": {
                 "lat": "30.005493",
@@ -185,7 +185,8 @@
         {
             "_id": "5",
             "user_id": "1",
-            "type": "Home",
+            "name": "Fruitcake",
+            "type": "Apartment",
             "description": "Cupcake ipsum. Fruitcake tiramisu muffin tiramisu croissant.",
             "total_rooms": 3,
             "total_kitchens": 1,
@@ -195,8 +196,7 @@
             "address": {
                 "country": "Egypt",
                 "city": "Alex",
-                "zipcode": 12552,
-                "state": "Alexandria"
+                "zipcode": 12552
             },
             "location": {
                 "lat": "31.205753",
