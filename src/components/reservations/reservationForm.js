@@ -15,6 +15,7 @@ import React, { Component } from "react";
           reserve_Places: [],
           Reservations: [],
           userId: "60044953de30a61a6c0ede19",
+          place_Id: "",
           user: {},
           hasPlaces: false,
           UserPlaces: [],
@@ -154,7 +155,7 @@ import React, { Component } from "react";
                                     <div className="col-auto my-1">
                                         <button type="submit" className="btn btn-primary float-right  bg-info"  onClick={async () => {
                           var client = {
-                            // _id: this.state.user._id,
+                            _id: this.state.user._id,
                             _id: this.state.places._id,
                             start_date: this.state.start_date,
                             end_date: this.state.end_date,
