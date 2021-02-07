@@ -1,10 +1,8 @@
-// import axios from "axios";
+import axios from "axios";
  
 // const baseUrl = "http://localhost:1337/api/places";
-// const Url = "http://localhost:1337/api/place";
-
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
-
+// const Url = "http://localhost:1337/api/place";
 // const baseUrl = "http://localhost:4200/students";
 
 export async function getAllPlaces(){
@@ -42,18 +40,50 @@ export async function getAllPlaces(){
       payload: location
   }
 };
-
-
+ function location(){
+     var latt = null , long = null
+     var pos = null;
+    navigator.geolocation.getCurrentPosition(position =>{
+        console.log(position.coords.latitude ,  position.coords.longitude);
+            latt = position.coords.latitude
+            long = position.coords.latitude
+            pos = position;
+        });
+        return pos;
+ }
+// export async function getlocation(){
+//     console.log("[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[")
+//     var payload = null;
+//     try{
+//       var long =null , latt =null;
+//         var position =  await location();
+//                 await console.log("how: " , position);
+//             //     var pos = {
+//             //       lat: latt,
+//             //       lon: long
+//             //   }
+//             //     payload = pos;
+//             //     console.log("hereeeeeee:  ", payload);
+//             }catch(e){
+//          console.log("niiiiiiiiiiiiii" , e);
+//      }
+//      return {
+//          type:"CurrentLocation",
+//          payload
+//      }
+     
+//  }
 
  export async function getPlaceById (id){
+
     var payload=null;
      try{
          let response = await fetch(`${baseUrl}/${id}`);
          payload = await response.json();
-          console.log("id", id , " " , payload);
+         console.log("id", id , " " , payload);
          
      }catch(e){
-         console.log("errrrroooooooooooorrrrrrr",id , e);
+         console.log(e);
      }
      return {
          type:"PlaceDetails",

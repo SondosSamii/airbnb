@@ -1,16 +1,18 @@
-import React, { Component,  createRef  }  from 'react';
+import React, { Component }  from 'react';
+// import React, { Component, createRef  }  from 'react';
 import './form.css';
-import { FiLogIn } from 'react-icons/fi';
-import { event } from 'jquery';
+// import { FiLogIn } from 'react-icons/fi';
+// import { event } from 'jquery';
 import Joi from 'joi-browser';
 import axios from "axios";
-import {setSessionCookie,getSessionCookie} from '../session'
+import {setSessionCookie} from '../session';
+// import {setSessionCookie, getSessionCookie} from '../session';
+import {NavLink as Link} from "react-router-dom";
 
 class Signup extends Component {
-    constructor(props) {
-        super(props);
-
-      }
+    // constructor(props) {
+    //     super(props);
+    //   }
     state={
         UserName:"",
         Email:"",
@@ -34,7 +36,7 @@ class Signup extends Component {
     }
     data={};
     async componentDidMount(){
-        this.data=await axios.get("http://localhost:3000/users");
+        this.data=await axios.get("http://localhost:3000/clients");
     }
     
     signupValidations = () =>{
@@ -67,7 +69,7 @@ class Signup extends Component {
         }
         let date = new Date().getDate();
         const obj={ name: this.state.UserName, email: this.state.Email, password: this.state.Password, created_at: date, phone:'' ,profile_image:'', is_host:false };
-        await axios.post("http://localhost:3000/users/",obj)
+        await axios.post("http://localhost:3000/clients/",obj)
             .then(response => {
                 if (response.data.status === "created") {
                 this.props.handleSuccessfulAuth(response.data);
@@ -85,7 +87,7 @@ class Signup extends Component {
     render() { 
         return (     
 
-                <div className="row">
+                <div id="signup_form" className="row">
                 <div className="col-sm-9 col-md-6 col-lg-4 mx-auto">
                     <div className="card card-signin my-5">
                     <div className="card-body">
@@ -114,7 +116,7 @@ class Signup extends Component {
 
                         <div className="custom-control custom-checkbox text-center mt-2 mb-4">
                             <input type="checkbox" className="custom-control-input" id="customCheck2" />
-                            <label className="custom-control-label text-link" htmlFor="customCheck2">Agree to <a href="#">Terms and Conditions</a></label>
+                            <label className="custom-control-label text-link" htmlFor="customCheck2">Agree to <Link to="/terms">Terms and Conditions</Link></label>
                         </div>
 
                         <button className="mybtn btn-lg btn-block text-uppercase submit-button" type="submit">Register</button>

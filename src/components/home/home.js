@@ -7,8 +7,18 @@ const Home = () => {
     return (
         <section id="home">
             <Slideshow/>
-            <Places/>
-            <Highlights/>
+            <div className="container">
+                <div className="my-5">
+                    <h2 className="text-center mb-4">Our Places</h2>
+                    <Places/>
+                </div>
+                <div className="my-5">
+                    <h2 className="text-center mb-0">Explore Our Highlights</h2>
+                    <div className="row justify-content-center">
+                        <Highlights/>
+                    </div>
+                </div>
+            </div>
         </section>
     )
 }

@@ -27,10 +27,11 @@ export async function getAllWishlists(){
 
 
 
- export async function getwishlistById(id){
+ export async function getWishlistsByUserId(id){
     var payload=null;
      try{
-         let response = await fetch(`${baseUrl}/${id}`);
+        //  let response = await fetch(`${baseUrl}/${id}`);
+         let response = await fetch(`${baseUrl}?user_id=${id}`);
          payload = await response.json();
          console.log("id", id , " " , payload);
          
@@ -60,8 +61,29 @@ export async function deleteByID (id){
         console.log("erorrrrrrrrrr");
     }
     return {
-        type:"deletebyid",
+        type:"deleteByID",
         payload
     }
     
 }
+export async function addWishlist (wishlist){
+
+    var payload=null;
+     try{
+         await axios.post(baseUrl,  wishlist )
+         .then(res => {
+           console.log(res);
+           console.log(res.data);
+           payload ="success";
+         }).catch(err=>{payload="fail"})
+         
+     }catch(e){
+         console.log("erorrrrrrrrrr");
+     }
+     return {
+         type:"addWishlist",
+         payload
+     }
+     
+ }
+ 

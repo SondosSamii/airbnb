@@ -2,7 +2,7 @@ import { FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { GiEarthAfricaEurope } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa";
-import { Card, Button } from "react-bootstrap";
+// import { Card, Button } from "react-bootstrap";
 import "./profile.css";
 
 import { NavLink as Link } from "react-router-dom";
@@ -11,13 +11,14 @@ import { bindActionCreators } from "redux";
 import { getAllPlaces, getPlaceById } from "../../actions/places";
 import {
   getAllWishlists,
-  getwishlistById,
+  // getWishlistsByUserId,
   deleteByID,
-} from "../../actions/wishlist";
+} from "../../actions/wishlists";
 import { getAllReservation } from "../../actions/reservations";
 import { getAllClients, updateClient } from "../../actions/clients";
 import React, { Component } from "react";
-import { FaRegHeart, FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
+import { FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
+// import { FaRegHeart, FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
 import { MdPets } from "react-icons/md";
 import { GiHeatHaze } from "react-icons/gi";
 import { AiFillEdit } from "react-icons/ai";
@@ -30,7 +31,8 @@ class ViewProfile extends Component {
       Places: [],
       reserve_Places: [],
       Reservations: [],
-      userId: "60044953de30a61a6c0ede19",
+      // userId: "60044953de30a61a6c0ede19",
+      userId: "5",
       user: {},
       hasPlaces: false,
       UserPlaces: [],
@@ -109,11 +111,15 @@ class ViewProfile extends Component {
 
   getUser = async () => {
     // console.log("/////////////////////" , this.props.clients);
-    if(this.props.clients > 0){
-        var user = this.props.clients.find(
-          (client) => client._id === this.state.userId
-        );
-        // console.log("/////////////////////" , user);
+    // if(this.props.clients > 0){
+    if(this.props.clients){
+      // console.log("All Clients: ", this.props.clients);
+        var user = this.props.clients.find((client) => {
+          if(client._id === this.state.userId){
+            return client
+          }
+        });
+        console.log("/////////////////////" , user);
         this.setState({
           user,
           name: user.name,
@@ -124,7 +130,8 @@ class ViewProfile extends Component {
     }
   };
   UserTrips = async () => {
-      if(this.state.Reservations > 0){
+      // if(this.state.Reservations > 0){
+        if(this.state.Reservations){
           var newArr = this.state.Reservations.filter(
             (reservation) => reservation.user_id === this.state.userId
           );
@@ -196,9 +203,10 @@ class ViewProfile extends Component {
 
   renderWishlist = () => {
     document.title = "Profile";
-    var i = 0;
+    // var i = 0;
     // console.log("Wishlist_Places: " , this.state.Places);
-    if(this.state.wishlists > 0) {
+    // if(this.state.wishlists > 0) {
+    if(this.state.wishlists) {
     return this.state.Wishlists.slice(0, 3).map((wishlist_Element, index) => {
       // console.log("");
 
@@ -271,16 +279,17 @@ class ViewProfile extends Component {
     }
   };
   renderTrips = () => {
-    var i = 0;
+    // var i = 0;
     // console.log("weeeeeee: " , this.state.reserve_Places);
     // console.log("######333333..................: " ,this.state.Reservations , "   " , this.state.reserve_Places.length);
-    if(this.state.Reservations > 0) {
-    return this.state.Reservations.slice(0, 4).map(
+    // if(this.state.Reservations > 0) {
+    if(this.state.Reservations) {
+      return this.state.Reservations.slice(0, 4).map(
       (reservation_Element, index) => {
         if (this.state.reserve_Places[index]) {
           // console.log("jjjj: " ,this.state.reserve_Places[index]);
           return (
-            <div className=" col-9 col-sm-6  col-lg-4 mt-4 ">
+            <div className=" col-9 col-sm-6  col-lg-4 mt-4 " key={this.state.Reservations[index]._id}>
               <div className=" card-item card-item-sm ">
                 <Link
                   to=""
@@ -368,7 +377,7 @@ class ViewProfile extends Component {
         <div className="row justify-content-center p-4 ">
           <div className="col-6 text-center m-5 ">
             <span className="wishlist_header ">My WishList</span>
-            <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" />
+            <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" alt="" />
           </div>
 
           <div className="container ">
@@ -381,7 +390,7 @@ class ViewProfile extends Component {
           {this.state.reserve_Places.length > 0 && (
             <div className="col-6 text-center m-5 ">
               <span className="wishlist_header ">My Trips</span>
-              <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" />
+              <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" alt="" />
             </div>
             )}
             {this.state.reserve_Places.length > 0 && (
@@ -394,7 +403,7 @@ class ViewProfile extends Component {
             {this.state.UserPlaces.length > 0 && (
               <div className="col-6 text-center m-5 ">
                 <span className="wishlist_header ">My Places</span>
-                <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" />
+                <img src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png" alt=""/>
               </div>
             )}
             <div className="container">
@@ -406,7 +415,7 @@ class ViewProfile extends Component {
             <div
               className="modal fade"
               id="exampleModal"
-              tabindex="-1"
+              tabIndex="-1"
               role="dialog"
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
@@ -429,7 +438,7 @@ class ViewProfile extends Component {
                   <div className="modal-body">
                     <form className = "update-form">
                       <div className="form-group">
-                        <label for="exampleInputEmail1">Name</label>
+                        <label htmlFor="name">Name</label>
                         <input
                           id="name"
                           type="text"
@@ -442,10 +451,10 @@ class ViewProfile extends Component {
                         {/* <small  className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <label htmlFor="email">Email address</label>
                         <input
                           id="email"
-                          type="text"
+                          type="email"
                           placeholder={this.state.user.email}
                           className="form-control"
                           onChange={(e) => {
@@ -459,7 +468,7 @@ class ViewProfile extends Component {
                         </small>
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputEmail1">Password </label>
+                        <label htmlFor="pass">Password </label>
                         <input
                           id="pass"
                           type="password"
@@ -471,10 +480,10 @@ class ViewProfile extends Component {
                         />
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputEmail1">Phone</label>
+                        <label htmlFor="phone">Phone</label>
                         <input
                           id="phone"
-                          type="text"
+                          type="tel"
                           placeholder={this.state.user.phone}
                           className="form-control"
                           onChange={(e) => {

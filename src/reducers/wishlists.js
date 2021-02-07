@@ -10,7 +10,11 @@ function Wishlists(state = null , action) {
             // console.log("lllllllllllllllllllllllllllllll")
             return action.payload;
         }
-        case "deletebyid" :{
+        case "deleteByID" :{
+            console.log("lllllllllllllllllllllllllllllll");
+            return action.payload;
+        }
+        case "addWishlist" :{
             console.log("lllllllllllllllllllllllllllllll");
             return action.payload;
         }

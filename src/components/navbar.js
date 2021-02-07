@@ -7,11 +7,12 @@ const Navbar = () => {
             style={{
                 position: 'absolute',
                 top: 0,
-                left: '3%',
-                right: '3%',
-                zIndex: 9
+                left: '0',
+                right: '0',
+                zIndex: 9,
+                backgroundColor: 'rgba(99, 99, 99, 0.3)'
         }}>
-            <nav className="navbar navbar-expand-lg navbar-light">
+            <nav className="navbar navbar-expand-lg navbar-light mx-0 mx-md-5">
                 <Link to="/" className="navbar-brand">
                     <img
                         src="logo192.png"

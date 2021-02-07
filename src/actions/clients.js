@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const baseUrl = "http://localhost:1337/api/clients";
 // const Url = "http://localhost:1337/api/client";
-const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/users";
+const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/clients";
 
 // const baseUrl = "http://localhost:4200/students";
 

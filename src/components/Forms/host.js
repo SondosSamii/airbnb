@@ -1,13 +1,15 @@
-import React, { Component,  createRef  }  from 'react';
+import React, { Component }  from 'react';
+// import React, { Component, createRef }  from 'react';
 import ReactDOM from 'react-dom';
 import './form.css';
-import { BsCheckAll } from 'react-icons/bs';
+// import { BsCheckAll } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
-import { event } from 'jquery';
-import Joi, { validate } from 'joi-browser';
+// import { event } from 'jquery';
+import Joi from 'joi-browser';
+// import Joi, { validate } from 'joi-browser';
 import axios from "axios";
 import {SessionContext ,getSessionCookie} from '../session'
-import { useContext } from "react";
+// import { useContext } from "react";
 
 
 class Host extends Component {
@@ -65,7 +67,7 @@ class Host extends Component {
         };
         data={};
         async componentDidMount(){
-            this.data=await axios.get("http://localhost:3000/users/");
+            this.data=await axios.get("http://localhost:3000/clients/");
         }
          //renderfile
          Maping = ()=>{
@@ -236,8 +238,8 @@ class Host extends Component {
         "price":  this.state.price,
         "address": this.state.address,
         "location": {
-          "lat": 30.013056,
-          "long": 31.208853
+          "lat": "30.013056",
+          "long": "31.208853"
         },
         "pets":  this.state.pets,
         "has_tv":  this.state.tv,
@@ -260,8 +262,8 @@ class Host extends Component {
         this.props.history.push("/");   
     }
     render() { 
-        return ( 
-            <div className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
+        return (
+            <div id="host_form" className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
                 <div className="background pb-5" style={{  height:"100%" }} >
                 <form  className="form-signin" action="" method="POST">
                 <div className="container signinClass">
