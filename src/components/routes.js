@@ -5,11 +5,12 @@ import { getSessionCookie, SessionContext } from "./session";
 import Navbar from './navbar';
 import Home from './home/home';
 import Profile from './profile/profile';
-import OurTeam from './Team/our-team';
+import Search from './search/search';
 import About from './about/about'; 
+import Host from './Forms/host'
+import Login from './Forms/login'
+import OurTeam from './Team/our-team';
 import Reservastion from './reservations/reservationForm';
-import Host from './Forms/host';
-import Login from './Forms/login';
 import NotFound from './not-found';
 import Footer from './footer';
 
@@ -31,6 +32,7 @@ const Routes = ()=> {
                 <Navbar/>
                 <Switch>
                     <Route exact path="/" component={Home}></Route>
+                    <Route path="/search" component={Search}></Route>
                     <Route path="/profile" component={Profile}></Route>
                     <Route path="/team" component={OurTeam}></Route>
                     <Route path="/about" component={About}></Route>
