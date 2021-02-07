@@ -19,11 +19,11 @@ const PlacesTry = () => {
     const renderPlaces = (places) => {
         if (places) {
             return (
-                <div className="row justify-content-center">
+                <div className="row justify-content-center" key={places._id}>
                         <div className="col-12 col-md-5">
                             <div className="card-item card-item-lg">
                                 <Link
-                                    to={`/places/${places[0].id}`}
+                                    to={`/places/${places[0]._id}`}
                                     className="card-item-bg"
                                     style={{
                                     backgroundImage: `url(images/places/${places[0].images[2]}.jpeg)`
@@ -37,7 +37,7 @@ const PlacesTry = () => {
                                 <div className="col-12 col-md-6">
                                     <div className="card-item card-item-sm">
                                         <Link
-                                            to={`/places/${places[1].id}`}
+                                            to={`/places/${places[1]._id}`}
                                             className="card-item-bg"
                                             style={{
                                             backgroundImage: `url(images/places/${places[1].images[0]}.jpeg)`
@@ -49,7 +49,7 @@ const PlacesTry = () => {
                                 <div className="col-12 col-md-6 mt-3 mt-md-0">
                                     <div className="card-item card-item-sm">
                                         <Link
-                                            to={`/places/${places[2].id}`}
+                                            to={`/places/${places[2]._id}`}
                                             className="card-item-bg"
                                             style={{
                                             backgroundImage: `url(images/places/${places[2].images[0]}.jpeg)`
@@ -63,7 +63,7 @@ const PlacesTry = () => {
                                 <div className="col-12">
                                     <div className="card-item card-item-sm">
                                         <Link
-                                            to={`/places/${places[0].id}`}
+                                            to={`/places/${places[0]._id}`}
                                             className="card-item-bg"
                                             style={{
                                             backgroundImage: `url(images/places/${places[0].images[1]}.jpeg)`
