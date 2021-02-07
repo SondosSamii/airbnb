@@ -11,15 +11,13 @@ import React, { Component } from "react";
     constructor(props) {
         super(props);
         this.state = {
-          Places: [],
+          // Places: [],
+
           reserve_Places: [],
           Reservations: [],
-          userId: "60044953de30a61a6c0ede19",
-          place_Id: "",
+          user_Id: "3",
+          place_Id: "4",
           user: {},
-          hasPlaces: false,
-          UserPlaces: [],
-          AllPlaces: [],
           start_date: "",
           end_date: "",
           total_nights: "",
