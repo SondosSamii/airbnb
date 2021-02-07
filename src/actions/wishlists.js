@@ -66,3 +66,24 @@ export async function deleteByID (id){
     }
     
 }
+export async function addWishlist (wishlist){
+
+    var payload=null;
+     try{
+         await axios.post(baseUrl,  wishlist )
+         .then(res => {
+           console.log(res);
+           console.log(res.data);
+           payload ="success";
+         }).catch(err=>{payload="fail"})
+         
+     }catch(e){
+         console.log("erorrrrrrrrrr");
+     }
+     return {
+         type:"addWishlist",
+         payload
+     }
+     
+ }
+ 

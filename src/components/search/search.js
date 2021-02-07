@@ -83,28 +83,30 @@ class Search extends Component {
                 // console.log('pets.........');
                 arr.push('pets');
             }
-            this.renderArr(arr);
-            // console.log("else arr", arr);
+            if(document.getElementById('has_tv').checked) {
+                // console.log('pets.........');
+                arr.push('has_tv');
+            }
+            if(document.getElementById('has_heating_system').checked) {
+                // console.log('pets.........');
+                arr.push('has_heating_system');
+            }
+            if(document.getElementById('has_air_conditioner').checked) {
+                // console.log('pets.........');
+                arr.push('has_air_conditioner');
+            }
+            
 
-            // this.setState({filtered: arr});
-            // await this.setState((state) => {
-            //     state.filtered = this.props.places.filter((item) => {
-            //         console.log(item);
-            //         // console.log(item[str]);
-            //         if(item[str]){
-            //             // console.log("item", item);
-            //             return item;
-            //         }
-            //     })
-            //     return state;
-            // })
+            console.log("######",arr);
+           await this.renderArr(arr);
+
         }
         // arr = this.state.filtered;
-        console.log("Outside if: " , this.state.filtered);
+        console.log("Outside if///////////////////////: " , this.state.filtered);
     }
 
-    renderArr(arr) {
-        this.setState({filtered: this.props.places});
+    async renderArr(arr) {
+        await this.setState({filtered: this.props.places});
         console.log('____________________');
         console.log(arr);
         arr.map((arrItem)=>{
@@ -118,6 +120,7 @@ class Search extends Component {
                 return state;
             })
         })
+        console.log("............" , this.state.filtered);
     }
 
     render() { 

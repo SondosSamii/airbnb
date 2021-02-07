@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { getAllPlaces } from '../../actions/places';
-import { getAllWishlists, getWishlistsByUserId } from '../../actions/wishlists';
+import { getAllWishlists, getWishlistsByUserId , addWishlist } from '../../actions/wishlists';
 import { getAllReviews } from '../../actions/reviews';
 
 import {FaRegHeart, FaHeart, FaStar, FaTv, FaWifi, FaFan} from "react-icons/fa";
@@ -20,7 +20,8 @@ class Highlights extends Component {
             userWishlists: [],
             isWishlisted: true,
             reviews: [],
-            userId: "5"
+            userId: "5",
+            flag:true
         }
     }
 
@@ -41,19 +42,25 @@ class Highlights extends Component {
         await this.setState({reviews: this.props.reviews});
         // console.log("Highlights Reviews: ", this.state.reviews);
     }
+    eventHandle = async (id) =>{
+        await this.setState({isWishlisted: !this.state.isWishlisted});
+        // this.renderWishlistIcon(id);
+    }
 
     renderWishlistIcon = (id) => {
         // console.log(this.state.userWishlists);
-        let wishlisted = true;
+        //let wishlisted = true;
         for (const wishlist of this.state.userWishlists) {
         // this.state.userWishlists.map(wishlist => {
             // console.log(wishlist.place_id)
-            if(wishlist.place_id === id && wishlisted){
+            if(wishlist.place_id == id && this.state.isWishlisted){
                 return (
                     <FaHeart
                         className = "wishlist-icon"
                         title = "Remove from wishlist"
                         onClick={()=> {
+                            // console.log("yes");
+                            // this.setState({isWishlisted: !this.state.isWishlisted});
                             // console.log(e.target);
                             console.log("before");
                             // wishlisted = !wishlisted;
@@ -66,11 +73,20 @@ class Highlights extends Component {
         // });
         }
         return (
+            // <div>JJJ</div>
             <FaRegHeart
                 className = "wishlist-icon"
                 title = "Add to wishlist"
                 onClick={()=> {
+                    document.body.style.color ="blue";
                     // console.log(e.target);
+                    console.log("mmmmm")
+                    var wishlist_Obj = {
+                        user_id:this.state.userId,
+                        // place_id :wishlist.place_id
+                    }
+                    console.log(wishlist_Obj);
+                    // this.props.addWishlist(wishlist_Obj);
                     this.setState({isWishlisted: !this.state.isWishlisted});
                 }}
             />
@@ -82,7 +98,8 @@ class Highlights extends Component {
         for (const wishlist of this.state.userWishlists) {
         // this.state.userWishlists.map(wishlist => {
             // console.log(wishlist.place_id)
-            if(wishlist.place_id === id){
+            if(wishlist.place_id === id){   
+                //this.setState({isWishlisted : false});
                 return(
                 <>
                     {this.state.isWishlisted
@@ -91,8 +108,9 @@ class Highlights extends Component {
                             className = "wishlist-icon"
                             title = "Remove from wishlist"
                             onClick={()=> {
+                                // this.eventHandle(wishlist.place_id);
                                 // console.log(e.target);
-                                this.setState({isWishlisted: !this.state.isWishlisted});
+                               
                             }}
                         />
                         :
@@ -166,8 +184,8 @@ class Highlights extends Component {
                                         <br/>
                                         {this.icons(highlight)}
                                     </h3>
-                                    {/* {this.renderWishlistIcon(highlight._id)} */}
-                                    {this.wishlist(highlight._id)}
+                                    {this.renderWishlistIcon(highlight._id)}
+                                    {/* {this.wishlist(highlight._id)} */}
                                 </div>
                                 <div className="card-item-details">
                                     <h4>{highlight.address.city}, {highlight.address.country}</h4>
@@ -190,6 +208,7 @@ class Highlights extends Component {
         return (
             <>
                 {this.renderHighlights()}
+                {/* <FaRegHeart style={{backgroundColor:"blue"}}/> */}
             </>
         );
     }
@@ -200,7 +219,8 @@ const mapActionToProps = (dispatch) => {
         getAllPlaces,
         getAllWishlists,
         getWishlistsByUserId,
-        getAllReviews
+        getAllReviews,
+        addWishlist
     }, dispatch);
 };
 
