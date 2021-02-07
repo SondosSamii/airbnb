@@ -1,11 +1,11 @@
 import axios from "axios";
  
-const baseUrl = "http://localhost:1337/api/wishlists";
+// const baseUrl = "http://localhost:1337/api/wishlists";
 const url = "http://localhost:1337/api/wishlist";
 
 // const Url = "http://localhost:1337/api/wishlist";
 
-// const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
+const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
 
 // const baseUrl = " http://localhost:2400/wishlists";
 
@@ -25,10 +25,6 @@ export async function getAllWishlists(){
      
  }
  
-
-
-
-
  export async function getWishlistsByUserId(id){
     var payload=null;
      try{
