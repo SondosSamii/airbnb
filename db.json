@@ -7,7 +7,7 @@
             "password": "12345abc",
             "created_at": "20/12/2020",
             "phone": "+201112112211",
-            "profile_image": "profile1",
+            "profile_image": "1.jpg",
             "is_host": true
         },
         {
@@ -17,7 +17,7 @@
             "password": "abcd1234",
             "created_at": "20/12/2020",
             "phone": "+201011111111",
-            "profile_image": "profile2",
+            "profile_image": "1.jpg",
             "is_host": false
         },
         {
@@ -57,7 +57,7 @@
             "_id": 1,
             "user_id": 3,
             "type": "Home",
-            "description": "Cupcake ipsum dolor sit amet. Halvah dessert cupcake I love I love I love dessert I love. Croissant powder jelly-o soufflé fruitcake toffee donut. Sesame snaps macaroon I love dragée tart tootsie roll danish.",
+            "description": "Cupcake ipsum dolor sit amet. Halvah dessert cupcake I love I love I love dessert I love. ",
             "total_rooms": 2,
             "total_kitchens": 1,
             "total_bathrooms": 2,
@@ -66,8 +66,7 @@
             "address": {
                 "country": "Egypt",
                 "city": "Giza",
-                "zipcode": 12552,
-                "state": "Cairo"
+                "zipcode": 12552
             },
             "location": {
                 "lat": 30.013056,
@@ -76,13 +75,13 @@
             "pets": true,
             "has_tv": true,
             "has_wifi": true,
-            "has_heating_system": false,
+            "has_heating_system": true,
             "has_air_conditioner": true,
             "max_guests": 4,
             "images": [
-                "place1-1",
-                "place1-2",
-                "place1-3"
+                "pexels-photo-59520.jpeg",
+                "1.jpg",
+                "pexels-photo-59520.jpeg"
             ]
         },
         {
@@ -191,8 +190,8 @@
     "reviews": [
         {
             "_id": 1,
-            "user_id": 3,
-            "rating": 4,
+            "user_id": 1,
+            "rating": 5,
             "comment": "Cupcake ipsum dolor sit amet gingerbread apple pie. I love bonbon jelly. Candy gummi bears croissant sugar plum brownie I love powder cookie. Oat cake pastry I love I love pie.",
             "place_id": 2
         },
@@ -219,7 +218,7 @@
         },
         {
             "_id": 5,
-            "user_id": 4,
+            "user_id": 1,
             "rating": 5,
             "comment": "Cupcake ipsum dolor sit. Amet sweet sweet donut I love jelly-o. Fruitcake muffin icing jelly-o danish soufflé pie.",
             "place_id": 3
