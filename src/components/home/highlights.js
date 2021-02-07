@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { getAllPlaces } from '../../actions/places';
-import { getAllWishlists, getWishlistsByUserId , addWishlist } from '../../actions/wishlists';
+import { getAllWishlists, getWishlistsByUserId , addWishlist , deleteByID } from '../../actions/wishlists';
 import { getAllReviews } from '../../actions/reviews';
 
 import {FaRegHeart, FaHeart, FaStar, FaTv, FaWifi, FaFan} from "react-icons/fa";
@@ -18,7 +18,7 @@ class Highlights extends Component {
             highlights: [],
             wishlists: [],
             userWishlists: [],
-            isWishlisted: true,
+            isWishlisted: false,
             reviews: [],
             userId: "5",
             flag:true
@@ -46,6 +46,68 @@ class Highlights extends Component {
         await this.setState({isWishlisted: !this.state.isWishlisted});
         // this.renderWishlistIcon(id);
     }
+    rendering = (id) =>{
+        var flag = false;
+        var wishlist_id = ""; 
+            
+        
+        // console.log(id);
+      var found  = this.state.userWishlists.find(
+          (wishlist)=>{ 
+              if(wishlist.place_id == id)
+              { 
+                  wishlist_id = wishlist._id;
+                //   console.log("yes");
+                // this.setState({isWishlisted: true});
+                flag = true;
+                  return true;
+              }
+          });
+          if(found && flag){
+              return (
+                <FaHeart
+                className = "wishlist-icon"
+                    title = "Remove from wishlist"
+                    onClick={async()=> {
+                        console.log("before");
+                        flag = false;
+                        var wishlist_Obj = {
+                            user_id:this.state.userId,
+                            place_id :id
+                        }
+                        console.log(wishlist_Obj , "   id " , wishlist_id);
+                        await this.props.deleteByID(wishlist_id);
+                         this.rendering(id);
+                         window.location.reload();
+                    }}
+                />
+              )
+          }
+          if(!flag || !found){
+              return (
+                <FaRegHeart
+                className = "wishlist-icon"
+                title = "Add to wishlist"
+                onClick={async ()=> {
+                flag = true;
+                console.log("noooooo");
+                var wishlist_Obj = {
+                    user_id:this.state.userId,
+                    place_id :id
+                }
+                console.log(wishlist_Obj);
+                await this.props.addWishlist(wishlist_Obj);
+                 this.rendering(id);
+                 window.location.reload();
+                    // this.setState({isWishlisted: !this.state.isWishlisted});
+                }}
+            />
+              )
+         
+          }
+    
+      console.log("found: " , found);
+    }
 
     renderWishlistIcon = (id) => {
         // console.log(this.state.userWishlists);
@@ -53,17 +115,18 @@ class Highlights extends Component {
         for (const wishlist of this.state.userWishlists) {
         // this.state.userWishlists.map(wishlist => {
             // console.log(wishlist.place_id)
-            if(wishlist.place_id == id && this.state.isWishlisted){
+            if(wishlist.place_id === id && this.state.isWishlisted){
                 return (
                     <FaHeart
-                        className = "wishlist-icon"
+                    className = "wishlist-icon"
                         title = "Remove from wishlist"
                         onClick={()=> {
-                            // console.log("yes");
-                            // this.setState({isWishlisted: !this.state.isWishlisted});
-                            // console.log(e.target);
-                            console.log("before");
-                            // wishlisted = !wishlisted;
+                            var wishlist_Obj = {
+                                user_id:this.state.userId,
+                                place_id :id
+                            }
+                            console.log(wishlist_Obj);
+                            // this.props.deleteByID(wishlist_Obj);
                             this.setState({isWishlisted: !this.state.isWishlisted});
                             console.log("after");
                         }}
@@ -83,7 +146,7 @@ class Highlights extends Component {
                     console.log("mmmmm")
                     var wishlist_Obj = {
                         user_id:this.state.userId,
-                        // place_id :wishlist.place_id
+                        place_id :id
                     }
                     console.log(wishlist_Obj);
                     // this.props.addWishlist(wishlist_Obj);
@@ -184,7 +247,8 @@ class Highlights extends Component {
                                         <br/>
                                         {this.icons(highlight)}
                                     </h3>
-                                    {this.renderWishlistIcon(highlight._id)}
+                                    {this.rendering(highlight._id)}
+                                    {/* {this.renderWishlistIcon(highlight._id)} */}
                                     {/* {this.wishlist(highlight._id)} */}
                                 </div>
                                 <div className="card-item-details">
@@ -220,7 +284,8 @@ const mapActionToProps = (dispatch) => {
         getAllWishlists,
         getWishlistsByUserId,
         getAllReviews,
-        addWishlist
+        addWishlist,
+        deleteByID
     }, dispatch);
 };
 
@@ -230,6 +295,7 @@ const mapStateToProps = (state) => {
         wishlists: state.Wishlists,
         userWishlists: state.Wishlists,
         reviews: state.Reviews
+        
     };
 };
 

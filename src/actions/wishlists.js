@@ -1,11 +1,13 @@
 import axios from "axios";
  
-// const baseUrl = "http://localhost:1337/api/wishlists";
+const baseUrl = "http://localhost:1337/api/wishlists";
+const url = "http://localhost:1337/api/wishlist";
+
 // const Url = "http://localhost:1337/api/wishlist";
 
-const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
+// const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
 
-// const baseUrl = "http://localhost:4200/students";
+// const baseUrl = " http://localhost:2400/wishlists";
 
 export async function getAllWishlists(){
     var payload = null;
@@ -48,7 +50,7 @@ export async function deleteByID (id){
 
    var payload=null;
     try{
-        await axios.delete(`${baseUrl}/${id}`)
+        await axios.delete(`${url}/${id}`)
         .then(res => {
           console.log(res);
           console.log(res.data);
@@ -67,10 +69,10 @@ export async function deleteByID (id){
     
 }
 export async function addWishlist (wishlist){
-
+    console.log("here:   ",wishlist)
     var payload=null;
      try{
-         await axios.post(baseUrl,  wishlist )
+         await axios.post(url,  wishlist )
          .then(res => {
            console.log(res);
            console.log(res.data);
