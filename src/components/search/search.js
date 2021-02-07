@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";  
 import {getAllPlaces , getLocation} from "../../actions";
 import Mapp from "./map";
+import Highlights from "../home/highlights";
 // import Mapping from './map3';
 // import Mapping from "./map3";
 
@@ -26,27 +27,97 @@ class Search extends Component {
        await this.props.getAllPlaces();
        // console.log("places:    " , this.props.places);
        // this.setState({long:long , lat :lat})
+       this.setState({filtered: this.props.places});
     }
 
-    handleClick = async () => {
-        var hasTv = document.getElementById("has_tv");
-        if (hasTv.checked){
-            console.log("uuuuuuuuuuu");
+    // handleClick = async () => {
+    //     var hasTv = document.getElementById("has_tv");
+    //     if (hasTv.checked){
+    //         console.log("uuuuuuuuuuu");
+    //         await this.setState((state) => {
+    //             state.filtered = this.props.places.filter((item) => {
+    //                 // console.log(name.toLowerCase())
+    //                 // console.log("$$$$" , item.name.toLowerCase().includes(name.toLowerCase()) )
+    //                 console.log("item: " , item);
+    //                 if(item.has_wifi==true){
+    //                     console.log("yeeeeeeeeeeeee");
+    //                     return item;
+    //                 }
+    //             })
+    //             return state;
+    //         }) 
+    //     }
+    //     console.log("llllllll: " , this.state.filtered);
+
+    // }
+
+    handleClick = async (str) => {
+        let arr = [];
+        if (!document.getElementById("has_tv").checked
+            && !document.getElementById("has_wifi").checked
+            && !document.getElementById("has_heating_system").checked
+            && !document.getElementById("has_air_conditioner").checked
+            && !document.getElementById("pets").checked) {
+                // console.log("Ifffff");
+                this.setState({filtered: this.props.places});
+        }
+        if (document.getElementById(str).checked){
             await this.setState((state) => {
-                state.filtered = this.props.places.filter((item) => {
-                    // console.log(name.toLowerCase())
-                    // console.log("$$$$" , item.name.toLowerCase().includes(name.toLowerCase()) )
-                    console.log("item: " , item);
-                    if(item.has_wifi==true){
-                        console.log("yeeeeeeeeeeeee");
+                state.filtered = this.state.filtered.filter((item) => {
+                    // console.log(item);
+                    // console.log(item[str]);
+                    if(item[str]){
+                        // console.log("item", item);
                         return item;
                     }
                 })
                 return state;
             }) 
-        }
-        console.log("llllllll: " , this.state.filtered);
+        } else {
+            console.log("else");
+            if(document.getElementById('has_wifi').checked) {
+                // console.log('has_wifi.........');
+                arr.push('has_wifi');
+            }
+            if(document.getElementById('pets').checked) {
+                // console.log('pets.........');
+                arr.push('pets');
+            }
+            this.renderArr(arr);
+            // console.log("else arr", arr);
 
+            // this.setState({filtered: arr});
+            // await this.setState((state) => {
+            //     state.filtered = this.props.places.filter((item) => {
+            //         console.log(item);
+            //         // console.log(item[str]);
+            //         if(item[str]){
+            //             // console.log("item", item);
+            //             return item;
+            //         }
+            //     })
+            //     return state;
+            // })
+        }
+        // arr = this.state.filtered;
+        console.log("Outside if: " , this.state.filtered);
+    }
+
+    renderArr(arr) {
+        this.setState({filtered: this.props.places});
+        console.log('____________________');
+        console.log(arr);
+        arr.map((arrItem)=>{
+            this.setState((state) => {
+                state.filtered = this.state.filtered.filter((place) => {
+                    console.log(place);
+                    if(place[arrItem]){
+                        return place;
+                    }
+                })
+                return state;
+            })
+        })
     }
 
     render() { 
@@ -76,8 +147,8 @@ class Search extends Component {
                     </div>
                     <div className="row justify-content-between my-4">
                         <div className="col-8 col-md-8">
-                            <div className="w-100">
-                            <Mapp />
+                            <div className="w-100 h-100">
+                                <Mapp />
                             </div>
                         </div>
                         <div className="col-4 col-md-4 col-lg-3">
@@ -89,8 +160,8 @@ class Search extends Component {
                                     value="TV"
                                     className="custom-control-input"
                                     onClick={()=>{
-                                        
-                                }}/>
+                                        this.handleClick("has_tv");
+                                    }}/>
                                 <label
                                     htmlFor="has_tv"
                                     className="custom-control-label">TV
@@ -104,6 +175,9 @@ class Search extends Component {
                                     name="has_wifi"
                                     value="Wi Fi"
                                     className="custom-control-input"
+                                    onClick={()=>{
+                                        this.handleClick("has_wifi");
+                                    }}
                                 />
                                 <label
                                     htmlFor="has_wifi"
@@ -118,6 +192,9 @@ class Search extends Component {
                                     name="pets"
                                     value="Pets"
                                     className="custom-control-input"
+                                    onClick={()=>{
+                                        this.handleClick("pets");
+                                    }}
                                 />
                                 <label
                                     htmlFor="pets"
@@ -132,6 +209,9 @@ class Search extends Component {
                                     name="has_heating_system"
                                     value="Heating"
                                     className="custom-control-input"
+                                    onClick={()=>{
+                                        this.handleClick("has_heating_system");
+                                    }}
                                 />
                                 <label
                                     htmlFor="has_heating_system"
@@ -146,6 +226,9 @@ class Search extends Component {
                                     name="has_air_conditioner"
                                     value="Air Conditioner"
                                     className="custom-control-input"
+                                    onClick={()=>{
+                                        this.handleClick("has_air_conditioner");
+                                    }}
                                 />
                                 <label
                                     htmlFor="has_air_conditioner"
@@ -154,8 +237,10 @@ class Search extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="row">
-
+                    <div className="container my-5">
+                        <div className="row justify-content-center">
+                            <Highlights/>
+                        </div>
                     </div>
                 </div>
             </section>
