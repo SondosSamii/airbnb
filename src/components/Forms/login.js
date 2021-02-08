@@ -2,6 +2,7 @@ import React, {useContext, Component,  createRef  }  from 'react';
 import './form.css';
 import Signup from './Signup';
 import { FiLogIn } from 'react-icons/fi';
+import { FaUserPlus } from 'react-icons/fa';
 import { event } from 'jquery';
 import Joi, { validate } from 'joi-browser';
 import axios from "axios";
@@ -122,7 +123,7 @@ class Login extends Component {
                     <ul>
                     <li  onClick={() => this.addActiveClass("1")} id="li1" className="active"><a id="a1" className="active-text"><FiLogIn /></a></li>
                     
-                    <li onClick={() => this.addActiveClass("2")} id="li2"><a id="a2" ><i className="fas fa-user-plus"></i> </a></li>
+                    <li onClick={() => this.addActiveClass("2")} id="li2"><a id="a2" ><FaUserPlus /> </a></li>
 
                     </ul>
                 </div>

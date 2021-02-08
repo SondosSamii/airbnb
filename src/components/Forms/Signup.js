@@ -14,6 +14,7 @@ class Signup extends Component {
     state={
         UserName:"",
         Email:"",
+        PhoneNumber:"",
         Password:"",
         Password_confirm:"",
         Signup_errors:{},
@@ -28,13 +29,15 @@ class Signup extends Component {
     
     schema={
         UserName:Joi.string().required().max(15),
-        Email: Joi.string().required().email(),
-        Password:Joi.string().required().max(15),
-        Password_confirm:Joi.any().equal(Joi.ref('Password'))
+        Email: Joi.string().trim().required().email(),
+        Password:Joi.string().trim().required().min(5).max(20),
+        Password_confirm:Joi.any().equal(Joi.ref('Password')),
+        PhoneNumber: Joi.string().trim().required().regex(/^[0-9]{11}$/).required()
     }
     data={};
     async componentDidMount(){
-        this.data=await axios.get("http://localhost:3000/users");
+        this.data=await axios.get("http://localhost:3001/users");
+        console.log(this.data)
     }
     
     signupValidations = () =>{
@@ -58,6 +61,7 @@ class Signup extends Component {
       handelsignup= async e =>{
         e.preventDefault();
         const errors=this.signupValidations();
+        console.log("1111111111111111111111",errors)
         if(errors) return;
         for(const data of this.data.data){
             if(data.email===this.state.Email){
@@ -67,18 +71,59 @@ class Signup extends Component {
         }
         let date = new Date().getDate();
         const obj={ name: this.state.UserName, email: this.state.Email, password: this.state.Password, created_at: date, phone:'' ,profile_image:'', is_host:false };
-        await axios.post("http://localhost:3000/users/",obj)
-            .then(response => {
-                if (response.data.status === "created") {
-                this.props.handleSuccessfulAuth(response.data);
-                }
-            })
-            .catch(error => {
-                console.log("registration error", error);
-            });
+        
+            var formData = new FormData();
+            formData.append("name", "aya");
+            console.log("aaaaaaaaaaaaaaaaaaaaa",formData);
+            formData.append("email", this.state.Email);
+            formData.append("password",  this.state.Password);
+            formData.append("phone", this.state.PhoneNumber);
+            formData.append("is_host", false);
+            for (var key of formData.entries()) {
+                console.log(key[0] + ', ' + key[1]);
+            }
+            console.log("1233333333333333333333",formData);
+
+            let url = "http://localhost:3001/users/";
+            let method = "POST";
+            // fetch(url, {
+            //     method: method,
+            //     body: formData,
+            //     headers: {
+            //       Authorization: "Bearer " + this.props.token,
+            //     },
+            //   }).then(response => {
+            //     if (response.statusText === "created") {
+            //     this.props.handleSuccessfulAuth(response.data);
+            //     }
+            // })
+            // .catch(error => {
+            //     console.log("registration error", error);
+            // });
+
+            fetch(url, {
+                method: method,
+                body: formData,
+                headers: {
+                  Authorization: "Bearer " + this.props.token,
+                },
+              })
+
+
+        // await axios.post("http://localhost:3001/users/",{data:formData},
+        // { headers : { 'content-type': 'multipart/form-data' }})
+        //     .then(response => {
+        //         if (response.statusText === "created") {
+        //         this.props.handleSuccessfulAuth(response.data);
+        //         console.log("done")
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.log("registration error", error);
+        //     });
             var email=this.state.Email;
             setSessionCookie({ email });
-        await  this.props.history.push("/");
+        //await  this.props.history.push("/");
       }
       
 
@@ -99,6 +144,11 @@ class Signup extends Component {
                         <div className="form-label-group">
                             <input value={this.state.Email}  onChange={this.handelchange} name="Email" type="email" className="form-control" placeholder="Email address"  />
                             {this.state.Signup_errors.Email && ( <div className="alert alert-danger form-control">{this.state.Signup_errors.Email}</div> )}
+                        </div>
+
+                        <div className="form-label-group">
+                            <input value={this.state.PhoneNumber}  onChange={this.handelchange} name="PhoneNumber" type="text" className="form-control" placeholder="Phone Number"  />
+                            {this.state.Signup_errors.PhoneNumber && ( <div className="alert alert-danger form-control">{this.state.Signup_errors.PhoneNumber}</div> )}
                         </div>
 
 
