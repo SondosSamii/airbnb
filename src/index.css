@@ -6,8 +6,8 @@
   --secondary-color: #28BAC5;
   --card-border-radius: 20px;
   --card-shadow: 0 0 20px 1px #aaa;
-  --label-shadow: 0 0 5px 1px #aaa;
   --card-dark-shadow: 0 0 20px 1px #333;
+  --label-shadow: 0 0 3px 1px #aaa;
   --transition: all 0.3s;
 }
 
