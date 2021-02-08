@@ -240,7 +240,7 @@ class Highlights extends Component {
                                 <div
                                     className="card-item-highlight"
                                     style={{
-                                    backgroundImage: `url(images/places/${highlight.images[1]}.jpeg)`
+                                    backgroundImage: `url(/images/places/${highlight.images[1]}.jpeg)`
                                 }}>
                                     <h3 className="card-item-name">
                                         {highlight.name}
