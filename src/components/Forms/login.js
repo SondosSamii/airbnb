@@ -57,39 +57,59 @@ class Login extends Component {
         this.setState({errors:errors})
         console.log(this.state.errors.Password);
     }
-     LoginValidations(){
-        console.log(this.data.data);
-        for(const data of this.data.data){
-            if(this.state.Email==data.email ){
-                var validEmail= true;
-                if(this.state.Password==data.password ){
-                    var validPass= true;
-                }
-            }
-        }
-        if(validEmail){
-            if(validPass){
-                return true;
-            }
-            else{
-                this.setState({errors:{Password:"The Password is not correct!"}})
-            }
+    //  LoginValidations(){
+    //     console.log(this.data.data);
+    //     for(const data of this.data.data){
+    //         if(this.state.Email==data.email ){
+    //             var validEmail= true;
+    //             if(this.state.Password==data.password ){
+    //                 var validPass= true;
+    //             }
+    //         }
+    //     }
+    //     if(validEmail){
+    //         if(validPass){
+    //             return true;
+    //         }
+    //         else{
+    //             this.setState({errors:{Password:"The Password is not correct!"}})
+    //         }
 
-        }
-        else{
-            this.setState({errors:{Email:"This Email is not exists!"}})
-        }
-    }
+    //     }
+    //     else{
+    //         this.setState({errors:{Email:"This Email is not exists!"}})
+    //     }
+    // }
     handelLogin=async e=>{
         e.preventDefault();
         
         const errors= this.Validations();
-        const valid=this.LoginValidations();
+        // const valid=this.LoginValidations();
         if(errors) return;
-        if(!valid)return;
-        var email=this.state.Email;
-        setSessionCookie({ email });
-        this.props.history.push("/");   
+        // if(!valid)return;
+        var formData = new FormData();
+            formData.append("email", this.state.Email);
+            formData.append("password",  this.state.Password);
+
+            let url = "http://localhost:3001/users/";
+            let method = "POST";
+            fetch(url, {
+                method: method,
+                body: formData,
+                headers: {
+                  Authorization: "Bearer " + this.props.token,
+                },
+              }).then(response => {
+                    if (response.statusText === "created") {
+                    this.props.handleSuccessfulAuth(response.data);
+                    }
+                })
+                .catch(error => {
+                    console.log("registration error", error);
+                });
+        // var email=this.state.Email;
+        // setSessionCookie({ email });
+        // this.props.history.push("/");   
     }
     
 
