@@ -123,6 +123,96 @@ class Search extends Component {
         console.log("............" , this.state.filtered);
     }
 
+    renderFeatures() {
+        return (
+            <>
+                <div className="custom-control custom-checkbox">
+                    <input
+                        type="checkbox"
+                        id="has_tv"
+                        name="has_tv"
+                        value="TV"
+                        className="custom-control-input"
+                        onClick={()=>{
+                            this.handleClick("has_tv");
+                        }}/>
+                    <label
+                        htmlFor="has_tv"
+                        className="custom-control-label">TV
+                    </label>
+                </div>
+
+                <div className="custom-control custom-checkbox">
+                    <input
+                        type="checkbox"
+                        id="has_wifi"
+                        name="has_wifi"
+                        value="Wi Fi"
+                        className="custom-control-input"
+                        onClick={()=>{
+                            this.handleClick("has_wifi");
+                        }}
+                    />
+                    <label
+                        htmlFor="has_wifi"
+                        className="custom-control-label">Wi-Fi
+                    </label>
+                </div>
+
+                <div className="custom-control custom-checkbox">
+                    <input
+                        type="checkbox"
+                        id="pets"
+                        name="pets"
+                        value="Pets"
+                        className="custom-control-input"
+                        onClick={()=>{
+                            this.handleClick("pets");
+                        }}
+                    />
+                    <label
+                        htmlFor="pets"
+                        className="custom-control-label">Allow Pets
+                    </label>
+                </div>
+
+                <div className="custom-control custom-checkbox">
+                    <input
+                        type="checkbox"
+                        id="has_heating_system"
+                        name="has_heating_system"
+                        value="Heating"
+                        className="custom-control-input"
+                        onClick={()=>{
+                            this.handleClick("has_heating_system");
+                        }}
+                    />
+                    <label
+                        htmlFor="has_heating_system"
+                        className="custom-control-label">Heating System
+                    </label>
+                </div>
+
+                <div className="custom-control custom-checkbox">
+                    <input
+                        type="checkbox"
+                        id="has_air_conditioner"
+                        name="has_air_conditioner"
+                        value="Air Conditioner"
+                        className="custom-control-input"
+                        onClick={()=>{
+                            this.handleClick("has_air_conditioner");
+                        }}
+                    />
+                    <label
+                        htmlFor="has_air_conditioner"
+                        className="custom-control-label">Air Conditioner
+                    </label>
+                </div>
+            </>
+        )
+    }
+
     render() { 
         return (
             <section
@@ -132,117 +222,22 @@ class Search extends Component {
                     marginTop: '63px', // Header Height
                 }}>
                 <div className="container">
+                    <div className="row mb-5">
+                        <div className="col-8 col-md-9 mb-3"
+                            style={{height: '250px'}}> {/* The same height of map */}
+                            <Mapp />
+                        </div>
+                    </div>
                     <div className="row">
-                        <div className="col-12 col-md-8 offset-md-1 col-lg-6">
-                            <input
-                                type="search"
-                                name="search"
-                                className="form-control"
-                                placeholder="Search..."
-                                onChange={(e)=>{
-                                    this.setState({seach_place : e.target.value})
-                                }}/>
-                            <input type="button" value="Search" 
-                            onClick={()=>{
-                                this.handleClick();
-                            }}/>
-                        </div>
-                    </div>
-                    <div className="row justify-content-between my-4">
-                        <div className="col-8 col-md-8">
-                            <div className="w-100 h-100">
-                                <Mapp />
+                        <div className="col-8 col-md-9">
+                            <div className="row justify-content-center">
+                                <Highlights/>
                             </div>
                         </div>
-                        <div className="col-4 col-md-4 col-lg-3">
-                            <div className="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    id="has_tv"
-                                    name="has_tv"
-                                    value="TV"
-                                    className="custom-control-input"
-                                    onClick={()=>{
-                                        this.handleClick("has_tv");
-                                    }}/>
-                                <label
-                                    htmlFor="has_tv"
-                                    className="custom-control-label">TV
-                                </label>
-                            </div>
-
-                            <div className="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    id="has_wifi"
-                                    name="has_wifi"
-                                    value="Wi Fi"
-                                    className="custom-control-input"
-                                    onClick={()=>{
-                                        this.handleClick("has_wifi");
-                                    }}
-                                />
-                                <label
-                                    htmlFor="has_wifi"
-                                    className="custom-control-label">Wi-Fi
-                                </label>
-                            </div>
-
-                            <div className="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    id="pets"
-                                    name="pets"
-                                    value="Pets"
-                                    className="custom-control-input"
-                                    onClick={()=>{
-                                        this.handleClick("pets");
-                                    }}
-                                />
-                                <label
-                                    htmlFor="pets"
-                                    className="custom-control-label">Allow Pets
-                                </label>
-                            </div>
-
-                            <div className="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    id="has_heating_system"
-                                    name="has_heating_system"
-                                    value="Heating"
-                                    className="custom-control-input"
-                                    onClick={()=>{
-                                        this.handleClick("has_heating_system");
-                                    }}
-                                />
-                                <label
-                                    htmlFor="has_heating_system"
-                                    className="custom-control-label">Heating System
-                                </label>
-                            </div>
-
-                            <div className="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    id="has_air_conditioner"
-                                    name="has_air_conditioner"
-                                    value="Air Conditioner"
-                                    className="custom-control-input"
-                                    onClick={()=>{
-                                        this.handleClick("has_air_conditioner");
-                                    }}
-                                />
-                                <label
-                                    htmlFor="has_air_conditioner"
-                                    className="custom-control-label">Air Conditioner
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="container my-5">
-                        <div className="row justify-content-center">
-                            <Highlights/>
+                        <div className="col-4 col-md-3 mt-4">
+                            <h4>Filters</h4>
+                            <hr/>
+                            {this.renderFeatures()}
                         </div>
                     </div>
                 </div>

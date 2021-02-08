@@ -9,9 +9,16 @@ import { connect } from 'react-redux';
 import axios from "axios";
 
 const mapStyles = {
-width:"500px",
-height:"500px"
+  width: "100%",
+  height: "100%"
 };
+
+const containerStyle = {
+  position: 'relative',  
+  width: '100%',
+  height: '250px' // The same height of its parent in render
+};
+
 var params = {
   access_key: '6895d17a0165c9fa200e743be896862d',
   query: '1600 Pennsylvania Ave NW'
@@ -107,18 +114,40 @@ var params = {
       }
   render() {
     return (
-      <div>
-      <input type="text" onChange={(e)=>{
-         this.setState({seach_place : e.target.value })
-      }}/>  
-      <button onClick={()=>{
-          this.handleClick();
-      }}>Click</button>
-        <Map
+      <>
+      <div className="container mb-4">
+        <div className="row justify-content-center">
+          <div className="col-8 col-md-7">
+            <input
+              type="search"
+              name="search"
+              className="form-control"
+              placeholder="Search..."
+              onChange={(e)=>{
+                this.setState({seach_place : e.target.value })
+              }}
+            />
+          </div>
+          <div className="col-3">
+            <button
+              type="button"
+              className="btn main-btn"
+              onClick={()=>{
+                this.handleClick();
+              }}>Find On Map
+            </button>
+          </div>
+        </div>
+      </div>
+      <Map
         google={this.props.google}
         zoom={8}
         style={mapStyles}
-        initialCenter={{ lat:47.49855629475769      , lng: -122.14184416996333}}
+        containerStyle={containerStyle}
+        initialCenter={{
+          lat:47.49855629475769,
+          lng: -122.14184416996333
+        }}
         center={this.state.coords}
         onClick={this.mapClicked}
       >
@@ -128,9 +157,7 @@ var params = {
           name={'Kenyatta International Convention Centre'}
         />
       </Map>
-      </div>
-           
-  
+      </>
     );
   }
 }
