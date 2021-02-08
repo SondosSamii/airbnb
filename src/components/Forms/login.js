@@ -3,15 +3,9 @@ import React, { Component }  from 'react';
 import './form.css';
 import Signup from './Signup';
 import { FiLogIn } from 'react-icons/fi';
-<<<<<<< HEAD
 import { FaUserPlus } from 'react-icons/fa';
 import { event } from 'jquery';
 import Joi, { validate } from 'joi-browser';
-=======
-// import { event } from 'jquery';
-import Joi from 'joi-browser';
-// import Joi, { validate } from 'joi-browser';
->>>>>>> f90ef733e05f0125bb3b5860c7ba48032a45011f
 import axios from "axios";
 import { setSessionCookie } from '../session'
 // import {SessionContext ,setSessionCookie,getSessionCookie} from '../session'
@@ -129,20 +123,12 @@ class Login extends Component {
                 className="background"
                 style={{backgroundImage: "url(/bg.jpg)"}}>
                 <div className="background p-3" >
-<<<<<<< HEAD
-                    <div className="buttons-container mx-auto mt-3" style={{width:"220px"}}>
-                    <ul>
-                    <li  onClick={() => this.addActiveClass("1")} id="li1" className="active"><a id="a1" className="active-text"><FiLogIn /></a></li>
-                    
-                    <li onClick={() => this.addActiveClass("2")} id="li2"><a id="a2" ><FaUserPlus /> </a></li>
-=======
                     <div className="pt-4">
                         <div className="buttons-container mx-auto mt-5" style={{width:"220px"}}>
                         <ul>
                         <li  onClick={() => this.addActiveClass("1")} id="li1" className="active"><a id="a1" className="active-text"><FiLogIn /></a></li>
->>>>>>> f90ef733e05f0125bb3b5860c7ba48032a45011f
 
-                        <li onClick={() => this.addActiveClass("2")} id="li2"><a id="a2" ><i className="fas fa-user-plus"></i> </a></li>
+                        <li onClick={() => this.addActiveClass("2")} id="li2"><a id="a2" ><FaUserPlus /> </a></li>
 
                         </ul>
                     </div>

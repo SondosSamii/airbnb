@@ -38,12 +38,8 @@ class Signup extends Component {
     }
     data={};
     async componentDidMount(){
-<<<<<<< HEAD
-        this.data=await axios.get("http://localhost:3001/users");
+        this.data=await axios.get("http://localhost:3001/users/");
         console.log(this.data)
-=======
-        this.data=await axios.get("http://localhost:3000/clients");
->>>>>>> f90ef733e05f0125bb3b5860c7ba48032a45011f
     }
     
     signupValidations = () =>{
@@ -77,7 +73,6 @@ class Signup extends Component {
         }
         let date = new Date().getDate();
         const obj={ name: this.state.UserName, email: this.state.Email, password: this.state.Password, created_at: date, phone:'' ,profile_image:'', is_host:false };
-<<<<<<< HEAD
         
             var formData = new FormData();
             formData.append("name", "aya");
@@ -117,28 +112,17 @@ class Signup extends Component {
               })
 
 
-        // await axios.post("http://localhost:3001/users/",{data:formData},
-        // { headers : { 'content-type': 'multipart/form-data' }})
-        //     .then(response => {
-        //         if (response.statusText === "created") {
-        //         this.props.handleSuccessfulAuth(response.data);
-        //         console.log("done")
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log("registration error", error);
-        //     });
-=======
-        await axios.post("http://localhost:3000/clients/",obj)
+        await axios.post("http://localhost:3001/users/",{data:formData},
+        { headers : { 'content-type': 'multipart/form-data' }})
             .then(response => {
-                if (response.data.status === "created") {
+                if (response.statusText === "created") {
                 this.props.handleSuccessfulAuth(response.data);
+                console.log("done")
                 }
             })
             .catch(error => {
                 console.log("registration error", error);
             });
->>>>>>> f90ef733e05f0125bb3b5860c7ba48032a45011f
             var email=this.state.Email;
             setSessionCookie({ email });
         //await  this.props.history.push("/");
