@@ -15,7 +15,7 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-light mx-0 mx-md-5">
                 <Link to="/" className="navbar-brand">
                     <img
-                        src="logo192.png"
+                        src="/logo192.png"
                         width="30"
                         height="30"
                         alt="Logo"
