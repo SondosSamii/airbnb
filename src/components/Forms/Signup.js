@@ -103,9 +103,9 @@ class Signup extends Component {
     fetch(url, {
       method: method,
       body: formData,
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-      },
+      //   headers: {
+      //     Authorization: "Bearer " + this.props.token,
+      //   },
     })
       .then((response) => {
         if (response.statusText === "created") {
