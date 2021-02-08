@@ -28,7 +28,8 @@ const PlacesTry = () => {
                                     style={{
                                     backgroundImage: `url(images/places/${places[0].images[2]}.jpeg)`
                                 }}>
-                                    <h3 className="card-item-type">{places[0].type}</h3>
+                                    <h3 className="card-item-name">{places[0].name}</h3>
+                                    <h4 className="card-item-type">{places[0].type}</h4>
                                 </Link>
                             </div>
                         </div>
@@ -42,7 +43,8 @@ const PlacesTry = () => {
                                             style={{
                                             backgroundImage: `url(images/places/${places[1].images[0]}.jpeg)`
                                         }}>
-                                            <h3 className="card-item-type">{places[1].type}</h3>
+                                            <h3 className="card-item-name">{places[1].name}</h3>
+                                            <h4 className="card-item-type">{places[1].type}</h4>
                                         </Link>
                                     </div>
                                 </div>
@@ -54,7 +56,8 @@ const PlacesTry = () => {
                                             style={{
                                             backgroundImage: `url(images/places/${places[2].images[0]}.jpeg)`
                                         }}>
-                                            <h3 className="card-item-type">{places[2].type}</h3>
+                                            <h3 className="card-item-name">{places[2].name}</h3>
+                                            <h4 className="card-item-type">{places[2].type}</h4>
                                         </Link>
                                     </div>
                                 </div>
@@ -63,12 +66,13 @@ const PlacesTry = () => {
                                 <div className="col-12">
                                     <div className="card-item card-item-sm">
                                         <Link
-                                            to={`/places/${places[0]._id}`}
+                                            to={`/places/${places[3]._id}`}
                                             className="card-item-bg"
                                             style={{
-                                            backgroundImage: `url(images/places/${places[0].images[1]}.jpeg)`
+                                            backgroundImage: `url(images/places/${places[3].images[1]}.jpeg)`
                                         }}>
-                                            <h3 className="card-item-type">{places[0].type}</h3>
+                                            <h3 className="card-item-name">{places[3].name}</h3>
+                                            <h4 className="card-item-type">{places[3].type}</h4>
                                         </Link>
                                     </div>
                                 </div>

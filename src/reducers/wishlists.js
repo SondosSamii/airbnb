@@ -10,8 +10,12 @@ function Wishlists(state = null , action) {
             // console.log("lllllllllllllllllllllllllllllll")
             return action.payload;
         }
-        case "deletebyid" :{
-            console.log("lllllllllllllllllllllllllllllll");
+        case "deleteByID" :{
+            // console.log("lllllllllllllllllllllllllllllll");
+            return action.payload;
+        }
+        case "addWishlist" :{
+            console.log("lllllllllllllllllllllllllllllll" , action.payload);
             return action.payload;
         }
         default:{

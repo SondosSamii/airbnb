@@ -11,9 +11,9 @@ import { bindActionCreators } from "redux";
 import { getAllPlaces, getPlaceById } from "../../actions/places";
 import {
   getAllWishlists,
-  // getwishlistById,
+  // getWishlistsByUserId,
   deleteByID,
-} from "../../actions/wishlist";
+} from "../../actions/wishlists";
 import { getAllReservation } from "../../actions/reservations";
 import { getAllClients, updateClient } from "../../actions/clients";
 import React, { Component } from "react";
@@ -163,11 +163,12 @@ class ViewProfile extends Component {
                   backgroundImage: `url(images/places/${placeElement.images[1]}.jpeg)`,
                 }}
               >
-                <h3 className="card-item-type">
-                  {placeElement.type}
+                <h3 className="card-item-name">
+                  {placeElement.name}
                   <br />
                   {this.icons(placeElement)}
                 </h3>
+                <h4 className="card-item-type">{placeElement.type}</h4>
               </div>
               <div className="card-item-details">
                 <h4>
@@ -224,11 +225,12 @@ class ViewProfile extends Component {
                   backgroundImage: `url(images/places/${this.state.Places[index].images[1]}.jpeg)`,
                 }}
               >
-                <h3 className="card-item-type">
-                  {this.state.Places[index].type}
+                <h3 className="card-item-name">
+                  {this.state.Places[index].name}
                   <br />
                   {this.icons(this.state.Places[index])}
                 </h3>
+                <h4 className="card-item-type">{this.state.Places[index].type}</h4>
                 <FaHeart
                   className="wishlist-icon"
                   title="Remove from wishlist"
@@ -298,9 +300,10 @@ class ViewProfile extends Component {
                     backgroundImage: `url(images/places/${this.state.reserve_Places[index].images[0]}.jpeg)`,
                   }}
                 >
-                  <h3 className="card-item-type">
-                    {this.state.reserve_Places[index].type}
+                  <h3 className="card-item-name">
+                    {this.state.reserve_Places[index].name}
                   </h3>
+                  <h4 className="card-item-type">{this.state.reserve_Places[index].type}</h4>
                 </Link>
                 {/* <AiOutlineHeart /> */}
               </div>

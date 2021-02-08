@@ -8,7 +8,7 @@ const App = ()=> {
     const createStoreWithMDW = applyMiddleware(promiseMW)(createStore)
     return (
         <Provider store = {createStoreWithMDW(reducers)}>
-        <Routes/>
+            <Routes/>
         </Provider>
     )
 }

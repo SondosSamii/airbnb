@@ -1,25 +1,30 @@
 import React, {Component} from 'react';
 import {NavLink as Link} from "react-router-dom";
 
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+
+import {getAllPlaces} from "../../actions/places";
+import {getAllWishlists} from "../../actions/wishlists";
+
 class Places extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            places: []
+            places: [],
+            wishlists: []
         }
-        this.baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
+        // this.baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
     }
 
-    componentDidMount() {
-        fetch(this.baseURL, {method: "GET"})
-        .then((resp) => {
-            return resp.json();
-        }).then((data) => {
-            // console.log(data);
-            this.setState({places: data});
-        }).catch((err) => {
-            console.log(err);
-        });
+    async componentDidMount() {
+        await this.props.getAllPlaces();
+        await this.setState({places: this.props.places});
+        // console.log("Home Places ", this.state.places);
+        
+        await this.props.getAllWishlists();
+        await this.setState({wishlists: this.props.wishlists});
+        // console.log("Home Wishlists ", this.state.wishlists);
     }
 
     renderPlaces = () => {
@@ -37,7 +42,8 @@ class Places extends Component {
                                         style={{
                                         backgroundImage: `url(images/places/${this.state.places[0].images[2]}.jpeg)`
                                     }}>
-                                        <h3 className="card-item-type">{this.state.places[0].type}</h3>
+                                        <h3 className="card-item-name">{this.state.places[0].name}</h3>
+                                        <h4 className="card-item-type">{this.state.places[0].type}</h4>
                                     </Link>
                                 </div>
                             </div>
@@ -51,7 +57,8 @@ class Places extends Component {
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[1].images[0]}.jpeg)`
                                             }}>
-                                                <h3 className="card-item-type">{this.state.places[1].type}</h3>
+                                                <h3 className="card-item-name">{this.state.places[1].name}</h3>
+                                                <h4 className="card-item-type">{this.state.places[1].type}</h4>
                                             </Link>
                                         </div>
                                     </div>
@@ -63,7 +70,8 @@ class Places extends Component {
                                                 style={{
                                                 backgroundImage: `url(images/places/${this.state.places[2].images[0]}.jpeg)`
                                             }}>
-                                                <h3 className="card-item-type">{this.state.places[2].type}</h3>
+                                                <h3 className="card-item-name">{this.state.places[2].name}</h3>
+                                                <h4 className="card-item-type">{this.state.places[2].type}</h4>
                                             </Link>
                                         </div>
                                     </div>
@@ -72,12 +80,13 @@ class Places extends Component {
                                     <div className="col-12">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[0]._id}`}
+                                                to={`/places/${this.state.places[3]._id}`}
                                                 className="card-item-bg"
                                                 style={{
-                                                backgroundImage: `url(images/places/${this.state.places[0].images[1]}.jpeg)`
+                                                backgroundImage: `url(images/places/${this.state.places[3].images[1]}.jpeg)`
                                             }}>
-                                                <h3 className="card-item-type">{this.state.places[0].type}</h3>
+                                                <h3 className="card-item-name">{this.state.places[3].name}</h3>
+                                                <h4 className="card-item-type">{this.state.places[3].type}</h4>
                                             </Link>
                                         </div>
                                     </div>
@@ -85,8 +94,7 @@ class Places extends Component {
                             </div>
                         </div>
                     )
-                }
-            )
+                })
         }
         return (
             <h2 className="text-center my-5">No Places...</h2>
@@ -95,12 +103,25 @@ class Places extends Component {
 
     render() {
         return (
-            <div className="container my-5">
-                <h2 className="text-center mb-4">Our Places</h2>
+            <>
                 {this.renderPlaces()}
-            </div>
+            </>
         );
     }
 }
 
-export default Places;
+const mapActionToProps = (disptch) => {
+    return bindActionCreators({
+        getAllPlaces,
+        getAllWishlists
+    }, disptch);
+};
+
+const mapStateToProps = (state) => {
+    return {
+        places: state.Places,
+        wishlists: state.Wishlists
+    };
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Places);
