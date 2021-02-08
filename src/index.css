@@ -34,6 +34,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--primary-dark-color);
   background-color: var(--primary-light-color);
 }
 
@@ -103,14 +104,6 @@ code {
 
 .slideshow-bg4 {
   background-image: url(./components/home/slideshow/pexels-photo-2398220.jpeg);
-}
-
-h1 {
-  color: var(--primary-dark-color);
-}
-
-p {
-  color: var(--primary-dark-color);
 }
 
 .card-item {
