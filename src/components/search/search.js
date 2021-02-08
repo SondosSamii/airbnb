@@ -223,21 +223,21 @@ class Search extends Component {
                 }}>
                 <div className="container">
                     <div className="row mb-5">
-                        <div className="col-8 col-md-9 mb-3"
+                        <div className="col-8 mb-3"
                             style={{height: '250px'}}> {/* The same height of map */}
                             <Mapp />
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-8 col-md-9">
-                            <div className="row justify-content-center">
-                                <Highlights/>
-                            </div>
-                        </div>
-                        <div className="col-4 col-md-3 mt-4">
+                        <div className="col-4 mt-4">
                             <h4>Filters</h4>
                             <hr/>
                             {this.renderFeatures()}
+                        </div>
+                    </div>
+                    <div className="row">
+                        {/* <div className="col-8"> */}
+                            <div className="row justify-content-center">
+                                <Highlights filteredPlaces={this.props.filtered}/>
+                            {/* </div> */}
                         </div>
                     </div>
                 </div>

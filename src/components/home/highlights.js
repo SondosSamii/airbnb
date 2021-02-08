@@ -229,6 +229,9 @@ class Highlights extends Component {
     }
 
     renderHighlights = () => {
+        if(this.props.filteredPlaces) {
+            console.log("Filtered from highlights", this.props.filteredPlaces);
+        }
         // console.log("renderHighlights: ", this.state.highlights);
         if (this.state.highlights) {
             // console.log("Inside if");
@@ -296,7 +299,6 @@ const mapStateToProps = (state) => {
         wishlists: state.Wishlists,
         userWishlists: state.Wishlists,
         reviews: state.Reviews
-        
     };
 };
 

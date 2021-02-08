@@ -128,7 +128,7 @@ var params = {
               }}
             />
           </div>
-          <div className="col-3">
+          <div className="col-4">
             <button
               type="button"
               className="btn main-btn"
