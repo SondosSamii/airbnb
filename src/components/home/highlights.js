@@ -242,11 +242,12 @@ class Highlights extends Component {
                                     style={{
                                     backgroundImage: `url(images/places/${highlight.images[1]}.jpeg)`
                                 }}>
-                                    <h3 className="card-item-type">
-                                        {highlight.type}
+                                    <h3 className="card-item-name">
+                                        {highlight.name}
                                         <br/>
                                         {this.icons(highlight)}
                                     </h3>
+                                    <h4 className="card-item-type">{highlight.type}</h4>
                                     {this.rendering(highlight._id)}
                                     {/* {this.renderWishlistIcon(highlight._id)} */}
                                     {/* {this.wishlist(highlight._id)} */}
