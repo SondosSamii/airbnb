@@ -1,5 +1,3 @@
-
-
 .fa, .fas, .fad {
     font-family: FontAwesome !important;
     font-style:normal !important;
@@ -168,6 +166,7 @@ transition: all 0.5s;
 width: 60%;
 margin-left: auto;
 margin-right: auto;
+border: 0;
 }
 .text-link a {
 color: #007bff;
@@ -192,7 +191,9 @@ position: relative;
 margin-bottom: 1rem;
 }
 
-.form-control{
+#host_form .form-control,
+#login_form .form-control,
+#signup_form .form-control{
 height: auto;
 border-radius: 2rem;
 width: 80%;

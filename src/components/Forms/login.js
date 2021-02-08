@@ -1,12 +1,20 @@
-import React, {useContext, Component,  createRef  }  from 'react';
+import React, { Component }  from 'react';
+// import React, {useContext, Component,  createRef }  from 'react';
 import './form.css';
 import Signup from './Signup';
 import { FiLogIn } from 'react-icons/fi';
+<<<<<<< HEAD
 import { FaUserPlus } from 'react-icons/fa';
 import { event } from 'jquery';
 import Joi, { validate } from 'joi-browser';
+=======
+// import { event } from 'jquery';
+import Joi from 'joi-browser';
+// import Joi, { validate } from 'joi-browser';
+>>>>>>> f90ef733e05f0125bb3b5860c7ba48032a45011f
 import axios from "axios";
-import {SessionContext ,setSessionCookie,getSessionCookie} from '../session'
+import { setSessionCookie } from '../session'
+// import {SessionContext ,setSessionCookie,getSessionCookie} from '../session'
 
 class Login extends Component {
     constructor(props) {
@@ -28,7 +36,7 @@ class Login extends Component {
     };
     data={};
     async componentDidMount(){
-        this.data=await axios.get("http://localhost:3000/users/");
+        this.data=await axios.get("http://localhost:3000/clients/");
         //const SessionContext = this.context;
     }
     ///start login form functions
@@ -117,15 +125,27 @@ class Login extends Component {
     }
     render() { 
         return ( 
-            <div className="background" style={{ backgroundImage: "url(/bg.jpg)" }}>
+            <section id="login_form"
+                className="background"
+                style={{backgroundImage: "url(/bg.jpg)"}}>
                 <div className="background p-3" >
+<<<<<<< HEAD
                     <div className="buttons-container mx-auto mt-3" style={{width:"220px"}}>
                     <ul>
                     <li  onClick={() => this.addActiveClass("1")} id="li1" className="active"><a id="a1" className="active-text"><FiLogIn /></a></li>
                     
                     <li onClick={() => this.addActiveClass("2")} id="li2"><a id="a2" ><FaUserPlus /> </a></li>
+=======
+                    <div className="pt-4">
+                        <div className="buttons-container mx-auto mt-5" style={{width:"220px"}}>
+                        <ul>
+                        <li  onClick={() => this.addActiveClass("1")} id="li1" className="active"><a id="a1" className="active-text"><FiLogIn /></a></li>
+>>>>>>> f90ef733e05f0125bb3b5860c7ba48032a45011f
 
-                    </ul>
+                        <li onClick={() => this.addActiveClass("2")} id="li2"><a id="a2" ><i className="fas fa-user-plus"></i> </a></li>
+
+                        </ul>
+                    </div>
                 </div>
 
 
@@ -134,7 +154,7 @@ class Login extends Component {
                     <div className="col-sm-9 col-md-6 col-lg-4 mx-auto">
                         <div className="card card-signin my-5">
                         <div className="card-body">
-                            <h5 className="card-title text-center">Welcome back!</h5>
+                            <h5 className="card-title text-center mt-0">Welcome back!</h5>
                             <form onSubmit={this.handelLogin} className="form-signin"  method="POST">
                             <div className="form-label-group">
                                 <input name="Email" value={this.state.Email} onChange={this.handelchange} type="email" className="form-control" placeholder="Email address"  />
@@ -167,7 +187,7 @@ class Login extends Component {
                         <Signup history={this.props.history}/>
                     </div>
                 </div>
-            </div>
+            </section>
          );
     }
 }
