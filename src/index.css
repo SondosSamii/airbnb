@@ -6,6 +6,7 @@
   --secondary-color: #28BAC5;
   --card-border-radius: 20px;
   --card-shadow: 0 0 20px 1px #aaa;
+  --label-shadow: 0 0 5px 1px #aaa;
   --card-dark-shadow: 0 0 20px 1px #333;
   --transition: all 0.3s;
 }
@@ -138,11 +139,24 @@ p {
   position: relative;
 }
 
-.card-item-type {
+.card-item-name {
   position: absolute;
   left: 5%;
   bottom: 5%;
   color: #fff;
+}
+
+.card-item-type {
+  position: absolute;
+  right: 0;
+  bottom: 5%;
+  padding: 0.5em 0.5em 0.5em 1em;
+  border-top-left-radius: 1.5em;
+  border-bottom-left-radius: 1.5em;
+  color: var(--primary-dark-color);
+  font-size: 0.75em;
+  background-color: #fff;
+  box-shadow: var(--label-shadow);
 }
 
 .card-item-details {
