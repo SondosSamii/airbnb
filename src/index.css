@@ -116,8 +116,8 @@ code {
 
 .card-item:hover,
 .card-item:focus {
-  /* transform: var(--zoom-scale); */
-  animation: var(--shake);
+  transform: var(--zoom-scale);
+  /* animation: var(--shake); */
   box-shadow: var(--card-dark-shadow);
 }
 
@@ -212,7 +212,7 @@ code {
   cursor: pointer;
 }
 
-.highlight-icon {
+.feature-icon {
   font-size: 0.75em;
   margin-right: 0.25em;
 }

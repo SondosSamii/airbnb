@@ -318,11 +318,11 @@ class ViewProfile extends Component {
   icons = (place) => {
     return (
       <>
-        {place.has_tv && <FaTv className="highlight-icon" />}
-        {place.has_wifi && <FaWifi className="highlight-icon" />}
-        {place.pets && <MdPets className="highlight-icon" />}
-        {place.has_air_conditioner && <FaFan className="highlight-icon" />}
-        {place.has_heating_system && <GiHeatHaze className="highlight-icon" />}
+        {place.has_tv && <FaTv className="feature-icon" />}
+        {place.has_wifi && <FaWifi className="feature-icon" />}
+        {place.pets && <MdPets className="feature-icon" />}
+        {place.has_air_conditioner && <FaFan className="feature-icon" />}
+        {place.has_heating_system && <GiHeatHaze className="feature-icon" />}
       </>
     );
   };
