@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { FaRegHeart, FaHeart, FaStar } from "react-icons/fa";
 
 import { getAllPlaces } from '../../actions/places';
-import { getAllWishlists, getWishlistsByUserId , addWishlist , deleteByID } from '../../actions/wishlists';
+import { getAllWishlists, getWishlistsByUserId, addWishlist, deleteByID } from '../../actions/wishlists';
 import { getAllReviews } from '../../actions/reviews';
+import FeaturesIcons from './features-icons';
 
-import {FaRegHeart, FaHeart, FaStar, FaTv, FaWifi, FaFan} from "react-icons/fa";
-import {MdPets} from "react-icons/md";
-import {GiHeatHaze} from "react-icons/gi";
-
-class Highlights extends Component {
+class Cards extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -42,10 +39,12 @@ class Highlights extends Component {
         await this.setState({reviews: this.props.reviews});
         // console.log("Highlights Reviews: ", this.state.reviews);
     }
+
     eventHandle = async (id) =>{
         await this.setState({isWishlisted: !this.state.isWishlisted});
         // this.renderWishlistIcon(id);
     }
+
     rendering = (id) =>{
         var flag = false;
         var wishlist_id = ""; 
@@ -193,13 +192,13 @@ class Highlights extends Component {
         // )};
     }
 
-    renderRating = (placeId) => {
+    renderRatingAvg = (id) => {
         const reviews = this.state.reviews;
         if(reviews) {
             let rate = 0;
             // eslint-disable-next-line
             const result = reviews.filter(review => {
-                if(review.place_id === placeId) {
+                if(review.place_id === id) {
                     return review.rating;
                 }
             });
@@ -216,69 +215,46 @@ class Highlights extends Component {
         }
     }
 
-    icons = (place) => {
-        return (
-            <>
-                {place.has_tv && <FaTv className="highlight-icon"/>}
-                {place.has_wifi && <FaWifi className="highlight-icon"/>}
-                {place.pets && <MdPets className="highlight-icon"/>}
-                {place.has_air_conditioner && <FaFan className="highlight-icon"/>}
-                {place.has_heating_system && <GiHeatHaze className="highlight-icon"/>}
-            </>
-        )
-    }
-
-    renderHighlights = () => {
-        if(this.props.filteredPlaces) {
-            console.log("Filtered from highlights", this.props.filteredPlaces);
-        }
-        // console.log("renderHighlights: ", this.state.highlights);
-        if (this.state.highlights) {
+    render() {
+        let places = this.props.places;
+        // if (places) {
+            // console.log("New Cards", places);
             // console.log("Inside if");
-            return this.state.highlights.slice(0, 6).map((highlight) => {
-                // console.log(highlight.images[0]);
-                    return (
-                        <div className="col-9 col-sm-6 col-lg-4 mt-4" key={highlight._id}>
-                            <div className="card-item">
-                                <div
-                                    className="card-item-highlight"
-                                    style={{
-                                    backgroundImage: `url(/images/places/${highlight.images[1]}.jpeg)`
-                                }}>
-                                    <h3 className="card-item-name">
-                                        {highlight.name}
-                                        <br/>
-                                        {this.icons(highlight)}
-                                    </h3>
-                                    <h4 className="card-item-type">{highlight.type}</h4>
-                                    {this.rendering(highlight._id)}
-                                    {/* {this.renderWishlistIcon(highlight._id)} */}
-                                    {/* {this.wishlist(highlight._id)} */}
-                                </div>
-                                <div className="card-item-details">
-                                    <h4>{highlight.address.city}, {highlight.address.country}</h4>
-                                    <p className="desc">{highlight.description}</p>
-                                    <p className="price">${highlight.price}</p>
-                                    <p className="rating"><FaStar/>&nbsp;{this.renderRating(highlight._id)}</p>
-                                </div>
+            return places.slice(0, 6).map((place) => {
+                return (
+                    <div className="col-9 col-sm-6 col-lg-4 mt-4" key={place._id}>
+                        <div className="card-item">
+                            <div
+                                className="card-item-highlight"
+                                style={{
+                                backgroundImage: `url(/images/places/${place.images[1]}.jpeg)`
+                            }}>
+                                <h3 className="card-item-name">
+                                    {place.name}
+                                    <br/>
+                                    <FeaturesIcons place={place}/>
+                                </h3>
+                                <h4 className="card-item-type">{place.type}</h4>
+                                {this.rendering(place._id)}
+                                {/* {this.renderWishlistIcon(highlight._id)} */}
+                                {/* {this.wishlist(highlight._id)} */}
+                            </div>
+                            <div className="card-item-details">
+                                <h4>{place.address.city}, {place.address.country}</h4>
+                                <p className="desc">{place.description}</p>
+                                <p className="price">${place.price}</p>
+                                <p className="rating">
+                                    <FaStar/>&nbsp;{this.renderRatingAvg(place._id)}
+                                </p>
                             </div>
                         </div>
-                    )
-                }
+                    </div>
+                )}
             )
-        }
-        return (
-            <h2 className="text-center my-5">No Highlights...</h2>
-        )
-    }
-
-    render() {
-        return (
-            <>
-                {this.renderHighlights()}
-                {/* <FaRegHeart style={{backgroundColor:"blue"}}/> */}
-            </>
-        );
+        // }
+        // return (
+        //     <h2 className="text-center my-5">No Cards...</h2>
+        // )
     }
 }
 
@@ -302,4 +278,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, mapActionToProps)(Highlights);
+export default connect(mapStateToProps, mapActionToProps)(Cards);

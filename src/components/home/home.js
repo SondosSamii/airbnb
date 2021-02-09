@@ -1,10 +1,16 @@
+import { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";  
+import { getAllPlaces } from "../../actions";
+
 import Slideshow from "./slideshow";
 import Places from "./places";
-import Highlights from "./highlights";
+import Cards from "./places-cards";
 
-const Home = () => {
-    document.title = "Home";
-    return (
+class Home extends Component {
+    render() {
+        document.title = "Home";
+        return (
         <section id="home">
             <Slideshow/>
             <div className="container">
@@ -15,12 +21,25 @@ const Home = () => {
                 <div className="my-5">
                     <h2 className="text-center mb-0">Explore Our Highlights</h2>
                     <div className="row justify-content-center">
-                        <Highlights/>
+                        <Cards places={this.props.places}/>
                     </div>
                 </div>
             </div>
         </section>
-    )
+        )
+    }
 }
 
-export default Home;
+const mapActionToProps = (dispatch) => {
+    return bindActionCreators({
+        getAllPlaces
+    }, dispatch);
+};
+
+const mapStateToProps = (state) => {
+    return {
+        places: state.Places
+    };
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Home);
