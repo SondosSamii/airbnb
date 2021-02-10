@@ -11,10 +11,10 @@ import React, { Component } from "react";
     constructor(props) {
         super(props);
         this.state = {
-          Places: [],
+          // Places: [],
           reserve_Places: [],
           Reservations: [],
-          userId: "60044953de30a61a6c0ede19",
+          user_Id: "",
           place_Id: "",
           user: {},
           hasPlaces: false,
@@ -24,13 +24,71 @@ import React, { Component } from "react";
           end_date: "",
           total_nights: "",
           num_of_guests: "",
+          token: "",
+          isAuth: false,
           isOpen: false,
           isLogin: true,
         };
         this.baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/reservations";
     }
+
+
+
+    handelReservations = async (e) => {
+      e.preventDefault();
+  
+      // const errors = this.Validations();
+      // const valid=this.LoginValidations();
+      // if (errors) return;
+      // if(!valid)return;
+      // var formData = new FormData();
+      // formData.append("email", "moataz3@gmail.com");
+      // formData.append("password", this.state.Password);
+      // console.log(this.state.Email);
+  
+      fetch("http://localhost:8080/api/reservation", {
+        method: "POST",
+        headers: {
+          // Authorization: 'Bearer ' + token,
+          "Content-Type": "application/json",
+               },
+        body: JSON.stringify({
+          start_date: this.state.start_date,
+          end_date: this.state.end_date,
+          total_nights: this.state.total_nights,
+          num_of_guests: this.state.num_of_guests,
+        }),
+      })
+        .then((response) => {
+          if (response.statusText === "created") {
+            this.props.handleSuccessfulAuth(response.data);
+          }
+          return response.json();
+        })
+        .then((response) => {
+          console.log("response: ", response);
+          console.log("token: ", response.token);
+          this.setState({
+            isAuth: true,
+            token: response.token,
+            user_id: response.user_id,
+          });
+          localStorage.setItem("token", response.token);
+          localStorage.setItem("user_id", response.user_id);
+
+        })
+        .catch((error) => {
+          console.log("registration error", error);
+        });
+      this.props.history.push("/");
+    };
+    
         openModal = () => this.setState({ isOpen: true });
         closeModal = () => this.setState({ isOpen: false });
+
+
+
+        
 
         async componentDidMount() {
           await this.props.getAllPlaces();
