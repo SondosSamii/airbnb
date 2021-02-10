@@ -25,11 +25,18 @@ export async function getAllClients(){
      }
      
  }
-export async function updateClient(client){
+export async function updateClient(token,client){
     var payload=null;
      try{
-         console.log("studentid: ",client);
-         await axios.put(`${baseUrl}/${client._id}` , client )
+         console.log("client: ",client);
+         await axios.put(`${url}` , client , {
+            headers: {
+            Authorization: 'Bearer ' + token,
+            "Content-Type": "application/json",
+                 },
+             }
+           
+          )
          .then(res => {
            console.log(res);
            console.log(res.data);

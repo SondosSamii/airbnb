@@ -1,4 +1,4 @@
-function Wishlists(state = null , action) {
+function Wishlists(state = {} , action) {
     // console.log("............" , action);
     switch(action.type){
         case "AllWishlists": {
@@ -6,8 +6,13 @@ function Wishlists(state = null , action) {
             return action.payload;
         }
 
-        case "wishlistsByUser": {
+        case "WishlistDetails": {
             // console.log("lllllllllllllllllllllllllllllll")
+            return {...state,wishlist_details:action.payload}
+        }
+        
+        case "deleteByIDwithtoken" :{
+            // console.log("lllllllllllllllllllllllllllllll");
             return action.payload;
         }
         case "deleteByID" :{

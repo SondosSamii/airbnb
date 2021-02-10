@@ -44,13 +44,12 @@ export async function getAllPlaces(){
 };
 
 
-export async function getPlaceById (token,id){
+export async function getPlaceById (id){
     var payload=null;
      try{
          let response = await fetch(`${url}/${id}`, {
         method: "GET",
         headers: {
-        Authorization: 'Bearer ' + token,
         "Content-Type": "application/json",
              },
          });
