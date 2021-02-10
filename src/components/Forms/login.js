@@ -104,11 +104,11 @@ class Login extends Component {
         password: this.state.Password,
       }),
     })
-      .then((response) => {
-        if (response.statusText === "created") {
-          this.props.handleSuccessfulAuth(response.data);
+      .then((resData) => {
+        if (resData.statusText === "created") {
+          this.props.handleSuccessfulAuth(resData.data);
         }
-        return response.json();
+        return resData.json();
       })
       .then((response) => {
         console.log("response: ", response);
