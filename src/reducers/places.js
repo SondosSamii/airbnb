@@ -21,9 +21,14 @@ function Places(state = null , action) {
             
         }
         case "PlaceDetails": {
-            console.log("lllllllllllllllllllllllllllllll" , action.payload);
+            // console.log("lllllllllllllllllllllllllllllll" , action.payload);
             return action.payload;
         }
+        case "Place_Details": {
+            // console.log("lllllllllllllllllllllllllllllll" , action.payload);
+            return action.payload;
+        }
+        
         default:{
             return state;
         }

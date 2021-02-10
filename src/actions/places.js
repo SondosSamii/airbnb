@@ -1,7 +1,7 @@
 // import axios from "axios";
  
 // const baseUrl = "http://localhost:1337/api/places";
-// const Url = "http://localhost:1337/api/place";
+const url = "http://localhost:8080/api/place";
 
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
 
@@ -44,8 +44,30 @@ export async function getAllPlaces(){
 };
 
 
+export async function getPlaceById (token,id){
+    var payload=null;
+     try{
+         let response = await fetch(`${url}/${id}`, {
+        method: "GET",
+        headers: {
+        Authorization: 'Bearer ' + token,
+        "Content-Type": "application/json",
+             },
+         });
+         payload = await response.json();
+        //   console.log("id", id , " " , payload);
+         
+     }catch(e){
+         console.log("errrrroooooooooooorrrrrrr",id , e);
+     }
+     return {
+         type:"Place_Details",
+         payload
+     }
+     
+}
 
- export async function getPlaceById (id){
+export async function getPlaceByID (id){
     var payload=null;
      try{
          let response = await fetch(`${baseUrl}/${id}`);
@@ -60,7 +82,7 @@ export async function getAllPlaces(){
          payload
      }
      
- }
+}
 
 //  export async function addClient (student){
      

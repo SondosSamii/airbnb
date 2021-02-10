@@ -5,6 +5,11 @@ function Reservations(state = null , action) {
             // console.log("llllllyyyyyyyyyylll")
             return action.payload;
         }
+        
+        case "reservationDetails": {
+            // console.log("llllllyyyyyyyyyylll")
+            return action.payload;
+        }
         default:{
             return state;
         }

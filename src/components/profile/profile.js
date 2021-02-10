@@ -8,15 +8,19 @@ import "./profile.css";
 import { NavLink as Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllPlaces, getPlaceById } from "../../actions/places";
+import { getAllPlaces,getPlaceById } from "../../actions/places";
 import {
   getAllWishlists,
   // getWishlistsByUserId,
   deleteByID,
+  getWishlistsByUserId,
+  getWishlistByID,
+  
 } from "../../actions/wishlists";
-import { getAllReservation } from "../../actions/reservations";
-import { getAllClients, updateClient } from "../../actions/clients";
+import { getAllReservation , getReservationByID } from "../../actions/reservations";
+import { getAllClients, updateClient , getclientById } from "../../actions/clients";
 import React, { Component } from "react";
+
 import { FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
 // import { FaRegHeart, FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
 import { MdPets } from "react-icons/md";
@@ -27,7 +31,7 @@ class ViewProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Wishlists: [],
+      User_wishlists: [],
       Places: [],
       reserve_Places: [],
       Reservations: [],
@@ -43,6 +47,7 @@ class ViewProfile extends Component {
       password: "",
       phone: "",
       isLogin: true,
+      token: ""
     };
     // this.baseUrl = "http://localhost:1337/api/place";
     this.baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
@@ -50,23 +55,41 @@ class ViewProfile extends Component {
   openModal = () => this.setState({ isOpen: true });
   closeModal = () => this.setState({ isOpen: false });
   async componentDidMount() {
-    await this.props.getAllPlaces();
+    
+    this.setState({token: localStorage.getItem("token")}); 
+    console.log("here token:  ",localStorage.getItem("token"));
+    if(!localStorage.getItem("token")){
+      this.props.history.push("/");
+    }
+    await this.props.getclientById(localStorage.getItem("token"));
+    console.log("heerreee:     ",this.props.client.user);
+    await this.setState({user: this.props.client.user });
+    await this.get_Wishlist_places();
+    // await this.getReservationByID(this.state.token,"60230037b84a5619c83f4222");
 
-    this.UserPlaces();
+    // this.props.getPlaceById(this.state.token,"601cd04e9b694d3c30abc913");
+    // await this.props.getWishlistsByUserId(localStorage.getItem("token"));
+    //  this.setState({User_wishlists : this.props.User_wishlists.wishlists });
+    // console.log("state:    " , this.state.User_wishlists);
 
-    await this.props.getAllWishlists();
-    await this.setState({ Wishlists: this.props.wishlists });
-    await this.User_Wishlist();
-    console.log("User_Wishlists:    ", this.state.Wishlists);
-    this.getPlaces();
-    //////////////////////////////////////////////
 
-    await this.props.getAllReservation();
-    await this.setState({ Reservations: this.props.reservations });
-    await this.UserTrips();
-    this.get_reserve_places();
-    await this.props.getAllClients();
-    this.getUser();
+    // await this.props.getAllPlaces();
+
+    // this.UserPlaces();
+
+    // await this.props.getAllWishlists();
+    // await this.setState({ Wishlists: this.props.wishlists });
+    // await this.User_Wishlist();
+    // console.log("User_Wishlists:    ", this.state.Wishlists);
+    // this.getPlaces();
+    // //////////////////////////////////////////////
+
+    // await this.props.getAllReservation();
+    // await this.setState({ Reservations: this.props.reservations });
+    // await this.UserTrips();
+    // this.get_reserve_places();
+    // await this.props.getAllClients();
+    // this.getUser();
   }
 
   User_Wishlist = async () => {
@@ -77,21 +100,49 @@ class ViewProfile extends Component {
           await this.setState({ Wishlists: newArr });
       }
   };
-  getPlaces = async () => {
+  get_Wishlist_places = async() => {
     var arr = [];
     var place = null;
-    if (this.state.Wishlists.length > 0) {
-      this.state.Wishlists.map(async (wishlist) => {
-        place = await this.props.places.filter((place) => {
-          if (place._id === wishlist.place_id) {
-            arr.push(place);
-          }
-        });
+    console.log("userWishslits:   " , this.state.user.wishlists);
+    if (this.state.user.wishlists.length > 0) {
+     this.state.user.wishlists.map(async (wishlist_id) => {
+        await this.props.getWishlistByID(this.state.token,wishlist_id);
+        console.log("............" , this.props.wishlistDetails);
+        
+        await this.props.getPlaceById(this.state.token , this.props.wishlistDetails.place_id);
+        await arr.push(this.props.placeDetails);
       });
-      await this.setState({ Places: arr });
-      console.log("array: ", this.state.Places);
+      // await this.setState({ Places: arr });
+      var places_Array = [];
+       console.log("array: ", arr);
+       console.log("array: ", arr.length);
+       await this.setState({Places : arr});
+       console.log("places:   " , this.state.Places)
+    //  await  this.newfunc(arr);
+      
     }
+
   };
+  get_Trips_places = async () => {
+    var arr = [];
+    var place = null;
+    if (this.state.user.wishlists.length > 0) {
+      await this.state.user.wishlists.map(async (wishlist_id) => {
+       await this.props.getWishlistByID(this.state.token,wishlist_id);
+     await this.props.getPlaceById(this.state.token , this.props.wishlistDetails.place_id);
+       arr.push(this.props.placeDetails);
+      });
+      // await this.setState({ Places: arr });
+      var places_Array = [];
+      await console.log("array: ", arr);
+      await this.setState({Places : arr});
+       console.log("places:   " , this.state.Places)
+    //  await  this.newfunc(arr);
+      
+    }
+
+  };
+ 
 
   ///////////////////////////////////////////////////////////
   async get_reserve_places() {
@@ -205,10 +256,10 @@ class ViewProfile extends Component {
   renderWishlist = () => {
     document.title = "Profile";
     // var i = 0;
-    // console.log("Wishlist_Places: " , this.state.Places);
+    // console.log("Wishlist_Places: " , this.state.user.wishlists);
     // if(this.state.wishlists > 0) {
-    if(this.state.wishlists) {
-    return this.state.Wishlists.slice(0, 3).map((wishlist_Element, index) => {
+    if(this.state.user.wishlists) {
+    return this.state.user.wishlists.slice(0, 3).map((wishlist_Element,index) => {
       // console.log("");
 
       if (this.state.Places[index]) {
@@ -399,7 +450,7 @@ class ViewProfile extends Component {
             {this.state.reserve_Places.length > 0 && (
             <div className="container">
               <div className="row justify-content-center">
-                {this.renderTrips()}
+                {/* {this.renderTrips()} */}
               </div>
             </div>
             )}
@@ -411,7 +462,7 @@ class ViewProfile extends Component {
             )}
             <div className="container">
               <div className="row justify-content-center">
-                {this.renderPlaces()}
+                {/* {this.renderPlaces()} */}
               </div>
             </div>
 
@@ -538,24 +589,33 @@ class ViewProfile extends Component {
 const mapactiontoprops = (disptch) => {
   return bindActionCreators(
     {
-      getAllPlaces,
-      getAllClients,
-      updateClient,
+      // getAllPlaces,
+      // getAllClients,
+      // updateClient,
+      // getPlaceById,
+      // getAllReservation,
+      // deleteByID,
+      getclientById,
+      // getWishlistsByUserId,
+      getWishlistByID,
       getPlaceById,
-      getAllWishlists,
-      getAllReservation,
-      deleteByID,
+      // getReservationByID
     },
     disptch
   );
 };
 const mapstatetoprops = (state) => {
   return {
-    places: state.Places,
-    clients: state.Clients,
+    // places: state.Places,
+    // placeDetails: state.Places,
+    // reservations: state.Reservations,
+    // User_wishlists: state.Wishlists,
+    client: state.Clients,
+    wishlistDetails : state.Wishlists,
     placeDetails: state.Places,
-    wishlists: state.Wishlists,
-    reservations: state.Reservations,
+    // reservationDetails: state.Reservation
+    
+    
   };
 };
 
