@@ -6,7 +6,7 @@ function Wishlists(state = null , action) {
             return action.payload;
         }
 
-        case "WishlistDetails": {
+        case "wishlistsByUser": {
             // console.log("lllllllllllllllllllllllllllllll")
             return action.payload;
         }

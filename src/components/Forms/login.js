@@ -132,7 +132,7 @@ class Login extends Component {
       });
     // var email=this.state.Email;
     // setSessionCookie({ email });
-    // this.props.history.push("/");
+    this.props.history.push("/");
   };
 
   //   .then(resData => {

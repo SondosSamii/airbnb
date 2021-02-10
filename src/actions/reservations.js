@@ -1,7 +1,7 @@
 // import axios from "axios";
  
 // const baseUrl = "http://localhost:1337/api/reservations";
-// const Url = "http://localhost:1337/api/reservation";
+const url = "http://localhost:8080/api/reservation";
 
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/reservations";
 
@@ -18,6 +18,28 @@ export async function getAllReservation(){
      }
      return {
          type:"AllReservations",
+         payload
+     }
+     
+ }
+
+export async function getReservationByID(token , id){
+    var payload = null;
+    try{
+        let response = await fetch(`${url}/${id}`, {
+        method: "GET",
+        headers: {
+        Authorization: 'Bearer ' + token,
+        "Content-Type": "application/json",
+             },
+         });
+        payload = await response.json();
+        console.log(payload);
+     }catch(e){
+         console.log( e);
+     }
+     return {
+         type:"reservationDetails",
          payload
      }
      

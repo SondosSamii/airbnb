@@ -2,7 +2,7 @@ import axios from "axios";
  
 // const baseUrl = "http://localhost:1337/api/wishlists";
 const url = "http://localhost:1337/api/wishlist";
-
+const getById_url = "http://localhost:8080/api/wishlist"
 // const Url = "http://localhost:1337/api/wishlist";
 
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
@@ -24,6 +24,29 @@ export async function getAllWishlists(){
      }
      
  }
+export async function getWishlistByID(token,id){
+    var payload=null;
+     try{
+        //  let response = await fetch(`${baseUrl}/${id}`);
+         let response = await fetch(`${getById_url}/${id}`, {
+        method: "GET",
+        headers: {
+              Authorization: 'Bearer ' + token,
+        "Content-Type": "application/json",
+             },
+         });
+         payload = await response.json();
+        //  console.log( " " , payload);
+         
+     }catch(e){
+         console.log(e);
+     }
+     return {
+         type:"wishlistsByUser",
+         payload
+     }
+     
+}
  
  export async function getWishlistsByUserId(id){
     var payload=null;
