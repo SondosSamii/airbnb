@@ -37,10 +37,10 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <Link to="/addPlace" className="nav-link">+ Add Place</Link>
+                            <Link to="/host" className="nav-link">+ Add Place</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/signup" className="nav-link">Sign Up</Link>
+                            <Link to="/login" className="nav-link">Sign Up</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/login" className="nav-link btn main-btn">Log In</Link>

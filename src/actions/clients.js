@@ -7,8 +7,6 @@ const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/clients";
 // const baseUrl = "http://localhost:4200/students";
 
 
-
-
 export async function getAllClients(){
     console.log("iiiiiiii");
     var payload = null;
@@ -46,8 +44,6 @@ export async function updateClient(client){
      
  }
 
- 
-
 export async function getclientById (token){
     console.log("toooooooken:   " , token);
     var payload=null;
@@ -73,3 +69,53 @@ export async function getclientById (token){
      }
      
  }
+
+ export async function addclient (formData,url){
+    var payload=null;
+     try{
+         let response = await fetch(url, {
+        method: "POST",
+        body: formData
+         }
+      ).then((response) => {
+        payload =  response.json();
+        console.log("registration done: ", payload);
+      })
+      .catch((error) => {
+        console.log("registration error", error);
+      });
+     }catch(error){
+         console.log("registration error: ", error);
+     }
+     return {
+         type:"addClient",
+         payload
+     }
+     
+ }
+
+ 
+ export async function login (formData,url){
+    var payload=null;
+     try{
+         let response = await fetch(url, {
+        method: "POST",
+        body: formData
+         }
+      ).then((response) => {
+        payload =  response.json();
+        console.log("login done: ", payload);
+      })
+      .catch((error) => {
+        console.log("login error", error);
+      });
+     }catch(error){
+         console.log("login error: ", error);
+     }
+     return {
+         type:"login",
+         payload
+     }
+     
+ }
+

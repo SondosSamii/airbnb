@@ -4,7 +4,9 @@ import "./form.css";
 import Signup from "./Signup";
 import { FiLogIn } from "react-icons/fi";
 import { FaUserPlus } from "react-icons/fa";
-import { event } from "jquery";
+import { login } from "../../actions/clients";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import Joi, { validate } from "joi-browser";
 import axios from "axios";
 import { setSessionCookie } from "../session";
@@ -46,6 +48,9 @@ class Login extends Component {
     const errors = {};
     let state = { ...this.state };
     delete state.errors;
+    delete state.isAuth;
+    delete state.token;
+    delete state.user_id;
     var res = Joi.validate(state, this.schema, { abortEarly: false });
     if (res.error === null) {
       this.setState({ errors: {} });
@@ -55,7 +60,6 @@ class Login extends Component {
       errors[error.path] = error.message;
     }
     console.log(res.error.details);
-    console.log(state);
     this.setState({ errors: errors });
     console.log(this.state.errors.Password);
   };
@@ -88,70 +92,68 @@ class Login extends Component {
     const errors = this.Validations();
     // const valid=this.LoginValidations();
     if (errors) return;
-    // if(!valid)return;
     var formData = new FormData();
-    formData.append("email", "moataz3@gmail.com");
+    formData.append("email", this.state.Email);
     formData.append("password", this.state.Password);
     console.log(this.state.Email);
+    let url = "http://localhost:8080/api/login";
+    await this.props.login(formData,url);
+    console.log("login data",this.props.client)
+    localStorage.setItem("token", this.props.client.token);
+    localStorage.setItem("user_id", this.props.client.user_id);
+    if(this.props.client.token){
+      this.setState({
+        isAuth: true,
+        token: this.props.client.token,
+        user_id: this.props.client.user_id,
+        
+      })
+      console.log(this.state)
+    }
 
-    fetch("http://localhost:8080/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: this.state.Email,
-        password: this.state.Password,
-      }),
-    })
-      .then((response) => {
-        if (response.statusText === "created") {
-          this.props.handleSuccessfulAuth(response.data);
-        }
-        return response.json();
-      })
-      .then((response) => {
-        console.log("response: ", response);
-        console.log("token: ", response.token);
-        this.setState({
-          isAuth: true,
-          token: response.token,
-          user_id: response.user_id,
-        });
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("user_id", response.user_id);
-        // const remainingMilliseconds = 60 * 60 * 1000;
-        // const expiryDate = new Date(
-        //   new Date().getTime() + remainingMilliseconds
-        // );
-        // localStorage.setItem("expiryDate", expiryDate.toISOString());
-        // this.setAutoLogout(remainingMilliseconds);
-      })
-      .catch((error) => {
-        console.log("registration error", error);
-      });
+
+    // fetch("http://localhost:8080/api/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     email: this.state.Email,
+    //     password: this.state.Password,
+    //   }),
+    // })
+    //   .then((response) => {
+    //     if (response.statusText === "created") {
+    //       this.props.handleSuccessfulAuth(response.data);
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((response) => {
+    //     console.log("response: ", response);
+    //     console.log("token: ", response.token);
+    //     this.setState({
+    //       isAuth: true,
+    //       token: response.token,
+    //       user_id: response.user_id,
+    //     });
+    //     localStorage.setItem("token", response.token);
+    //     localStorage.setItem("user_id", response.user_id);
+    //     // const remainingMilliseconds = 60 * 60 * 1000;
+    //     // const expiryDate = new Date(
+    //     //   new Date().getTime() + remainingMilliseconds
+    //     // );
+    //     // localStorage.setItem("expiryDate", expiryDate.toISOString());
+    //     // this.setAutoLogout(remainingMilliseconds);
+    //   })
+    //   .catch((error) => {
+    //     console.log("login error", error);
+    //   });
     // var email=this.state.Email;
     // setSessionCookie({ email });
-    this.props.history.push("/");
+    //this.props.history.push("/");
   };
 
-  //   .then(resData => {
-  //     console.log(resData);
-  //     this.setState({
-  //       isAuth: true,
-  //       token: resData.token,
-  //       authLoading: false,
-  //       userId: resData.userId
-  //     });
-  //   localStorage.setItem('token', resData.token);
-  //   localStorage.setItem('userId', resData.userId);
-  //   const remainingMilliseconds = 60 * 60 * 1000;
-  //   const expiryDate = new Date(
-  //     new Date().getTime() + remainingMilliseconds
-  //   );
-  //   localStorage.setItem('expiryDate', expiryDate.toISOString());
-  //   this.setAutoLogout(remainingMilliseconds);
-  //   })
+ 
 
   addActiveClass(i) {
     var li1 = document.getElementById("li1");
@@ -291,5 +293,17 @@ class Login extends Component {
     );
   }
 }
-
-export default Login;
+const mapactiontoprops = (disptch) => {
+  return bindActionCreators(
+    {
+      login
+    },
+    disptch
+  );
+};
+const mapstatetoprops = (state) => {
+  return {
+    client: state.Clients    
+  };
+}
+export default connect(mapstatetoprops, mapactiontoprops) (Login);
