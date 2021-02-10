@@ -217,8 +217,9 @@ class Cards extends Component {
 
     render() {
         let places = this.props.places;
-        // if (places) {
-            // console.log("New Cards", places);
+        console.log("props.places: ", places);        
+
+        if (places) {
             // console.log("Inside if");
             return places.slice(0, 6).map((place) => {
                 return (
@@ -251,10 +252,10 @@ class Cards extends Component {
                     </div>
                 )}
             )
-        // }
-        // return (
-        //     <h2 className="text-center my-5">No Cards...</h2>
-        // )
+        }
+        return (
+            <h2 className="text-center my-5">No Cards...</h2>
+        )
     }
 }
 

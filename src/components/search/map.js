@@ -16,7 +16,7 @@ const mapStyles = {
 const containerStyle = {
   position: 'relative',  
   width: '100%',
-  height: '250px' // The same height of its parent in render
+  height: '350px' // The same height of its parent in render
 };
 
 var params = {
@@ -31,7 +31,8 @@ var params = {
         selectedPlace: {}  ,
         coords:{},
         places :[],
-        seach_place:"",
+        search_place:"",
+        word: ""
       };
       getlocation =  () =>{
         navigator.geolocation.getCurrentPosition(position =>{
@@ -51,7 +52,7 @@ var params = {
           lat: "",
           lng: ""
       }
-      params.query = this.state.seach_place;
+      params.query = this.state.search_place;
       await axios.get('http://api.positionstack.com/v1/forward', {params})
       .then(response => {
           console.log(response.data.data[0]);
@@ -113,6 +114,7 @@ var params = {
         // ...
       }
   render() {
+    // let 
     return (
       <>
       <div className="container mb-4">
@@ -124,7 +126,8 @@ var params = {
               className="form-control"
               placeholder="Search..."
               onChange={(e)=>{
-                this.setState({seach_place : e.target.value })
+                this.setState({search_place : e.target.value });
+                this.setState({word: this.props.word(e.target.value)});
               }}
             />
           </div>
