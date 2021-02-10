@@ -90,7 +90,7 @@ class Login extends Component {
     if (errors) return;
     // if(!valid)return;
     var formData = new FormData();
-    formData.append("email", "moataz3@gmail.com");
+    formData.append("email", this.state.Email);
     formData.append("password", this.state.Password);
     console.log(this.state.Email);
 
@@ -120,6 +120,8 @@ class Login extends Component {
         });
         localStorage.setItem("token", response.token);
         localStorage.setItem("user_id", response.user_id);
+        console.log(localStorage.token);
+        console.log(response.token);
         // const remainingMilliseconds = 60 * 60 * 1000;
         // const expiryDate = new Date(
         //   new Date().getTime() + remainingMilliseconds
@@ -132,7 +134,7 @@ class Login extends Component {
       });
     // var email=this.state.Email;
     // setSessionCookie({ email });
-    this.props.history.push("/");
+    // this.props.history.push("/");
   };
 
   //   .then(resData => {
