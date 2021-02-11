@@ -220,7 +220,7 @@ class Cards extends Component {
         let places = this.props.places;
         // console.log("props.places: ", places);        
 
-        if (places) {
+        if (places && places.length > 0) {
             // console.log("Inside if");
             return places.slice(0, 6).map((place) => {
                 return (
