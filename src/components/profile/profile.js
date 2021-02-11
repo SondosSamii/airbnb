@@ -19,7 +19,7 @@ import {
   
 } from "../../actions/wishlists";
 import { getAllReservation , getReservationByID } from "../../actions/reservations";
-import { getAllClients, updateClient , getclientById } from "../../actions/clients";
+import { getAllClients, updateClient , getclientById , updatePassword } from "../../actions/clients";
 import React, { Component } from "react";
 
 import { FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
@@ -36,32 +36,39 @@ class ViewProfile extends Component {
       Places: [],
       reserve_Places: [],
       All_User_places:[],
-      Reservations: [],
-      // userId: "60044953de30a61a6c0ede19",
-      userId: "5",
-      user: {},
-      hasPlaces: false,
-      UserPlaces: [],
-      AllPlaces: [],
       isOpen: false,
       name: "",
       email: "",
-      password: "",
       phone: "",
       isLogin: true,
       token: "",
-      places_id:[]
+      user: {},
+      isOpen2:true,
+      old_pass:"",
+      new_pass:"",
+      profile_image:"",
+      // userId: "60044953de30a61a6c0ede19",
+      userId: "5",
+      hasPlaces: false,
+      Reservations: [],
+      UserPlaces: [],
+      AllPlaces: [],
+      places_id:[],
+
+
     };
-    // this.baseUrl = "http://localhost:1337/api/place";
-    this.baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
+   
   }
   openModal = () => this.setState({ isOpen: true });
   closeModal = () => this.setState({ isOpen: false });
+
+  openModal2 = () => this.setState({ isOpen2: true });
+  closeModal2 = () => this.setState({ isOpen2: false });
   async componentDidMount() {
-    
     this.setState({token: localStorage.getItem("token")}); 
     console.log("here token:  ",localStorage.getItem("token"));
     if(localStorage.getItem("token")===""){
+      this.setState({isLogin:false});
       this.props.history.push("/");
     }
     await this.props.getclientById(localStorage.getItem("token"));
@@ -103,14 +110,7 @@ class ViewProfile extends Component {
     // this.getUser();
   }
 
-  User_Wishlist = async () => {
-      if(this.state.wishlists){
-          var newArr = await this.state.Wishlists.filter(
-            (wishlist) => wishlist.user_id === this.state.userId
-          );
-          await this.setState({ Wishlists: newArr });
-      }
-  };
+
   get_Wishlist_places = async() => {
     var arr = [];
     var place = null;
@@ -137,8 +137,6 @@ class ViewProfile extends Component {
 
   };
  
-
-
 
   get_Trips_places = async() => {
     var arr = [];
@@ -189,61 +187,8 @@ class ViewProfile extends Component {
  
 
   ///////////////////////////////////////////////////////////
-  async get_reserve_places() {
-     var arr = [];
-    var place = null;
-    if (this.state.Reservations.length > 0) {
-      this.state.Reservations.map(async (reservation) => {
-        place = await this.props.places.filter((place) => {
-          if (place._id === reservation.place_id) {
-           arr.push(place);
-          }
-        });
-        await this.setState({ reserve_Places: arr });
-      });
-    }
-  }
 
-  getUser = async () => {
-    // console.log("/////////////////////" , this.props.clients);
-    // if(this.props.clients > 0){
-    if(this.props.clients){
-      // console.log("All Clients: ", this.props.clients);
-        var user = this.props.clients.find((client) => {
-          if(client._id === this.state.userId){
-            return client
-          }
-        });
-        console.log("/////////////////////" , user);
-        this.setState({
-          user,
-          name: user.name,
-          email: user.email,
-          password: user.password,
-          phone: user.phone,
-        });
-    }
-  };
-  UserTrips = async () => {
-      // if(this.state.Reservations > 0){
-        if(this.state.Reservations){
-          var newArr = this.state.Reservations.filter(
-            (reservation) => reservation.user_id === this.state.userId
-          );
-          // console.log(",,,mmmmm,mmmmmmmmmmmmmmmmmmmm,,," ,newArr);
-          this.setState({ Reservations: newArr });
-      }
-  };
-  UserPlaces = async () => {
-    //  console.log(",,,,,,," ,this.props.places);
-    if(this.props.places){
-        var newArr = await this.props.places.filter(
-          (place) => place.user_id === this.state.userId
-        );
-        // console.log(",,,,,,," ,newArr);
-        await this.setState({ UserPlaces: newArr });
-    }
-  };
+
 
   renderPlaces = () => {
     // console.log("........lllll......" , this.state.UserPlaces);
@@ -427,47 +372,51 @@ class ViewProfile extends Component {
       </>
     );
   };
-  schema = {
-    name: Joi.string().required().max(15),
-    password: Joi.string().trim().required().min(5).max(20),
-    // Password_confirm: Joi.any().equal(Joi.ref("Password")),
-    phone: Joi.string().trim().required()
-  };
+
   handleUpdate = ()=>{
-    console.log("kkkkkkkkk");
+    console.log("kkkkkkkkk" , this.state.profile_image);
     var client = {
-      _id: this.state.user._id,
-      name: this.state.name,
-      password: this.state.password,
+      name: this.state.name,    
       phone: this.state.phone,
+      profile_image:this.state.profile_image,
     };
+
+
     if(!this.state.name){
       client.name = this.state.user.name
-    }
-    if(!this.state.password){
-      client.password = this.state.user.password
     }
     if(!this.state.phone){
       client.phone = this.state.user.phone
     }
+    if(!this.state.profile_image){
+
+      client.profile_image = this.state.user.profile_image
+      console.log("typeof:   ", typeof(client.profile_image));
+    }
 
 var flag = true;
-    if(client.password.length < 5){
-      flag = false;
-        document.getElementById("passError").innerHTML="Password is less than 5";
-    }
     if(!client.name.match(/^[a-zA-Z]+$/) )
     {
       flag = false;
       document.getElementById("nameError").innerHTML="Name must be letters";
     }
     if(flag){
+      // this.setState({profile_image: e.target.files[0]});
+      // client.profile_image =  
+      var formData = new FormData();
+      formData.append("name", client.name);
+      formData.append("phone", client.phone);
+      formData.append("profile_image", client.profile_image);
       console.log("yes" , client);
-      var confirm = window.confirm("are you sure you want to update");
-      if(confirm){
-        this.props.updateClient(this.state.token,client );
-        window.location.reload();
-      }
+      // for(var e of formData.entries()){
+      //   console.log(e);
+      // }
+
+      // var confirm = window.confirm("are you sure you want to update");
+      this.props.updateClient(this.state.token,formData );
+      // if(confirm){
+      //   window.location.reload();
+      // }
       
     }
 
@@ -477,6 +426,27 @@ var flag = true;
     
     // await this.props.updateClient(client);
     // window.location.reload();
+  }
+  handleUpdatePassword = ()=>{
+    var clientPasswords = {
+      oldPassword:this.state.old_pass,
+      newPassword:this.state.new_pass
+    }
+    var check = true;
+    if(!clientPasswords.oldPassword && clientPasswords.newPassword)
+    {
+      check = false;
+      document.getElementById("old_pass_Error").innerHTML="you should enter your old password";
+    }
+    if(clientPasswords.oldPassword && !clientPasswords.newPassword)
+    {
+      check = false;
+      document.getElementById("old_pass_Error").innerHTML="you should enter your new password";
+    }
+    if(check){
+      this.props.updatePassword(this.state.token , clientPasswords);
+    }
+
   }
 
   render() {
@@ -504,11 +474,13 @@ var flag = true;
           <div className=" row justify-content-center" >
             <div className="user_img " 
             style={{
-            backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
+            // backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
+            backgroundImage:`url('http://localhost:8080/${this.state.user.profile_image}')`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}>
+        {/* <img src="http://localhost:8080/images/Alaa.jpg" /> */}
             </div>
           
           </div>
@@ -599,6 +571,16 @@ var flag = true;
                   <div className="modal-body">
                     <form className = "update-form">
                       <div className="form-group">
+                        <label htmlFor="img">upload Your photo</label>
+                         <input type="file" id="img" name="img" accept="image/*" onChange={(e) => {
+                            this.setState({ profile_image: e.target.files[0] });
+                          }} />
+                          {/* <input type="file" onChange={this.fileChangedHandler}/>
+                            <button onClick={this.uploadHandler}>Upload!</button> */}
+                          <input type="text" value={this.state.profile_image}/>
+                        <small id="nameError"></small>
+                      </div>
+                      <div className="form-group">
                         <label htmlFor="name">Name</label>
                         <input
                           id="name"
@@ -610,19 +592,6 @@ var flag = true;
                           }}
                         />
                         <small id="nameError"></small>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="pass">Password </label>
-                        <input
-                          id="pass"
-                          type="password"
-                          placeholder="Enter your new password"
-                          className="form-control"
-                          onChange={(e) => {
-                            this.setState({ password: e.target.value });
-                          }}
-                        />
-                        <small id="passError"></small>
                       </div>
                       <div className="form-group">
                         <label htmlFor="phone">Phone</label>
@@ -644,6 +613,91 @@ var flag = true;
                         className="btn update-btn"
                         onClick={async () => {
                           this.handleUpdate();
+                        }}
+                        >
+                        Update
+                      </button>
+                    </form>
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#exampleModal2"
+                      >
+                      Update Password
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-dismiss="modal2"
+                      >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+            <div
+              className="modal fade"
+              id="exampleModal2"
+              tabIndex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel2"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Update Your Password
+                    </h5>
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <form className = "update-form">
+                      <div className="form-group">
+                        <label htmlFor="name">Old Password</label>
+                        <input
+                          id="old_pass"
+                          type="password"
+                          placeholder="old password"
+                          className="form-control"
+                          onChange={(e) => {
+                            this.setState({ old_pass: e.target.value });
+                          }}
+                        />
+                        <small id="old_pass_Error"></small>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="pass">New Password </label>
+                        <input
+                          id="new_pass"
+                          type="password"
+                          placeholder=" new password"
+                          className="form-control"
+                          onChange={(e) => {
+                            this.setState({new_pass: e.target.value });
+                          }}
+                        />
+                        <small id="new_pass_Error"></small>
+                      </div>
+                      
+                      <button
+                        type="button"
+                        className="btn update-btn"
+                        onClick={async () => {
+                          this.handleUpdatePassword();
                         }}
                         >
                         Update
@@ -683,7 +737,8 @@ const mapactiontoprops = (disptch) => {
       getPlaceById,
       getReservationByID,
       deleteWishlistById,
-      updateClient
+      updateClient,
+      updatePassword
       // getReservationByID
     },
     disptch

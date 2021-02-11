@@ -37,7 +37,7 @@ class Signup extends Component {
     PhoneNumber: Joi.string()
       .trim()
       .required()
-      .regex(/^[0-9]{11}$/)
+      .regex(/^[0-9]+$/)
       .required(),
   };
   data = {};

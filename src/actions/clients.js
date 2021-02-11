@@ -3,7 +3,7 @@ import axios from "axios";
 // const baseUrl = "http://localhost:1337/api/clients";
 const url = "http://localhost:8080/api/client";
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/clients";
-
+const update_pass_url = "http://localhost:8080/api/clientPassword"
 // const baseUrl = "http://localhost:4200/students";
 
 
@@ -27,6 +27,9 @@ export async function getAllClients(){
  }
 export async function updateClient(token,client){
     var payload=null;
+    for(var e of client.entries()){
+        console.log(e);
+      }
      try{
          console.log("client: ",client);
          await axios.put(`${url}` , client , {
@@ -48,6 +51,33 @@ export async function updateClient(token,client){
      }
      return {
          type:"update_Client",
+         payload
+     }
+     
+ }
+export async function updatePassword(token,clientPasswords){
+    var payload=null;
+     try{
+        //  console.log("client: ",client);
+         await axios.put(`${update_pass_url}` , clientPasswords , {
+            headers: {
+            Authorization: 'Bearer ' + token,
+            "Content-Type": "application/json",
+                 },
+             }
+           
+          )
+         .then(res => {
+           console.log(res);
+           console.log(res.data);
+           payload ="successUpdated";
+         })
+         .catch(err=>{payload="fail To update"})      
+     }catch(e){
+         console.log("erorrrrrrrrrr");
+     }
+     return {
+         type:"update_password",
          payload
      }
      
