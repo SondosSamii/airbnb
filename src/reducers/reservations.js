@@ -1,4 +1,4 @@
-function Reservations(state = null , action) {
+function Reservations(state = {} , action) {
     // console.log("............" , action);
     switch(action.type){
         case "AllReservations": {
@@ -10,6 +10,11 @@ function Reservations(state = null , action) {
             // console.log("llllllyyyyyyyyyylll")
             return action.payload;
         }
+        case "add_reservation": {
+            // console.log("llllllyyyyyyyyyylll")
+            return {...state,message:action.payload}
+        }
+        
         default:{
             return state;
         }

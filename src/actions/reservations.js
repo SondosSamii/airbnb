@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
  
 // const baseUrl = "http://localhost:1337/api/reservations";
 const url = "http://localhost:8080/api/reservation";
@@ -44,6 +44,34 @@ export async function getReservationByID(token , id){
      }
      
  }
+ export async function addReservation (token, id , reservation){
+console.log("..............................");
+    var payload=null;
+     try{
+         await axios.post(`${url}/${id}`,reservation,{
+            headers: {
+            Authorization: 'Bearer ' + token,
+            "Content-Type": "application/json",
+                 },
+             })
+         .then(res => {
+           console.log(res);
+           console.log(res.data);
+           payload ="success";
+         })
+         .catch(err=>{payload="fail"})
+         
+         
+     }catch(e){
+         console.log("erorrrrrrrrrr");
+     }
+     return {
+         type:"add_reservation",
+         payload
+     }
+     
+ }
+ 
 
 //  export async function getPlaceById(id){
 //     var payload=null;

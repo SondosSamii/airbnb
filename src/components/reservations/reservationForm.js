@@ -1,8 +1,10 @@
 import "./reservationForm.css";
-import { getAllReservation } from "../../actions/reservations";
+import { getAllReservation , addReservation } from "../../actions/reservations";
 import { getAllClients, updateClient } from "../../actions/clients";
 import { getAllPlaces, getPlaceById } from "../../actions/places";
+
 import { connect } from "react-redux";
+
 import { bindActionCreators } from "redux";
 import React, { Component } from "react";
 
@@ -25,6 +27,8 @@ import React, { Component } from "react";
           isAuth: false,
           isOpen: false,
           isLogin: true,
+          placeID : ""
+          
         };
         this.baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/reservations";
     }
@@ -97,14 +101,20 @@ import React, { Component } from "react";
         
 
         async componentDidMount() {
-          await this.props.getAllPlaces();
+            // console.log(",,,,,,,:  ",this.props.match.params.id);
+          await this.setState({
+              token: localStorage.getItem("token") ,
+              placeID :  this.props.match.params.id
+        });
+          console.log("token: "  , this.state.token);
+          // await this.props.getAllPlaces();
       
           // this.UserPlaces();
          
       
-          await this.props.getAllReservation();
-          await this.setState({ Reservations: this.props.reservations });
-          // this.get_reserve_places();
+          // await this.props.getAllReservation();
+          // await this.setState({ Reservations: this.props.reservations });
+          // // this.get_reserve_places();
           // await this.props.getAllClients();
           // this.getUser();
         }
@@ -168,6 +178,38 @@ import React, { Component } from "react";
   //       await this.setState({ UserPlaces: newArr });
   //   }
   // };
+  handleClick = ()=>{
+    var reservation = {
+      start_date: this.state.start_date,
+      end_date: this.state.end_date,
+      price_per_night: 200,
+      total_nights: this.state.total_nights,
+      num_of_guests: this.state.num_of_guests
+    };
+var flag= true;
+    if(!reservation.start_date){
+      flag=false;
+      document.getElementById("start_err").innerHTML= "should Enter start Date";
+    }
+    if(!reservation.end_date){
+      flag=false;
+      document.getElementById("end_err").innerHTML= "should Enter start Date";
+    }
+    if(!reservation.total_nights){
+      flag=false;
+      document.getElementById("total_nights_err").innerHTML= "should Enter start Date";
+    }
+    if(!reservation.num_of_guests){
+      flag=false;
+      document.getElementById("num_guests_err").innerHTML= "should Enter start Date";
+    }
+    if(flag){
+      console.log(reservation);
+      this.props.addReservation(this.state.token , this.state.placeID,reservation);
+    }
+
+
+  }
 
         
         render() {
@@ -188,6 +230,9 @@ import React, { Component } from "react";
                                      onChange={(e) => {
                                         this.setState({start_date : e.target.value });
                                       }}/>
+                                <small id="start_err">
+
+                                </small>
                                 </div>
                                 <div className="form-group">
                                     <label className="text-info">Check Out :</label>
@@ -196,6 +241,9 @@ import React, { Component } from "react";
                                     onChange={(e) => {
                                         this.setState({ end_date: e.target.value });
                                       }}/>
+                                <small id="end_err">
+                                  
+                                </small>
                                 </div>
 
                                 <div className="form-group">
@@ -205,6 +253,9 @@ import React, { Component } from "react";
                                     onChange={(e) => {
                                         this.setState({ total_nights: e.target.value });
                                       }}/>
+                                      <small id="total_nights_err">
+                                  
+                                  </small>
                                 </div>
                                 <div className="form-group">
                                     <label className="text-info">Number of guests :</label>
@@ -214,10 +265,15 @@ import React, { Component } from "react";
                                     onChange={(e) => {
                                         this.setState({ num_of_guests: e.target.value });
                                       }}/>
+                                      <small id="num_guests_err">
+                                  
+                                    </small>
                                 </div>
                                 <div className="form-group">
                                     <div className="col-auto my-1">
-                                        <button type="submit" className="btn btn-primary float-right  bg-info"  onClick= {this.handelReservations}>Submit</button>
+                                        <button type="button" className="btn btn-primary float-right  bg-info"  onClick= {()=>{
+                                          this.handleClick()
+                                        }}>Submit</button>
                                     </div>
                                 </div>
                             </form>
@@ -239,6 +295,7 @@ const mapactiontoprops = (disptch) => {
         updateClient,
         getPlaceById,
         getAllReservation,
+        addReservation
 
       },
       disptch
