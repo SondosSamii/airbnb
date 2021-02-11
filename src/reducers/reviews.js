@@ -1,7 +1,13 @@
-function Reviews(state = null, action) {
+function Reviews(state = {}, action) {
     switch (action.type) {
         case "AllReviews": {
-            return action.payload;
+            return {...state,all_reviews:action.payload}
+        }
+        case "PlaceReviews": {
+            return {...state,place_reviews:action.payload}
+        }
+        case "ReviewDetails": {
+            return {...state,review_details:action.payload}
         }
         default: {
             return state;

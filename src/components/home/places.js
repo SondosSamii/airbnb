@@ -19,8 +19,8 @@ class Places extends Component {
 
     async componentDidMount() {
         await this.props.getAllPlaces();
-        await this.setState({places: this.props.places});
-        // console.log("Home Places ", this.state.places);
+        await this.setState({places: this.props.places.places});
+        // console.log("******************", this.state.places);
         
         await this.props.getAllWishlists();
         await this.setState({wishlists: this.props.wishlists});
@@ -40,7 +40,8 @@ class Places extends Component {
                                         to={`/places/${this.state.places[0]._id}`}
                                         className="card-item-bg"
                                         style={{
-                                        backgroundImage: `url(images/places/${this.state.places[0].images[2]}.jpeg)`
+                                        // backgroundImage: `url(images/places/${this.state.places[0].images[2]}.jpeg)`
+                                        backgroundImage: `url(/images/places/place1-3.jpeg)`
                                     }}>
                                         <h3 className="card-item-name">{this.state.places[0].name}</h3>
                                         <h4 className="card-item-type">{this.state.places[0].type}</h4>
@@ -55,7 +56,8 @@ class Places extends Component {
                                                 to={`/places/${this.state.places[1]._id}`}
                                                 className="card-item-bg"
                                                 style={{
-                                                backgroundImage: `url(images/places/${this.state.places[1].images[0]}.jpeg)`
+                                                // backgroundImage: `url(images/places/${this.state.places[1].images[0]}.jpeg)`
+                                                backgroundImage: `url(/images/places/place1-3.jpeg)`
                                             }}>
                                                 <h3 className="card-item-name">{this.state.places[1].name}</h3>
                                                 <h4 className="card-item-type">{this.state.places[1].type}</h4>
@@ -68,7 +70,8 @@ class Places extends Component {
                                                 to={`/places/${this.state.places[2]._id}`}
                                                 className="card-item-bg"
                                                 style={{
-                                                backgroundImage: `url(images/places/${this.state.places[2].images[0]}.jpeg)`
+                                                // backgroundImage: `url(images/places/${this.state.places[2].images[0]}.jpeg)`
+                                                backgroundImage: `url(/images/places/place1-3.jpeg)`
                                             }}>
                                                 <h3 className="card-item-name">{this.state.places[2].name}</h3>
                                                 <h4 className="card-item-type">{this.state.places[2].type}</h4>
@@ -83,7 +86,8 @@ class Places extends Component {
                                                 to={`/places/${this.state.places[3]._id}`}
                                                 className="card-item-bg"
                                                 style={{
-                                                backgroundImage: `url(images/places/${this.state.places[3].images[1]}.jpeg)`
+                                                // backgroundImage: `url(images/places/${this.state.places[3].images[1]}.jpeg)`
+                                                backgroundImage: `url(/images/places/place1-3.jpeg)`
                                             }}>
                                                 <h3 className="card-item-name">{this.state.places[3].name}</h3>
                                                 <h4 className="card-item-type">{this.state.places[3].type}</h4>

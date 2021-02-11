@@ -5,14 +5,14 @@ import { FaRegHeart, FaHeart, FaStar } from "react-icons/fa";
 
 import { getAllPlaces } from '../../actions/places';
 import { getAllWishlists, getWishlistsByUserId, addWishlist, deleteByID } from '../../actions/wishlists';
-import { getAllReviews } from '../../actions/reviews';
+import { getAllReviews, getPlaceReviews, getReviewDetails } from '../../actions/reviews';
 import FeaturesIcons from './features-icons';
 
 class Cards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            highlights: [],
+            places: [],
             wishlists: [],
             userWishlists: [],
             isWishlisted: false,
@@ -24,20 +24,20 @@ class Cards extends Component {
 
     async componentDidMount() {
         await this.props.getAllPlaces();
-        await this.setState({highlights: this.props.highlights});
-        // console.log("Highlights Places: ", this.state.highlights);
+        await this.setState({places: this.props.places.places});
+        console.log("Places: *******", this.state.places);
 
         await this.props.getAllWishlists();
         await this.setState({wishlists: this.props.wishlists});
-        // console.log("Highlights Wishlists: ", this.state.wishlists);
+        // console.log("Wishlists: ", this.state.wishlists);
 
         await this.props.getWishlistsByUserId(this.state.userId);
         await this.setState({userWishlists: this.props.userWishlists});
-        // console.log("Highlights userWishlists: ", this.state.userWishlists);
+        // console.log("userWishlists: ", this.state.userWishlists);
         
         await this.props.getAllReviews();
         await this.setState({reviews: this.props.reviews});
-        // console.log("Highlights Reviews: ", this.state.reviews);
+        // console.log("Reviews: ", this.state.reviews);
     }
 
     eventHandle = async (id) =>{
@@ -217,8 +217,9 @@ class Cards extends Component {
     }
 
     render() {
-        let places = this.props.places;
+        // let places = this.props.places;
         // console.log("props.places: ", places);        
+        let places = this.state.places;
 
         if (places && places.length > 0) {
             // console.log("Inside if");
@@ -229,7 +230,8 @@ class Cards extends Component {
                             <div
                                 className="card-item-highlight"
                                 style={{
-                                backgroundImage: `url(/images/places/${place.images[1]}.jpeg)`
+                                // backgroundImage: `url(/images/places/${place.images[1]}.jpeg)`
+                                backgroundImage: `url(/images/places/place1-3.jpeg)`
                             }}>
                                 <h3 className="card-item-name">
                                     {place.name}
@@ -242,7 +244,8 @@ class Cards extends Component {
                                 {/* {this.wishlist(highlight._id)} */}
                             </div>
                             <div className="card-item-details">
-                                <h4>{place.address.city}, {place.address.country}</h4>
+                                {/* <h4>{place.address.city}, {place.address.country}</h4> */}
+                                <h4>Cairo, Egypt</h4>
                                 <p className="desc">{place.description}</p>
                                 <p className="price">${place.price}</p>
                                 <p className="rating">
@@ -267,16 +270,20 @@ const mapActionToProps = (dispatch) => {
         getWishlistsByUserId,
         getAllReviews,
         addWishlist,
-        deleteByID
+        deleteByID,
+        getPlaceReviews,
+        getReviewDetails
     }, dispatch);
 };
 
 const mapStateToProps = (state) => {
     return {
-        highlights: state.Places,
+        places: state.Places,
         wishlists: state.Wishlists,
         userWishlists: state.Wishlists,
-        reviews: state.Reviews
+        reviews: state.Reviews.all_reviews,
+        placeReviews: state.Reviews.place_reviews,
+        reviewDetails: state.Reviews.review_details
     };
 };
 

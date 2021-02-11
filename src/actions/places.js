@@ -5,12 +5,15 @@ const url = "http://localhost:8080/api/place";
 
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
 
-// const baseUrl = "http://localhost:4200/students";
+// const baseUrl = "http://localhost:8080/api/allPlaces";
+
+const allPlacesUrl = "https://node-airbnb.herokuapp.com/api/allPlaces";
 
 export async function getAllPlaces(){
     var payload = null;
     try{
-        let response = await fetch(`${baseUrl}`);
+        let response = await fetch(`${allPlacesUrl}`);
+        // let response = await fetch(`${baseUrl}`);
         payload = await response.json();
         console.log(payload);
      }catch(e){
