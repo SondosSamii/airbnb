@@ -1,4 +1,4 @@
-function Places(state = null , action) {
+function Places(state = {} , action) {
     // console.log("............" , action);
     switch(action.type){
         case "AllPlaces": {
@@ -21,9 +21,14 @@ function Places(state = null , action) {
             
         }
         case "PlaceDetails": {
-            console.log("lllllllllllllllllllllllllllllll" , action.payload);
+            // console.log("lllllllllllllllllllllllllllllll" , action.payload);
             return action.payload;
         }
+        case "Place_Details": {
+            // console.log("lllllllllllllllllllllllllllllll" , action.payload);
+            return {...state,place_details:action.payload}
+        }
+        
         default:{
             return state;
         }

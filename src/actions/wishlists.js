@@ -3,6 +3,9 @@ import axios from "axios";
 // const baseUrl = "http://localhost:1337/api/wishlists";
 const url = "http://localhost:1337/api/wishlist";
 
+const deleteByID_url = "http://localhost:8080/api/wishlist";
+
+const getById_url = "http://localhost:8080/api/wishlist"
 // const Url = "http://localhost:1337/api/wishlist";
 
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
@@ -24,7 +27,32 @@ export async function getAllWishlists(){
      }
      
  }
- 
+export async function getWishlistByID(token,id){
+    var payload=null;
+    // console.log("kkkkkkklkkkkkkkk");
+     try{
+        //  let response = await fetch(`${baseUrl}/${id}`);
+         let response = await fetch(`${getById_url}/${id}`, {
+        method: "GET",
+        headers: {
+        Authorization: 'Bearer ' + token,
+        "Content-Type": "application/json",
+             },
+         });
+         payload = await response.json();
+        //  console.log( " " , payload);
+         
+     }catch(e){
+         console.log(e);
+     }
+     return {
+         type:"WishlistDetails",
+         payload
+     }
+     
+}
+
+
  export async function getWishlistsByUserId(id){
     var payload=null;
      try{
@@ -37,7 +65,7 @@ export async function getAllWishlists(){
          console.log(e);
      }
      return {
-         type:"WishlistDetails",
+         type:"WishlistByUserID",
          payload
      }
      
@@ -80,6 +108,33 @@ export async function addWishlist (wishlist){
      }
      return {
          type:"addWishlist",
+         payload
+     }
+     
+ }
+ export async function deleteWishlistById (token,id){
+
+    var payload=null;
+     try{
+         await axios.delete(`${deleteByID_url}/${id}`, {
+             headers: {
+             Authorization: 'Bearer ' + token,
+             "Content-Type": "application/json",
+                  },
+              })
+         .then(res => {
+           console.log(res);
+           console.log(res.data);
+           payload ="success";
+         })
+         .catch(err=>{payload="fail"})
+         
+         
+     }catch(e){
+         console.log("erorrrrrrrrrr");
+     }
+     return {
+         type:"deleteByIDwithtoken",
          payload
      }
      
