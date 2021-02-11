@@ -25,14 +25,15 @@ var params = {
 };
 
  export  class Mapp extends Component {
-    state = {
+   state = {
         showingInfoWindow: false,  // Hides or shows the InfoWindow
         activeMarker: {},          // Shows the active marker upon click
         selectedPlace: {}  ,
         coords:{},
         places :[],
         search_place:"",
-        word: ""
+        word: "",
+        search: ""
       };
       getlocation =  () =>{
         navigator.geolocation.getCurrentPosition(position =>{
@@ -81,7 +82,20 @@ var params = {
         this.displayMarkers();
         console.log("places: " , this.state.places);
         console.log("/////////////" , this.state.lat , "  ",this.state.lng);
+
+        await this.setState({
+          search: (new URL(document.location)).searchParams.get("keyword")
+        });
     }
+
+    handleValueChange = (value) => {
+      this.setState({
+        word: this.props.word(value),
+        search_place: value,
+        search: value
+      });
+    }
+
       displayMarkers = () => {
         return this.state.places.map((place, index) => {
           return <Marker key={index} id={index} position={{
@@ -125,10 +139,8 @@ var params = {
               name="search"
               className="form-control"
               placeholder="Search..."
-              onChange={(e)=>{
-                this.setState({search_place : e.target.value });
-                this.setState({word: this.props.word(e.target.value)});
-              }}
+              value={this.state.search}
+              onChange={e => this.handleValueChange(e.target.value)}
             />
           </div>
           <div className="col-4">

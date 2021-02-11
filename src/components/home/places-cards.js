@@ -52,8 +52,9 @@ class Cards extends Component {
         
         // console.log(id);
       var found  = this.state.userWishlists.find(
+          // eslint-disable-next-line
           (wishlist)=>{ 
-              if(wishlist.place_id == id)
+              if(wishlist.place_id === id)
               { 
                   wishlist_id = wishlist._id;
                 //   console.log("yes");
@@ -217,7 +218,7 @@ class Cards extends Component {
 
     render() {
         let places = this.props.places;
-        console.log("props.places: ", places);        
+        // console.log("props.places: ", places);        
 
         if (places) {
             // console.log("Inside if");

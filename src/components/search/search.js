@@ -16,112 +16,68 @@ class Search extends Component {
             currentLocation :{},
             lat:null,
             long:null,
-            filtered:[],
-            search_place:""
-         }
-    }
-   async componentDidMount(){
-       document.title = "Search";
-       await this.props.getLocation();
-       // console.log("here: " , this.props);
-       // console.log("position:    " , this.props.position);
-       
-       await this.props.getAllPlaces();
-       // console.log("places:    " , this.props.places);
-       // this.setState({long:long , lat :lat})
-       this.setState({filtered: this.props.places});
-    }
-
-    // handleFiltersCheck = async () => {
-    //     var hasTv = document.getElementById("has_tv");
-    //     if (hasTv.checked){
-    //         console.log("uuuuuuuuuuu");
-    //         await this.setState((state) => {
-    //             state.filtered = this.props.places.filter((item) => {
-    //                 // console.log(name.toLowerCase())
-    //                 // console.log("$$$$" , item.name.toLowerCase().includes(name.toLowerCase()) )
-    //                 console.log("item: " , item);
-    //                 if(item.has_wifi==true){
-    //                     console.log("yeeeeeeeeeeeee");
-    //                     return item;
-    //                 }
-    //             })
-    //             return state;
-    //         }) 
-    //     }
-    //     console.log("llllllll: " , this.state.filtered);
-
-    // }
-
-    handleFiltersCheck = async (str) => {
-        let arr = [];
-        if (!document.getElementById("has_tv").checked
-            && !document.getElementById("has_wifi").checked
-            && !document.getElementById("has_heating_system").checked
-            && !document.getElementById("has_air_conditioner").checked
-            && !document.getElementById("pets").checked) {
-                await this.setState({filtered: this.props.places});                
+            filteredPlaces:[],
+            searchedPlaces: [],
+            searchedWord: "",
+            wordFromHome: ""
         }
-        // if (document.getElementById(str).checked){
-        //     await this.setState((state) => {
-        //         state.filtered = this.state.filtered.filter((item) => {
-        //             // console.log(item);
-        //             // console.log(item[str]);
-        //             if(item[str]){
-        //                 // console.log("item", item);
-        //                 return item;
-        //             }
-        //         })
-        //         return state;
-        //     }) 
-        // }
-        else {
-            // console.log("else");
-    
-            if(document.getElementById('has_wifi').checked) {
-                // console.log('has_wifi.........');
-                arr.push('has_wifi');
-            }
-            if(document.getElementById('pets').checked) {
-                // console.log('pets.........');
-                arr.push('pets');
-            }
-            if(document.getElementById('has_tv').checked) {
-                // console.log('pets.........');
-                arr.push('has_tv');
-            }
-            if(document.getElementById('has_heating_system').checked) {
-                // console.log('pets.........');
-                arr.push('has_heating_system');
-            }
-            if(document.getElementById('has_air_conditioner').checked) {
-                // console.log('pets.........');
-                arr.push('has_air_conditioner');
-            }
-            
-            console.log("###### inside else: ",arr);
-            await this.renderArr(arr);
-        }
-        console.log("Outside if///////////////////////: " , this.state.filtered);
     }
+    async componentDidMount(){
+        document.title = "Search";
+        await this.props.getLocation();
+        // console.log("here: " , this.props);
+        // console.log("position:    " , this.props.position);
 
-    async renderArr(arr) {
-        // await this.setState({filtered: this.props.places});
-        console.log('____________________');
-        console.log("Features Checked: ", arr);
+        await this.props.getAllPlaces();
+        // console.log("places:    " , this.props.places);
+        // this.setState({long:long , lat :lat})
+        this.setState({filteredPlaces: this.props.places});
+
+        this.setState({
+            wordFromHome: (new URL(document.location)).searchParams.get("keyword")
+            // wordFromHome: this.props.location.search
+        });
+
+        // console.log("***********************");
+        // console.log(this.state.wordFromHome, typeof(this.state.wordFromHome), this.state.wordFromHome.length);
+
+        if(this.state.wordFromHome && this.state.wordFromHome.length > 0) {
+            this.getPlacesBySearch(this.state.wordFromHome);
+        }
         
-        arr.map((arrItem)=>{
-            this.setState((state) => {
-                state.filtered = this.state.filtered.filter((place) => {
-                    console.log(place);
-                    if(place[arrItem]){
-                        return place;
-                    }
-                })
-                return state;
+        // this.getPlacesBySearch(this.state.wordFromHome);        
+    }
+
+    checkSearchedPlaces = async (string) => {
+        if (string && string.length > 0) {
+            await this.setState({filteredPlaces: await this.state.searchedPlaces});                    
+        } else {
+            await this.setState({filteredPlaces: await this.props.places});                
+        }
+    }
+
+    checkFilteredPlaces = async (string) => {
+        await this.setState((state) => {
+            // eslint-disable-next-line
+            state.filteredPlaces = this.state.filteredPlaces.filter((place) => {
+                // console.log("place", place);
+                // console.log(place[string]);
+                if(place[string]){
+                    return place;
+                }
             })
-        })
-        console.log("renderArr ............" , this.state.filtered);
+            return state;
+        }) 
+    }
+
+    handleFiltersOnCheck = async (str) => {
+        let checkedFilter = document.getElementById(str).checked;
+
+        if (checkedFilter) {
+            this.checkFilteredPlaces(str);
+        } else if (!checkedFilter) {
+            this.checkSearchedPlaces(await this.state.searchedWord);
+        }
     }
 
     renderFeatures() {
@@ -135,7 +91,7 @@ class Search extends Component {
                         value="TV"
                         className="custom-control-input"
                         onClick={()=>{
-                            this.handleFiltersCheck("has_tv");
+                            this.handleFiltersOnCheck("has_tv");
                         }}/>
                     <label
                         htmlFor="has_tv"
@@ -151,7 +107,7 @@ class Search extends Component {
                         value="Wi Fi"
                         className="custom-control-input"
                         onClick={()=>{
-                            this.handleFiltersCheck("has_wifi");
+                            this.handleFiltersOnCheck("has_wifi");
                         }}
                     />
                     <label
@@ -168,7 +124,7 @@ class Search extends Component {
                         value="Pets"
                         className="custom-control-input"
                         onClick={()=>{
-                            this.handleFiltersCheck("pets");
+                            this.handleFiltersOnCheck("pets");
                         }}
                     />
                     <label
@@ -185,7 +141,7 @@ class Search extends Component {
                         value="Heating"
                         className="custom-control-input"
                         onClick={()=>{
-                            this.handleFiltersCheck("has_heating_system");
+                            this.handleFiltersOnCheck("has_heating_system");
                         }}
                     />
                     <label
@@ -202,7 +158,7 @@ class Search extends Component {
                         value="Air Conditioner"
                         className="custom-control-input"
                         onClick={()=>{
-                            this.handleFiltersCheck("has_air_conditioner");
+                            this.handleFiltersOnCheck("has_air_conditioner");
                         }}
                     />
                     <label
@@ -215,24 +171,25 @@ class Search extends Component {
     }
 
     getPlacesBySearch = async (word) => {
-        console.log(word);
-
-        if(word.length === 0) {
-            await this.setState({filtered: this.props.places});
+        await this.setState({searchedWord: word.toLowerCase()});
+        // console.log(await this.state.searchedWord);
+        
+        if(this.state.searchedWord.length === 0) {
+            await this.setState({filteredPlaces: this.props.places});
         }
 
-        word = word.toLowerCase();
-        let wordArr = [];
-        if(this.state.filtered) {
-            await this.state.filtered.map(async place => {
+        let searchedArr = [];
+        if(this.state.filteredPlaces) {
+            await this.state.filteredPlaces.map(async place => {
                 const cityAndCountry = place.address.city.concat(" ", place.address.country).toLocaleLowerCase();
                 // console.log(cityAndCountry);
-                if (cityAndCountry.includes(word.toLocaleLowerCase())) {
+                if (cityAndCountry.includes(this.state.searchedWord)) {
                     // console.log(place);
-                    wordArr.push(place);
+                    searchedArr.push(place);
                 }
             })
-            await this.setState({filtered: wordArr});
+            await this.setState({filteredPlaces: searchedArr});
+            await this.setState({searchedPlaces: searchedArr});
         }
     }
 
@@ -257,7 +214,7 @@ class Search extends Component {
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <Cards places={this.state.filtered}/>
+                        <Cards places={this.state.filteredPlaces}/>
                     </div>
                 </div>
             </section>
@@ -265,15 +222,19 @@ class Search extends Component {
     }
 }
  
-const mapactiontoprops = (disptch) =>{
-    return bindActionCreators({getAllPlaces , getLocation} ,disptch);
-}
-const mapstatetoprops = (state) =>{
-    
-    return {
-        places : state.Places,
-        position : state.Places
-    }
-}
+const mapActionToProps = (disptch) =>{
+    return bindActionCreators({
+        getAllPlaces,
+        getLocation
+    },
+    disptch);
+};
 
-export default connect(mapstatetoprops , mapactiontoprops)(Search);
+const mapStateToProps = (state) =>{
+    return {
+        places: state.Places,
+        position: state.Places
+    }
+};
+
+export default connect(mapStateToProps , mapActionToProps)(Search);
