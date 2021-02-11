@@ -48,16 +48,16 @@ class Search extends Component {
         // this.getPlacesBySearch(this.state.wordFromHome);        
     }
 
-    checkSearchedPlaces = async (string) => {
+    checkSearchedPlaces = (string) => {
         if (string && string.length > 0) {
-            await this.setState({filteredPlaces: await this.state.searchedPlaces});                    
+            this.setState({filteredPlaces: this.state.searchedPlaces});                    
         } else {
-            await this.setState({filteredPlaces: await this.props.places});                
+            this.setState({filteredPlaces: this.props.places});                
         }
     }
 
-    checkFilteredPlaces = async (string) => {
-        await this.setState((state) => {
+    checkFilteredPlaces = (string) => {
+        this.setState((state) => {
             // eslint-disable-next-line
             state.filteredPlaces = this.state.filteredPlaces.filter((place) => {
                 // console.log("place", place);
@@ -76,7 +76,7 @@ class Search extends Component {
         if (checkedFilter) {
             this.checkFilteredPlaces(str);
         } else if (!checkedFilter) {
-            this.checkSearchedPlaces(await this.state.searchedWord);
+            this.checkSearchedPlaces(this.state.searchedWord);
         }
     }
 
