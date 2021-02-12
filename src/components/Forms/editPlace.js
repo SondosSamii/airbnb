@@ -8,7 +8,7 @@ import { MdDelete } from 'react-icons/md';
 import Joi from 'joi-browser';
 // import Joi, { validate } from 'joi-browser';
 import axios from "axios";
-import { addplace } from "../../actions/places";
+import { getPlaceById ,updatePlace } from "../../actions/places";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {SessionContext ,getSessionCookie} from '../session'
@@ -18,7 +18,7 @@ var params = {
     query: '1600 Pennsylvania Ave NW'
     }
 
-class Host extends Component {
+class EditPlace extends Component {
     //static contextType = SessionContext();
     
   
@@ -32,6 +32,7 @@ class Host extends Component {
         this.kitNum = React.createRef();
         this.maxGuests=React.createRef();
         this.rooms =0;
+        const placedata={};
         // const session = getSessionCookie();
         // console.log(session)
         //login session validation
@@ -45,11 +46,13 @@ class Host extends Component {
          
           this.handleInputChange = this.handleInputChange.bind(this);
         }
-         
+        
         state = {
-            isLogin: true,
+            isLogin: false,
+            place_id:"6025e04196911b43c80f3d72",
+            placedata:{},
             token: "",
-            name:"",
+            name: "",
             description:"",
             type:"",
             price:"",
@@ -61,17 +64,18 @@ class Host extends Component {
             bedroom:0,
             kitchen:0,
             guests:0,
-            tv: false,
-            aircon: false,
-            wifi: false,
-            heat:false,
-            pets:false,
+            tv: "",
+            aircon: "",
+            wifi: "",
+            heat:"",
+            pets:"",
             photo:{},
             files:[],
             filesArr: [],
             errors:{},
             coordinates :""
         };
+        
         
         async componentDidMount(){
             this.setState({token: localStorage.getItem("token")});
@@ -80,8 +84,33 @@ class Host extends Component {
                 alert("please log in frist!")
             this.props.history.push("/");
             }
-
-            // this.data=await axios.get("http://localhost:3000/clients/");
+            await this.props.getPlaceById(localStorage.token ,this.state.place_id);
+            console.log(this.props.placeDetails.place)
+            var place= this.props.placeDetails.place;
+            this.setState({placedata:place});
+            console.log(this.state.placedata)
+            this.setState({
+                name:this.state.placedata.name,
+                description:this.state.placedata.description,
+                type:this.state.placedata.type,
+                price:this.state.placedata.price,
+                city:this.state.placedata.address.city,
+                country:this.state.placedata.address.country,
+                zipcode:this.state.placedata.address.zipcode,
+                room:this.state.placedata.total_rooms,
+                bathroom:this.state.placedata.total_bathrooms,
+                bedroom:this.state.placedata.total_beds,
+                kitchen:this.state.placedata.total_kitchens,
+                guests:this.state.placedata.max_guests,
+                tv: this.state.placedata.has_tv,
+                aircon: this.state.placedata.has_airconditioner,
+                wifi: this.state.placedata.has_wifi,
+                heat: this.state.placedata.has_heating_system,
+                pets:this.state.placedata.pets,
+                photo:this.state.placedata.images,
+                coordinates:this.state.placedata.location
+            })
+            console.log(this.state.photo);
         }
          //renderfile
          Maping = ()=>{
@@ -269,6 +298,8 @@ class Host extends Component {
         delete state.token;
         delete state.isLogin;
         delete state.coordinates;
+        delete state.place_id;
+        delete state.placedata;
         var res=Joi.validate(state,this.schema);
         if(res.error === null){
             this.setState({errors:{}});
@@ -286,7 +317,7 @@ class Host extends Component {
         await this.handleClick();
         console.log(this.state.coordinates)
         var address={country:"egy",city:"tanta"}
-        var ins = document.getElementById("files").files.length;
+        var ins =this.state.photo.length;
         var formData = new FormData();
         formData.append("name", this.state.name);
         formData.append("type", this.state.type);
@@ -315,9 +346,11 @@ class Host extends Component {
         for (var key of formData.entries()) {
             console.log(key[0] + ", " + key[1]);
           }
-        let url = "http://localhost:8080/api/place";
-        await this.props.addplace(formData,url,this.state.token);
+        let url = "http://localhost:8080/api/place/"+this.state.place_id;
+        console.log(url);
+        await this.props.updatePlace(formData,url,this.state.token);
         console.log("place data",this.props.placeDetails)
+        
 
         {/* 
         // const  obj={
@@ -356,12 +389,13 @@ class Host extends Component {
     }
     render() { 
         return (
-            <div id="host_form" className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
-                <div className="background pb-5" style={{  height:"100%" }} >
+            <div id="host_form" className="background " style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
+                <div className="background pt-5 pb-5" style={{  height:"100%" }} >
+                    <h1 className="text-center pt-5">Edit Your Place Information</h1>
                 <form  className="form-signin" action="" method="POST">
-                <div className="container signinClass">
+                <div className="container signinClass ">
                     <div className="row">
-                        <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+                        <div className="col-sm-9 col-md-12 col-lg-8 mx-auto">
                             <div className="card card-signin my-5">
                                 <div className=" toggel " onClick={() => this.addActiveClass("one")}>
                                 <h5 className="card-title text-center">Place Information  <i className="fad fa-angle-down"></i></h5>
@@ -369,17 +403,17 @@ class Host extends Component {
                                 <div className="card-body" id="one">
                                     <div className="form-label-group">
                                         <label  className="ml-5">Place Name:</label>
-                                        <input name="name" onChange={this.handelchange} type="text" className="form-control" placeholder="Enter the Place Name"  />
+                                        <input name="name" onChange={this.handelchange} type="text" className="form-control" value={this.state.name} placeholder="Enter the Place Name"  />
                                         {this.state.errors.name && ( <div className="alert alert-danger form-control">{this.state.errors.name}</div> )}
                                     </div>
                                     <div className="form-label-group">
                                         <label className="ml-5">Description:</label>
-                                        <textarea name="description" onChange={this.handelchange} className="form-control" rows="3"></textarea>                                
+                                        <textarea name="description" onChange={this.handelchange} value={this.state.description} className="form-control" rows="3"></textarea>                                
                                         {this.state.errors.description && ( <div className="alert alert-danger form-control">{this.state.errors.description}</div> )}
                                     </div>
                                     <div className="form-label-group ">
                                         <label className="ml-5 " >Place Type:</label>
-                                        <select name="type" onChange={this.handelchange} className="form-control" id="type">
+                                        <select name="type" onChange={this.handelchange} value={this.state.type} className="form-control" id="type">
                                             <option defaultValue>Choose the place type...</option>
                                             <option value="home">Home</option>
                                             <option value="room">Room</option>
@@ -389,7 +423,7 @@ class Host extends Component {
                                     </div>
                                     <div className="form-label-group">
                                         <label className="ml-5">Price per Night:</label>
-                                        <input  name="price" onChange={this.handelchange} type="text" className="form-control" placeholder="$ Enter price" required />
+                                        <input  name="price" onChange={this.handelchange} value={this.state.price} type="text" className="form-control" placeholder="$ Enter price" required />
                                         {this.state.errors.price && ( <div className="alert alert-danger form-control">{this.state.errors.price}</div> )}
                                     
                                     </div>                                                          
@@ -400,7 +434,7 @@ class Host extends Component {
                 </div>
                 <div className="container signinClass">
                     <div className="row">
-                        <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+                        <div className="col-sm-9 col-md-12 col-lg-8 mx-auto">
                             <div className="card card-signin ">
                                 <div className=" toggel " onClick={() => this.addActiveClass("sec")}>
                                     <h5 className="card-title text-center">Place Location <i className="fad fa-angle-down"></i></h5>
@@ -408,17 +442,17 @@ class Host extends Component {
                                 <div className="card-body" id="sec">
                                     <div className="form-label-group">
                                         <label className="ml-5">Country:</label>
-                                            <input type="text" onChange={this.handelchange} name="country" className="form-control" rows="3" /> 
+                                            <input type="text" onChange={this.handelchange} value={this.state.country} name="country" className="form-control" rows="3" /> 
                                             {this.state.errors.country && ( <div className="alert alert-danger form-control">{this.state.errors.city}</div> )}                          
                                     </div>
                                     <div className="form-label-group">
                                         <label className="ml-5">City:</label>
-                                            <input type="text" onChange={this.handelchange} name="city" className="form-control" rows="3" /> 
+                                            <input type="text" onChange={this.handelchange} value={this.state.city} name="city" className="form-control" rows="3" /> 
                                             {this.state.errors.city && ( <div className="alert alert-danger form-control">{this.state.errors.city}</div> )}                          
                                     </div>
                                     <div className="form-label-group">
                                         <label className="ml-5">Zipcode:</label>
-                                            <input type="text" onChange={this.handelchange} name="zipcode" className="form-control" rows="3" /> 
+                                            <input type="text" onChange={this.handelchange} value={this.state.zipcode} name="zipcode" className="form-control" rows="3" /> 
                                             {this.state.errors.zipcode && ( <div className="alert alert-danger form-control">{this.state.errors.city}</div> )}                          
                                     </div>                                                           
                                 </div>
@@ -428,7 +462,7 @@ class Host extends Component {
                 </div>
                 <div className="container signinClass">
                     <div className="row">
-                    <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+                    <div className="col-sm-9 col-md-12 col-lg-8 mx-auto">
                         <div className="card card-signin my-5">
                         <div className=" toggel " onClick={() => this.addActiveClass("rooms")}>
                             <h5 className="card-title text-center">Number of Rooms <i className="fad fa-angle-down"></i></h5>
@@ -466,8 +500,8 @@ class Host extends Component {
                             </div>
                             {this.state.errors.kitchen && ( <div className="alert alert-danger form-control">{this.state.errors.kitchen}</div> )}
                              
-                            <div className="form-label-group">
-                            <label className="ml-5">Number of Max Guests:</label>
+                            <div className="form-label-group ">
+                            <label className="ml-5 ">Number of Max Guests:</label>
                                 <div className="plus btn " onClick={() => this.AddNumber("guest")}>+</div>
                                 <input name="guests"  ref={this.maxGuests} id="maxGuests" type="text" className="number form-control" value={this.state.guests} disabled/>
                                 <div className="minus btn" onClick={() => this.RemoveNumber("guest")}>-</div>
@@ -483,7 +517,7 @@ class Host extends Component {
 
                 <div className="container signinClass">
                     <div className="row">
-                        <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+                        <div className="col-sm-9 col-md-12 col-lg-8 mx-auto">
                             <div className="card card-signin ">
                                 <div className=" toggel " onClick={() => this.addActiveClass("amenities")}>
                                     <h5 className="card-title text-center">Amenities you Offer <i className="fad fa-angle-down"></i></h5>
@@ -517,10 +551,10 @@ class Host extends Component {
                 
                 <div className="container signinClass mt-5">
                     <div className="row">
-                    <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+                    <div className="col-sm-9 col-md-12 col-lg-8 mx-auto">
                         <div className="card card-signin ">
                             <div className=" toggel " onClick={() => this.addActiveClass("photos")}>
-                                <h5 className="card-title text-center">Add Photos <i className="fad fa-angle-down"></i></h5>
+                                <h5 className="card-title text-center">Uplode New Photos <i className="fad fa-angle-down"></i></h5>
                             </div>
                             <div className="card-body" id="photos">
                                 <div className="form-label-group">
@@ -543,7 +577,7 @@ class Host extends Component {
                     </div>
                     </div>
                 </div>
-                <button onClick={this.handelSubmit}  style={{ height:"50px" }} className="btn mybtn btn-lg btn-block text-uppercase submit-button mt-5 col-4 mb-5" type="submit">Submit</button> 
+                <button onClick={this.handelSubmit}  style={{ height:"50px" }} className="btn mybtn btn-lg btn-block text-uppercase submit-button mt-5 col-4 mb-5" type="submit">Save Changes</button> 
                 </form>
                 </div>
             </div>
@@ -555,7 +589,8 @@ class Host extends Component {
 const mapactiontoprops = (disptch) => {
     return bindActionCreators(
       {
-        addplace
+        updatePlace,
+        getPlaceById
       },
       disptch
     );
@@ -565,5 +600,4 @@ const mapactiontoprops = (disptch) => {
         placeDetails: state.Places   
     };
   }
-Host.contextType = SessionContext;
-export default connect(mapstatetoprops, mapactiontoprops) (Host);
+export default connect(mapstatetoprops, mapactiontoprops) (EditPlace);

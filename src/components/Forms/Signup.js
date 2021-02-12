@@ -89,6 +89,7 @@ class Signup extends Component {
     let url = "http://localhost:8080/api/signup";
     await this.props.addclient(formData,url);
     console.log("signup data",this.props.client)
+    
     // let url = "http://localhost:8080/api/signup";
     // let method = "POST";
     // fetch(url, {

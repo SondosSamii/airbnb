@@ -28,6 +28,14 @@ function Places(state = null , action) {
             // console.log("lllllllllllllllllllllllllllllll" , action.payload);
             return action.payload;
         }
+        case "addplace": {
+             console.log("addplace" , action.payload);
+            return action.payload;
+        }
+        case "updatePlace":{
+            console.log("updatePlace" , action.payload);
+            return action.payload;
+        }
         
         default:{
             return state;

@@ -109,6 +109,7 @@ class Login extends Component {
         
       })
       console.log(this.state)
+      this.props.history.push("/");
     }
 
 
@@ -150,7 +151,7 @@ class Login extends Component {
     //   });
     // var email=this.state.Email;
     // setSessionCookie({ email });
-    //this.props.history.push("/");
+    
   };
 
  

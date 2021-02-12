@@ -84,25 +84,64 @@ export async function getPlaceByID (id){
      
 }
 
-//  export async function addClient (student){
+export async function addplace (formData,url,token){
+    var payload=null;
+     try{
+         let response = await fetch(url, {
+        method: "POST",
+        body: formData,
+        headers: {
+            Authorization: 'Bearer ' + token
+                }
+         }
+      ).then((response) => {
+        return response.json();
+        
+      }).then((response)=>{
+        payload = response;
+        console.log("place added: ", payload);
+      })
+      .catch((error) => {
+        console.log("place added error", error);
+      });
+     }catch(error){
+         console.log("place added error: ", error);
+     }
+     return {
+         type:"addplace",
+         payload
+     }
      
-//     var payload=null;
-//      try{
-//          await axios.post(Url,  student )
-//          .then(res => {
-//            console.log(res);
-//            console.log(res.data);
-//            payload ="success";
-//          }).catch(err=>{
-//              console.log(err);
-//              payload="fail"})
-         
-//      }catch(e){
-//          console.log("erorrrrrrrrrr");
-//      }
-//      return {
-//          type:"addClient",
-//          payload
-//      }
+ }
+
+ 
+export async function updatePlace (formData,url,token){
+    var payload=null;
+    console.log(token)
+     try{
+         let response = await fetch(url, {
+        method: "PUT",
+        body: formData,
+        headers: {
+            Authorization: 'Bearer ' + token
+                }
+         }
+      ).then((response) => {
+        return response.json();
+        
+      }).then((response)=>{
+        payload = response;
+        console.log("place updated: ", payload);
+      })
+      .catch((error) => {
+        console.log("place updated error", error);
+      });
+     }catch(error){
+         console.log("place updated error: ", error);
+     }
+     return {
+         type:"updatePlace",
+         payload
+     }
      
-//  }
+ }
