@@ -24,7 +24,7 @@ class Home extends Component {
                 <div className="my-5">
                     <h2 className="text-center mb-0">Explore Our Highlights</h2>
                     <div className="row justify-content-center">
-                        <Cards filteredPlaces={this.props.places.places}/>
+                        <Cards cards={this.props.places.places}/>
                     </div>
                 </div>
             </div>

@@ -226,7 +226,7 @@ class Search extends Component {
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <Cards filteredPlaces={this.state.filteredPlaces}/>
+                        <Cards cards={this.state.filteredPlaces}/>
                     </div>
                 </div>
             </section>

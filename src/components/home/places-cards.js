@@ -407,7 +407,7 @@ class Cards extends Component {
     }
 
     render() {
-        let places = this.props.filteredPlaces;
+        let places = this.props.cards;
         // let places = this.state.places;
         // console.log("/////////////", places);
 
