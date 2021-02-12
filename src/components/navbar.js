@@ -58,7 +58,7 @@ const Navbar = () => {
                                     <button to="/login" className="nav-link btn main-btn" onClick={()=>{
                                         localStorage.removeItem("token");
                                         localStorage.removeItem("user_id");
-                                        window.location.reload();
+                                        
                                     }}>Log out</button>
                                     </li>
                                 ):(

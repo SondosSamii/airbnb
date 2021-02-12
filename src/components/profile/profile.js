@@ -86,34 +86,7 @@ class ViewProfile extends Component {
       await this.get_user_places();
       console.log(".......",this.state.reserve_Places);
     }
-   
-    // await this.props.getReservationByID(this.state.token,"60230037b84a5619c83f4222");
-    // this.props.getPlaceById("601cd04e9b694d3c30abc913");
-    // console.log(this.props.wishlistDetails);
-    
 
-    // await this.props.getWishlistsByUserId(localStorage.getItem("token"));
-    //  this.setState({User_wishlists : this.props.User_wishlists.wishlists });
-    // console.log("state:    " , this.state.User_wishlists);
-
-
-    // await this.props.getAllPlaces();
-
-    // this.UserPlaces();
-
-    // await this.props.getAllWishlists();
-    // await this.setState({ Wishlists: this.props.wishlists });
-    // await this.User_Wishlist();
-    // console.log("User_Wishlists:    ", this.state.Wishlists);
-    // this.getPlaces();
-    // //////////////////////////////////////////////
-
-    // await this.props.getAllReservation();
-    // await this.setState({ Reservations: this.props.reservations });
-    // await this.UserTrips();
-    // this.get_reserve_places();
-    // await this.props.getAllClients();
-    // this.getUser();
   }
 
 
@@ -317,24 +290,6 @@ class ViewProfile extends Component {
               </div>
             </div>
           </div>
-          // <div className="col-4 ">
-          // <Card style={{ width: '18rem' }}>
-          //  <Card.Img variant="top" src={`images/places/${this.state.Places[index].images[0]}.jpeg`} />
-          //  <Card.Body>
-          //  <FaHeart onClick={()=>{
-          //     //  console.log("...." , wishlist_Element._id);
-          //      this.props.deleteByID(wishlist_Element._id);
-          //  }} />
-          //      <Card.Title>{this.state.Places[index].address.country}</Card.Title>
-          //      <Card.Title>{this.state.Places[index].type}</Card.Title>
-          //      <Card.Text>
-          //      Some quick example text to build on the card title and make up the bulk of
-          //      the card's content.
-          //      </Card.Text>
-          //      <Button variant="primary">Go somewhere</Button>
-          //  </Card.Body>
-          //  </Card>
-          //         </div>
         );
       }
     });
@@ -487,16 +442,33 @@ var flag = true;
           )}
 
           <div className=" row justify-content-center" >
-            <div className="user_img " 
-            style={{
-            // backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
-            backgroundImage:`url('http://localhost:8080/${this.state.user.profile_image}')`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}>
-        {/* <img src="http://localhost:8080/images/Alaa.jpg" /> */}
-            </div>
+            {
+              this.state.user.profile_image ?(
+                <div className="user_img " 
+                style={{
+                // backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
+                backgroundImage:`url('http://localhost:8080/${this.state.user.profile_image}')`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}>
+            {/* <img src="http://localhost:8080/images/Alaa.jpg" /> */}
+                </div>
+              ):(
+                <div className="user_img " 
+                style={{
+                // backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
+                backgroundImage:`url('data:image/jpeg;base64,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')`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}>
+            {/* <img src="http://localhost:8080/images/Alaa.jpg" /> */}
+                </div>
+              )
+
+            }
+
           
           </div>
           <div className="row justify-content-center">

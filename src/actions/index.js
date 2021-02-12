@@ -12,7 +12,7 @@ export async function getAllPlaces(){
         payload = await response.json();
         console.log(payload);
      }catch(e){
-         console.log( e);
+         console.log(e);
      }
      return {
          type:"AllPlaces",

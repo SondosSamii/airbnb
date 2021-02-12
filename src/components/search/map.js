@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import HPlatform, { HMap, HMapPolyLine ,HMapMarker } from "react-here-map";
 
 import { bindActionCreators } from "redux";  
-import {getAllPlaces , getLocation } from "../../actions";
+import {getAllPlaces , getLocation } from "../../actions/places";
 
 import { Map, GoogleApiWrapper,InfoWindow, Marker } from 'google-maps-react';
 import { connect } from 'react-redux';
