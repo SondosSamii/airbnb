@@ -29,7 +29,7 @@
 }
 #start_err,#end_err,#total_nights_err,#num_guests_err{
     color:crimson;
-    background:darkgrey;
+    /* background:darkgrey; */
 }
 #submit{
     margin-top: 15px;

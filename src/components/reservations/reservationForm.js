@@ -195,6 +195,7 @@ import React, { Component } from "react";
       num_of_guests: this.state.num_of_guests
     };
 var flag= true;
+var min;
     if(!reservation.start_date){
       flag=false;
       document.getElementById("start_err").innerHTML= "should Enter start Date" ;
