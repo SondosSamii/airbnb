@@ -27,6 +27,7 @@ import { FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
 import { MdPets } from "react-icons/md";
 import { GiHeatHaze } from "react-icons/gi";
 import { AiFillEdit } from "react-icons/ai";
+import Cards from "../home/places-cards";
 
 class ViewProfile extends Component {
   constructor(props) {
@@ -529,7 +530,11 @@ var flag = true;
           </div>
 
           <div className="container ">
-            <div className="row">{this.renderWishlist()}</div>
+            <div className="row justify-content-center">
+              {/* {this.renderWishlist()} */}
+              <Cards filteredPlaces={this.state.Places}/>
+              {/* {console.log("********** ", this.state.Places)} */}
+            </div>
           </div>
         </div>
 
