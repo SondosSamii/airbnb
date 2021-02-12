@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";  
-import {getAllPlaces , getLocation} from "../../actions";
+import {getAllPlaces , getLocation} from "../../actions/places";
 import Mapp from "./map";
 import Cards from "../home/places-cards";
 
@@ -29,9 +29,9 @@ class Search extends Component {
         // console.log("position:    " , this.props.position);
 
         await this.props.getAllPlaces();
-        // console.log("places:    " , this.props.places);
+        // console.log("places:    " , this.props.places.places);
         // this.setState({long:long , lat :lat})
-        this.setState({filteredPlaces: this.props.places});
+        this.setState({filteredPlaces: this.props.places.places});
 
         this.setState({
             wordFromHome: (new URL(document.location)).searchParams.get("keyword")
@@ -42,6 +42,7 @@ class Search extends Component {
         // console.log(this.state.wordFromHome, typeof(this.state.wordFromHome), this.state.wordFromHome.length);
 
         if(this.state.wordFromHome && this.state.wordFromHome.length > 0) {
+            // console.log("*****************");
             this.getPlacesBySearch(this.state.wordFromHome);
         }
         
@@ -51,8 +52,10 @@ class Search extends Component {
     checkSearchedPlaces = (string) => {
         if (string && string.length > 0) {
             this.setState({filteredPlaces: this.state.searchedPlaces});                    
+            // console.log("Iffff checkSearchedPlaces: ", this.state.filteredPlaces);              
         } else {
-            this.setState({filteredPlaces: this.props.places});                
+            this.setState({filteredPlaces: this.props.places.places});
+            // console.log("Elsee checkSearchedPlaces: ", this.state.filteredPlaces);              
         }
         console.log("searched: " , this.state.filteredPlaces);
     }
@@ -173,25 +176,33 @@ class Search extends Component {
 
     getPlacesBySearch = async (word) => {
         await this.setState({searchedWord: word.toLowerCase()});
-        // console.log(await this.state.searchedWord);
+        console.log("Searched Woooord: ", await this.state.searchedWord);
         
         if(this.state.searchedWord.length === 0) {
-            await this.setState({filteredPlaces: this.props.places});
+            await this.setState({filteredPlaces: this.props.places.places});
+            console.log("Filtered Places if word = 0: ", this.state.filteredPlaces);
         }
+
+        // console.log("Filtered Places after if......: ", this.state.filteredPlaces);
 
         let searchedArr = [];
         if(this.state.filteredPlaces) {
             await this.state.filteredPlaces.map(async place => {
-                const cityAndCountry = place.address.city.concat(" ", place.address.country).toLocaleLowerCase();
-                // console.log(cityAndCountry);
-                if (cityAndCountry.includes(this.state.searchedWord)) {
-                    // console.log(place);
-                    searchedArr.push(place);
+                // console.log("City: ", place.address);
+                if(place.address) {
+                    const cityAndCountry = place.address.city.concat(" ", place.address.country).toLocaleLowerCase();
+                    // console.log(cityAndCountry);
+                    if (cityAndCountry.includes(this.state.searchedWord)) {
+                        // console.log(place);
+                        searchedArr.push(place);
+                    }
                 }
             })
             await this.setState({filteredPlaces: searchedArr});
             await this.setState({searchedPlaces: searchedArr});
         }
+        // console.log("Filtered Places after map......: ", this.state.filteredPlaces);
+        // console.log("Searched Places after map......: ", this.state.searchedPlaces);
     }
 
     render() { 
@@ -215,7 +226,7 @@ class Search extends Component {
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <Cards places={this.state.filteredPlaces}/>
+                        <Cards filteredPlaces={this.state.filteredPlaces}/>
                     </div>
                 </div>
             </section>

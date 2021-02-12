@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";  
-import { getAllPlaces } from "../../actions";
+import { getAllPlaces } from "../../actions/places";
 
 import Slideshow from "./slideshow";
 import Places from "./places";
@@ -24,7 +24,7 @@ class Home extends Component {
                 <div className="my-5">
                     <h2 className="text-center mb-0">Explore Our Highlights</h2>
                     <div className="row justify-content-center">
-                        <Cards places={this.props.places}/>
+                        <Cards filteredPlaces={this.props.places.places}/>
                     </div>
                 </div>
             </div>

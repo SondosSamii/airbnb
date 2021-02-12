@@ -407,11 +407,9 @@ class Cards extends Component {
     }
 
     render() {
-        // let places = this.props.places;
-        // console.log("props.places: ", places);
-
-        let places = this.state.places;
-        // console.log("state.places: ", places);        
+        let places = this.props.filteredPlaces;
+        // let places = this.state.places;
+        // console.log("/////////////", places);
 
         if (places && places.length > 0) {
             // console.log("Inside if");
@@ -436,8 +434,8 @@ class Cards extends Component {
                                 {/* {this.wishlist(highlight._id)} */}
                             </div>
                             <div className="card-item-details">
-                                {/* <h4>{place.address.city}, {place.address.country}</h4> */}
-                                <h4>Cairo, Egypt</h4>
+                                <h4>{place.address.city}, {place.address.country}</h4>
+                                {/* <h4>Cairo, Egypt</h4> */}
                                 <p className="desc">{place.description}</p>
                                 <p className="price">${place.price}</p>
                                 <p className="rating">
