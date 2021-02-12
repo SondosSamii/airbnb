@@ -42,23 +42,23 @@ export default class About extends Component {
             <hr />
             <div className="social">
                 <div className="d1">
-               <a href="#"><FaFacebook className="f"/></a>
+               <a href="https://www.facebook.com/"><FaFacebook className="f"/></a>
                </div>
                <hr />
                <div className="d1">
-               <a href="#"><AiFillTwitterCircle/></a>
+               <a href="https://twitter.com/twitter?lang=ar"><AiFillTwitterCircle/></a>
                </div>
                <hr />
                <div className="d1">
-               <a href="#"><FcGoogle/></a>
+               <a href="https://www.google.com/"><FcGoogle/></a>
                </div>
                <hr />
                <div className="d1">
-               <a href="#"><RiLinkedinBoxFill/></a>
+               <a href="https://www.linkedin.cn/login"><RiLinkedinBoxFill/></a>
                </div>
                <hr />
                <div className="d1">
-               <a href="#"><AiFillInstagram/></a>
+               <a href="https://www.instagram.com/"><AiFillInstagram/></a>
                </div>
               
             </div>
