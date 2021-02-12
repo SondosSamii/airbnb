@@ -5,6 +5,10 @@ function Clients(state = null , action) {
             // console.log("cliiinenntnntntntn")
             return action.payload;
         }
+        case "AllClients2": {
+            // console.log("cliiinenntnntntntn")
+            return action.payload;
+        }
         case "update_Client":{
             // console.log("cliiinenntnntntntn")
             return action.payload;

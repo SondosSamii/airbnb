@@ -14,6 +14,7 @@ import OurTeam from './Team/our-team';
 import Reservastion from './reservations/reservationForm';
 import NotFound from './not-found';
 import Footer from './footer';
+import PlaceDetails from './PlaceD/place-details';
 
 const Routes = ()=> {
     const [session, setSession] = useState(getSessionCookie());
@@ -41,6 +42,7 @@ const Routes = ()=> {
                     <Route path="/host" component={Host}></Route>
                     <Route path="/login" component={Login}></Route>
                     <Route path="/place-edit" component={EditPlace}></Route>
+                    <Route path="/place-details" component={PlaceDetails}></Route>
                     <Route path="*" component={NotFound}></Route>
                 </Switch>
                 <Footer/>

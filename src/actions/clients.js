@@ -23,6 +23,18 @@ export async function getAllClients(){
      }
      
  }
+ export async function AllClients() {
+    var payload = null;
+    try {
+        let url="http://localhost:8080/api/clients"
+        const res = await fetch(url);
+        payload = await res.json();
+        console.log("clients: ", payload);
+    } catch (err) {
+        console.log(err);
+    }
+    return {type: "Allclients2", payload}
+}
 export async function updateClient(client){
     var payload=null;
      try{

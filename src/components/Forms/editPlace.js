@@ -49,7 +49,7 @@ class EditPlace extends Component {
         
         state = {
             isLogin: false,
-            place_id:"6025e04196911b43c80f3d72",
+            place_id:"6024167de5ac3946c8952f89",
             placedata:{},
             token: "",
             name: "",
