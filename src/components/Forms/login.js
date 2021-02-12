@@ -120,6 +120,7 @@ class Login extends Component {
         });
         localStorage.setItem("token", response.token);
         localStorage.setItem("user_id", response.user_id);
+        
         // const remainingMilliseconds = 60 * 60 * 1000;
         // const expiryDate = new Date(
         //   new Date().getTime() + remainingMilliseconds
@@ -132,6 +133,7 @@ class Login extends Component {
       });
     // var email=this.state.Email;
     // setSessionCookie({ email });
+    // window.location.reload();
     this.props.history.push("/");
   };
 

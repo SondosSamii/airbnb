@@ -8,6 +8,9 @@ import Places from "./places";
 import Cards from "./places-cards";
 
 class Home extends Component {
+    componentDidMount(){
+        // window.location.reload();
+    }
     render() {
         document.title = "Home";
         return (

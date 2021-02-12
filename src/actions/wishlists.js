@@ -1,7 +1,7 @@
 import axios from "axios";
  
 // const baseUrl = "http://localhost:1337/api/wishlists";
-const url = "http://localhost:1337/api/wishlist";
+const url = "http://localhost:8080/api/wishlist";
 
 const deleteByID_url = "http://localhost:8080/api/wishlist";
 
@@ -57,6 +57,7 @@ export async function getWishlistByID(token,id){
 
 
  export async function getWishlistsByUserId(token){
+     console.log("yes");
     var payload=null;
      try{
         //  let response = await fetch(`${baseUrl}/${id}`);
@@ -69,13 +70,13 @@ export async function getWishlistByID(token,id){
             }
         });
          payload = await response.json();
-         console.log("getWishlistsByUserId" , payload);
+        //  console.log("getWishlistsByUserId" , payload);
          
      }catch(e){
          console.log(e);
      }
      return {
-         type:"WishlistByUserID",
+         type:"Wishlist_By_user",
          payload
      }
      

@@ -4,6 +4,7 @@ function Reviews(state = {}, action) {
             return {...state,all_reviews:action.payload}
         }
         case "PlaceReviews": {
+            console.log("./mmmmmmmmmmmmmmmmmm:   ", action.payload);
             return {...state,place_reviews:action.payload}
             // return action.payload
         }

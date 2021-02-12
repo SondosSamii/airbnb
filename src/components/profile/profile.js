@@ -67,20 +67,26 @@ class ViewProfile extends Component {
   async componentDidMount() {
     this.setState({token: localStorage.getItem("token")}); 
     console.log("here token:  ",localStorage.getItem("token"));
-    if(localStorage.getItem("token")===""){
+    if(!localStorage.getItem("token")){
       this.setState({isLogin:false});
-      this.props.history.push("/");
-    }
-    await this.props.getclientById(localStorage.getItem("token"));
-    console.log("heerreee:     ",this.props.client.user);
-    if(this.props.client.message === "jwt expired"){
+      console.log("yyyyyyyyyyyyyyyyyyyyyyyyy");
       this.props.history.push("/login");
     }
-    this.setState({user: this.props.client.user });
-    await this.get_Wishlist_places();
-    await this.get_Trips_places();
-    await this.get_user_places();
-    console.log(".......",this.state.reserve_Places);
+
+    else{
+
+      await this.props.getclientById(localStorage.getItem("token"));
+      console.log("heerreee:     ",this.props.client.user);
+      if(this.props.client.message === "jwt expired"){
+        this.props.history.push("/login");
+      }
+      this.setState({user: this.props.client.user });
+      await this.get_Wishlist_places();
+      await this.get_Trips_places();
+      await this.get_user_places();
+      console.log(".......",this.state.reserve_Places);
+    }
+   
     // await this.props.getReservationByID(this.state.token,"60230037b84a5619c83f4222");
     // this.props.getPlaceById("601cd04e9b694d3c30abc913");
     // console.log(this.props.wishlistDetails);
@@ -248,14 +254,18 @@ class ViewProfile extends Component {
   renderWishlist = () => {
     document.title = "Profile";
     // var i = 0;
-    // console.log("Wishlist_Places: " , this.state.user.wishlists);
+    console.log("Wishlist_Places: " , this.state.Places);
     // if(this.state.wishlists > 0) {
     if(this.state.user.wishlists) {
     return this.state.user.wishlists.slice(0, 3).map((wishlist_Element,index) => {
-      // console.log("aaaaaaaaaaaaaa:  ", wishlist_Element);
+      console.log("aaaaaaaaaaaaaa:  ", wishlist_Element);
 
       if (this.state.Places[index]) {
+        var flag = false;
         // console.log("jjjj: " ,this.state.Places[index]);
+        if(this.state.Places[index].address !=="undefined" && this.state.Places[index].address!=="undefined" ){
+          flag = true
+        }
         return (
           <div
             className="col-9 col-sm-6 col-lg-4 mt-4"
@@ -265,7 +275,7 @@ class ViewProfile extends Component {
               <div
                 className="card-item-highlight"
                 style={{
-                  backgroundImage: `url(images/places/place1-1.jpeg)`,
+                  backgroundImage: `url('http://localhost:8080/${this.state.Places[index].images[0]}')`,
                 }}
               >
                 <h3 className="card-item-name">
@@ -283,16 +293,20 @@ class ViewProfile extends Component {
                     this.props.deleteWishlistById(this.state.token,wishlist_Element);
                     // this.forceUpdate();
                     this.renderWishlist();
-                    // window.location.reload();
+                    window.location.reload();
 
                   }}
                 />
               </div>
               <div className="card-item-details">
-                <h4>
+                
+                  {flag  &&(
+                    <h4>
                   {this.state.Places[index].address.city},{" "}
                   {this.state.Places[index].address.country}
                 </h4>
+
+                  )}
                 <p className="desc">{this.state.Places[index].description}</p>
                 <p className="price">${this.state.Places[index].price}</p>
                 <p className="rating">
@@ -335,7 +349,7 @@ class ViewProfile extends Component {
       return this.state.user.reservations.slice(0, 4).map(
       (reservation_Element, index) => {
         if (this.state.reserve_Places[index]) {
-          // console.log("jjjj: " ,this.state.reserve_Places[index]);
+          console.log("jjjj: " ,this.state.reserve_Places[index]);
           return (
             <div className=" col-9 col-sm-6  col-lg-4 mt-4 " key={index}>
               <div className=" card-item card-item-sm ">
@@ -343,9 +357,10 @@ class ViewProfile extends Component {
                   to=""
                   className="card-item-bg"
                   style={{
-                    backgroundImage: `url(images/places/place1-1.jpeg)`,
+                    backgroundImage: `url('http://localhost:8080/${this.state.reserve_Places[index].images[0]}')`,
                   }}
                 >
+
                   <h3 className="card-item-name">
                     {this.state.reserve_Places[index].name}
                   </h3>
@@ -412,11 +427,11 @@ var flag = true;
       //   console.log(e);
       // }
 
-      // var confirm = window.confirm("are you sure you want to update");
-      this.props.updateClient(this.state.token,formData );
-      // if(confirm){
-      //   window.location.reload();
-      // }
+      var confirm = window.confirm("are you sure you want to update");
+      if(confirm){
+        this.props.updateClient(this.state.token,formData );
+        window.location.reload();
+      }
       
     }
 

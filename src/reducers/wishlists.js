@@ -21,10 +21,11 @@ function Wishlists(state = {} , action) {
         }
         case "addWishlist" :{
             console.log("lllllllllllllllllllllllllllllll" , action.payload);
-            return action.payload;
+            return {...state, addWishlist : action.payload}
         }
-        case "getWishlistsByUserId": {
-            return {...state,wishlistsByUserId:action.payload}
+        case "Wishlist_By_user": {
+            console.log("/////////////" , action.payload);
+            return {...state, wishlistsByUserId : action.payload}
         }
         default:{
             return state;

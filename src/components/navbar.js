@@ -2,6 +2,16 @@ import {NavLink as Link} from 'react-router-dom';
 import { BsFillPersonFill } from "react-icons/bs";
 
 const Navbar = () => {
+    var login = false;
+    var button = "";
+    if (localStorage.getItem("token")){
+        button = "logout"
+        login =true;
+    }
+    else{
+        button = "login"
+        login =false;
+    }
     return (
         <header
             style={{
@@ -42,9 +52,21 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link to="/signup" className="nav-link">Sign Up</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/login" className="nav-link btn main-btn">Log In</Link>
-                        </li>
+                            {
+                                login ?(
+                                    <li className="nav-item">
+                                    <button to="/login" className="nav-link btn main-btn" onClick={()=>{
+                                        localStorage.removeItem("token");
+                                        localStorage.removeItem("user_id");
+                                        window.location.reload();
+                                    }}>Log out</button>
+                                    </li>
+                                ):(
+                                    <li className="nav-item">
+                                    <Link to="/login" className="nav-link btn main-btn">Log In</Link>
+                                </li>
+                                )
+                            }
                         <li className="nav-item">
                             <Link to="/profile" className="nav-link btn">
                                 <BsFillPersonFill className="user-icon"/>
@@ -58,3 +80,5 @@ const Navbar = () => {
 }
 
 export default Navbar;
+
+

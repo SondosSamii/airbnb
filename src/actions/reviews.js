@@ -19,15 +19,19 @@ export async function getAllReviews() {
 }
 
 export async function getPlaceReviews(id) {
+    console.log("yyyyyys");
     let payload = null;
     try {
         let res = await fetch(`${placeReviewsUrl}/${id}`);
         payload = await res.json();
-        console.log("getPlaceReviews Action: ", payload);
+        // console.log("getPlaceReviews Action: ", payload);
     } catch (err) {
         console.log(err);
     }
-    return {type: "PlaceReviews", payload}
+    return {
+        type: "PlaceReviews",
+         payload
+        }
 }
 
 export async function getReviewDetails(id) {
