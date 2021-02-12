@@ -532,7 +532,7 @@ var flag = true;
           <div className="container ">
             <div className="row justify-content-center">
               {/* {this.renderWishlist()} */}
-              <Cards filteredPlaces={this.state.Places}/>
+              <Cards cards={this.state.Places}/>
               {/* {console.log("********** ", this.state.Places)} */}
             </div>
           </div>
