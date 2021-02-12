@@ -5,9 +5,11 @@ function Reviews(state = {}, action) {
         }
         case "PlaceReviews": {
             return {...state,place_reviews:action.payload}
+            // return action.payload
         }
         case "ReviewDetails": {
             return {...state,review_details:action.payload}
+            // return action.payload
         }
         default: {
             return state;

@@ -23,6 +23,9 @@ function Wishlists(state = {} , action) {
             console.log("lllllllllllllllllllllllllllllll" , action.payload);
             return action.payload;
         }
+        case "getWishlistsByUserId": {
+            return {...state,wishlistsByUserId:action.payload}
+        }
         default:{
             return state;
         }

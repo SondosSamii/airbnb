@@ -10,6 +10,9 @@ const getById_url = "http://localhost:8080/api/wishlist"
 
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
 
+const wishlistsUrl = "http://localhost:8080/api/wishlists";
+// const wishlistsUrl = "https://node-airbnb.herokuapp.com/api/wishlists";
+
 // const baseUrl = " http://localhost:2400/wishlists";
 
 export async function getAllWishlists(){
@@ -53,13 +56,20 @@ export async function getWishlistByID(token,id){
 }
 
 
- export async function getWishlistsByUserId(id){
+ export async function getWishlistsByUserId(token){
     var payload=null;
      try{
         //  let response = await fetch(`${baseUrl}/${id}`);
-         let response = await fetch(`${baseUrl}?user_id=${id}`);
+        //  let response = await fetch(`${baseUrl}?user_id=${id}`);
+        let response = await fetch(`${wishlistsUrl}`, {
+            method: "GET",
+            headers: {
+                Authorization: 'Bearer ' + token,
+                "Content-Type": "application/json",
+            }
+        });
          payload = await response.json();
-         console.log("id", id , " " , payload);
+         console.log("getWishlistsByUserId" , payload);
          
      }catch(e){
          console.log(e);
@@ -92,11 +102,15 @@ export async function deleteByID (id){
     }
     
 }
-export async function addWishlist (wishlist){
+export async function addWishlist (token, wishlist){
     console.log("here:   ",wishlist)
     var payload=null;
      try{
-         await axios.post(url,  wishlist )
+         await axios.post(url, wishlist, { headers: {
+            Authorization: 'Bearer ' + token,
+            "Content-Type": "application/json",
+                 },
+             })
          .then(res => {
            console.log(res);
            console.log(res.data);

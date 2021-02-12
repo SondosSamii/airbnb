@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { FaRegHeart, FaHeart, FaStar } from "react-icons/fa";
 
 import { getAllPlaces } from '../../actions/places';
-import { getAllWishlists, getWishlistsByUserId, addWishlist, deleteByID } from '../../actions/wishlists';
+import { getWishlistsByUserId, addWishlist, deleteWishlistById, deleteByID } from '../../actions/wishlists';
 import { getAllReviews, getPlaceReviews, getReviewDetails } from '../../actions/reviews';
 import FeaturesIcons from './features-icons';
 
@@ -18,17 +18,22 @@ class Cards extends Component {
             isWishlisted: false,
             reviews: [],
             userId: "5",
-            flag:true
+            flag:true,
+            avgArr: [],
+            ratingResult: 0,
+            token: ""
         }
     }
 
     async componentDidMount() {
         await this.props.getAllPlaces();
         await this.setState({places: this.props.places.places});
-        console.log("Places: *******", this.state.places);
+        // console.log("Places: *******", await this.state.places);
+        // await this.setState({places: this.props.places});
+        // console.log("Places: *******", this.state.places.places);
 
-        await this.props.getAllWishlists();
-        await this.setState({wishlists: this.props.wishlists});
+        // await this.props.getAllWishlists();
+        // await this.setState({wishlists: this.props.wishlists});
         // console.log("Wishlists: ", this.state.wishlists);
 
         await this.props.getWishlistsByUserId(this.state.userId);
@@ -38,11 +43,39 @@ class Cards extends Component {
         await this.props.getAllReviews();
         await this.setState({reviews: this.props.reviews});
         // console.log("Reviews: ", this.state.reviews);
+
+        // await this.props.getPlaceReviews("601cd04e9b694d3c30abc913");
+        // console.log("$$$$$$$$$$$ ", this.props.placeReviews.reviews);
+
+        // await this.props.getReviewDetails("601c2b3dbdacaa26ec53b067");
+        // console.log("########### ", this.props.reviewDetails.review);
+
+        // this.renderRating("601cd04e9b694d3c30abc913");
+
+        
+        // this.state.places.slice(0, 6).map(place => {
+        //     let avg = this.renderRating(place._id);
+        //     this.setState((state) => {
+        //         const avgArr = state.avgArr.push(avg);
+        //         return avgArr;
+        //     })
+        //     console.log(this.state.avgArr);
+        // });
+
+        // console.log("000000 ", this.state.result);
+        this.setState({token: localStorage.getItem("token")});
+        await this.props.getWishlistsByUserId(this.state.token);
+        this.userWishlists();
     }
 
     eventHandle = async (id) =>{
         await this.setState({isWishlisted: !this.state.isWishlisted});
         // this.renderWishlistIcon(id);
+    }
+
+    userWishlists = async () => {
+        // console.log("!!!!!!!!!!!!!!!", this.props.wishlistsByUser);
+        console.log("!!!!!!!!!!!!!!!", this.props);
     }
 
     rendering = (id) =>{
@@ -216,10 +249,64 @@ class Cards extends Component {
         }
     }
 
+    renderRating = async (id) => {
+
+        // await this.props.getPlaceReviews();
+        // await this.props.getReviewDetails();
+
+        // await this.props.getPlaceReviews("601cd04e9b694d3c30abc913");
+        // console.log("$$$$$$$$$$$ ", this.props.placeReviews.reviews);
+
+        // await this.props.getReviewDetails("601c2b3dbdacaa26ec53b067");
+        // console.log("########### ", this.props.reviewDetails.review);
+
+        await this.props.getPlaceReviews(id);
+        // console.log("...............", this.props.placeReviews.reviews);
+        const reviews = this.props.placeReviews.place_reviews.reviews;
+        console.log("reviews: ", reviews)
+        if (reviews && reviews.length > 0) {
+            let rate = 0;
+            reviews.map(rev => {
+                // console.log("rev: ", rev);
+                this.props.getReviewDetails(rev);
+                const rating = this.props.reviewDetails.review_details.review.rating;
+                // console.log("rating: ", rating);
+                rate += rating;
+                // console.log("rate: ", rate);
+            });
+            // console.log("reviews.length: ", reviews.length);
+            const avg = rate / reviews.length
+            // console.log("avg: ", avg);
+            return avg;
+
+            // let result = 0;
+            // await reviews.map(async review => {
+            //     // console.log("+++++++++++++++++", review);
+            //     await this.props.getReviewDetails(review);
+            //     // const rating = this.props.reviewDetails.review.rating;
+            //     // console.log("########### ", rating);
+            //     // result += rating;
+            //     console.log(result);
+            //     result += this.props.reviewDetails.review.rating;
+            //     this.setState({ratingResult: result});
+            //     console.log("////////////", this.state.ratingResult);
+            //     return result;
+            // })
+            // console.log("===========", this.state.ratingResult);
+            // // console.log("////////////", reviews.length);
+            // const avg = this.state.ratingResult / reviews.length;
+            // // console.log("@@@@@@@@@", avg);
+            // return avg;
+        }
+        // return 0;
+    }
+
     render() {
         // let places = this.props.places;
-        // console.log("props.places: ", places);        
+        // console.log("props.places: ", places);
+
         let places = this.state.places;
+        // console.log("state.places: ", places);        
 
         if (places && places.length > 0) {
             // console.log("Inside if");
@@ -249,7 +336,9 @@ class Cards extends Component {
                                 <p className="desc">{place.description}</p>
                                 <p className="price">${place.price}</p>
                                 <p className="rating">
-                                    <FaStar/>&nbsp;{this.renderRatingAvg(place._id)}
+                                    {/* <FaStar/>&nbsp;{this.renderRatingAvg(place._id)} */}
+                                    {/* <FaStar/>&nbsp;{this.renderRating(place._id)} */}
+                                    {/* {console.log(place._id)} */}
                                 </p>
                             </div>
                         </div>
@@ -266,7 +355,7 @@ class Cards extends Component {
 const mapActionToProps = (dispatch) => {
     return bindActionCreators({
         getAllPlaces,
-        getAllWishlists,
+        deleteWishlistById,
         getWishlistsByUserId,
         getAllReviews,
         addWishlist,
@@ -282,8 +371,13 @@ const mapStateToProps = (state) => {
         wishlists: state.Wishlists,
         userWishlists: state.Wishlists,
         reviews: state.Reviews.all_reviews,
-        placeReviews: state.Reviews.place_reviews,
-        reviewDetails: state.Reviews.review_details
+        // placeReviews: state.Reviews.place_reviews.reviews,
+        placeReviews: state.Reviews,
+        // reviewDetails: state.Reviews.review_details.review
+        reviewDetails: state.Reviews,
+        // reviewDetails: state.Reviews
+        wishlistsByUser: state.Wishlists.wishlistsByUserId,
+        addWishlist: state.Wishlists
     };
 };
 
