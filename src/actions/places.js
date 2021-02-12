@@ -7,10 +7,12 @@ const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
 
 // const baseUrl = "http://localhost:8080/api/allPlaces";
 
-const allPlacesUrl = "https://node-airbnb.herokuapp.com/api/allPlaces";
+// const allPlacesUrl = "https://node-airbnb.herokuapp.com/api/allPlaces";
+
+const allPlacesUrl = "http://localhost:8080/api/allPlaces";
 
 export async function getAllPlaces(){
-    var payload = null;
+    let payload = null;
     try{
         let response = await fetch(`${allPlacesUrl}`);
         // let response = await fetch(`${baseUrl}`);
@@ -48,7 +50,7 @@ export async function getAllPlaces(){
 
 
 export async function getPlaceById (id){
-    var payload=null;
+    let payload=null;
      try{
          let response = await fetch(`${url}/${id}`, {
         method: "GET",
@@ -70,7 +72,7 @@ export async function getPlaceById (id){
 }
 
 export async function getPlaceByID (id){
-    var payload=null;
+    let payload=null;
      try{
          let response = await fetch(`${baseUrl}/${id}`);
          payload = await response.json();
@@ -88,7 +90,7 @@ export async function getPlaceByID (id){
 
 //  export async function addClient (student){
      
-//     var payload=null;
+//     let payload=null;
 //      try{
 //          await axios.post(Url,  student )
 //          .then(res => {
