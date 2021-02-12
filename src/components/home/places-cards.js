@@ -217,9 +217,9 @@ class Cards extends Component {
     }
 
     render() {
-        // let places = this.props.places;
-        // console.log("props.places: ", places);        
-        let places = this.state.places;
+        let places = this.props.filteredPlaces;
+        // let places = this.state.places;
+        // console.log("/////////////", places);
 
         if (places && places.length > 0) {
             // console.log("Inside if");

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import HPlatform, { HMap, HMapPolyLine ,HMapMarker } from "react-here-map";
 
 import { bindActionCreators } from "redux";  
-import {getAllPlaces , getLocation } from "../../actions";
+import {getAllPlaces , getLocation } from "../../actions/places";
 
 import { Map, GoogleApiWrapper,InfoWindow, Marker } from 'google-maps-react';
 import { connect } from 'react-redux';
@@ -78,9 +78,9 @@ var params = {
         await this.setState({coords:this.props.position});
         console.log("laattt:    " , this.state.coords);
         await this.props.getAllPlaces();
-        await this.setState({places:this.props.places});
+        await this.setState({places:this.props.places.places});
         this.displayMarkers();
-        console.log("places: " , this.state.places);
+        // console.log("places: " , this.state.places);
         console.log("/////////////" , this.state.lat , "  ",this.state.lng);
 
         await this.setState({
@@ -88,21 +88,24 @@ var params = {
         });
     }
 
-    handleValueChange = (value) => {
-      this.setState({
+    handleValueChange = async (value) => {
+      await this.setState({
         word: this.props.word(value),
         search_place: value,
         search: value
       });
+      console.log("Woooord: ", this.state.search);
     }
 
       displayMarkers = () => {
         return this.state.places.map((place, index) => {
-          return <Marker key={index} id={index} position={{
-           lat: place.location.lat,
-           lng: place.location.lng
-         }}
-         onClick={() => console.log("You clicked me!")} />
+          if(this.state.places.location) {
+            return <Marker key={index} id={index} position={{
+             lat: place.location.lat,
+             lng: place.location.lng
+           }}
+           onClick={() => console.log("You clicked me!")} />
+          }
         })
       }
     onMarkerClick = (props, marker, e) =>
