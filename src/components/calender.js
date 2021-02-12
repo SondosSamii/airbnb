@@ -24,20 +24,21 @@ class CalenderComp extends Component {
         };
        async componentDidMount(){
             var arr = await this.getDaysArray(new Date("2021-02-01") ,new Date("2021-02-04"))
+            var array = [];
             arr.map((v) => {
-                v.toISOString().slice(0,10)
-                console.log(v)
-            }
-                ).join("")
-            console.log(arr);
-            this.setState({Days : arr})
+              array.push(v.toISOString().slice(0, 10));
+            })
+                
+            this.setState({Days : array})
+            console.log(this.state.Days);
         }
 
     render() { 
         return (  
             <div className="mt-5">
            	{/* <Calendar selectedRange= {["2019-03-03","2019-03-07"]} /> */}
-               <Calendar disabledDates= {() => { return [this.state.Days[0],"2021-02-02","2022-02-08"] } } />
+               {/* <Calendar disabledDates= {() => { return [this.state.Days[0],"2021-02-08"] } } /> */}
+               <Calendar disabledDates= {() => { return this.state.Days } } />
         </div>
         );
     }
