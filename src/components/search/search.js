@@ -176,11 +176,11 @@ class Search extends Component {
 
     getPlacesBySearch = async (word) => {
         await this.setState({searchedWord: word.toLowerCase()});
-        console.log("Searched Woooord: ", await this.state.searchedWord);
+        // console.log("Searched Woooord: ", await this.state.searchedWord);
         
         if(this.state.searchedWord.length === 0) {
             await this.setState({filteredPlaces: this.props.places.places});
-            console.log("Filtered Places if word = 0: ", this.state.filteredPlaces);
+            // console.log("Filtered Places if word = 0: ", this.state.filteredPlaces);
         }
 
         // console.log("Filtered Places after if......: ", this.state.filteredPlaces);

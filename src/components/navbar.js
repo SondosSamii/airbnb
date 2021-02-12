@@ -1,4 +1,4 @@
-import {NavLink as Link} from 'react-router-dom';
+import {NavLink as Link, Redirect} from 'react-router-dom';
 import { BsFillPersonFill } from "react-icons/bs";
 
 const Navbar = () => {
@@ -15,12 +15,12 @@ const Navbar = () => {
     return (
         <header
             style={{
-                position: 'absolute',
+                position: 'fixed',
                 top: 0,
                 left: '0',
                 right: '0',
                 zIndex: 9,
-                backgroundColor: 'rgba(99, 99, 99, 0.3)'
+                backgroundColor: 'rgba(99, 99, 99, 0.5)'
         }}>
             <nav className="navbar navbar-expand-lg navbar-light mx-0 mx-md-5">
                 <Link to="/" className="navbar-brand">
@@ -55,16 +55,21 @@ const Navbar = () => {
                             {
                                 login ?(
                                     <li className="nav-item">
-                                    <button to="/login" className="nav-link btn main-btn" onClick={()=>{
-                                        localStorage.removeItem("token");
-                                        localStorage.removeItem("user_id");
-                                        window.location.reload();
-                                    }}>Log out</button>
+                                        {/* <Redirect to="/login" className="nav-link btn main-btn" onClick={()=>{
+                                            localStorage.removeItem("token");
+                                            localStorage.removeItem("user_id");
+                                            // window.location.reload();
+                                        }}>Log out</Redirect> */}
+                                        <Link to="/login" className="nav-link btn main-btn" onClick={()=>{
+                                            localStorage.removeItem("token");
+                                            localStorage.removeItem("user_id");
+                                            window.location.reload();
+                                        }}>Log out</Link>
                                     </li>
                                 ):(
                                     <li className="nav-item">
-                                    <Link to="/login" className="nav-link btn main-btn">Log In</Link>
-                                </li>
+                                        <Link to="/login" className="nav-link btn main-btn">Log In</Link>
+                                    </li>
                                 )
                             }
                         <li className="nav-item">

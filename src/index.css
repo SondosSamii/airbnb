@@ -55,12 +55,20 @@ code {
   font-weight: 500;
 }
 
+.navbar-light li.nav-item {
+  width: fit-content;
+}
+
 .main-btn,
 .navbar-light .navbar-nav .nav-link.main-btn {
   color: var(--primary-light-color);
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
   transition: var(--transition);
+}
+
+.navbar-light .navbar-nav .nav-link.main-btn {
+  padding: 0.5em 1em;
 }
 
 .main-btn:focus,
