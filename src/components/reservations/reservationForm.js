@@ -2,6 +2,7 @@ import "./reservationForm.css";
 import { getAllReservation , addReservation } from "../../actions/reservations";
 import { getAllClients, updateClient } from "../../actions/clients";
 import { getAllPlaces, getPlaceById } from "../../actions/places";
+import Joi, { validate } from "joi-browser";
 
 import { connect } from "react-redux";
 
@@ -167,17 +168,24 @@ import React, { Component } from "react";
 //     }
 //   };
 
+// Validations = () => {
+//   const errors = {};
+//   let state = { ...this.state };
+//   delete state.errors;
+//   var res = Joi.validate(state, this.schema, { abortEarly: false });
+//   if (res.error === null || res.error <= 0 ) {
+//     this.setState({ errors: {} });
+//     return null;
+//   }
+//   for (const error of res.error.details) {
+//     errors[error.path] = error.message;
+//   }
+//   // console.log(res.error.details);
+//   // console.log(state);
+//   this.setState({ errors: errors });
+//   // console.log(this.state.errors.Password);
+// };
 
-  // UserPlaces = async () => {
-    
-  //   if(this.props.places){
-  //       var newArr = await this.props.places.filter(
-  //         (place) => place.user_id === this.state.userId
-  //       );
-        
-  //       await this.setState({ UserPlaces: newArr });
-  //   }
-  // };
   handleClick = ()=>{
     var reservation = {
       start_date: this.state.start_date,
@@ -189,19 +197,19 @@ import React, { Component } from "react";
 var flag= true;
     if(!reservation.start_date){
       flag=false;
-      document.getElementById("start_err").innerHTML= "should Enter start Date";
+      document.getElementById("start_err").innerHTML= "should Enter start Date" ;
     }
     if(!reservation.end_date){
       flag=false;
-      document.getElementById("end_err").innerHTML= "should Enter start Date";
+      document.getElementById("end_err").innerHTML= "should Enter end Date";
     }
-    if(!reservation.total_nights){
+    if(!reservation.total_nights || reservation.total_nights < 0 ){
       flag=false;
-      document.getElementById("total_nights_err").innerHTML= "should Enter start Date";
+      document.getElementById("total_nights_err").innerHTML= "should Enter positive number";
     }
-    if(!reservation.num_of_guests){
+    if(!reservation.num_of_guests || reservation.num_of_guests <= 0  ){
       flag=false;
-      document.getElementById("num_guests_err").innerHTML= "should Enter start Date";
+      document.getElementById("num_guests_err").innerHTML= "should Enter positive number";
     }
     if(flag){
       console.log(reservation);
@@ -219,28 +227,42 @@ var flag= true;
             <div className="container">
                 <div id="login-row" className="row justify-content-center align-items-center">
                     <div id="login-column" className="col-md-6">
-                        <div id="login-box" className="col-md-12">
+                        <div id="login-box" className="col-md-12 ">
                             <form id="login-form" className="form" action="" method="post">
                                 <h3 className="text-center text-info">Reservation</h3>
 
                                 <div className="form-group">
                                     <label className="text-info">Check In :</label>
-                                    <input type="date" className="form-control"
-                                     placeholder={this.state.user.start_date}
+                                    <input type="date"
+                                     className="form-control"
+                                     value={this.state.start_date}
+                                    //  placeholder={this.state.user.start_date}
                                      onChange={(e) => {
                                         this.setState({start_date : e.target.value });
                                       }}/>
+                                         {/* {this.state.errors.start_date && (
+                                          <div className="alert alert-danger form-control">
+                                         {this.state.errors.start_date}
+                                        </div>
+                                       )} */}
                                 <small id="start_err">
 
                                 </small>
                                 </div>
                                 <div className="form-group">
                                     <label className="text-info">Check Out :</label>
-                                    <input type="date" className="form-control" 
-                                    placeholder={this.state.user.end_date}
-                                    onChange={(e) => {
+                                    <input type="date"
+                                     className="form-control" 
+                                     value={this.state.end_date}
+                                    //  placeholder={this.state.user.end_date}
+                                     onChange={(e) => {
                                         this.setState({ end_date: e.target.value });
                                       }}/>
+                                         {/* {this.state.errors.end_date && (
+                                          <div className="alert alert-danger form-control">
+                                         {this.state.errors.end_date}
+                                        </div>
+                                       )} */}
                                 <small id="end_err">
                                   
                                 </small>
@@ -248,11 +270,18 @@ var flag= true;
 
                                 <div className="form-group">
                                     <label className="text-info">Total Nights :</label>
-                                    <input type="number" className="form-control" 
-                                    placeholder={this.state.user.total_nights}
+                                    <input type="number" 
+                                    className="form-control"
+                                    value={this.state.total_nights} 
+                                    // placeholder={this.state.user.total_nights}
                                     onChange={(e) => {
                                         this.setState({ total_nights: e.target.value });
                                       }}/>
+                                       {/* {this.state.errors.total_nights && (
+                                          <div className="alert alert-danger form-control">
+                                         {this.state.errors.total_nights}
+                                        </div>
+                                       )} */}
                                       <small id="total_nights_err">
                                   
                                   </small>
@@ -260,22 +289,37 @@ var flag= true;
                                 <div className="form-group">
                                     <label className="text-info">Number of guests :</label>
                                     <input type="number" 
-                                    placeholder={this.state.user.num_of_guests}
+                                    // placeholder={this.state.user.num_of_guests}
+                                    value={this.state.num_of_guests}
                                     className="form-control" 
                                     onChange={(e) => {
                                         this.setState({ num_of_guests: e.target.value });
                                       }}/>
+                                       {/* {this.state.errors.num_of_guests && (
+                                          <div className="alert alert-danger form-control">
+                                         {this.state.errors.num_of_guests}
+                                        </div>
+                                       )} */}
                                       <small id="num_guests_err">
                                   
                                     </small>
-                                </div>
-                                <div className="form-group">
-                                    <div className="col-auto my-1">
-                                        <button type="button" className="btn btn-primary float-right  bg-info"  onClick= {()=>{
+
+
+                                    <div className="form-group">
+                                    <div className="col-auto my-2">
+                                        <button  id="submit" type="button" className="btn btn-primary float-right  bg-info"  onClick= {()=>{
                                           this.handleClick()
                                         }}>Submit</button>
                                     </div>
                                 </div>
+                                </div>
+                                {/* <div className="form-group">
+                                    <div className="col-auto my-1">
+                                        <button  id="submit" type="button" className="btn btn-primary float-right  bg-info"  onClick= {()=>{
+                                          this.handleClick()
+                                        }}>Submit</button>
+                                    </div>
+                                </div> */}
                             </form>
                         </div>
                     </div>

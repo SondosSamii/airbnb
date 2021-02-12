@@ -7,10 +7,17 @@
     /* height:800px; */
     height: 910px;
 }
-#login .container #login-row #login-column #login-box {
+#login .container #login-row #login-column #login-box  {
     margin-top: 120px;
     max-width: 500px;
-    height: 500px;
+    /* height: 600px; */
+    /* height: 500px; */
+    /* flex-basis: auto; */
+    /* flex: auto; */
+    display: flex;
+    flex-direction: column;
+    /* flex-basis: 600px; */
+    /* flex-basis: content; */
     border: 1px solid #9C9C9C;
     background-color: #EAEAEA;
 }
@@ -19,4 +26,11 @@
 }
 #login .container #login-row #login-column #login-box #login-form #register-link {
     margin-top: -85px;
+}
+#start_err,#end_err,#total_nights_err,#num_guests_err{
+    color:crimson;
+    background:darkgrey;
+}
+#submit{
+    margin-top: 15px;
 }
