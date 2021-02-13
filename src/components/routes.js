@@ -7,14 +7,14 @@ import Home from './home/home';
 import Profile from './profile/profile';
 import Search from './search/search';
 import About from './about/about'; 
-import Host from './Forms/host'
-import Login from './Forms/login'
+import Host from './Forms/host';
+import Login from './Forms/login';
+import EditPlace from './Forms/editPlace';
 import OurTeam from './Team/our-team';
 import Reservastion from './reservations/reservationForm';
 import NotFound from './not-found';
 import Footer from './footer';
-import CalenderComp from './calender';
-
+import PlaceDetails from './PlaceD/place-details';
 
 const Routes = ()=> {
     const [session, setSession] = useState(getSessionCookie());
@@ -41,7 +41,8 @@ const Routes = ()=> {
                     <Route path="/reservation" component={Reservastion}></Route>
                     <Route path="/host" component={Host}></Route>
                     <Route path="/login" component={Login}></Route>
-                    <Route path="/calender" component={CalenderComp}></Route>
+                    <Route path="/place-edit" component={EditPlace}></Route>
+                    <Route path="/place-details/:id" component={PlaceDetails}></Route>
                     <Route path="*" component={NotFound}></Route>
                 </Switch>
                 <Footer/>

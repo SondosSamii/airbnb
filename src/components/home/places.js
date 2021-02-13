@@ -37,11 +37,11 @@ class Places extends Component {
                             <div className="col-12 col-md-5">
                                 <div className="card-item card-item-lg">
                                     <Link
-                                        to={`/places/${this.state.places[0]._id}`}
+                                        to={`/place-details/${this.state.places[0]._id}`}
                                         className="card-item-bg"
                                         style={{
                                         // backgroundImage: `url(images/places/${this.state.places[0].images[2]}.jpeg)`
-                                        backgroundImage: `url(/images/places/place1-3.jpeg)`
+                                        backgroundImage: `url(http://localhost:8080/${this.state.places[0].images[0]})`
                                     }}>
                                         <h3 className="card-item-name">{this.state.places[0].name}</h3>
                                         <h4 className="card-item-type">{this.state.places[0].type}</h4>
@@ -53,11 +53,12 @@ class Places extends Component {
                                     <div className="col-12 col-md-6">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[1]._id}`}
+                                                to={`/place-details/${this.state.places[1]._id}`}
                                                 className="card-item-bg"
                                                 style={{
                                                 // backgroundImage: `url(images/places/${this.state.places[1].images[0]}.jpeg)`
-                                                backgroundImage: `url(/images/places/place1-3.jpeg)`
+                                                // backgroundImage: `url(/images/places/place1-3.jpeg)`
+                                                backgroundImage: `url(http://localhost:8080/${this.state.places[1].images[0]})`
                                             }}>
                                                 <h3 className="card-item-name">{this.state.places[1].name}</h3>
                                                 <h4 className="card-item-type">{this.state.places[1].type}</h4>
@@ -67,11 +68,12 @@ class Places extends Component {
                                     <div className="col-12 col-md-6 mt-3 mt-md-0">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[2]._id}`}
+                                                to={`/place-details/${this.state.places[2]._id}`}
                                                 className="card-item-bg"
                                                 style={{
                                                 // backgroundImage: `url(images/places/${this.state.places[2].images[0]}.jpeg)`
-                                                backgroundImage: `url(/images/places/place1-3.jpeg)`
+                                                // backgroundImage: `url(/images/places/place1-3.jpeg)`
+                                                backgroundImage: `url(http://localhost:8080/${this.state.places[2].images[0]})`
                                             }}>
                                                 <h3 className="card-item-name">{this.state.places[2].name}</h3>
                                                 <h4 className="card-item-type">{this.state.places[2].type}</h4>
@@ -83,11 +85,12 @@ class Places extends Component {
                                     <div className="col-12">
                                         <div className="card-item card-item-sm">
                                             <Link
-                                                to={`/places/${this.state.places[3]._id}`}
+                                                to={`/place-details/${this.state.places[3]._id}`}
                                                 className="card-item-bg"
                                                 style={{
                                                 // backgroundImage: `url(images/places/${this.state.places[3].images[1]}.jpeg)`
-                                                backgroundImage: `url(/images/places/place1-3.jpeg)`
+                                                // backgroundImage: `url(/images/places/place1-3.jpeg)`
+                                                backgroundImage: `url(http://localhost:8080/${this.state.places[3].images[0]})`
                                             }}>
                                                 <h3 className="card-item-name">{this.state.places[3].name}</h3>
                                                 <h4 className="card-item-type">{this.state.places[3].type}</h4>

@@ -7,8 +7,6 @@ const update_pass_url = "http://localhost:8080/api/clientPassword"
 // const baseUrl = "http://localhost:4200/students";
 
 
-
-
 export async function getAllClients(){
     console.log("iiiiiiii");
     var payload = null;
@@ -25,6 +23,19 @@ export async function getAllClients(){
      }
      
  }
+export async function AllClients() {
+    var payload = null;
+    try {
+        let url="http://localhost:8080/api/clients"
+        const res = await fetch(url);
+        payload = await res.json();
+        console.log("clients: ", payload);
+    } catch (err) {
+        console.log(err);
+    }
+    return {type: "AllClients2", payload}
+}
+
 export async function updateClient(token,client){
     var payload=null;
     for(var e of client.entries()){
@@ -83,8 +94,6 @@ export async function updatePassword(token,clientPasswords){
      
  }
 
- 
-
 export async function getclientById (token){
     console.log("toooooooken:   " , token);
     var payload=null;
@@ -110,3 +119,53 @@ export async function getclientById (token){
      }
      
  }
+
+ export async function addclient (formData,url){
+    var payload=null;
+     try{
+         let response = await fetch(url, {
+        method: "POST",
+        body: formData
+         }
+      ).then((response) => {
+        payload =  response.json();
+        console.log("registration done: ", payload);
+      })
+      .catch((error) => {
+        console.log("registration error", error);
+      });
+     }catch(error){
+         console.log("registration error: ", error);
+     }
+     return {
+         type:"addClient",
+         payload
+     }
+     
+ }
+
+ 
+ export async function login (formData,url){
+    var payload=null;
+     try{
+         let response = await fetch(url, {
+        method: "POST",
+        body: formData
+         }
+      ).then((response) => {
+        payload =  response.json();
+        console.log("login done: ", payload);
+      })
+      .catch((error) => {
+        console.log("login error", error);
+      });
+     }catch(error){
+         console.log("login error: ", error);
+     }
+     return {
+         type:"login",
+         payload
+     }
+     
+ }
+

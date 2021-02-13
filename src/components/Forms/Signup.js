@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 // import React, { Component, createRef  }  from 'react';
 import "./form.css";
-// import { FiLogIn } from 'react-icons/fi';
-// import { event } from 'jquery';
 import Joi from "joi-browser";
 import axios from "axios";
 import { setSessionCookie } from "../session";
-// import {setSessionCookie, getSessionCookie} from '../session';
+import { addclient } from "../../actions/clients";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { NavLink as Link } from "react-router-dom";
 
+
 class Signup extends Component {
-  // constructor(props) {
-  //     super(props);
-  //   }
+  constructor(props) {
+      super(props);
+    }
   state = {
     UserName: "",
     Email: "",
@@ -31,20 +32,19 @@ class Signup extends Component {
 
   schema = {
     UserName: Joi.string().required().max(15),
-    Email: Joi.string().trim().required().email(),
+    Email: Joi.string().required().email(),
     Password: Joi.string().trim().required().min(5).max(20),
     Password_confirm: Joi.any().equal(Joi.ref("Password")),
     PhoneNumber: Joi.string()
-      .trim()
       .required()
       .regex(/^[0-9]+$/)
       .required(),
   };
-  data = {};
-  async componentDidMount() {
-    this.data = await axios.get("http://localhost:8080/api/clients");
-    console.log(this.data);
-  }
+  // data = {};
+  // async componentDidMount() {
+  //   this.data = await axios.get("http://localhost:8080/api/clients");
+  //   console.log(this.data);
+  // }
 
   signupValidations = () => {
     const errors = {};
@@ -67,28 +67,17 @@ class Signup extends Component {
     e.preventDefault();
     const errors = this.signupValidations();
     console.log("1111111111111111111111", errors);
-    if (errors) return;
-    // for (const data of this.data.data) {
-    //   if (data.email === this.state.Email) {
-    //     this.state.Signup_errors.Email =
-    //       "This Email already exists, try to login!";
-    //     return;
-    //   }
-    // }
-    let date = new Date().getDate();
-    const obj = {
-      name: this.state.UserName,
-      email: this.state.Email,
-      password: this.state.Password,
-      created_at: date,
-      phone: "",
-      profile_image: "",
-      is_host: false,
-    };
+    if (errors !== null) return;
+    // const obj = {
+    //   name: this.state.UserName,
+    //   email: this.state.Email,
+    //   password: this.state.Password,
+    //   phone: this.state.PhoneNumber,
+    //   is_host: false,
+    // };
 
     var formData = new FormData();
     formData.append("name", this.state.UserName);
-    console.log("aaaaaaaaaaaaaaaaaaaaa", formData);
     formData.append("email", this.state.Email);
     formData.append("password", this.state.Password);
     formData.append("phone", this.state.PhoneNumber);
@@ -96,25 +85,34 @@ class Signup extends Component {
     for (var key of formData.entries()) {
       console.log(key[0] + ", " + key[1]);
     }
-    console.log("1233333333333333333333", formData);
-
     let url = "http://localhost:8080/api/signup";
-    let method = "POST";
-    fetch(url, {
-      method: method,
-      body: formData,
-      //   headers: {
-      //     Authorization: "Bearer " + this.props.token,
-      //   },
-    })
-      .then((response) => {
-        if (response.statusText === "created") {
-          this.props.handleSuccessfulAuth(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log("registration error", error);
-      });
+    await this.props.addclient(formData,url);
+    console.log("signup data",this.props.client);
+
+    // console.log("^^^^^^^^^^^", this.props.client.data[0].msg)
+    if(this.props.client.message === "Validation failed.") {
+      window.alert(this.props.client.data[0].msg);
+      // this.state.errors.email
+      // this.setState({Signup_errors:this.props.client.data[0][1] })
+    }
+    
+    // let url = "http://localhost:8080/api/signup";
+    // let method = "POST";
+    // fetch(url, {
+    //   method: method,
+    //   body: formData,
+    //   //   headers: {
+    //   //     Authorization: "Bearer " + this.props.token,
+    //   //   },
+    // })
+    //   .then((response) => {
+    //     if (response.statusText === "created") {
+    //       this.props.handleSuccessfulAuth(response.data);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("registration error", error);
+    //   });
 
     // fetch(url, {
     //   method: method,
@@ -140,7 +138,8 @@ class Signup extends Component {
     //     console.log("registration error", error);
     //   });
     var email = this.state.Email;
-    setSessionCookie({ email });
+    var password= this.state.password;
+    setSessionCookie({ email,password });
     //await  this.props.history.push("/");
   };
 
@@ -199,7 +198,8 @@ class Signup extends Component {
                   />
                   {this.state.Signup_errors.PhoneNumber && (
                     <div className="alert alert-danger form-control">
-                      {this.state.Signup_errors.PhoneNumber}
+                      Not valid
+                      {/* {this.state.Signup_errors.PhoneNumber} */}
                     </div>
                   )}
                 </div>
@@ -266,4 +266,19 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+
+
+const mapactiontoprops = (disptch) => {
+  return bindActionCreators(
+    {
+      addclient
+    },
+    disptch
+  );
+};
+const mapstatetoprops = (state) => {
+  return {
+    client: state.Clients    
+  };
+}
+export default  connect(mapstatetoprops, mapactiontoprops)(Signup);

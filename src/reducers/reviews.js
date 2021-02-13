@@ -4,7 +4,6 @@ function Reviews(state = {}, action) {
             return {...state,all_reviews:action.payload}
         }
         case "PlaceReviews": {
-            console.log("./mmmmmmmmmmmmmmmmmm:   ", action.payload);
             return {...state,place_reviews:action.payload}
             // return action.payload
         }
@@ -12,8 +11,17 @@ function Reviews(state = {}, action) {
             return {...state,review_details:action.payload}
             // return action.payload
         }
+        // case "PlaceReview":{
+        //     return {...state,placereviews:action.payload}
+        // }
+        case "Reviews":{
+            return {...state,allreviews:action.payload}
+        }
+        case "AddReview":{
+
+        }
         default: {
-            return state;
+            return state
         }
     }
 }

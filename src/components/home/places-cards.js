@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { NavLink as Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FaRegHeart, FaHeart, FaStar } from "react-icons/fa";
@@ -430,18 +431,15 @@ class Cards extends Component {
                                 backgroundImage: `url(/images/places/place1-3.jpeg)`
                             }}>
                                 <h3 className="card-item-name">
-                                    {place.name}
+                                    <Link to={`/place-details/${place._id}`}
+                                        className="text-white">
+                                        {place.name}
+                                    </Link>
                                     <br/>
                                     <FeaturesIcons place={place}/>
                                 </h3>
                                 <h4 className="card-item-type">{place.type}</h4>
-                                {
-                                    this.state.isAuth &&
-                                        this.rendering(place._id)
-                                    
-                                }
-
-
+                                { this.state.isAuth && this.rendering(place._id) }
                                 {/* {this.renderWishlistIcon(highlight._id)} */}
                                 {/* {this.wishlist(highlight._id)} */}
                             </div>
@@ -451,21 +449,8 @@ class Cards extends Component {
                                 <p className="desc">{place.description}</p>
                                 <p className="price">${place.price}</p>
                                 <p className="rating">
-                            
-                                    {
-                                    this.state.avrgs[index] > 0 && 
-                                    <FaStar className="mr-1" />
-                                    
-                                    }
-                                    
-                                   
-                                    {
-                                    this.state.avrgs[index] > 0 && 
-                                    this.state.avrgs[index]
-                                    
-                                    }
-                                     
-                                   
+                                    { this.state.avrgs[index] > 0 && <FaStar className="mr-1" /> }
+                                    { this.state.avrgs[index] > 0 && this.state.avrgs[index] }
                                 </p>
                             </div>
                         </div>

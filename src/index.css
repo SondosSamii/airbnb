@@ -230,3 +230,65 @@ footer .nav-link {
 }
 
 /* ///////////////////// for Team Page///////////////////////////////// */
+.place-info{
+  height: 500px;
+  background-color: var(--primary-dark-color);
+  color: var(--primary-light-color);
+}
+.featchers{
+  height: 500px;
+  background-color: var(--primary-light-color);
+}
+
+.featchers ul{
+  list-style: none;
+  color:  var(--primary-dark-color);
+}
+.place-desc{
+  width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--primary-dark-color);
+}
+.review{
+  background-color: var(--primary-dark-color);
+  color: var(--primary-light-color) !important;
+
+}
+.users{
+  padding: 2em;
+
+}
+.user-photo{
+  right: 10px;
+  width: 100px;
+  height: 100px;
+  border: 0;
+  border-radius: 50%;
+}
+.user-photo img{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.review p, .review h2{
+  color: var(--primary-light-color) !important;
+}
+.img-slide{
+  width: 100%;
+  height: 90vh;
+padding-left: 20px;
+padding-right: 20px;
+}
+.Place-name {
+  font-family: cursive;
+  font-size: 50px;
+  color:var(--primary-light-color) !important;
+  -webkit-text-stroke: 3px var(--primary-dark-color);;
+  position: absolute;
+  top: 20%;
+  right:70% ;
+    
+}

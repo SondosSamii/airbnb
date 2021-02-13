@@ -1,20 +1,24 @@
 function Clients(state = null , action) {
-    // console.log("............" , action);
     switch(action.type){
         case "AllClients": {
-            // console.log("cliiinenntnntntntn")
             return action.payload;
         }
         case "update_password": {
-            // console.log("cliiinenntnntntntn")
+            return action.payload;
+        }
+        case "AllClients2": {
             return action.payload;
         }
         case "update_Client":{
-            // console.log("cliiinenntnntntntn")
             return action.payload;
         }
         case "clientDetails":{
-            console.log("cliiinenntnntntntn")            
+            return action.payload;
+        }
+        case "addClient":{
+            return action.payload;
+        }
+        case "login":{
             return action.payload;
         }
         default:{

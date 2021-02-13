@@ -25,8 +25,16 @@ function Places(state = {} , action) {
             return action.payload;
         }
         case "Place_Details": {
-            // console.log("lllllllllllllllllllllllllllllll" , action.payload);
+            console.log("lllllllllllllllllllllllllllllll" , action.payload);
             return {...state,place_details:action.payload}
+        }
+        case "addplace": {
+             console.log("addplace" , action.payload);
+            return action.payload;
+        }
+        case "updatePlace":{
+            console.log("updatePlace" , action.payload);
+            return action.payload;
         }
         
         default:{
