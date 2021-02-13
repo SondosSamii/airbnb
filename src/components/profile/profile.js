@@ -276,7 +276,7 @@ class ViewProfile extends Component {
             <div className=" col-9 col-sm-6  col-lg-4 mt-4 " key={index}>
               <div className=" card-item card-item-sm ">
                 <Link
-                  to=""
+                  to={`/place-details/${this.state.reserve_Places[index]._id}`}
                   className="card-item-bg"
                   style={{
                     backgroundImage: `url('http://localhost:8080/${this.state.reserve_Places[index].images[0]}')`,
