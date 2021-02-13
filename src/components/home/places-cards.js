@@ -23,7 +23,8 @@ class Cards extends Component {
             ratingResult: 0,
             token: "",
             UserWishlists:[],
-            avrgs:[]
+            avrgs:[],
+            isAuth: false
             // userWishlists:[]
         }
     }
@@ -42,7 +43,11 @@ class Cards extends Component {
         await this.props.getWishlistsByUserId(this.state.userId);
         await this.setState({userWishlists: this.props.userWishlists});
         // console.log("userWishlists: ", this.state.userWishlists);
-        this.setState({userId:localStorage.getItem("user_id")})
+        this.setState({userId:localStorage.getItem("user_id")});
+        if(localStorage.getItem("token")){
+            this.setState({isAuth : true});
+        }
+        
         
         // await this.props.getAllReviews();
         // await this.setState({reviews: this.props.reviews});
@@ -430,7 +435,13 @@ class Cards extends Component {
                                     <FeaturesIcons place={place}/>
                                 </h3>
                                 <h4 className="card-item-type">{place.type}</h4>
-                                {this.rendering(place._id)}
+                                {
+                                    this.state.isAuth &&
+                                        this.rendering(place._id)
+                                    
+                                }
+
+
                                 {/* {this.renderWishlistIcon(highlight._id)} */}
                                 {/* {this.wishlist(highlight._id)} */}
                             </div>
@@ -440,9 +451,21 @@ class Cards extends Component {
                                 <p className="desc">{place.description}</p>
                                 <p className="price">${place.price}</p>
                                 <p className="rating">
-                                    {/* <FaStar/>&nbsp;{this.renderRatingAvg(place._id)} */}
-                                    <FaStar/>&nbsp;{this.state.avrgs[index]}
-                                    {/* {console.log(place._id)} */}
+                            
+                                    {
+                                    this.state.avrgs[index] > 0 && 
+                                    <FaStar className="mr-1" />
+                                    
+                                    }
+                                    
+                                   
+                                    {
+                                    this.state.avrgs[index] > 0 && 
+                                    this.state.avrgs[index]
+                                    
+                                    }
+                                     
+                                   
                                 </p>
                             </div>
                         </div>
