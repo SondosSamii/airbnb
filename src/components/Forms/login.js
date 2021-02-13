@@ -7,7 +7,8 @@ import { login } from "../../actions/clients";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Joi, { validate } from "joi-browser";
-// import {SessionContext ,setSessionCookie,getSessionCookie} from '../session'
+// import {SessionContext ,setSessionCookie,getSessionCookie} from '../session';
+import {Redirect} from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
@@ -104,8 +105,8 @@ class Login extends Component {
       window.alert("Wrong password!");
     }
     else {
-      localStorage.setItem("token", this.props.client.token);
-      localStorage.setItem("user_id", this.props.client.user_id);  
+      await localStorage.setItem("token", this.props.client.token);
+      await localStorage.setItem("user_id", this.props.client.user_id);  
     }
 
     if(this.props.client.token){
@@ -117,6 +118,7 @@ class Login extends Component {
       })
       console.log(this.state);
       this.props.history.push("/");
+      // <Redirect push to="/"/>
     }
 
 

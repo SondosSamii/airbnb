@@ -37,7 +37,7 @@ const Routes = ()=> {
                     <Route path="/search" component={Search}></Route>
                     <Route path="/profile" component={Profile}></Route>
                     <Route path="/team" component={OurTeam}></Route>
-                    <Route path="/about" component={About}></Route>
+                    <Route path="/about-us" component={About}></Route>
                     <Route path="/reservation/:id" component={Reservastion}></Route>
                     <Route path="/host" component={Host}></Route>
                     <Route path="/login" component={Login}></Route>

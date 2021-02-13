@@ -5,26 +5,26 @@ import { BsFillPersonFill } from "react-icons/bs";
 function LoginButton(props) {
     console.log("LoginButton");
     return (
-        // <button className="btn main-btn" onClick={props.onClick}>
-        //     Login
-        // </button>
+        <button className="btn main-btn" onClick={props.onClick}>
+            Login
+        </button>
 
-      <Link to="/login" className="nav-link btn main-btn" onClick={props.onClick}>
-        Login
-      </Link>
+    //   <Link to="/login" className="btn main-btn" onClick={props.onClick}>
+    //     Login
+    //   </Link>
     );
   }
   
 function LogoutButton(props) {
     console.log("LogoutButton");
     return (
-        // <button className="btn main-btn" onClick={props.onClick}>
-        //     Logout
-        // </button>
+        <button className="btn main-btn" onClick={props.onClick}>
+            Logout
+        </button>
 
-    <Link to="/" className="nav-link btn main-btn" onClick={props.onClick}>
-      Logout
-    </Link>
+    // <Link to="/" className="btn main-btn" onClick={props.onClick}>
+    //   Logout
+    // </Link>
   );
 }
 
@@ -159,7 +159,72 @@ class Navbar extends Component {
                             </li>
                            
                             
-                                {/* {button} */}
+                                {
+                                    this.state.login ?(
+                                        <li className="nav-item">
+                                        {/* <button to="/login" className="nav-link btn main-btn" onClick={()=>{
+                                            localStorage.removeItem("token");
+                                            localStorage.removeItem("user_id");
+                                            
+                                        }}>Log out</button> */}
+                                            {/* <Redirect to="/login" className="nav-link btn main-btn" onClick={()=>{
+                                                localStorage.removeItem("token");
+                                                localStorage.removeItem("user_id");
+                                                // window.location.reload();
+                                            }}>Log out</Redirect> */}
+                                            <Link to="/login" className="nav-link btn main-btn" onClick={()=>{
+                                                localStorage.removeItem("token");
+                                                localStorage.removeItem("user_id");
+                                                // window.location.reload();
+                                               
+                                            }}>Out</Link>
+                                        </li>
+                                    ):(
+                                        <li className="nav-item">
+                                            <Link to="/login" className="nav-link btn main-btn">IN</Link>
+                                        </li>
+                                    )
+                                }
+                               {this.state.isAuth &&
+                                      <li className="nav-item">
+                                      {/* <Link to="" className="nav-link btn main-btn"onClick={()=>{ */}
+                                      <button className="nav-link btn main-btn"
+                                        onClick={()=>{
+                                                localStorage.removeItem("token");
+                                                localStorage.removeItem("user_id");
+                                                this.forceUpdateHandler();
+                                                // this.props.history.push("/");
+                                                // window.location.reload();
+                                                // this.forceUpdate();
+                                                // this.setState({isAuth: false});
+                                            }}>
+                                                <Link to="/">try out</Link>
+                                            </button>
+                                  </li>
+    
+                                }
+                                {!this.state.isAuth &&   
+                                    <li className="nav-item">
+                                    {/* <Link to="/login" className="nav-link btn main-btn" */}
+                                    <button className="nav-link btn main-btn"
+                                        onClick={()=>{
+                                                this.forceUpdateHandler();                                                
+                                                // this.forceUpdate();
+                                                // this.setState({isAuth: true});
+                                    }}>
+                                        <Link to="/login">try In</Link>
+                                    </button>
+                                </li>
+                                }
+
+                                {/* <button className="btn main-btn"
+                                    onClick={()=>{
+                                        this.handleClick(this.state.btnValue);
+                                    }}>
+                                        {this.state.btnValue}
+                                </button> */}
+                                {/* <Link to={this.state.path}>{this.state.btnValue}</Link> */}
+                                {button}
 
                                 {isAuth ? (
                                       <li className="nav-item">

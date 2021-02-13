@@ -67,8 +67,9 @@ export async function getPlaceById (id){
      }
      return {
          type:"Place_Details",
-         payload: payload.place
-     }
+        //  payload: payload.place
+        payload
+    }
      
 }
 

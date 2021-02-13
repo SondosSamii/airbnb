@@ -74,62 +74,64 @@ class Cards extends Component {
 
         // console.log("000000 ", this.state.result);
         this.setState({token: localStorage.getItem("token")});
+
+        // Error Here
         this.state.places.slice(0,6).map(async(place)=>{
             // console.log("place: " , place);
             var id = place._id;
             await this.props.getPlaceReviews(id);
-        // console.log("...............", this.props.placeReviews);
-        // return id;
-        const reviews = this.props.placeReviews.reviews;
-        // console.log("reviews: ", reviews)
-        if (reviews && reviews.length > 0) {
-            let rate = 0;
-            var avg =0;
-            var result =0;
-            result = await reviews.map(async rev => {
-                // console.log("rev: ", rev);
-                await this.props.getReviewDetails(rev);
-                var rating =  this.props.reviewDetails.review.rating;
-                // console.log("ratingggggggg : ", this.props.reviewDetails.review.rating);
-                rate += rating;
-                // console.log("rate: ", rate);
-                return rate;
-            })
-            var sum =0;
-            // console.log("kkkkkkkkk:   ",result[result.length-1]);
-            result[result.length-1].then((promise)=>{
-                // console.log("promise: " , promise);
-                avg = promise / reviews.length;
-                // console.log("avg: ", avg);
-                this.setState({result: avg});
-                this.setState((state) => {
-                    const avrgs = state.avrgs.push(avg.toFixed(1));
-                    return avrgs;
+            // console.log("...............", this.props.placeReviews);
+            // return id;
+            const reviews = this.props.placeReviews.reviews;
+            // console.log("reviews: ", reviews)
+            if (reviews && reviews.length > 0) {
+                let rate = 0;
+                var avg =0;
+                var result =0;
+                result = await reviews.map(async rev => {
+                    // console.log("rev: ", rev);
+                    await this.props.getReviewDetails(rev);
+                    var rating =  this.props.reviewDetails.review.rating;
+                    // console.log("ratingggggggg : ", this.props.reviewDetails.review.rating);
+                    rate += rating;
+                    // console.log("rate: ", rate);
+                    return rate;
                 })
-                  
-            })
-            
-                // result.map((promise)=>{
-                //     // console.log("promiiiiiiiseeeee:  ",promise)
-                //     promise.then((ava)=>{
-                //         console.log("../.,,,,,,:  " ,ava);
-                //             sum += ava;
-                //             console.log("summm:   ",sum);
-                //             return sum;
-                //     }).then((sum)=>{
-                //         var avg = sum / reviews.length;
-                //         console.log("avg: ", avg);
-                //     })
-                // })
+                var sum =0;
+                // console.log("kkkkkkkkk:   ",result[result.length-1]);
+                result[result.length-1].then((promise)=>{
+                    // console.log("promise: " , promise);
+                    avg = promise / reviews.length;
+                    // console.log("avg: ", avg);
+                    this.setState({result: avg});
+                    this.setState((state) => {
+                        const avrgs = state.avrgs.push(avg.toFixed(1));
+                        return avrgs;
+                    })
 
-                // console.log("reviews.length: ", reviews.length ,  "   " , result);
-                // var avg = result / reviews.length;
-                // console.log("avg: ", avg);
-                
-            // var res = result.then(
-            // })
-            // return avg;
-        }
+                })
+
+                    // result.map((promise)=>{
+                    //     // console.log("promiiiiiiiseeeee:  ",promise)
+                    //     promise.then((ava)=>{
+                    //         console.log("../.,,,,,,:  " ,ava);
+                    //             sum += ava;
+                    //             console.log("summm:   ",sum);
+                    //             return sum;
+                    //     }).then((sum)=>{
+                    //         var avg = sum / reviews.length;
+                    //         console.log("avg: ", avg);
+                    //     })
+                    // })
+
+                    // console.log("reviews.length: ", reviews.length ,  "   " , result);
+                    // var avg = result / reviews.length;
+                    // console.log("avg: ", avg);
+
+                // var res = result.then(
+                // })
+                // return avg;
+            }
        
             // console.log("result: " , this.state.result);
         })
@@ -417,7 +419,7 @@ class Cards extends Component {
     render() {
         let places = this.props.cards;
         // let places = this.state.places;
-        // console.log("/////////////", places);
+        console.log("/////////////", places);
 
         if (places && places.length > 0) {
             // console.log("Inside if");
@@ -428,7 +430,7 @@ class Cards extends Component {
                             <div
                                 className="card-item-highlight"
                                 style={{
-                                // backgroundImage: `url(/images/places/${place.images[1]}.jpeg)`
+                                // backgroundImage: `url(/images/places/place1-2.jpeg)`
                                 backgroundImage: `url(http://localhost:8080/${place.images[0]})`
                             }}>
                                 <h3 className="card-item-name">
@@ -452,6 +454,7 @@ class Cards extends Component {
                                 <p className="rating">
                                     { this.state.avrgs[index] > 0 && <FaStar className="mr-1" /> }
                                     { this.state.avrgs[index] > 0 && this.state.avrgs[index] }
+                                    {/* <FaStar className="mr-1" /> 4.3 */}
                                 </p>
                             </div>
                         </div>
