@@ -72,37 +72,44 @@ var params = {
         async componentDidMount(){
         await this.props.getLocation();
         // this.getlocation();
-        console.log("heremmmmmmmm: " , this.props);       
-        console.log("position:    " , this.props.position);
+        // console.log("heremmmmmmmm: " , this.props);       
+        // console.log("position:    " , this.props.position);
         // await this.setState({lat : this.props.position.lat , lng: this.props.position.lng});
         await this.setState({coords:this.props.position});
-        console.log("laattt:    " , this.state.coords);
+        // console.log("laattt:    " , this.state.coords);
         await this.props.getAllPlaces();
-        await this.setState({places:this.props.places});
+        await this.setState({places:this.props.places.places});
         this.displayMarkers();
-        console.log("places: " , this.state.places);
-        console.log("/////////////" , this.state.lat , "  ",this.state.lng);
+        // console.log("places: " , this.state.places);
+        // console.log("/////////////" , this.state.lat , "  ",this.state.lng);
 
         await this.setState({
           search: (new URL(document.location)).searchParams.get("keyword")
         });
     }
 
-    handleValueChange = (value) => {
-      this.setState({
+    handleValueChange = async (value) => {
+      await this.setState({
         word: this.props.word(value),
         search_place: value,
         search: value
       });
+      // console.log("Woooord: ", this.state.search);
     }
 
       displayMarkers = () => {
         return this.state.places.map((place, index) => {
-          return <Marker key={index} id={index} position={{
-           lat: place.location.lat,
-           lng: place.location.lng
-         }}
-         onClick={() => console.log("You clicked me!")} />
+          // console.log("^^^^^^^^^^^", place.location);
+          if(place.location) {
+            // console.log("-_________--")
+            return <Marker key={index} id={index} position={{
+             lat: place.location.lat,
+             lng: place.location.lng
+            // lat: "30.013056",
+            // lng: "31.208853"
+           }}
+           onClick={() => console.log("You clicked me!")} />
+          }
         })
       }
     onMarkerClick = (props, marker, e) =>

@@ -28,6 +28,7 @@ import { FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
 import { MdPets } from "react-icons/md";
 import { GiHeatHaze } from "react-icons/gi";
 import { AiFillEdit } from "react-icons/ai";
+import Cards from "../home/places-cards";
 
 class ViewProfile extends Component {
   constructor(props) {
@@ -83,7 +84,7 @@ class ViewProfile extends Component {
     var place = null;
     console.log("userWishslits:   " , this.state.user.wishlists);
     
-    if (this.state.user.wishlists.length > 0) {
+    if (this.state.user.wishlists && this.state.user.wishlists.length > 0) {
 
         await this.state.user.wishlists.map(async (wishlist_id) => {
          await this.props.getWishlistByID(this.state.token,wishlist_id);
@@ -110,7 +111,7 @@ class ViewProfile extends Component {
     var place = null;
     console.log("userTrips:   " , this.state.user.reservations);
     
-    if (this.state.user.reservations.length > 0) {
+    if (this.state.user.reservations && this.state.user.reservations.length > 0) {
         await this.state.user.reservations.map(async(reservation_id) => {
          await this.props.getReservationByID(this.state.token,reservation_id);
         // console.log("............" , this.props.wishlistDetails.wishlist);
@@ -135,7 +136,7 @@ class ViewProfile extends Component {
     var place = null;
     console.log("userTrips:   " , this.state.user.places);
     
-    if (this.state.user.places.length > 0) {
+    if (this.state.user.places && this.state.user.places.length > 0) {
 
         await this.state.user.places.map(async(place_id) => {
         await this.props.getPlaceById(place_id);
@@ -161,7 +162,7 @@ class ViewProfile extends Component {
     return this.state.All_User_places.slice(0, 3).map((placeElement, index) => {
       if (placeElement) {
         return (
-          <div className="col-9 col-sm-6 col-lg-4 mt-4" key={placeElement}>
+          <div className="col-9 col-sm-6 col-lg-4 mt-4" key={placeElement._id}>
             <div className="card-item">
               <div
                 className="card-item-highlight"
@@ -213,7 +214,7 @@ class ViewProfile extends Component {
         return (
           <div
             className="col-9 col-sm-6 col-lg-4 mt-4"
-            key={this.state.Places[index]._id}
+            key={wishlist_Element._id}
           >
             <div className="card-item">
               <div
@@ -492,7 +493,11 @@ var flag = true;
           </div>
 
           <div className="container ">
-            <div className="row">{this.renderWishlist()}</div>
+            <div className="row justify-content-center">
+              {/* {this.renderWishlist()} */}
+              <Cards cards={this.state.Places}/>
+              {/* {console.log("********** ", this.state.Places)} */}
+            </div>
           </div>
         </div>
 

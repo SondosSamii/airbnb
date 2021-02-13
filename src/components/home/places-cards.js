@@ -69,13 +69,13 @@ class Cards extends Component {
         // console.log("000000 ", this.state.result);
         this.setState({token: localStorage.getItem("token")});
         this.state.places.slice(0,6).map(async(place)=>{
-            console.log("place: " , place);
+            // console.log("place: " , place);
             var id = place._id;
             await this.props.getPlaceReviews(id);
-        console.log("...............", this.props.placeReviews);
+        // console.log("...............", this.props.placeReviews);
         // return id;
         const reviews = this.props.placeReviews.reviews;
-        console.log("reviews: ", reviews)
+        // console.log("reviews: ", reviews)
         if (reviews && reviews.length > 0) {
             let rate = 0;
             var avg =0;
@@ -93,15 +93,15 @@ class Cards extends Component {
             // console.log("kkkkkkkkk:   ",result[result.length-1]);
             result[result.length-1].then((promise)=>{
                 // console.log("promise: " , promise);
-                 avg = promise / reviews.length;
-                  console.log("avg: ", avg);
-                  this.setState({result: avg});
-                  this.setState((state) => {
-                    const avrgs = state.avrgs.push(avg);
+                avg = promise / reviews.length;
+                // console.log("avg: ", avg);
+                this.setState({result: avg});
+                this.setState((state) => {
+                    const avrgs = state.avrgs.push(avg.toFixed(1));
                     return avrgs;
-                        })
+                })
                   
-                            })
+            })
             
                 // result.map((promise)=>{
                 //     // console.log("promiiiiiiiseeeee:  ",promise)
@@ -115,16 +115,17 @@ class Cards extends Component {
                 //         console.log("avg: ", avg);
                 //     })
                 // })
-                    console.log("reviews.length: ", reviews.length ,  "   " , result);
-                    var avg = result / reviews.length;
-                    console.log("avg: ", avg);
+
+                // console.log("reviews.length: ", reviews.length ,  "   " , result);
+                // var avg = result / reviews.length;
+                // console.log("avg: ", avg);
                 
             // var res = result.then(
             // })
-            return avg;
+            // return avg;
         }
        
-            console.log("result: " , this.state.result);
+            // console.log("result: " , this.state.result);
         })
        
         this.userWishlists();
@@ -137,18 +138,18 @@ class Cards extends Component {
 
     userWishlists = async () => {
         await this.props.getWishlistsByUserId(this.state.token);
-        console.log("hereeeeeee:   ",this.props.userWishlists);
+        // console.log("hereeeeeee:   ",this.props.userWishlists);
         if(this.props.userWishlists.wishlists){
             this.props.userWishlists.wishlists.map(async(wishlist_id)=>{
                 await this.props.getWishlistByID(this.state.token,wishlist_id);
-                console.log(".........." , this.props.wishlistDetails.wishlist);
+                // console.log(".........." , this.props.wishlistDetails.wishlist);
                 var wishlist_details = this.props.wishlistDetails;
                 this.setState((state) => {
                     const userWishlists = state.UserWishlists.push(wishlist_details.wishlist);
                     return userWishlists;
             })
             })
-            console.log("llllllllll: " , this.state.UserWishlists);
+            // console.log("llllllllll: " , this.state.UserWishlists);
 
         }
         // this.setState({use})
@@ -175,7 +176,7 @@ class Cards extends Component {
           if(found && flag){
               return (
                 <FaHeart
-                className = "wishlist-icon"
+                    className = "wishlist-icon"
                     title = "Remove from wishlist"
                     onClick={async()=> {
                         console.log("before");
@@ -407,11 +408,9 @@ class Cards extends Component {
     }
 
     render() {
-        // let places = this.props.places;
-        // console.log("props.places: ", places);
-
-        let places = this.state.places;
-        // console.log("state.places: ", places);        
+        let places = this.props.cards;
+        // let places = this.state.places;
+        // console.log("/////////////", places);
 
         if (places && places.length > 0) {
             // console.log("Inside if");
@@ -436,8 +435,8 @@ class Cards extends Component {
                                 {/* {this.wishlist(highlight._id)} */}
                             </div>
                             <div className="card-item-details">
-                                {/* <h4>{place.address.city}, {place.address.country}</h4> */}
-                                <h4>Cairo, Egypt</h4>
+                                <h4>{place.address.city}, {place.address.country}</h4>
+                                {/* <h4>Cairo, Egypt</h4> */}
                                 <p className="desc">{place.description}</p>
                                 <p className="price">${place.price}</p>
                                 <p className="rating">
