@@ -49,7 +49,7 @@ class EditPlace extends Component {
         
         state = {
             isLogin: false,
-            place_id:"6024167de5ac3946c8952f89",
+            place_id:"",
             placedata:{},
             token: "",
             name: "",
@@ -84,33 +84,41 @@ class EditPlace extends Component {
                 alert("please log in frist!")
             this.props.history.push("/");
             }
-            await this.props.getPlaceById(localStorage.token ,this.state.place_id);
-            console.log(this.props.placeDetails.place)
-            var place= this.props.placeDetails.place;
+            await this.props.getPlaceById(this.props.match.params.id);
+            console.log("1111111", this.props.placeDetails);
+            // console.log("2222222", this.props.placeDetails.message);
+            // console.log("3333333", this.props.placeDetails.place);
+            // console.log("2222222", this.props.placeDetails.address);
+            var place= this.props.placeDetails;
             this.setState({placedata:place});
             console.log(this.state.placedata)
-            this.setState({
-                name:this.state.placedata.name,
-                description:this.state.placedata.description,
-                type:this.state.placedata.type,
-                price:this.state.placedata.price,
-                city:this.state.placedata.address.city,
-                country:this.state.placedata.address.country,
-                zipcode:this.state.placedata.address.zipcode,
-                room:this.state.placedata.total_rooms,
-                bathroom:this.state.placedata.total_bathrooms,
-                bedroom:this.state.placedata.total_beds,
-                kitchen:this.state.placedata.total_kitchens,
-                guests:this.state.placedata.max_guests,
-                tv: this.state.placedata.has_tv,
-                aircon: this.state.placedata.has_airconditioner,
-                wifi: this.state.placedata.has_wifi,
-                heat: this.state.placedata.has_heating_system,
-                pets:this.state.placedata.pets,
-                photo:this.state.placedata.images,
-                coordinates:this.state.placedata.location
-            })
             console.log(this.state.photo);
+            console.log("**************", this.props.placeDetails.name);
+            // const address = this.state.address
+
+            // if(this.state.placedata) {
+                this.setState({
+                    name:this.state.placedata.name,
+                    description:this.state.placedata.description,
+                    type:this.state.placedata.type,
+                    price:this.state.placedata.price,
+                    city:this.state.placedata.address.city,
+                    country:this.state.placedata.address.country,
+                    zipcode:this.state.placedata.address.zipcode,
+                    room:this.state.placedata.total_rooms,
+                    bathroom:this.state.placedata.total_bathrooms,
+                    bedroom:this.state.placedata.total_beds,
+                    kitchen:this.state.placedata.total_kitchens,
+                    guests:this.state.placedata.max_guests,
+                    tv: this.state.placedata.has_tv,
+                    aircon: this.state.placedata.has_airconditioner,
+                    wifi: this.state.placedata.has_wifi,
+                    heat: this.state.placedata.has_heating_system,
+                    pets:this.state.placedata.pets,
+                    photo:this.state.placedata.images,
+                    coordinates:this.state.placedata.location
+                })    
+            // }
         }
          //renderfile
          Maping = ()=>{
@@ -346,7 +354,7 @@ class EditPlace extends Component {
         for (var key of formData.entries()) {
             console.log(key[0] + ", " + key[1]);
           }
-        let url = "http://localhost:8080/api/place/"+this.state.place_id;
+        let url = "http://localhost:8080/api/place/"+this.props.match.params.id;
         console.log(url);
         await this.props.updatePlace(formData,url,this.state.token);
         console.log("place data",this.props.placeDetails)

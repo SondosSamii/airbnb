@@ -10,6 +10,11 @@ function Reservations(state = {} , action) {
             // console.log("llllllyyyyyyyyyylll")
             return {...state,reservation_details:action.payload}
         }
+        case "add_reservation": {
+            // console.log("llllllyyyyyyyyyylll")
+            return {...state,message:action.payload}
+        }
+        
         default:{
             return state;
         }

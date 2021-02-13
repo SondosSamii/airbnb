@@ -275,7 +275,7 @@ class ViewProfile extends Component {
       return this.state.user.reservations.slice(0, 4).map(
       (reservation_Element, index) => {
         if (this.state.reserve_Places[index]) {
-          console.log("jjjj: " ,this.state.reserve_Places[index]);
+          // console.log("jjjj: " ,this.state.reserve_Places[index]);
           return (
             <div className=" col-9 col-sm-6  col-lg-4 mt-4 " key={index}>
               <div className=" card-item card-item-sm ">
@@ -356,7 +356,6 @@ class ViewProfile extends Component {
       profile_image:this.state.profile_image,
     };
 
-
     if(!this.state.name){
       client.name = this.state.user.name
     }
@@ -364,16 +363,20 @@ class ViewProfile extends Component {
       client.phone = this.state.user.phone
     }
     if(!this.state.profile_image){
-
       client.profile_image = this.state.user.profile_image
       console.log("typeof:   ", typeof(client.profile_image));
     }
-
-var flag = true;
+    
+    var flag = true;
     if(!client.name.match(/^[a-z A-Z]+$/) )
     {
       flag = false;
       document.getElementById("nameError").innerHTML="Name must be letters";
+    }
+    if(!client.phone.match(/^[0-9]+$/) )
+    {
+      flag = false;
+      document.getElementById("phoneError").innerHTML="Not Valid";
     }
     if(flag){
       // this.setState({profile_image: e.target.files[0]});
@@ -383,16 +386,14 @@ var flag = true;
       formData.append("phone", client.phone);
       formData.append("profile_image", client.profile_image);
       console.log("yes" , client);
-
-
-      var confirm = window.confirm("are you sure you want to update");
-      if(confirm){
-        this.props.updateClient(this.state.token,formData );
-        window.location.reload();
-      }
       
-    }
+      this.props.updateClient(this.state.token,formData );
 
+      // var confirm = window.confirm("are you sure you want to update");
+      // if(confirm){
+      //   window.location.reload();
+      // }      
+    }
   }
   handleUpdatePassword = ()=>{
     var clientPasswords = {
@@ -558,7 +559,17 @@ var flag = true;
                   <div className="modal-body">
                     <form className = "update-form">
                       <div className="form-group">
-                        <label htmlFor="img">upload Your photo</label>
+                      {/* <label htmlFor="img" className="btn main-btn text-white">
+                        Upload Your Photo
+                        <input type="file" id="img" name="img" accept="image/*"
+                          onChange={(e) => {
+                            this.setState({ profile_image: e.target.files[0] });
+                          }}/>
+                      </label>
+                      <small>{this.state.profile_image}</small> */}
+
+                        <label htmlFor="img" className="btn main-btn">Upload Your Photo</label>
+                        <br/>
                          <input type="file" id="img" name="img" accept="image/*" onChange={(e) => {
                             this.setState({ profile_image: e.target.files[0] });
                           }} />
@@ -566,7 +577,7 @@ var flag = true;
                         
                       </div>
                       <div className="form-group">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name" className="label">Name</label>
                         <input
                           id="name"
                           type="text"
@@ -574,12 +585,13 @@ var flag = true;
                           className="form-control"
                           onChange={(e) => {
                             this.setState({ name: e.target.value });
+                            document.getElementById('nameError').innerHTML = "";
                           }}
                         />
                         <small  id="nameError" style={{color :"red"}}></small>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor="phone" className="label">Phone</label>
                         <input
                           id="phone"
                           type="tel"
@@ -587,6 +599,7 @@ var flag = true;
                           className="form-control"
                           onChange={(e) => {
                             this.setState({ phone: e.target.value });
+                            document.getElementById('phoneError').innerHTML = "";
                           }}
                           />
                           <small id="phoneError" style={{color :"red"}}></small>
@@ -595,7 +608,8 @@ var flag = true;
 
                       <button
                         type="button"
-                        className="btn update-btn"
+                        // className="btn update-btn"
+                        className="btn main-btn"
                         onClick={async () => {
                           this.handleUpdate();
                         }}
@@ -660,9 +674,10 @@ var flag = true;
                           className="form-control"
                           onChange={(e) => {
                             this.setState({ old_pass: e.target.value });
+                            document.getElementById('old_pass_Error').innerHTML = "";
                           }}
                         />
-                        <small id="old_pass_Error"></small>
+                        <small id="old_pass_Error" style={{color :"red"}}></small>
                       </div>
                       <div className="form-group">
                         <label htmlFor="pass">New Password </label>
@@ -673,9 +688,10 @@ var flag = true;
                           className="form-control"
                           onChange={(e) => {
                             this.setState({new_pass: e.target.value });
+                            document.getElementById('new_pass_Error').innerHTML = "";
                           }}
                         />
-                        <small id="new_pass_Error"></small>
+                        <small id="new_pass_Error" style={{color :"red"}}></small>
                       </div>
                       
                       <button

@@ -158,7 +158,6 @@ class Login extends Component {
     //   });
     // var email=this.state.Email;
     // setSessionCookie({ email });
-    
   };
 
  

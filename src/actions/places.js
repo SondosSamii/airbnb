@@ -60,14 +60,14 @@ export async function getPlaceById (id){
         });
         payload = await response.json();
         console.log("id", id);
-        console.log(payload);
+        console.log(payload.place);
          
      }catch(e){
          console.log("errrrroooooooooooorrrrrrr",id , e);
      }
      return {
          type:"Place_Details",
-         payload
+         payload: payload.place
      }
      
 }

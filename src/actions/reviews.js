@@ -39,7 +39,7 @@ export async function getReviewDetails(id) {
     try {
         let res = await fetch(`${reviewUrl}/${id}`);
         payload = await res.json();
-        console.log("getReviewDetails Action: ", payload);
+        // console.log("getReviewDetails Action: ", payload);
     } catch (err) {
         console.log(err);
     }

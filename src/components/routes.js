@@ -38,10 +38,10 @@ const Routes = ()=> {
                     <Route path="/profile" component={Profile}></Route>
                     <Route path="/team" component={OurTeam}></Route>
                     <Route path="/about" component={About}></Route>
-                    <Route path="/reservation" component={Reservastion}></Route>
+                    <Route path="/reservation/:id" component={Reservastion}></Route>
                     <Route path="/host" component={Host}></Route>
                     <Route path="/login" component={Login}></Route>
-                    <Route path="/place-edit" component={EditPlace}></Route>
+                    <Route path="/place-edit/:id" component={EditPlace}></Route>
                     <Route path="/place-details/:id" component={PlaceDetails}></Route>
                     <Route path="*" component={NotFound}></Route>
                 </Switch>

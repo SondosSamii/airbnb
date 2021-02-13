@@ -168,7 +168,7 @@ class GetPlaceDetails extends Component {
             return (
                 <div className="featchers row">
                     <h2 className="text-center col-12">Place Information  &nbsp;
-                    { this.state.owner &&(<Link to="/place-edit" style={{color:"var(--primary-dark-color)"}} ><FiEdit /></Link>)}
+                    { this.state.owner &&(<Link to={`/place-edit/${this.props.match.params.id}`} style={{color:"var(--primary-dark-color)"}} ><FiEdit /></Link>)}
                     </h2>
                     
                     <div className="col-12 col-md-6">
@@ -391,9 +391,9 @@ btnModel(){
             <button type="button" className="btn mr-5 mt-auto main-btn" data-toggle="modal" data-target="#exampleModal">
                 Add Review
             </button>
-            <button type="button" className="btn mr-5 mt-auto main-btn" >
+            <Link to={`/reservation/${this.props.match.params.id}`} type="button" className="btn mr-5 mt-auto main-btn" >
                 Make Reservation
-            </button>
+            </Link>
         </div>)
 }
     render(){
