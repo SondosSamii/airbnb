@@ -251,13 +251,12 @@ footer .nav-link {
   color: var(--primary-dark-color);
 }
 .review{
-  height: 800px;
   background-color: var(--primary-dark-color);
   color: var(--primary-light-color) !important;
 
 }
 .users{
-  height: 150px;
+  padding: 2em;
 
 }
 .user-photo{

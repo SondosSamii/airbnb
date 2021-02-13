@@ -36,7 +36,6 @@ class Signup extends Component {
     Password: Joi.string().trim().required().min(5).max(20),
     Password_confirm: Joi.any().equal(Joi.ref("Password")),
     PhoneNumber: Joi.string()
-      .trim()
       .required()
       .regex(/^[0-9]{11}$/)
       .required(),

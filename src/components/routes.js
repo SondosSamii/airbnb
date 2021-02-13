@@ -9,6 +9,7 @@ import Search from './search/search';
 import About from './about/about'; 
 import Host from './Forms/host'
 import Login from './Forms/login'
+import ReviewAdding from './Forms/review'
 import EditPlace from './Forms/editPlace'
 import OurTeam from './Team/our-team';
 import Reservastion from './reservations/reservationForm';
@@ -43,6 +44,7 @@ const Routes = ()=> {
                     <Route path="/login" component={Login}></Route>
                     <Route path="/place-edit" component={EditPlace}></Route>
                     <Route path="/place-details" component={PlaceDetails}></Route>
+                    <Route path="/aya" component={ReviewAdding}></Route>
                     <Route path="*" component={NotFound}></Route>
                 </Switch>
                 <Footer/>

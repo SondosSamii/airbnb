@@ -29,14 +29,15 @@ export async function getPlaceReviews(token,id) {
     }
     return {type: "PlaceReview", payload}
 }
-export async function AllReviews(token) {
+
+
+export async function AllReviews() {
     var payload = null;
     try {
         let url="http://localhost:8080/api/allReviews"
         const res = await fetch(url,{
         method: "GET",
         headers: {
-        Authorization: 'Bearer ' + token,
         "Content-Type": "application/json",
              }})
         payload = await res.json();
@@ -44,5 +45,23 @@ export async function AllReviews(token) {
     } catch (err) {
         console.log(err);
     }
-    return {type: "AllReviews", payload}
+    return {type: "Reviews", payload}
+}
+
+export async function AddReview(formData,url,token) {
+    var payload = null;
+    try {
+        
+        const res = await fetch(url,{
+        method: "POST",
+        body: formData,
+        headers: {
+        Authorization: 'Bearer ' + token
+             }})
+        payload = await res.json();
+        console.log("Payload of Add reviews Action: ", payload);
+    } catch (err) {
+        console.log(err);
+    }
+    return {type: "AddReview", payload}
 }

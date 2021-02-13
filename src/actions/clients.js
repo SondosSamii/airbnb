@@ -33,7 +33,7 @@ export async function getAllClients(){
     } catch (err) {
         console.log(err);
     }
-    return {type: "Allclients2", payload}
+    return {type: "AllClients2", payload}
 }
 export async function updateClient(client){
     var payload=null;

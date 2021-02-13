@@ -1,8 +1,10 @@
 import React, {Component} from "react";
+import {NavLink as Link} from 'react-router-dom';
 import {SiGithub} from "react-icons/si";
 import {useState, useEffect} from "react";
 import Slider from "react-slick";
 import {FaTv, FaWifi, FaFan, FaUserAlt, FaBath} from "react-icons/fa";
+import {FiEdit} from "react-icons/fi";
 import {IoIosBed} from "react-icons/io";
 import {MdPets} from "react-icons/md";
 import {GiHeatHaze,GiCampCookingPot} from "react-icons/gi";
@@ -11,8 +13,21 @@ import { AllClients } from "../../actions/clients";
 import {getPlaceReviews,AllReviews} from "../../actions/reviews";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Mapp from "../search/map"
+import ReviewAdding from "../Forms/review";
+import { AiFillEdit } from "react-icons/ai";
 
+import { Map, GoogleApiWrapper,InfoWindow, Marker } from 'google-maps-react';
+
+const mapStyles = {
+    width: "100%",
+    height: "100%"
+  };
+  
+  const containerStyle = {
+    position: 'relative',  
+    width: '100%',
+    height: '350px' // The same height of its parent in render
+  };
 
 class GetPlaceDetails extends Component {
     constructor(props) {
@@ -24,8 +39,10 @@ class GetPlaceDetails extends Component {
             address:[],
             reviews: [],
             allreviews:[],
-            Users:[],
-            placeID:1
+            users:[],
+            username:[],
+            userimg:[],
+            owner:false
         }
     }
     async componentDidMount(){
@@ -38,19 +55,23 @@ class GetPlaceDetails extends Component {
         await this.props.getPlaceById(localStorage.token ,this.state.place_id);
         await this.props.AllClients();
         await this.props.getPlaceReviews(localStorage.token ,this.state.place_id);
-        this.setState({reviews:this.props.reviews});
-        await this.props.AllReviews(localStorage.token);
-        this.setState({allreviews:this.props.reviews});
-        console.log(this.props.placeDetails.place)
+        this.setState({reviews:this.props.reviews.reviews});
+        await this.props.AllReviews();
+        this.setState({allreviews:this.props.allreviews.reviews});
+        // console.log("3333333333333333333333",this.props.allreviews.reviews)
+        // console.log(this.props.placeDetails.place)
         var place= this.props.placeDetails.place;
+        localStorage.setItem("place_id", place._id);
         this.setState({address:place.address});
         this.setState({img:place.images});
         this.setState({placedata:place});
-        this.setState({users:this.props.client});
-        
-        console.log(this.state.reviews)
-        console.log(this.state.allreviews)
-        console.log(this.state.users)
+        this.setState({users:this.props.users.users});
+        if(localStorage.user_id === this.state.placedata.user_id){
+            this.setState({owner:true})
+        }
+        // console.log(this.state.reviews)
+        // console.log(this.state.allreviews)
+        // console.log("33333333333333",this.props.users.users)
         
     }
     // async componentDidMount() {
@@ -135,15 +156,20 @@ class GetPlaceDetails extends Component {
 
      Placelocation(){
         if(this.state.placedata){
+
             const place=this.state.placedata;
             return (
                 <div className="featchers row">
-                    <h2 className="text-center col-12">Place Information</h2>
+                    <h2 className="text-center col-12">Place Information  &nbsp;
+                    { this.state.owner &&(<Link to="/place-edit" style={{color:"var(--primary-dark-color)"}} ><FiEdit /></Link>)}
+                    </h2>
+                    
+                    <div className="col-12 col-md-6">
                         <div className="ml-3 col-12 pt-3 pb-3">
                             <p className="h4 col-12 pl-5 d-block vertical-align-middle ">Discription:</p>
                             <p className=" h5 pl-5 pr-5 d-block m-0 ml-5 col-12 text-left">{ this.state.placedata.description}</p>
                         </div>
-                        <div className=" col-lg-8 col-md-12 pt-3 ">
+                        <div className=" col-12 pt-3 ">
                             <div className="ml-3">
                             <p className="h4 pl-5 d-inline-block w-25">Price Per Night:</p>
                             <p className=" h5 pl-3 d-inline-block m-0 col-6">$ { this.state.placedata.price}</p>
@@ -168,9 +194,25 @@ class GetPlaceDetails extends Component {
                             </div>
                             
                         </div>
-                    <div className=" col-lg-4 col-md-6 pr-5" style={{height: '350px'}}>
-                    {/* <img className="d-inline w-100" src="/bg.jpg"/> */}
-                             {/* <Mapp {} /> */}
+                        </div>
+                    <div className=" col-12 col-md-6 " style={{height: '350px'}}>
+                        
+                            
+                            <Map
+                                    google={this.props.google}
+                                    zoom={8}
+                                    style={mapStyles}
+                                    containerStyle={containerStyle}
+                                    initialCenter={{
+                                    lat:47.49855629475769,
+                                    lng: -122.14184416996333
+                                    }}
+                                    center={this.state.placedata.location}
+                                    onClick={this.mapClicked}>
+                                    <Marker  position={this.state.placedata.location}
+                                    onClick={() => console.log("You clicked me!")} />
+
+                                </Map> 
                          
                     </div>
                 </div>
@@ -223,38 +265,56 @@ class GetPlaceDetails extends Component {
         }
     }
     Review(){
-        if(this.state.reviews){
-        var users=this.state.Users;
-        var allreviews=this.state.reviews;
+         if(this.state.reviews){
+        var allreviews=this.state.allreviews;
+        var reviews=this.state.reviews;
+        var allusers=this.state.users;
+        console.log(allreviews)
+        console.log(reviews)
+        var placeReviews=[];
         let rate=0;
-        let user=[];
-        
-        // allreviews.map(rev => {
-        //     users.map(oneuser =>{
-        //         if(rev.user_id==oneuser._id)
-        //         user.push(oneuser);
-        //     })
-        //     rate += rev.rating;
-        //     return rate;
-        
+        let username=[];
+        let userimg=[];
+        allreviews.map(r =>{
+            reviews.map( r2 =>{
+                if(r._id === r2){
+                    placeReviews.push(r);
+                }
+            })
+        });
+        placeReviews.map(r=>{
+            allusers.map(oneuser=>{
+                if(r.user_id === oneuser._id){
+                    username.push(oneuser.name);
+                    userimg.push(oneuser.profile_image);
+                    console.log(oneuser)
+                }
+                
+            })
+            rate += r.rating; 
             
-        // });
-        // console.log(rate);
-        // console.log(user.name)
+        });
         const avg = rate / allreviews.length;
+        const newavg=avg.toFixed(1)
+            console.log(newavg)
+        var uName=[];
+        var uImg=[];
+        //console.log("22222222222222",user)
+        //console.log("333333333333", placeReviews)
+        
         
             return (
-                <div className="review row ">
-                    <h2 style={{height:"50px !important"}} className="text-center col-12 pb-0 mb-0 mt-5">User Reviwes</h2>
+                <div className="review row " style={{height:"100% !important"}}>
+                    <h2  className="text-center col-12 pb-0 mb-0 mt-5">User Reviwes</h2>
                     
-                    
-                    <div className="col-3 users">
-                        {user.map(user => (
+{/*                     
+                    <div className="col-3 ">
+                        {user.slice(0,3).map(user => (
                         
-                        <div className="col-6 ml-auto pb-5">
+                        <div className="col-6 ml-auto pb-5 users">
                             <p className=" text-center h4" >{user.name}</p>
                             <div className="user-photo  m-auto">
-                                {user.profile_image ? <img src={`/img/${user.profile_image}`} /> : <img src={`/img/avatar.png`} />}
+                                {user.profile_image ? <img src={`http://localhost:8080/${user.profile_image}`} /> : <img src={`/img/avatar.png`} />}
                             </div>
                         </div>
                         
@@ -262,32 +322,82 @@ class GetPlaceDetails extends Component {
                       ))}
                     </div> 
 
-                    {/* <div className="col-8 users">
-                      {allreviews.map(rev => (
+                    <div className="col-8 users">
+                      {allreviews.slice(0,3).map(rev => (
                         <div>
-                        <div className="pl-3 col-12 pb-5">
+                        <div className="pl-4 col-12 py-3 ">
                         <p className="h4">{rev.comment}</p>
                         </div>
-                        <div className="pl-3 col-12">
+                        <div className="pl-4 col-12 py-3">
                         <p className="h4 pl-5 pb-2">{rev.rating} <span className="text-muted">/5</span></p>
                         </div>
                         </div>
                         ))}
-                    </div>  */}
-                        
-                  
+                    </div> 
+                         */} 
+
+                    <div className="container users">
+                      {allreviews.slice(0,3).map((rev,index) =>(
+                          <>
+                        <div className="row my-2">
+                            <div className="col-3">
+                                <div className="user-photo  m-auto">
+                                    {userimg[index] ? <img src={`http://localhost:8080/${userimg[index]}`} /> : <img src={`/img/avatar.png`} />}
+                                </div>
+                            </div>
+                            <div className="col-9">
+                            <p className="h4" >{username[index]}</p>
+                            <p className="h4">{rev.comment}</p>
+                            <p className="h4 pl-5 pb-2">{rev.rating} <span className="text-muted">/5</span></p>
+                            </div>
+                            
+                        </div>
+                        <hr style={{borderColor:"gray",width:"75%"}}/>
+                        </>
+                        ))}
+                    </div>  
                 </div>
             )
         }
     }
-
+Model(){
+    return(
+        <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                <div className="modal-header border-0">
+                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div className="modal-body">
+                    <ReviewAdding />
+                </div>
+                
+                </div>
+            </div>
+            </div>
+    )
+}
+btnModel(){
+    return(<div className="row justify-content-end">
+            <button type="button" className="btn mr-5 mt-auto main-btn" data-toggle="modal" data-target="#exampleModal">
+                Add Review
+            </button>
+            <button type="button" className="btn mr-5 mt-auto main-btn" >
+                Make Reservation
+            </button>
+        </div>)
+}
     render(){
     return (
         <section style={{ marginTop: '63px',position: 'relative', overflow: 'hidden',width:"100%"}}>
             {this.PlaceSlider()}
             {this.Placelocation()}
             {this.Placefetcher()} 
+            {this.btnModel()}
             {this.Review()}
+           {this.Model()}
         </section>
     )}
 }
@@ -306,11 +416,13 @@ const mapactiontoprops = (disptch) => {
   };
   const mapstatetoprops = (state) => {
     return {
-      client: state.Clients,
+      users: state.Clients,
       placeDetails: state.Places,
-      reviews: state.Reviews
+      reviews: state.Reviews.placereviews,
+      allreviews:state.Reviews.allreviews
       
       
     };
   };
-export default connect(mapstatetoprops, mapactiontoprops) (GetPlaceDetails);
+  export default connect(mapstatetoprops, mapactiontoprops)(GoogleApiWrapper({
+    apiKey: "AIzaSyDED1xIAqSktQ5LAnZ5BCVIkwtKbJPT31U" })(GetPlaceDetails)) ;
