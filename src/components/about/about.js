@@ -35,7 +35,7 @@ export default class About extends Component {
 
                 <div className="row banner">
          <div className="banner-text">
-            <h1 className="responsive-headline">AirBnb</h1>
+            <h1 className="responsive-headline">Where To ?</h1>
             <h3>I'm a Manila based <span>graphic designer</span>, <span>illustrator</span> and <span>webdesigner</span> creating awesome and
             effective visual identities for companies of all sizes around the globe. Let's <a className="smoothscroll" href="#about">start scrolling</a>
             and learn more <a className="smoothscroll" href="#about">about me</a>.</h3>
