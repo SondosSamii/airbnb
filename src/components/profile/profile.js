@@ -159,42 +159,46 @@ class ViewProfile extends Component {
 
 
   renderPlaces = () => {
-    return this.state.All_User_places.slice(0, 3).map((placeElement, index) => {
-      if (placeElement) {
-        return (
-          <div className="col-9 col-sm-6 col-lg-4 mt-4" key={placeElement._id}>
-            <div className="card-item">
-              <div
-                className="card-item-highlight"
-                style={{
-                  backgroundImage: `url(images/places/place1-1.jpeg)`,
-                }}
-              >
-                <h3 className="card-item-name">
-                  {placeElement.name}
-                  <br />
-                  {this.icons(placeElement)}
-                </h3>
-                <h4 className="card-item-type">{placeElement.type}</h4>
-              </div>
-              <div className="card-item-details">
-                <h4>
-                  {placeElement.address.city}, {placeElement.address.country}
-                </h4>
-                <p className="desc">{placeElement.description}</p>
-                <p className="price">${placeElement.price}</p>
-                <p className="rating">
-                  <FaStar />
-                  &nbsp;4.8
-                </p>
-                {/* {this.renderRating(this.state.Places[index]._id)} */}
-              </div>
-            </div>
-          </div>
+    return (
+      <Cards cards={this.state.All_User_places}/>
+    )
+    // return this.state.All_User_places.slice(0, 3).map((placeElement, index) => {
+    //   if (placeElement) {
+    //     return (
+          // <div className="col-9 col-sm-6 col-lg-4 mt-4" key={placeElement._id}>
+          //   <div className="card-item">
+          //     <Link
+          //         to={`/place-details/${placeElement._id}`}
+          //       className="card-item-highlight"
+          //       style={{
+          //         backgroundImage: `url(http://localhost:8080/${placeElement.images[0]})`
+          //       }}
+          //     >
+          //       <h3 className="card-item-name">
+          //         {placeElement.name}
+          //         <br />
+          //         {this.icons(placeElement)}
+          //       </h3>
+          //       <h4 className="card-item-type">{placeElement.type}</h4>
+          //     </Link>
+          //     <div className="card-item-details">
+          //       <h4>
+          //         {placeElement.address.city}, {placeElement.address.country}
+          //       </h4>
+          //       <p className="desc">{placeElement.description}</p>
+          //       <p className="price">${placeElement.price}</p>
+          //       <p className="rating">
+          //         <FaStar />
+          //         &nbsp;4.8
+          //       </p>
+          //       {/* {this.renderRating(this.state.Places[index]._id)} */}
+          //     </div>
+          //   </div>
+          // </div>
         
-        );
-      }
-    });
+        // );
+      // }
+    // });
   };
 
   renderWishlist = () => {

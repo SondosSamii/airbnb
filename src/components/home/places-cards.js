@@ -145,6 +145,7 @@ class Cards extends Component {
     userWishlists = async () => {
         await this.props.getWishlistsByUserId(this.state.token);
         // console.log("hereeeeeee:   ",this.props.userWishlists);
+        // Error Here
         if(this.props.userWishlists.wishlists){
             this.props.userWishlists.wishlists.map(async(wishlist_id)=>{
                 await this.props.getWishlistByID(this.state.token,wishlist_id);
@@ -428,7 +429,7 @@ class Cards extends Component {
                                 className="card-item-highlight"
                                 style={{
                                 // backgroundImage: `url(/images/places/${place.images[1]}.jpeg)`
-                                backgroundImage: `url(/images/places/place1-3.jpeg)`
+                                backgroundImage: `url(http://localhost:8080/${place.images[0]})`
                             }}>
                                 <h3 className="card-item-name">
                                     <Link to={`/place-details/${place._id}`}
