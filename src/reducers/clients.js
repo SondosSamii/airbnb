@@ -5,6 +5,10 @@ function Clients(state = null , action) {
             // console.log("cliiinenntnntntntn")
             return action.payload;
         }
+        case "update_password": {
+            // console.log("cliiinenntnntntntn")
+            return action.payload;
+        }
         case "update_Client":{
             // console.log("cliiinenntnntntntn")
             return action.payload;

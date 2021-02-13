@@ -4,7 +4,7 @@ import { GiEarthAfricaEurope } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa";
 // import { Card, Button } from "react-bootstrap";
 import "./profile.css";
-import Joi from "joi-browser";
+
 
 import { NavLink as Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -18,9 +18,10 @@ import {
   getWishlistByID,
   
 } from "../../actions/wishlists";
-import { getAllReservation , getReservationByID } from "../../actions/reservations";
-import { getAllClients, updateClient , getclientById , updatePassword } from "../../actions/clients";
+import {  getReservationByID } from "../../actions/reservations";
+import {  updateClient , getclientById , updatePassword } from "../../actions/clients";
 import React, { Component } from "react";
+import Joi, { validate } from "joi-browser";
 
 import { FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
 // import { FaRegHeart, FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
@@ -36,47 +37,34 @@ class ViewProfile extends Component {
       Places: [],
       reserve_Places: [],
       All_User_places:[],
-      isOpen: false,
       name: "",
       email: "",
       phone: "",
       isLogin: true,
       token: "",
       user: {},
-      isOpen2:true,
       old_pass:"",
       new_pass:"",
       profile_image:"",
-      // userId: "60044953de30a61a6c0ede19",
-      userId: "5",
-      hasPlaces: false,
-      Reservations: [],
-      UserPlaces: [],
-      AllPlaces: [],
-      places_id:[],
+      errors : []
+     
 
 
     };
    
   }
-  openModal = () => this.setState({ isOpen: true });
-  closeModal = () => this.setState({ isOpen: false });
 
-  openModal2 = () => this.setState({ isOpen2: true });
-  closeModal2 = () => this.setState({ isOpen2: false });
   async componentDidMount() {
     this.setState({token: localStorage.getItem("token")}); 
     console.log("here token:  ",localStorage.getItem("token"));
     if(!localStorage.getItem("token")){
       this.setState({isLogin:false});
-      console.log("yyyyyyyyyyyyyyyyyyyyyyyyy");
       this.props.history.push("/login");
     }
 
     else{
 
       await this.props.getclientById(localStorage.getItem("token"));
-      console.log("heerreee:     ",this.props.client.user);
       if(this.props.client.message === "jwt expired"){
         this.props.history.push("/login");
       }
@@ -170,10 +158,8 @@ class ViewProfile extends Component {
 
 
   renderPlaces = () => {
-    // console.log("........lllll......" , this.state.UserPlaces);
     return this.state.All_User_places.slice(0, 3).map((placeElement, index) => {
       if (placeElement) {
-        // console.log("jjjj: " ,this.state.Places[i]);
         return (
           <div className="col-9 col-sm-6 col-lg-4 mt-4" key={placeElement}>
             <div className="card-item">
@@ -204,26 +190,12 @@ class ViewProfile extends Component {
               </div>
             </div>
           </div>
-          // <div className="col-4 ">
-          // <Card style={{ width: '18rem' }}>
-          //  <Card.Img variant="top" src="https://cdn.pixabay.com/photo/2021/01/08/07/52/trees-5899195_960_720.jpg" />
-          //  <Card.Body>
-          //      <Card.Title>{placeElement.price}</Card.Title>
-          //      <Card.Text>
-          //      Some quick example text to build on the card title and make up the bulk of
-          //      the card's content.
-          //      </Card.Text>
-          //      <Button variant="primary">Go somewhere</Button>
-          //  </Card.Body>
-          //  </Card>
-          //         </div>
+        
         );
       }
     });
   };
-// componentDidUpdate(){
-//   this.forceUpdate();
-// }
+
   renderWishlist = () => {
     document.title = "Profile";
     // var i = 0;
@@ -235,7 +207,6 @@ class ViewProfile extends Component {
 
       if (this.state.Places[index]) {
         var flag = false;
-        // console.log("jjjj: " ,this.state.Places[index]);
         if(this.state.Places[index].address !=="undefined" && this.state.Places[index].address!=="undefined" ){
           flag = true
         }
@@ -264,7 +235,6 @@ class ViewProfile extends Component {
                     this.setState({ isWishlisted: !this.state.isWishlisted });
                     console.log("klklll:    ",wishlist_Element);
                     this.props.deleteWishlistById(this.state.token,wishlist_Element);
-                    // this.forceUpdate();
                     this.renderWishlist();
                     window.location.reload();
 
@@ -296,10 +266,6 @@ class ViewProfile extends Component {
     }
   };
   renderTrips = () => {
-    // var i = 0;
-    // console.log("weeeeeee: " , this.state.reserve_Places);
-    // console.log("######333333..................: " ,this.state.Reservations , "   " , this.state.reserve_Places.length);
-    // if(this.state.Reservations > 0) {
     if(this.state.user.reservations) {
       return this.state.user.reservations.slice(0, 4).map(
       (reservation_Element, index) => {
@@ -343,8 +309,42 @@ class ViewProfile extends Component {
     );
   };
 
+  schema = {
+    name: Joi.string().required(),
+    phone: Joi.string().required(),
+  };
+  validation =(state) =>{
+    const errors = {};
+    var myState = {...state};
+    // delete myState.User_wishlists;
+    // delete myState.Places;
+    // delete myState.reserve_Places;
+    // delete myState.All_User_places;
+    // delete myState.isLogin;
+    // delete myState.token;
+    // delete myState.new_pass;
+    // delete myState.user;
+    // delete myState.old_pass;
+    delete myState.profile_image;
+
+    var res = Joi.validate(myState, this.schema, { abortEarly: false });
+    if (res.error === null) {
+      this.setState({ errors: {} });
+      return null;
+    }
+    for (const error of res.error.details) {
+      errors[error.path] = error.message;
+    }
+    console.log(res.error.details);
+    console.log(state);
+    this.setState({ errors: errors });
+    console.log(this.state.errors.Password);
+
+
+  }
+
   handleUpdate = ()=>{
-    console.log("kkkkkkkkk" , this.state.profile_image);
+
     var client = {
       name: this.state.name,    
       phone: this.state.phone,
@@ -365,7 +365,7 @@ class ViewProfile extends Component {
     }
 
 var flag = true;
-    if(!client.name.match(/^[a-zA-Z]+$/) )
+    if(!client.name.match(/^[a-z A-Z]+$/) )
     {
       flag = false;
       document.getElementById("nameError").innerHTML="Name must be letters";
@@ -378,9 +378,7 @@ var flag = true;
       formData.append("phone", client.phone);
       formData.append("profile_image", client.profile_image);
       console.log("yes" , client);
-      // for(var e of formData.entries()){
-      //   console.log(e);
-      // }
+
 
       var confirm = window.confirm("are you sure you want to update");
       if(confirm){
@@ -390,12 +388,6 @@ var flag = true;
       
     }
 
-    // if(client.name.match(/^[A-Z][-a-zA-Z]+$/ )){
-
-    // }
-    
-    // await this.props.updateClient(client);
-    // window.location.reload();
   }
   handleUpdatePassword = ()=>{
     var clientPasswords = {
@@ -452,7 +444,6 @@ var flag = true;
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}>
-            {/* <img src="http://localhost:8080/images/Alaa.jpg" /> */}
                 </div>
               ):(
                 <div className="user_img " 
@@ -562,10 +553,8 @@ var flag = true;
                          <input type="file" id="img" name="img" accept="image/*" onChange={(e) => {
                             this.setState({ profile_image: e.target.files[0] });
                           }} />
-                          {/* <input type="file" onChange={this.fileChangedHandler}/>
-                            <button onClick={this.uploadHandler}>Upload!</button> */}
                           <input type="text" value={this.state.profile_image}/>
-                        <small id="nameError"></small>
+                        
                       </div>
                       <div className="form-group">
                         <label htmlFor="name">Name</label>
@@ -578,7 +567,7 @@ var flag = true;
                             this.setState({ name: e.target.value });
                           }}
                         />
-                        <small id="nameError"></small>
+                        <small  id="nameError" style={{color :"red"}}></small>
                       </div>
                       <div className="form-group">
                         <label htmlFor="phone">Phone</label>
@@ -591,7 +580,7 @@ var flag = true;
                             this.setState({ phone: e.target.value });
                           }}
                           />
-                          <small id="phoneError"></small>
+                          <small id="phoneError" style={{color :"red"}}></small>
         
                       </div>
 
@@ -713,12 +702,7 @@ var flag = true;
 const mapactiontoprops = (disptch) => {
   return bindActionCreators(
     {
-      // getAllPlaces,
-      // getAllClients,
-      // updateClient,
-      // getPlaceById,
-      // getAllReservation,
-      // deleteByID,
+      
       getclientById,
       getWishlistByID,
       getPlaceById,
@@ -726,17 +710,12 @@ const mapactiontoprops = (disptch) => {
       deleteWishlistById,
       updateClient,
       updatePassword
-      // getReservationByID
     },
     disptch
     );
   };
   const mapstatetoprops = (state) => {
   return {
-    // places: state.Places,
-    // placeDetails: state.Places,
-    // reservations: state.Reservations,
-    // User_wishlists: state.Wishlists,
     client: state.Clients,
     wishlistDetails : state.Wishlists.wishlist_details,
     placeDetails: state.Places.place_details,
@@ -748,20 +727,3 @@ const mapactiontoprops = (disptch) => {
 
 export default connect(mapstatetoprops, mapactiontoprops)(ViewProfile);
 
-{/* <div className="form-group">
-  <label htmlFor="email">Email address</label>
-  <input
-    id="email"
-    type="email"
-    placeholder={this.state.user.email}
-    className="form-control"
-    onChange={(e) => {
-      this.setState({ email: e.target.value });
-    }}
-  >
-     
-  </input>
-  <small className="form-text text-muted">
-    We'll never share your email with anyone else.
-  </small>
-</div> */}
