@@ -138,7 +138,7 @@ class Cards extends Component {
             // console.log("result: " , this.state.result);
         })
        
-        this.userWishlists();
+        await this.userWishlists();
     }
 
     eventHandle = async (id) =>{
@@ -422,7 +422,7 @@ class Cards extends Component {
     render() {
         let places = this.props.cards;
         // let places = this.state.places;
-        console.log("/////////////", places);
+        // console.log("/////////////", places);
 
         if (places && places.length > 0) {
             // console.log("Inside if");

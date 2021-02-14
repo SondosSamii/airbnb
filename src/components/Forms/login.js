@@ -7,13 +7,15 @@ import { login } from "../../actions/clients";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Joi, { validate } from "joi-browser";
-// import {SessionContext ,setSessionCookie,getSessionCookie} from '../session';
+ import {SessionContext ,setSessionCookie,getSessionCookie} from '../session';
 import {Redirect} from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.checked = React.createRef();
     this.addActiveClass = this.addActiveClass.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
   //static contextType = SessionContext;
   state = {
@@ -24,12 +26,28 @@ class Login extends Component {
     token: "",
     isAuth: false,
     user_id: "",
+    isChecked:false
   };
+  async componentDidMount(){
+    if(localStorage.checked==="true"){
+      await this.setState({Email:localStorage.email,
+        Password:localStorage.password,
+        isChecked:localStorage.checked});
+        // console.log(localStorage)
+        console.log("here true")
+    }else{
+      await this.setState({Email:"",
+        Password:"",
+        isChecked:false});
+        console.log("here false")
+    }
+    
+  }
   schema = {
     Email: Joi.string().required().email(),
     Password: Joi.string().required(),
   };
-  data = {};
+  //data = {};
   //   async componentDidMount() {
   //     this.data = await axios.get("http://localhost:3000/clients/");
   //     //const SessionContext = this.context;
@@ -49,6 +67,7 @@ class Login extends Component {
     delete state.isAuth;
     delete state.token;
     delete state.user_id;
+    delete state.isChecked;
     var res = Joi.validate(state, this.schema, { abortEarly: false });
     if (res.error === null) {
       this.setState({ errors: {} });
@@ -84,6 +103,18 @@ class Login extends Component {
   //         this.setState({errors:{Email:"This Email is not exists!"}})
   //     }
   // }
+
+  handleInputChange=async e=> {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const targetname = target.name;
+    let state={...this.state};
+    state[targetname]=value;
+    await this.setState(state);
+    console.log(state)
+    console.log(value)
+  }
+
   handelLogin = async (e) => {
     e.preventDefault();
 
@@ -108,7 +139,15 @@ class Login extends Component {
       await localStorage.setItem("token", this.props.client.token);
       await localStorage.setItem("user_id", this.props.client.user_id);  
     }
-
+    if(this.state.isChecked==="true"){
+      await localStorage.setItem("email", this.state.Email);
+      await localStorage.setItem("password", this.state.Password);
+      await localStorage.setItem("checked", this.state.isChecked);
+    }else{
+      await localStorage.removeItem("email");
+      await localStorage.removeItem("password");
+      await localStorage.removeItem("checked");
+    }
     if(this.props.client.token){
       this.setState({
         isAuth: true,
@@ -266,9 +305,13 @@ class Login extends Component {
                       </div>
                       <div className="custom-control custom-checkbox text-center mt-2 mb-2">
                         <input
+                        name="isChecked"
                           type="checkbox"
                           className="custom-control-input"
                           id="customCheck1"
+                          checked={this.state.isChecked}
+                          onChange={this.handleInputChange}
+
                         />
                         <label
                           className="custom-control-label"

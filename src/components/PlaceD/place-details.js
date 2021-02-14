@@ -252,7 +252,7 @@ class GetPlaceDetails extends Component {
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center">Beds Number </li>
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaFan className=" mr-3"/> Available Rooms </li>
                         </div>
-                        <div lassName="pb-3">
+                        <div className="pb-3">
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaUserAlt className=" mr-3"/> {place.max_guests} </li>
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><IoIosBed className=" mr-3 "/> {place.total_beds} </li>
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><IoIosBed className=" mr-3 "/> {place.total_rooms} </li>
@@ -289,6 +289,7 @@ class GetPlaceDetails extends Component {
                 }
             })
         });
+        console.log(placeReviews)
         placeReviews.map(r=>{
             allusers.map(oneuser=>{
                 if(r.user_id === oneuser._id){
@@ -370,7 +371,7 @@ class GetPlaceDetails extends Component {
     }
 Model(){
     return(
-        <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                 <div className="modal-header border-0">

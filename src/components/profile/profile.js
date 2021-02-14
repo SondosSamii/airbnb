@@ -578,7 +578,7 @@ class ViewProfile extends Component {
                          <input type="file" id="img" name="img" accept="image/*" onChange={(e) => {
                             this.setState({ profile_image: e.target.files[0] });
                           }} />
-                          <input type="text" value={this.state.profile_image}/>
+                          <input type="text" defaultValue={this.state.profile_image}/>
                         
                       </div>
                       <div className="form-group">
