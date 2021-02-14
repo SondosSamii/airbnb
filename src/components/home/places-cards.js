@@ -91,11 +91,13 @@ class Cards extends Component {
                 result = await reviews.map(async rev => {
                     // console.log("rev: ", rev);
                     await this.props.getReviewDetails(rev);
-                    var rating =  this.props.reviewDetails.review.rating;
-                    // console.log("ratingggggggg : ", this.props.reviewDetails.review.rating);
-                    rate += rating;
-                    // console.log("rate: ", rate);
-                    return rate;
+                    if(this.props.reviewDetails) {
+                        var rating =  this.props.reviewDetails.review.rating;
+                        // console.log("ratingggggggg : ", this.props.reviewDetails.review.rating);
+                        rate += rating;
+                        // console.log("rate: ", rate);
+                        return rate;
+                    }
                 })
                 var sum =0;
                 // console.log("kkkkkkkkk:   ",result[result.length-1]);
@@ -148,17 +150,18 @@ class Cards extends Component {
         await this.props.getWishlistsByUserId(this.state.token);
         // console.log("hereeeeeee:   ",this.props.userWishlists);
         // Error Here
+        // if(this.props.userWishlists.wishlists && this.props.userWishlists.wishlists > 0){
         if(this.props.userWishlists.wishlists){
             this.props.userWishlists.wishlists.map(async(wishlist_id)=>{
-                await this.props.getWishlistByID(this.state.token,wishlist_id);
-                // console.log(".........." , this.props.wishlistDetails.wishlist);
-                var wishlist_details = this.props.wishlistDetails;
-                this.setState((state) => {
-                    const userWishlists = state.UserWishlists.push(wishlist_details.wishlist);
-                    return userWishlists;
+            await this.props.getWishlistByID(this.state.token,wishlist_id);
+            // console.log(".........." , this.props.wishlistDetails.wishlist);
+            var wishlist_details = this.props.wishlistDetails;
+            this.setState((state) => {
+                const userWishlists = state.UserWishlists.push(wishlist_details.wishlist);
+                return userWishlists;
             })
-            })
-            // console.log("llllllllll: " , this.state.UserWishlists);
+        })
+        // console.log("llllllllll: " , this.state.UserWishlists);
 
         }
         // this.setState({use})
@@ -463,7 +466,8 @@ class Cards extends Component {
             )
         }
         return (
-            <h2 className="text-center my-5">No Cards...</h2>
+            <></>
+            // <h2 className="text-center my-5">No Cards...</h2>
         )
     }
 }

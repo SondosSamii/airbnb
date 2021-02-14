@@ -282,10 +282,10 @@ class GetPlaceDetails extends Component {
         let rate=0;
         let username=[];
         let userimg=[];
-        allreviews.map(r =>{
-            reviews.map( r2 =>{
-                if(r._id === r2){
-                    placeReviews.push(r);
+        reviews.map(r =>{
+            allreviews.map( r2 =>{
+                if(r2._id === r){
+                    placeReviews.push(r2);
                 }
             })
         });
@@ -309,7 +309,7 @@ class GetPlaceDetails extends Component {
         //console.log("22222222222222",user)
         //console.log("333333333333", placeReviews)
         
-        
+        if(placeReviews.length > 0) {
             return (
                 <div className="review row " style={{height:"100% !important"}}>
                     <h2  className="text-center col-12 pb-0 mb-0 mt-5">User Reviwes</h2>
@@ -344,7 +344,7 @@ class GetPlaceDetails extends Component {
                          */} 
 
                     <div className="container users">
-                      {allreviews.slice(0,3).map((rev,index) =>(
+                      {placeReviews.slice(0,3).map((rev,index) =>(
                           <>
                         <div className="row my-2">
                             <div className="col-3">
@@ -366,6 +366,7 @@ class GetPlaceDetails extends Component {
                 </div>
             )
         }
+        }
     }
 Model(){
     return(
@@ -378,7 +379,7 @@ Model(){
                     </button>
                 </div>
                 <div className="modal-body">
-                    <ReviewAdding />
+                    <ReviewAdding history={this.props.history} />
                 </div>
                 
                 </div>
@@ -388,7 +389,8 @@ Model(){
 }
 btnModel(){
     return(<div className="row justify-content-end">
-            <button type="button" className="btn mr-5 mt-auto main-btn" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" className="btn mr-5 mt-auto main-btn"
+                data-toggle="modal" data-target="#exampleModal">
                 Add Review
             </button>
             <Link to={`/reservation/${this.props.match.params.id}`} type="button" className="btn mr-5 mt-auto main-btn" >

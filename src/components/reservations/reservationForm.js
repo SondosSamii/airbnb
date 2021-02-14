@@ -3,11 +3,11 @@ import { getAllReservation , addReservation } from "../../actions/reservations";
 import { getAllClients, updateClient } from "../../actions/clients";
 import { getAllPlaces, getPlaceById } from "../../actions/places";
 import Joi, { validate } from "joi-browser";
-
+import { ToastContainer, toast } from 'react-toastify';
 import { connect } from "react-redux";
-
 import { bindActionCreators } from "redux";
 import React, { Component } from "react";
+import moment from "moment"
 
 // const Reservastion = () => {
     class Reservastion extends Component {
@@ -42,7 +42,6 @@ import React, { Component } from "react";
         _id: this.state.places._id,
         start_date: this.state.start_date,
         end_date: this.state.end_date,
-        price_per_night: this.state.price_per_night,
         total_nights: this.state.total_nights,
         num_of_guests: this.state.num_of_guests
       };
@@ -108,6 +107,7 @@ import React, { Component } from "react";
               placeID :  this.props.match.params.id
         });
           console.log("token: "  , this.state.token);
+          // console.log(moment(document.getElementById("")))
           // await this.props.getAllPlaces();
       
           // this.UserPlaces();
@@ -186,46 +186,103 @@ import React, { Component } from "react";
 //   // console.log(this.state.errors.Password);
 // };
 
-  handleClick = ()=>{
+  handleClick = async ()=>{
     var reservation = {
       start_date: this.state.start_date,
       end_date: this.state.end_date,
-      price_per_night: 200,
       total_nights: this.state.total_nights,
       num_of_guests: this.state.num_of_guests
     };
-var flag= true;
-var min;
+    var flag= true;
+    if(reservation.start_date && reservation.end_date <= reservation.start_date) {
+      flag = false;
+      toast.error('🙄 Select Valid Dates', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
+
     if(!reservation.start_date){
       flag=false;
-      document.getElementById("start_err").innerHTML= "should Enter start Date" ;
+      toast.error('🙄 Select Start Date', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
     if(!reservation.end_date){
       flag=false;
-      document.getElementById("end_err").innerHTML= "should Enter end Date";
+      toast.error('😏 Select End Date', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
     if(!reservation.total_nights || reservation.total_nights < 0 ){
       flag=false;
-      document.getElementById("total_nights_err").innerHTML= "should Enter positive number";
+      toast.error('🤔 Enter Valid Number', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
     if(!reservation.num_of_guests || reservation.num_of_guests <= 0  ){
       flag=false;
-      document.getElementById("num_guests_err").innerHTML= "should Enter positive number";
+      toast.error('🤨 Enter Valid Number of Guests', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
     if(flag){
       console.log(reservation);
-      this.props.addReservation(this.state.token , this.state.placeID,reservation);
+      await this.props.addReservation(this.state.token , this.state.placeID,reservation);
+      console.log("^^^^^^^^", this.props.msg);
+      // if(this.props.msg === "reservation created successfully!") {
+      if(this.props.msg === "success") {
+        toast.success('🤩 Reservation created Successfully!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+          setTimeout(()=>{
+            this.props.history.push(`/place-details/${this.state.placeID}`);
+        }, 5500)
+      }
     }
-
-
   }
 
-        
-        render() {
-        
+  render() {      
     return (
+      <>
         <section id="login" className="py-5">
             <div className="container">
+              <ToastContainer />
                 <div id="login-row" className="row justify-content-center align-items-center">
                     <div id="login-column" className="col-md-6">
                         <div id="login-box" className="col-md-12 ">
@@ -235,6 +292,7 @@ var min;
                                 <div className="form-group">
                                     <label className="text-info">Check In :</label>
                                     <input type="date"
+                                    id="start_date"
                                      className="form-control"
                                      value={this.state.start_date}
                                     //  placeholder={this.state.user.start_date}
@@ -254,6 +312,7 @@ var min;
                                 <div className="form-group">
                                     <label className="text-info">Check Out :</label>
                                     <input type="date"
+                                    id="end_date"
                                      className="form-control" 
                                      value={this.state.end_date}
                                     //  placeholder={this.state.user.end_date}
@@ -331,7 +390,7 @@ var min;
                 </div>
             </div>
         </section>
-
+      </>
 );
 }
 }
@@ -345,7 +404,6 @@ const mapactiontoprops = (disptch) => {
         getPlaceById,
         getAllReservation,
         addReservation
-
       },
       disptch
     );
@@ -356,6 +414,7 @@ const mapactiontoprops = (disptch) => {
       clients: state.Clients,
       placeDetails: state.Places,
       reservations: state.Reservations,
+      msg: state.Reservations.message
     };
   };
 

@@ -277,9 +277,6 @@ class Login extends Component {
                           Remember Me
                         </label>
                       </div>
-                      <div className="text-center mb-4 text-link">
-                        <a href="#">Forget password</a>
-                      </div>
 
                       <button
                         className="mybtn btn-lg btn-block text-uppercase submit-button"

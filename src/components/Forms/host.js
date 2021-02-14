@@ -12,7 +12,10 @@ import { addplace } from "../../actions/places";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {SessionContext ,getSessionCookie} from '../session'
+import { ToastContainer, toast } from 'react-toastify';
 // import { useContext } from "react";
+import { Redirect } from "react-router-dom";
+
 var params = {
     access_key: '6895d17a0165c9fa200e743be896862d',
     query: '1600 Pennsylvania Ave NW'
@@ -318,8 +321,24 @@ class Host extends Component {
           }
         let url = "http://localhost:8080/api/place";
         await this.props.addplace(formData,url,this.state.token);
-        console.log("place data",this.props.placeDetails)
-
+        console.log("place data",this.props.placeDetails);
+        console.log("^^^^^^^^", this.props.msg.message);
+        if(this.props.msg.message === "place created successfully!") {
+          toast.success('👌 Place added Successfully!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            });
+            setTimeout(()=>{
+                this.props.history.push(`/place-details/${this.props.msg.place._id}`);
+            }, 5500)
+        }
+        // <Redirect push to="/"/>
+        
         {/* 
         // const  obj={
         // "user_id": this.state.UserId,
@@ -359,6 +378,7 @@ class Host extends Component {
         return (
             <div id="host_form" className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
                 <div className="background pb-5" style={{  height:"100%" }} >
+                <ToastContainer />
                 <form  className="form-signin" action="" method="POST">
                 <div className="container signinClass">
                     <div className="row">
@@ -564,7 +584,8 @@ const mapactiontoprops = (disptch) => {
   };
   const mapstatetoprops = (state) => {
     return {
-        placeDetails: state.Places   
+        placeDetails: state.Places,
+        msg: state.Places.message
     };
   }
 Host.contextType = SessionContext;

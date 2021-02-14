@@ -10,7 +10,6 @@
     cursor: pointer;
   }
   .about-text{
-    font-size: 1.6em;
     font-weight: bolder;
     /* color: rgb(122, 118, 118); */
     color: var(--primary-dark-color);
@@ -32,6 +31,9 @@
     display: block;
   }
 .edit-icon{
+  position: absolute;
+  right: 3%;
+  bottom: 5%;
   font-size: 2em;
   cursor: pointer;
   color:var(--primary-dark-color) ;
