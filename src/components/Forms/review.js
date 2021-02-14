@@ -8,6 +8,7 @@ import {AddReview} from "../../actions/reviews";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Joi, { validate } from "joi-browser";
+import { ToastContainer, toast } from "react-toastify";
 
 class ReviewAdding extends Component{
     constructor(props) {
@@ -70,12 +71,26 @@ class ReviewAdding extends Component{
         formData.append("comment", this.state.Comment);
         let url="http://localhost:8080/api/review/"+this.state.Place_id
         await this.props.AddReview(formData,url,localStorage.token);
+        toast.success('🤩 Review added Successfully!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+          setTimeout(()=>{
+            // this.props.history.push(`/place-details/${this.state.Place_id}`);
+            window.location.reload();
+        }, 5500)
     }
 
 render(){
    return(
 
-    <div  className="container signinClass mt-0">
+    <div className="container signinClass mt-0">
+      <ToastContainer/>
             <div className="row">
               <div className=" col-12 mx-auto">
                 <div className="card card-signin mb-5">

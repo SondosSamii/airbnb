@@ -141,6 +141,7 @@ class Signup extends Component {
     var password= this.state.password;
     setSessionCookie({ email,password });
     //await  this.props.history.push("/");
+    window.location.reload();
   };
 
   render() {

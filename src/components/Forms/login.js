@@ -28,12 +28,11 @@ class Login extends Component {
     isChecked:false
   };
   async componentDidMount(){
-    console.log(localStorage.checked)
-    if(localStorage.checked){
+    if(localStorage.checked==="true"){
       await this.setState({Email:localStorage.email,
         Password:localStorage.password,
         isChecked:localStorage.checked});
-        console.log(localStorage)
+        // console.log(localStorage)
         console.log("here true")
     }else{
       await this.setState({Email:"",
@@ -139,7 +138,7 @@ class Login extends Component {
       await localStorage.setItem("token", this.props.client.token);
       await localStorage.setItem("user_id", this.props.client.user_id);  
     }
-    if(this.state.isChecked===true){
+    if(this.state.isChecked==="true"){
       await localStorage.setItem("email", this.state.Email);
       await localStorage.setItem("password", this.state.Password);
       await localStorage.setItem("checked", this.state.isChecked);
@@ -319,9 +318,6 @@ class Login extends Component {
                         >
                           Remember Me
                         </label>
-                      </div>
-                      <div className="text-center mb-4 text-link">
-                        <a href="#">Forget password</a>
                       </div>
 
                       <button

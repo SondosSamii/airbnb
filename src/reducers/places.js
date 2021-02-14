@@ -30,8 +30,8 @@ function Places(state = {} , action) {
         }
         case "addplace": {
              console.log("addplace" , action.payload);
-            return action.payload;
-        }
+             return {...state,message:action.payload}
+            }
         case "updatePlace":{
             console.log("updatePlace" , action.payload);
             return action.payload;

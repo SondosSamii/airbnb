@@ -327,6 +327,7 @@ class EditPlace extends Component {
         console.log(this.state.coordinates)
         //var address={country:"egy",city:"tanta"}
         var ins =this.state.photo.length;
+        // console.log("^^^^^", this.state.name);
         var formData = new FormData();
         formData.append("name", this.state.name);
         formData.append("type", this.state.type);
@@ -359,7 +360,7 @@ class EditPlace extends Component {
         console.log(url);
         await this.props.updatePlace(formData,url,this.state.token);
         console.log("place data",this.props.placeDetails);
-        await this.props.history.push(`/place-details/${this.props.match.params.id}`);
+        // await this.props.history.push(`/place-details/${this.props.match.params.id}`);
         
 
         {/* 
@@ -425,9 +426,10 @@ class EditPlace extends Component {
                                         <label className="ml-5 " >Place Type:</label>
                                         <select name="type" onChange={this.handelchange} value={this.state.type} className="form-control" id="type">
                                             <option defaultValue>Choose the place type...</option>
-                                            <option value="home">Home</option>
+                                            <option value="apartment">Apartment</option>
+                                            <option value="cottage">Cottage</option>
                                             <option value="room">Room</option>
-                                            <option value="house">House</option>
+                                            <option value="villa">Villa</option>
                                         </select>
                                         {this.state.errors.type && ( <div className="alert alert-danger form-control">{this.state.errors.type}</div> )}
                                     </div>

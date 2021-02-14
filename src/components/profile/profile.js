@@ -1,14 +1,9 @@
-import { FaFacebook } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai";
-import { GiEarthAfricaEurope } from "react-icons/gi";
-import { FaHeart } from "react-icons/fa";
-// import { Card, Button } from "react-bootstrap";
-import "./profile.css";
-
-
+import React, { Component } from "react";
+import Joi, { validate } from "joi-browser";
 import { NavLink as Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
 import { getAllPlaces,getPlaceById } from "../../actions/places";
 import {
   getAllWishlists,
@@ -18,16 +13,17 @@ import {
   getWishlistByID,
   
 } from "../../actions/wishlists";
+import "./profile.css";
 import {  getReservationByID } from "../../actions/reservations";
 import {  updateClient , getclientById , updatePassword } from "../../actions/clients";
-import React, { Component } from "react";
-import Joi, { validate } from "joi-browser";
 
-import { FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
-// import { FaRegHeart, FaStar, FaTv, FaWifi, FaFan } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+import { FaStar, FaTv, FaWifi, FaFan, FaHeart } from "react-icons/fa";
 import { MdPets } from "react-icons/md";
 import { GiHeatHaze } from "react-icons/gi";
 import { AiFillEdit } from "react-icons/ai";
+import { HiOutlineMail } from "react-icons/hi";
+import { ImPhone } from "react-icons/im";
 import Cards from "../home/places-cards";
 
 class ViewProfile extends Component {
@@ -386,13 +382,23 @@ class ViewProfile extends Component {
       formData.append("phone", client.phone);
       formData.append("profile_image", client.profile_image);
       console.log("yes" , client);
-      
-      this.props.updateClient(this.state.token,formData );
-
-      // var confirm = window.confirm("are you sure you want to update");
-      // if(confirm){
-      //   window.location.reload();
-      // }      
+            
+      var confirm = window.confirm("are you sure you want to update");
+      if(confirm){
+        this.props.updateClient(this.state.token,formData );
+        toast('Updating... 😇', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          });
+          setTimeout(()=>{
+            window.location.reload();
+        }, 5500)
+      }      
     }
   }
   handleUpdatePassword = ()=>{
@@ -420,75 +426,74 @@ class ViewProfile extends Component {
   render() {
     return (
       <div className="container--fluid hero">
+        <ToastContainer />
         <div
           style={{
-            backgroundImage: `url('https://cdn.pixabay.com/photo/2017/07/29/13/24/background-2551501_960_720.jpg')`,
+            // backgroundImage: `url('https://cdn.pixabay.com/photo/2017/07/29/13/24/background-2551501_960_720.jpg')`,
+            backgroundImage: `url('/images/pexels-photo-2088203.jpeg')`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            backgroundPosition: "",
+            backgroundPosition: "bottom",
           }}
           className="bg-light about-content"
         >
-          {this.state.isLogin && (
-            <div className="row p-4 mr-3 mt-2 justify-content-end">
-              <AiFillEdit
-                className="edit-icon"
-                data-toggle="modal"
-                data-target="#exampleModal"
-              />
-            </div>
-          )}
-
-          <div className=" row justify-content-center" >
+          <div className="row justify-content-center mt-5">
+            <div className="mt-4 text-center">
             {
-              this.state.user.profile_image ?(
-                <div className="user_img " 
-                style={{
-                // backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
-                backgroundImage:`url('http://localhost:8080/${this.state.user.profile_image}')`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}>
-                </div>
-              ):(
-                <div className="user_img " 
-                style={{
-                // backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
-                backgroundImage:`url('data:image/jpeg;base64,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')`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}>
-            {/* <img src="http://localhost:8080/images/Alaa.jpg" /> */}
-                </div>
-              )
-
-            }
-
-          
+                this.state.user.profile_image ?(
+                  <div className="user_img " 
+                  style={{
+                  // backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
+                  backgroundImage:`url('http://localhost:8080/${this.state.user.profile_image}')`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}>
+                  </div>
+                ):(
+                  <div className="user_img " 
+                  style={{
+                  // backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
+                  backgroundImage:`url('data:image/jpeg;base64,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')`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}>
+              {/* <img src="http://localhost:8080/images/Alaa.jpg" /> */}
+                  </div>
+                )
+              }
+              <p className="about-text h2">{this.state.user.name}</p>
+              <p className="about-text h4"><HiOutlineMail className="mr-2"/>{this.state.user.email}</p>
+              <p className="about-text h4"><ImPhone className="mr-2 mb-2"/>{this.state.user.phone}</p>
+            </div>
+          </div>
+          <div style={{position: "relative"}}>
+            {this.state.isLogin && (
+              <AiFillEdit
+              className="edit-icon"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              />
+            )}
           </div>
           <div className="row justify-content-center">
-            <div className="col-8  col-md-6 p-3 mt-2  text-center">
-              <span className="about-text">
-                 I am {this.state.user.name}{" "},
-              </span>
+            {/* <div className="col-6 col-md-4 col-lg-3 p-3 mt-2 text-center">
               
-              <span className="about-text">Welcome in my profile page</span>
-              <br></br>
-              <span className="about-text">
-                My Email: {this.state.user.email}
-              </span>
-              <br></br>
-              <span className="about-text">
-                My phone: {this.state.user.phone}
-              </span>
-              <br></br>
-{/* 
-              <FaFacebook className="icon" />
-              <AiFillInstagram className="icon" />
-              <GiEarthAfricaEurope className="icon" /> */}
-            </div>
+              <p className="about-text h2">{this.state.user.name}</p>
+              <p className="about-text h4"><HiOutlineMail className="mr-2"/>{this.state.user.email}</p>
+              <p className="about-text h4"><ImPhone className="mr-2 mb-2"/>{this.state.user.phone}</p>
+              
+              {this.state.isLogin && (
+                <div className="row justify-content-center">
+                  <AiFillEdit
+                    className="edit-icon"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                  />
+                </div>
+              )}
+            </div> */}
           </div>
         </div>
         <div className="row justify-content-center p-4 ">
@@ -573,7 +578,7 @@ class ViewProfile extends Component {
                          <input type="file" id="img" name="img" accept="image/*" onChange={(e) => {
                             this.setState({ profile_image: e.target.files[0] });
                           }} />
-                          <input type="text" value={this.state.profile_image}/>
+                          <input type="text" defaultValue={this.state.profile_image}/>
                         
                       </div>
                       <div className="form-group">

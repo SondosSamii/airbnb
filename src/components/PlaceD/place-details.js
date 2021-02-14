@@ -252,7 +252,7 @@ class GetPlaceDetails extends Component {
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center">Beds Number </li>
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaFan className=" mr-3"/> Available Rooms </li>
                         </div>
-                        <div lassName="pb-3">
+                        <div className="pb-3">
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaUserAlt className=" mr-3"/> {place.max_guests} </li>
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><IoIosBed className=" mr-3 "/> {place.total_beds} </li>
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><IoIosBed className=" mr-3 "/> {place.total_rooms} </li>
@@ -310,7 +310,7 @@ class GetPlaceDetails extends Component {
         //console.log("22222222222222",user)
         //console.log("333333333333", placeReviews)
         
-        
+        if(placeReviews.length > 0) {
             return (
                 <div className="review row " style={{height:"100% !important"}}>
                     <h2  className="text-center col-12 pb-0 mb-0 mt-5">User Reviwes</h2>
@@ -367,10 +367,11 @@ class GetPlaceDetails extends Component {
                 </div>
             )
         }
+        }
     }
 Model(){
     return(
-        <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                 <div className="modal-header border-0">
@@ -379,7 +380,7 @@ Model(){
                     </button>
                 </div>
                 <div className="modal-body">
-                    <ReviewAdding />
+                    <ReviewAdding history={this.props.history} />
                 </div>
                 
                 </div>
@@ -389,7 +390,8 @@ Model(){
 }
 btnModel(){
     return(<div className="row justify-content-end">
-            <button type="button" className="btn mr-5 mt-auto main-btn" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" className="btn mr-5 mt-auto main-btn"
+                data-toggle="modal" data-target="#exampleModal">
                 Add Review
             </button>
             <Link to={`/reservation/${this.props.match.params.id}`} type="button" className="btn mr-5 mt-auto main-btn" >

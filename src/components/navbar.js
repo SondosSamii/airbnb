@@ -71,8 +71,9 @@ class Navbar extends Component {
 
     handleLoginClick() {
         console.log("***handleLoginClick***");
+        this.setState({isAuth: true});
         // if(localStorage.getItem("token")) {
-            this.setState({isAuth: true});
+        //     window.location.reload();
         // }
     }
     
@@ -133,14 +134,15 @@ class Navbar extends Component {
                 <nav className="navbar navbar-expand-lg navbar-light mx-0 mx-md-5">
                     <Link to="/" className="navbar-brand">
                         <img
-                            src="/logo192.png"
-                            width="30"
-                            height="30"
+                            // src="/images/Logo/Logo-Icon-2.png"
+                            src="/images/Logo/Logo_where-to-3.png"
+                            // width="60"
+                            height="60"
                             alt="Logo"
                             style={{
                             marginRight: '0.5em'
                         }}/>
-                        Airbnb</Link>
+                        </Link>
                     <button
                         className="navbar-toggler"
                         type="button"
