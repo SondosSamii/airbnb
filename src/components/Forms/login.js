@@ -7,7 +7,6 @@ import { login } from "../../actions/clients";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Joi, { validate } from "joi-browser";
- import {SessionContext ,setSessionCookie,getSessionCookie} from '../session';
 import {Redirect} from 'react-router-dom';
 
 class Login extends Component {
@@ -157,7 +156,7 @@ class Login extends Component {
         
       })
       console.log(this.state);
-      //this.props.history.push("/");
+      this.props.history.push("/");
       // <Redirect push to="/"/>
     }
 

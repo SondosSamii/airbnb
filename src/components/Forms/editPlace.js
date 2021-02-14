@@ -322,10 +322,10 @@ class EditPlace extends Component {
       handelSubmit=async e=>{
         e.preventDefault();
         const errors= this.Validations();
-        if(errors) return;
+        if(errors !== null) return;
         await this.handleClick();
         console.log(this.state.coordinates)
-        var address={country:"egy",city:"tanta"}
+        //var address={country:"egy",city:"tanta"}
         var ins =this.state.photo.length;
         var formData = new FormData();
         formData.append("name", this.state.name);
