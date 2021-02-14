@@ -193,11 +193,12 @@ class EditPlace extends Component {
           console.log(this.state);
           console.log(targetname);
         }
-        handelchange=e=>{
+        handelchange= async e=>{
             this.state.errors[e.currentTarget.name]=null;
             let state={...this.state};
             state[e.currentTarget.name]=e.currentTarget.value;
-            this.setState(state)
+            await this.setState(state)
+            console.log(this.state)
         }
     
       addActiveClass(i) {
@@ -284,7 +285,7 @@ class EditPlace extends Component {
         type:Joi.string().required(),
         price:Joi.number().required(),
         city:Joi.string().required(),
-        zipcode:Joi.string().required(),
+        zipcode:Joi.required(),
         country:Joi.string().required(),
         room:Joi.number().required().min(1),
         bathroom:Joi.number().required().min(1),
@@ -296,7 +297,7 @@ class EditPlace extends Component {
         wifi: Joi.boolean().required(),
         heat:Joi.boolean().required(),
         pets:Joi.boolean().required(),
-        photo:Joi.array().items(Joi.object().keys().min(3))
+        photo:Joi.required()
     };
     Validations = () =>{
         const errors=  {};
@@ -309,6 +310,7 @@ class EditPlace extends Component {
         delete state.coordinates;
         delete state.place_id;
         delete state.placedata;
+        delete state.UserId;
         var res=Joi.validate(state,this.schema);
         if(res.error === null){
             this.setState({errors:{}});

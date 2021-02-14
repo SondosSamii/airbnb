@@ -249,7 +249,7 @@ class Host extends Component {
         type:Joi.string().required(),
         price:Joi.number().required(),
         city:Joi.string().required(),
-        zipcode:Joi.string().required(),
+        zipcode:Joi.required(),
         country:Joi.string().required(),
         room:Joi.number().required().min(1),
         bathroom:Joi.number().required().min(1),
