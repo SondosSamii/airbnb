@@ -282,13 +282,14 @@ class GetPlaceDetails extends Component {
         let rate=0;
         let username=[];
         let userimg=[];
-        allreviews.map(r =>{
-            reviews.map( r2 =>{
-                if(r._id === r2){
-                    placeReviews.push(r);
+        reviews.map(r =>{
+            allreviews.map( r2 =>{
+                if(r2._id === r){
+                    placeReviews.push(r2);
                 }
             })
         });
+        console.log(placeReviews)
         placeReviews.map(r=>{
             allusers.map(oneuser=>{
                 if(r.user_id === oneuser._id){
@@ -344,7 +345,7 @@ class GetPlaceDetails extends Component {
                          */} 
 
                     <div className="container users">
-                      {allreviews.slice(0,3).map((rev,index) =>(
+                      {placeReviews.slice(0,3).map((rev,index) =>(
                           <>
                         <div className="row my-2">
                             <div className="col-3">
