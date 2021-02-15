@@ -13,6 +13,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {SessionContext ,getSessionCookie} from '../session'
 // import { useContext } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+
 var params = {
     access_key: '6895d17a0165c9fa200e743be896862d',
     query: '1600 Pennsylvania Ave NW'
@@ -81,8 +83,8 @@ class EditPlace extends Component {
             this.setState({token: localStorage.getItem("token")});
             this.setState({UserId: localStorage.getItem("user_id")});
             if(!localStorage.getItem("token")){
-                alert("please log in frist!")
-            this.props.history.push("/login");
+                alert("Please login frist!");
+                this.props.history.push("/login");
             }
             await this.props.getPlaceById(this.props.match.params.id);
             console.log("1111111", this.props.placeDetails.place_details.place);
@@ -133,7 +135,7 @@ class EditPlace extends Component {
                   suffix = "MB";
                   size = Math.round(size / 1024000 * 100) / 100;
                 }
-                return (<li key="{index}">{file.name} <span className="file-size">{size} {suffix}</span><MdDelete className="delimg" onClick={() => this.deleteImg({index})}  /></li>)
+                return (<li key={index}>{file.name} <span className="file-size">{size} {suffix}</span><MdDelete className="delimg" onClick={() => this.deleteImg({index})}  /></li>)
               });
               
               return(fileMap);
@@ -363,7 +365,18 @@ class EditPlace extends Component {
         await this.props.updatePlace(formData,url,this.state.token);
         console.log("place data",this.props.placeDetails);
         // await this.props.history.push(`/place-details/${this.props.match.params.id}`);
-        
+        toast.success('Updating... 😁', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            });
+            setTimeout(()=>{
+              this.props.history.push(`/place-details/${this.props.match.params.id}`);
+          }, 3500)  
 
         {/* 
         // const  obj={
@@ -403,6 +416,7 @@ class EditPlace extends Component {
     render() { 
         return (
             <div id="host_form" className="background " style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
+                <ToastContainer />
                 <div className="background pt-5 pb-5" style={{  height:"100%" }} >
                     <h1 className="text-center pt-5">Edit Your Place Information</h1>
                 <form  className="form-signin" action="" method="POST">
@@ -428,10 +442,10 @@ class EditPlace extends Component {
                                         <label className="ml-5 " >Place Type:</label>
                                         <select name="type" onChange={this.handelchange} value={this.state.type} className="form-control" id="type">
                                             <option defaultValue>Choose the place type...</option>
-                                            <option value="apartment">Apartment</option>
-                                            <option value="cottage">Cottage</option>
-                                            <option value="room">Room</option>
-                                            <option value="villa">Villa</option>
+                                            <option value="Apartment">Apartment</option>
+                                            <option value="Cottage">Cottage</option>
+                                            <option value="Room">Room</option>
+                                            <option value="Villa">Villa</option>
                                         </select>
                                         {this.state.errors.type && ( <div className="alert alert-danger form-control">{this.state.errors.type}</div> )}
                                     </div>

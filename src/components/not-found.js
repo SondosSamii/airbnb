@@ -7,7 +7,7 @@ const NotFound = ()=> {
         <section
             style={{
                 // height: '100vh',
-                marginTop: '63px', // Header Height
+                marginTop: '70px', // Header Height
                 overflow: 'hidden',
                 backgroundColor: '#141019',
                 background: 'radial-gradient(at 50% -20%, #908392, #0d060e) fixed'
@@ -16,7 +16,7 @@ const NotFound = ()=> {
                 <div
                     className="container"
                     style={{
-                        height: 'calc(100vh - 178px)' // Subtract height of Header and Footer
+                        height: 'calc(100vh - 185px)' // Subtract height of Header and Footer
                     }}>
                     <div className="row justify-content-center align-items-center h-100">
                         <div className="col-12 col-lg-8">

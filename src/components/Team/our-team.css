@@ -52,7 +52,7 @@
 }
 #team .about-div p{
     font-size: 1.4em;
-    color: var(--primary-light-light-color);
+    color: var(--primary-lighter-color);
     /* font-weight: bold; */
     font-family: "Dosis","sans-serif";
 }

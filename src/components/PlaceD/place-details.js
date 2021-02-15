@@ -3,11 +3,12 @@ import {NavLink as Link} from 'react-router-dom';
 import {SiGithub} from "react-icons/si";
 import {useState, useEffect} from "react";
 import Slider from "react-slick";
-import {FaTv, FaWifi, FaFan, FaUserAlt, FaBath} from "react-icons/fa";
+import {FaTv, FaWifi, FaFan, FaUserAlt, FaBath, FaHome} from "react-icons/fa";
 import {FiEdit} from "react-icons/fi";
 import {IoIosBed} from "react-icons/io";
 import {MdPets} from "react-icons/md";
-import {GiHeatHaze,GiCampCookingPot} from "react-icons/gi";
+import {GoGlobe} from "react-icons/go";
+import {GiHeatHaze,GiCampCookingPot, GiMoneyStack} from "react-icons/gi";
 import { getPlaceById ,updatePlace } from "../../actions/places";
 import { AllClients } from "../../actions/clients";
 import {getPlaceReviews,AllReviews} from "../../actions/reviews";
@@ -15,8 +16,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ReviewAdding from "../Forms/review";
 import { AiFillEdit } from "react-icons/ai";
+import "./place-details.css";
 
-import { Map, GoogleApiWrapper,InfoWindow, Marker } from 'google-maps-react';
+// import { Map, GoogleApiWrapper,InfoWindow, Marker } from 'google-maps-react';
 
 const mapStyles = {
     width: "100%",
@@ -42,7 +44,8 @@ class GetPlaceDetails extends Component {
             users:[],
             username:[],
             userimg:[],
-            owner:false
+            owner:false,
+            isAuth: false
         }
     }
     async componentDidMount(){
@@ -54,9 +57,10 @@ class GetPlaceDetails extends Component {
 
         this.setState({token: localStorage.getItem("token")});
         this.setState({UserId: localStorage.getItem("user_id")});
-        if(!localStorage.getItem("token")){
-            alert("please log in frist!")
-        this.props.history.push("/");
+        if(localStorage.getItem("token")){
+            this.setState({isAuth: true});
+            // alert("please login frist!");
+            // this.props.history.push("/");
         }
         await this.props.getPlaceById(this.props.match.params.id);
         await this.props.AllClients();
@@ -138,11 +142,21 @@ class GetPlaceDetails extends Component {
         if(this.state.img){
             return (
                 <div style={{position: 'relative', overflow: 'hidden' }}>
-                <Slider  >
+                <Slider {...settings}>
                       {this.state.img.map((images)=>{
+                          console.log(images);
                     return (
-                       <div><img className="slideshow-bg img-slide" src={`http://localhost:8080/${images}`}/></div>
-                        
+                       <div>
+                           <img
+                            className="slideshow-bg w-100"
+                            src={`http://localhost:8080/${images}`}
+                            alt=""
+                            />
+                       </div>
+                        // <div className="slideshow-bg"
+                        //     style={{backgroundImage: `url('http://localhost:8080/${images}')`}}
+                        // >
+                        // </div>
                        );})} 
                        
                             {/* <div><img style={{width:"100%"}} className="slideshow-bg" src="/img/pexels-photo-59520.jpeg"/></div>
@@ -166,63 +180,128 @@ class GetPlaceDetails extends Component {
 
             const place=this.state.placedata;
             return (
-                <div className="featchers row">
-                    <h2 className="text-center col-12">Place Information  &nbsp;
-                    { this.state.owner &&(<Link to={`/place-edit/${this.props.match.params.id}`} style={{color:"var(--primary-dark-color)"}} ><FiEdit /></Link>)}
+                <>
+                <div className="row justify-content-center align-items-center py-5">
+                    <h2 style={{
+                        width: 'fit-content',
+                        padding: '0.5em 1em',
+                        borderRadius: 'var(--border-radius)',
+                        boxShadow: 'var(--shadow)',
+                        marginBottom: 0
+                        }}>
+                            Place Information
                     </h2>
-                    
-                    <div className="col-12 col-md-6">
-                        <div className="ml-3 col-12 pt-3 pb-3">
-                            <p className="h4 col-12 pl-5 d-block vertical-align-middle ">Discription:</p>
-                            <p className=" h5 pl-5 pr-5 d-block m-0 ml-5 col-12 text-left">{ this.state.placedata.description}</p>
-                        </div>
-                        <div className=" col-12 pt-3 ">
-                            <div className="ml-3">
-                            <p className="h4 pl-5 d-inline-block w-25">Price Per Night:</p>
-                            <p className=" h5 pl-3 d-inline-block m-0 col-6">$ { this.state.placedata.price}</p>
-                            </div>
-                            <div className="ml-3">
-                            <p className="h4 pl-5 d-inline-block w-25">Type:</p>
-                            <p className=" h5 pl- d-inline-block m-0 col-6">{ this.state.placedata.type}</p>
-                            </div>
-                            <div className="ml-3">
-                            <p className="h4 pl-5 d-inline-block w-25">country:</p>
-                            <p className="h5 pl-3 d-inline">{this.state.address.country}</p> 
-                            
-                            </div>
-                            <div className="ml-3">
-                            <p className="h4 pl-5 d-inline-block w-25 ">city:</p>
-                             <p className="h5 pl-3 d-inline">{this.state.address.city}</p> 
-                            </div>
-                            <div className="ml-3">
-                            <p className="h4 pl-5 d-inline-block w-25">zipcode:</p>
-                             <p className="h5 pl-3 d-inline">{  this.state.address.zipcode}</p> 
-                            
-                            </div>
-                            
-                        </div>
-                        </div>
-                    <div className=" col-12 col-md-6 " style={{height: '350px'}}>
-                        
-                            
-                            <Map
-                                    google={this.props.google}
-                                    zoom={8}
-                                    style={mapStyles}
-                                    containerStyle={containerStyle}
-                                    initialCenter={{
-                                    lat:47.49855629475769,
-                                    lng: -122.14184416996333
-                                    }}
-                                    center={this.state.placedata.location}
-                                    onClick={this.mapClicked}>
-                                    <Marker  position={this.state.placedata.location}
-                                    onClick={() => console.log("You clicked me!")} />
+                    {this.state.owner && (
+                        <>
+                            <Link to={`/place-edit/${this.props.match.params.id}`}
+                                className="place-edit-icon">
+                                    <FiEdit />
+                            </Link>
+                        </>
+                    )}
+                </div>
+                <div className="container">
+                    <div className="featchers row">
+                        <div className="col-12 col-md-6 mt-3"
+                            style={{position: 'relative'}}>
+                            <div className="row justify-content-center">
+                                <div className="outer-circle first">
+                                  <div className="inner-circle"> 
+                                    <div className="circle-container">
+                                        <div className="text">
+                                            <p className="value">${this.state.placedata.price}</p>
+                                            <p className="type"><GiMoneyStack/></p>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                                </div>
 
-                                </Map> 
-                         
+                                <div className="outer-circle second mx-5">
+                                  <div className="inner-circle"> 
+                                    <div className="circle-container">
+                                        <div className="text">
+                                            <p className="value">
+                                                {this.state.address.city}
+                                                <br/>
+                                                {this.state.address.country}
+                                            </p>
+                                            <p className="type"><GoGlobe/></p>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                                </div>
+
+                                <div className="outer-circle third">
+                                  <div className="inner-circle"> 
+                                    <div className="circle-container">
+                                        <div className="text">
+                                            <p className="value">{this.state.placedata.type}</p>
+                                            <p className="type"><FaHome/></p>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* <div className="col-12 col-md-6">
+                            <div className="row">
+                                <div className="col-5">
+                                    <p className="h4">Type: </p>
+                                    <p className="h4">City: </p>
+                                    <p className="h4">Country: </p>
+                                    <p className="h4">Zipcode: </p>
+                                    <p className="h4">Price Per Night: </p>
+                                </div>
+                                <div className="col-6">
+                                    <p className="h4">{this.state.placedata.type}</p>
+                                    <p className="h4">{this.state.address.city}</p> 
+                                    <p className="h4">{this.state.address.country}</p> 
+                                    <p className="h4">{this.state.address.zipcode}</p>
+                                    <p className="h4">${this.state.placedata.price}</p>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <p className="h4">Discription:</p>
+                                    <p className="h5">{ this.state.placedata.description}</p>
+                                </div>
+                            </div>
+                        </div>
+ */}
+                        <div className="col-12 col-md-6 bg-dark" style={{height: '350px'}}>
+                                {/* Don't Delete */}
+                                {/* <Map
+                                        google={this.props.google}
+                                        zoom={8}
+                                        style={mapStyles}
+                                        containerStyle={containerStyle}
+                                        initialCenter={{
+                                        lat:47.49855629475769,
+                                        lng: -122.14184416996333
+                                        }}
+                                        center={this.state.placedata.location}
+                                        onClick={this.mapClicked}>
+                                        <Marker  position={this.state.placedata.location}
+                                        onClick={() => console.log("You clicked me!")} />
+
+                                    </Map>  */}
+                        </div>
                     </div>
                 </div>
+                </>
             )
         }
     }
@@ -231,7 +310,7 @@ class GetPlaceDetails extends Component {
         var place=this.state.placedata;{
             return (
                 <div className="featchers row">
-                     <h2 style={{height:"40px"}} className="text-center col-12 p-0">Available Features</h2>
+                    <h2 style={{height:"40px"}} className="text-center col-12 p-0">Available Features</h2>
                     <div className=" col-lg-12 col-md-6 ">
                     <ul>
                         <div className=" pb-5">
@@ -245,12 +324,12 @@ class GetPlaceDetails extends Component {
                         </div>
                     </ul>
                     </div>
-                    <div className=" col-lg-12 col-md-6 ">
+                    <div className="col-lg-12 col-md-6">
                     <ul>
                         <div className="pb-3">
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"> Max Number of Guests </li>
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center">Beds Number </li>
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaFan className=" mr-3"/> Available Rooms </li>
+                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center">Available Rooms </li>
                         </div>
                         <div className="pb-3">
                         <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaUserAlt className=" mr-3"/> {place.max_guests} </li>
@@ -313,7 +392,7 @@ class GetPlaceDetails extends Component {
         if(placeReviews.length > 0) {
             return (
                 <div className="review row " style={{height:"100% !important"}}>
-                    <h2  className="text-center col-12 pb-0 mb-0 mt-5">User Reviwes</h2>
+                    <h2  className="text-center col-12 pb-0 mb-0 mt-5">User Reviews</h2>
                     
 {/*                     
                     <div className="col-3 ">
@@ -401,11 +480,11 @@ btnModel(){
 }
     render(){
     return (
-        <section style={{ marginTop: '63px',position: 'relative', overflow: 'hidden',width:"100%"}}>
+        <section id="place-details" style={{position: 'relative', overflow: 'hidden',width:"100%"}}>
             {this.PlaceSlider()}
             {this.Placelocation()}
             {this.Placefetcher()} 
-            {this.btnModel()}
+            {this.state.isAuth && this.btnModel()}
             {this.Review()}
            {this.Model()}
         </section>
@@ -434,5 +513,7 @@ const mapactiontoprops = (disptch) => {
       
     };
   };
-  export default connect(mapstatetoprops, mapactiontoprops)(GoogleApiWrapper({
-    apiKey: "AIzaSyDED1xIAqSktQ5LAnZ5BCVIkwtKbJPT31U" })(GetPlaceDetails)) ;
+//   export default connect(mapstatetoprops, mapactiontoprops)(GoogleApiWrapper({
+//     apiKey: "AIzaSyDED1xIAqSktQ5LAnZ5BCVIkwtKbJPT31U" })(GetPlaceDetails)) ;
+
+export default connect(mapstatetoprops, mapactiontoprops)(GetPlaceDetails);

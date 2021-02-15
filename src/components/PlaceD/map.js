@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-
-
-
-
-
-
+import { Map, GoogleApiWrapper,InfoWindow, Marker } from 'google-maps-react';
 
  export  class Map2 extends Component {
    state = {

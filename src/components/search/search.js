@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";  
 import {getAllPlaces , getLocation} from "../../actions/places";
-import Mapp from "./map";
+// import Mapp from "./map";
 import Cards from "../home/places-cards";
 
 // import Mapping from './map3';
@@ -211,13 +211,14 @@ class Search extends Component {
                 id="search"
                 className="py-5"
                 style={{
-                    marginTop: '63px', // Header Height
+                    marginTop: '70px', // Header Height
                 }}>
                 <div className="container">
                     <div className="row mb-5">
-                        <div className="col-8 mb-3"
+                        <div className="col-8 mb-3 bg-dark"
                             style={{height: '350px'}}> {/* The same height of map */}
-                            <Mapp word={this.getPlacesBySearch}/>
+                            {/* Don't Delete */}
+                            {/* <Mapp word={this.getPlacesBySearch}/> */}
                         </div>
                         <div className="col-4 mt-5 pt-3">
                             <h4>Filters</h4>

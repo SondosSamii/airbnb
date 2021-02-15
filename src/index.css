@@ -1,12 +1,13 @@
 :root {
   --primary-color: #156268;
-  --primary-light-light-color: #24787e;
   --primary-dark-color: hsl(184, 66%, 20%);
   --primary-light-color: hsl(184, 66%, 97%);
+  --primary-lighter-color: #24787e;
   --secondary-color: #28BAC5;
-  --card-border-radius: 20px;
-  --card-shadow: 0 0 20px 1px #aaa;
-  --card-dark-shadow: 0 0 20px 1px #333;
+  --border-radius: 20px;
+  --shadow: 0 0 20px 1px #aaa;
+  --dark-shadow: 0 0 20px 1px #333;
+  --light-shadow: 0 0 10px 1px #333;
   --label-shadow: 0 0 3px 1px #aaa;
   --zoom-scale: scale(1.005);
   --transition: all 0.3s;
@@ -34,6 +35,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: content-box;
   color: var(--primary-dark-color);
   background-color: var(--primary-light-color);
 }
@@ -117,8 +119,8 @@ code {
 .card-item {
   width: 100%;
   position: relative;
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--card-shadow);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
   transition: var(--transition);
 }
 
@@ -126,7 +128,7 @@ code {
 .card-item:focus {
   transform: var(--zoom-scale);
   /* animation: var(--shake); */
-  box-shadow: var(--card-dark-shadow);
+  box-shadow: var(--dark-shadow);
 }
 
 .card-item-lg {
@@ -145,15 +147,15 @@ code {
   bottom: 0;
   background-size: cover;
   background-position: center;
-  border-radius: var(--card-border-radius);
+  border-radius: var(--border-radius);
 }
 
 .card-item-highlight {
   height: 240px;
   background-size: cover;
   background-position: center;
-  border-top-left-radius: var(--card-border-radius);
-  border-top-right-radius: var(--card-border-radius);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
   position: relative;
 }
 
@@ -276,19 +278,30 @@ footer .nav-link {
 .review p, .review h2{
   color: var(--primary-light-color) !important;
 }
-.img-slide{
-  width: 100%;
-  height: 90vh;
-padding-left: 20px;
-padding-right: 20px;
+
+#place-details .slideshow-bg {
+  max-width: 100%;
+  height: auto;
 }
+
+.place-edit-icon {
+  font-size: 2em;
+  color: var(--primary-color);
+  margin-left: 0.5em;
+}
+
+.place-edit-icon svg {
+  vertical-align: baseline;
+}
+
 .Place-name {
   font-family: cursive;
   font-size: 50px;
   color:var(--primary-light-color) !important;
   -webkit-text-stroke: 3px var(--primary-dark-color);;
   position: absolute;
-  top: 20%;
-  right:70% ;
-    
+  top: 11%;
+  left: 20%;
+  right: 20%;
+  text-align: center;    
 }

@@ -6,7 +6,7 @@ import "./our-team.css";
 const OurTeam = () => {
     return (
         <section id="team" style={{
-            marginTop: '63px' // Header Height
+            marginTop: '70px' // Header Height
         }}>
           <div className="container">
             <div className="row justify-content-center text-center">

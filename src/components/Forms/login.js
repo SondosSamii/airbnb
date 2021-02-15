@@ -259,8 +259,8 @@ class Login extends Component {
           </div>
 
           <div id="signin" className="container signinClass">
-            <div className="row">
-              <div className="col-sm-9 col-md-6 col-lg-4 mx-auto">
+            <div className="row justify-content-center">
+              <div className="col-sm-9 col-md-7 col-lg-5">
                 <div className="card card-signin my-5">
                   <div className="card-body">
                     <h5 className="card-title text-center mt-0">

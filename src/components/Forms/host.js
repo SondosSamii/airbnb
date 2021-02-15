@@ -80,8 +80,8 @@ class Host extends Component {
             this.setState({token: localStorage.getItem("token")});
             // this.setState({UserId: localStorage.getItem("user_id")});
             if(!localStorage.getItem("token")){
-                alert("please log in frist!")
-            this.props.history.push("/");
+                alert("please login frist!");
+                this.props.history.push("/login");
             }
 
             // this.data=await axios.get("http://localhost:3000/clients/");
@@ -377,7 +377,7 @@ class Host extends Component {
     render() { 
         return (
             <div id="host_form" className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
-                <div className="background pb-5" style={{  height:"100%" }} >
+                <div className="background py-5" style={{  height:"100%" }} >
                 <ToastContainer />
                 <form  className="form-signin" action="" method="POST">
                 <div className="container signinClass">
@@ -402,10 +402,10 @@ class Host extends Component {
                                         <label className="ml-5 " >Place Type:</label>
                                         <select name="type" onChange={this.handelchange} className="form-control" id="type">
                                             <option defaultValue>Choose the place type...</option>
-                                            <option value="apartment">Apartment</option>
-                                            <option value="cottage">Cottage</option>
-                                            <option value="room">Room</option>
-                                            <option value="villa">Villa</option>
+                                            <option value="Apartment">Apartment</option>
+                                            <option value="Cottage">Cottage</option>
+                                            <option value="Room">Room</option>
+                                            <option value="Villa">Villa</option>
                                         </select>
                                         {this.state.errors.type && ( <div className="alert alert-danger form-control">{this.state.errors.type}</div> )}
                                     </div>

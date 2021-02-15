@@ -126,12 +126,12 @@ class Navbar extends Component {
                 style={{
                     position: 'fixed',
                     top: 0,
-                    left: '0',
-                    right: '0',
+                    left: 0,
+                    right: 0,
                     zIndex: 9,
                     backgroundColor: 'rgba(99, 99, 99, 0.5)'
             }}>
-                <nav className="navbar navbar-expand-lg navbar-light mx-0 mx-md-5">
+                <nav className="navbar navbar-expand-lg navbar-light mx-0 mx-md-5 py-0">
                     <Link to="/" className="navbar-brand">
                         <img
                             // src="/images/Logo/Logo-Icon-2.png"

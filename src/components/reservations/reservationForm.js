@@ -280,17 +280,17 @@ import moment from "moment"
   render() {      
     return (
       <>
-        <section id="login" className="py-5">
-            <div className="container">
+        <section id="login">
+            <div className="container py-5">
               <ToastContainer />
-                <div id="login-row" className="row justify-content-center align-items-center">
+                <div id="login-row" className="row justify-content-center align-items-center py-5">
                     <div id="login-column" className="col-md-6">
                         <div id="login-box" className="col-md-12 ">
                             <form id="login-form" className="form" action="" method="post">
-                                <h3 className="text-center text-info">Reservation</h3>
+                                <h3 className="text-center label">Reservation</h3>
 
                                 <div className="form-group">
-                                    <label className="text-info">Check In :</label>
+                                    <label className="label">Check In :</label>
                                     <input type="date"
                                     id="start_date"
                                      className="form-control"
@@ -310,7 +310,7 @@ import moment from "moment"
                                 </small>
                                 </div>
                                 <div className="form-group">
-                                    <label className="text-info">Check Out :</label>
+                                    <label className="label">Check Out :</label>
                                     <input type="date"
                                     id="end_date"
                                      className="form-control" 
@@ -331,7 +331,7 @@ import moment from "moment"
                                 </div>
 
                                 <div className="form-group">
-                                    <label className="text-info">Total Nights :</label>
+                                    <label className="label">Total Nights :</label>
                                     <input type="number" 
                                     className="form-control"
                                     value={this.state.total_nights} 
@@ -350,7 +350,7 @@ import moment from "moment"
                                   </small>
                                 </div>
                                 <div className="form-group">
-                                    <label className="text-info">Number of guests :</label>
+                                    <label className="label">Number of guests :</label>
                                     <input type="number" 
                                     // placeholder={this.state.user.num_of_guests}
                                     value={this.state.num_of_guests}
@@ -371,7 +371,9 @@ import moment from "moment"
 
                                     <div className="form-group">
                                     <div className="col-auto my-2">
-                                        <button  id="submit" type="button" className="btn btn-primary float-right  bg-info"  onClick= {()=>{
+                                        <button  id="submit" type="button"
+                                          className="btn float-right"
+                                          onClick= {()=>{
                                           this.handleClick()
                                         }}>Submit</button>
                                     </div>
