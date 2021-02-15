@@ -4,6 +4,7 @@
   --primary-light-color: hsl(184, 66%, 97%);
   --primary-lighter-color: #24787e;
   --secondary-color: #28BAC5;
+  /* --secondary-color: #fff; */
   --border-radius: 20px;
   --shadow: 0 0 20px 1px #aaa;
   --dark-shadow: 0 0 20px 1px #333;
@@ -233,19 +234,10 @@ footer .nav-link {
 
 /* ///////////////////// for Team Page///////////////////////////////// */
 .place-info{
-  height: 500px;
   background-color: var(--primary-dark-color);
   color: var(--primary-light-color);
 }
-.featchers{
-  height: 500px;
-  background-color: var(--primary-light-color);
-}
 
-.featchers ul{
-  list-style: none;
-  color:  var(--primary-dark-color);
-}
 .place-desc{
   width: 75%;
   white-space: nowrap;
@@ -275,7 +267,7 @@ footer .nav-link {
   height: 100%;
   border-radius: 50%;
 }
-.review p, .review h2{
+.review h2{
   color: var(--primary-light-color) !important;
 }
 

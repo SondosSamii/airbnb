@@ -128,7 +128,7 @@ class Navbar extends Component {
                     top: 0,
                     left: 0,
                     right: 0,
-                    zIndex: 9,
+                    zIndex: 37,
                     backgroundColor: 'rgba(99, 99, 99, 0.5)'
             }}>
                 <nav className="navbar navbar-expand-lg navbar-light mx-0 mx-md-5 py-0">

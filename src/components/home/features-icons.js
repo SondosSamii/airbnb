@@ -1,6 +1,7 @@
-import {FaTv, FaWifi, FaFan} from "react-icons/fa";
+import {FaTv, FaWifi} from "react-icons/fa";
 import {MdPets} from "react-icons/md";
-import {GiHeatHaze} from "react-icons/gi";
+import {GiFireplace} from "react-icons/gi";
+import {IoIosSnow} from "react-icons/io";
 
 const FeaturesIcons = (placeObj) => {
     const place = placeObj.place;
@@ -10,8 +11,8 @@ const FeaturesIcons = (placeObj) => {
             {place.has_tv && <FaTv className="feature-icon"/>}
             {place.has_wifi && <FaWifi className="feature-icon"/>}
             {place.pets && <MdPets className="feature-icon"/>}
-            {place.has_air_conditioner && <FaFan className="feature-icon"/>}
-            {place.has_heating_system && <GiHeatHaze className="feature-icon"/>}
+            {place.has_air_conditioner && <IoIosSnow className="feature-icon"/>}
+            {place.has_heating_system && <GiFireplace className="feature-icon"/>}
         </>
     )
 }

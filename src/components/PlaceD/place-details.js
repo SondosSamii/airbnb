@@ -3,12 +3,12 @@ import {NavLink as Link} from 'react-router-dom';
 import {SiGithub} from "react-icons/si";
 import {useState, useEffect} from "react";
 import Slider from "react-slick";
-import {FaTv, FaWifi, FaFan, FaUserAlt, FaBath, FaHome} from "react-icons/fa";
+import {FaTv, FaWifi, FaUserAlt, FaBath, FaHome, FaStar} from "react-icons/fa";
 import {FiEdit} from "react-icons/fi";
-import {IoIosBed} from "react-icons/io";
+import {IoIosBed, IoIosSnow} from "react-icons/io";
 import {MdPets} from "react-icons/md";
 import {GoGlobe} from "react-icons/go";
-import {GiHeatHaze,GiCampCookingPot, GiMoneyStack} from "react-icons/gi";
+import {GiFireplace, GiForkKnifeSpoon, GiMoneyStack, GiDoorHandle} from "react-icons/gi";
 import { getPlaceById ,updatePlace } from "../../actions/places";
 import { AllClients } from "../../actions/clients";
 import {getPlaceReviews,AllReviews} from "../../actions/reviews";
@@ -45,7 +45,8 @@ class GetPlaceDetails extends Component {
             username:[],
             userimg:[],
             owner:false,
-            isAuth: false
+            isAuth: false,
+            rate: 'New'
         }
     }
     async componentDidMount(){
@@ -130,7 +131,7 @@ class GetPlaceDetails extends Component {
 
 
 
-     PlaceSlider= () => {
+     placeSlider= () => {
         const settings = {
             infinite: true,
             speed: 500,
@@ -164,7 +165,8 @@ class GetPlaceDetails extends Component {
                             {/* <div><img className="slideshow-bg" src={`/img/${this.state.placeData.images[0]}`}/></div> */}
                     
                 </Slider>
-                <h1 className="Place-name " > {this.state.placedata.name}</h1> 
+                <h1 className="Place-name" >{this.state.placedata.name}</h1> 
+                <span className="place-rate"><FaStar/> {this.state.rate}</span>
                 </div>
             )
         }
@@ -175,7 +177,7 @@ class GetPlaceDetails extends Component {
         }
     }
 
-     Placelocation(){
+     placeLocation(){
         if(this.state.placedata){
 
             const place=this.state.placedata;
@@ -201,12 +203,12 @@ class GetPlaceDetails extends Component {
                     )}
                 </div>
                 <div className="container">
-                    <div className="featchers row">
-                        <div className="col-12 col-md-6 mt-3"
+                    <div className="row">
+                        <div className="col-12 col-md-6"
                             style={{position: 'relative'}}>
-                            <div className="row justify-content-center">
+                            <div className="row justify-content-center mb-5 pb-5 mb-md-0 pb-md-0">
                                 <div className="outer-circle first">
-                                  <div className="inner-circle"> 
+                                  <div className="inner-circle">
                                     <div className="circle-container">
                                         <div className="text">
                                             <p className="value">${this.state.placedata.price}</p>
@@ -214,10 +216,10 @@ class GetPlaceDetails extends Component {
                                         </div>
                                     </div>
                                   </div>
-                                  <span></span>
-                                  <span></span>
-                                  <span></span>
-                                  <span></span>
+                                  <span className="circle-span"></span>
+                                  <span className="circle-span"></span>
+                                  <span className="circle-span"></span>
+                                  <span className="circle-span"></span>
                                 </div>
 
                                 <div className="outer-circle second mx-5">
@@ -233,10 +235,10 @@ class GetPlaceDetails extends Component {
                                         </div>
                                     </div>
                                   </div>
-                                  <span></span>
-                                  <span></span>
-                                  <span></span>
-                                  <span></span>
+                                  <span className="circle-span"></span>
+                                  <span className="circle-span"></span>
+                                  <span className="circle-span"></span>
+                                  <span className="circle-span"></span>
                                 </div>
 
                                 <div className="outer-circle third">
@@ -248,56 +250,30 @@ class GetPlaceDetails extends Component {
                                         </div>
                                     </div>
                                   </div>
-                                  <span></span>
-                                  <span></span>
-                                  <span></span>
-                                  <span></span>
+                                  <span className="circle-span"></span>
+                                  <span className="circle-span"></span>
+                                  <span className="circle-span"></span>
+                                  <span className="circle-span"></span>
                                 </div>
                             </div>
                         </div>
 
-                        {/* <div className="col-12 col-md-6">
-                            <div className="row">
-                                <div className="col-5">
-                                    <p className="h4">Type: </p>
-                                    <p className="h4">City: </p>
-                                    <p className="h4">Country: </p>
-                                    <p className="h4">Zipcode: </p>
-                                    <p className="h4">Price Per Night: </p>
-                                </div>
-                                <div className="col-6">
-                                    <p className="h4">{this.state.placedata.type}</p>
-                                    <p className="h4">{this.state.address.city}</p> 
-                                    <p className="h4">{this.state.address.country}</p> 
-                                    <p className="h4">{this.state.address.zipcode}</p>
-                                    <p className="h4">${this.state.placedata.price}</p>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col">
-                                    <p className="h4">Discription:</p>
-                                    <p className="h5">{ this.state.placedata.description}</p>
-                                </div>
-                            </div>
-                        </div>
- */}
                         <div className="col-12 col-md-6 bg-dark" style={{height: '350px'}}>
-                                {/* Don't Delete */}
-                                {/* <Map
-                                        google={this.props.google}
-                                        zoom={8}
-                                        style={mapStyles}
-                                        containerStyle={containerStyle}
-                                        initialCenter={{
-                                        lat:47.49855629475769,
-                                        lng: -122.14184416996333
-                                        }}
-                                        center={this.state.placedata.location}
-                                        onClick={this.mapClicked}>
-                                        <Marker  position={this.state.placedata.location}
-                                        onClick={() => console.log("You clicked me!")} />
-
-                                    </Map>  */}
+                            {/* Don't Delete */}
+                            {/* <Map
+                                    google={this.props.google}
+                                    zoom={8}
+                                    style={mapStyles}
+                                    containerStyle={containerStyle}
+                                    initialCenter={{
+                                    lat:47.49855629475769,
+                                    lng: -122.14184416996333
+                                    }}
+                                    center={this.state.placedata.location}
+                                    onClick={this.mapClicked}>
+                                    <Marker  position={this.state.placedata.location}
+                                    onClick={() => console.log("You clicked me!")} />
+                                </Map>  */}
                         </div>
                     </div>
                 </div>
@@ -305,50 +281,69 @@ class GetPlaceDetails extends Component {
             )
         }
     }
-     Placefetcher=()=>{
+
+     placeFeature=()=>{
         if(this.state.placedata)
-        var place=this.state.placedata;{
-            return (
-                <div className="featchers row">
-                    <h2 style={{height:"40px"}} className="text-center col-12 p-0">Available Features</h2>
-                    <div className=" col-lg-12 col-md-6 ">
-                    <ul>
-                        <div className=" pb-5">
-                        {this.state.placedata.has_wifi && ( <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaWifi className=" mr-3"/> WIFI</li> )}
-                        {this.state.placedata.has_heating_system && ( <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><GiHeatHaze className=" mr-3"/> Heating System </li> )}
-                        {this.state.placedata.has_airconditioner && ( <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaFan className=" mr-3"/> Air Conditioner </li> )}
-                        
-                        
-                        {this.state.placedata.has_tv && ( <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaTv className=" mr-3"/> TV </li> )}
-                        {this.state.placedata.pets && ( <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><MdPets className=" mr-3 "/> Allow Pets </li> )}
+        var place=this.state.placedata;
+        console.log("place>>>>>", place);
+        return (
+            <div className="container">
+                <div className="row py-5">
+                    <div className="col-12 col-md-8">
+                        <div className="row">
+                            <div className="col">
+                                <h2 className="py-3">Description</h2>
+                                <p className="lead">{place.description}</p>
+                            </div>
                         </div>
-                    </ul>
+                        <div className="row">
+                            <div className="col">
+                                <h4 className="place-header"><IoIosBed/><br/>
+                                    {place.total_beds > 1 ? ('Beds') : ('Bed')}
+                                    <span>{place.total_beds}</span>
+                                </h4>
+                                <h4 className="place-header"><GiDoorHandle/><br/>
+                                    {place.total_rooms > 1 ? ('Rooms') : ('Room')}
+                                    <span>{place.total_rooms}</span>
+                                </h4>
+                                <h4 className="place-header"><FaBath/><br/>
+                                    {place.total_bathrooms > 1 ? ('Bathrooms') : ('Bathroom')}
+                                    <span>{place.total_bathrooms}</span>
+                                </h4>
+                            </div>
+                            <div className="col">
+                                <h4 className="place-header"><GiForkKnifeSpoon/><br/>
+                                    {place.total_kitchens > 1 ? ('Kitchens') : ('Kitchen')}
+                                    <span>{place.total_kitchens}</span>
+                                </h4>
+                                <h4 className="place-header"><FaUserAlt/><br/>
+                                    Maximum Guests
+                                    <span>{place.max_guests}</span>
+                                </h4>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-lg-12 col-md-6">
-                    <ul>
-                        <div className="pb-3">
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"> Max Number of Guests </li>
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center">Beds Number </li>
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center">Available Rooms </li>
-                        </div>
-                        <div className="pb-3">
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaUserAlt className=" mr-3"/> {place.max_guests} </li>
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><IoIosBed className=" mr-3 "/> {place.total_beds} </li>
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><IoIosBed className=" mr-3 "/> {place.total_rooms} </li>
-                        </div>
-                        <div className="pt-3 m-auto">
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"> Available Bathroom </li>
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center">Available Kitchen </li>
-                        </div>
-                        <div className="pt-3 ml-auto">
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><FaBath className=" mr-3"/> {place.total_bathrooms} </li>
-                        <li className="h4 col-lg-4 col-md-6 d-inline-block text-center"><GiCampCookingPot className=" mr-3 "/> {place.total_kitchens} </li>
-                        </div>
-                    </ul>
+
+                    <div className="col-12 col-md-4">
+                        <h2 className="py-3">Features</h2>
+                        {this.state.placedata.has_tv && (
+                            <h4><FaTv/> TV </h4> )}
+
+                        {this.state.placedata.has_wifi && (
+                            <h4><FaWifi/> Wi-Fi</h4>)}
+
+                        {this.state.placedata.pets && (
+                            <h4><MdPets/> Allow Pets </h4>)}
+        
+                        {this.state.placedata.has_airconditioner && (
+                            <h4><IoIosSnow/> Air Conditioner </h4>)}
+                                    
+                        {this.state.placedata.has_heating_system && (
+                            <h4><GiFireplace/> Heating System </h4>)}
                     </div>
                 </div>
-            )
-        }
+            </div>
+        )
     }
     Review(){
          if(this.state.reviews){
@@ -383,7 +378,9 @@ class GetPlaceDetails extends Component {
         });
         const avg = rate / allreviews.length;
         const newavg=avg.toFixed(1)
-            console.log(newavg)
+        console.log(newavg);
+        // this.setState({rate: newavg});
+        this.state.rate = newavg;
         var uName=[];
         var uImg=[];
         //console.log("22222222222222",user)
@@ -391,58 +388,63 @@ class GetPlaceDetails extends Component {
         
         if(placeReviews.length > 0) {
             return (
-                <div className="review row " style={{height:"100% !important"}}>
-                    <h2  className="text-center col-12 pb-0 mb-0 mt-5">User Reviews</h2>
-                    
-{/*                     
-                    <div className="col-3 ">
-                        {user.slice(0,3).map(user => (
-                        
-                        <div className="col-6 ml-auto pb-5 users">
-                            <p className=" text-center h4" >{user.name}</p>
-                            <div className="user-photo  m-auto">
-                                {user.profile_image ? <img src={`http://localhost:8080/${user.profile_image}`} /> : <img src={`/img/avatar.png`} />}
-                            </div>
-                        </div>
-                        
-                        
-                      ))}
-                    </div> 
-
-                    <div className="col-8 users">
-                      {allreviews.slice(0,3).map(rev => (
-                        <div>
-                        <div className="pl-4 col-12 py-3 ">
-                        <p className="h4">{rev.comment}</p>
-                        </div>
-                        <div className="pl-4 col-12 py-3">
-                        <p className="h4 pl-5 pb-2">{rev.rating} <span className="text-muted">/5</span></p>
-                        </div>
-                        </div>
-                        ))}
-                    </div> 
-                         */} 
-
-                    <div className="container users">
-                      {placeReviews.slice(0,3).map((rev,index) =>(
-                          <>
-                        <div className="row my-2">
-                            <div className="col-3">
-                                <div className="user-photo  m-auto">
-                                    {userimg[index] ? <img src={`http://localhost:8080/${userimg[index]}`} /> : <img src={`/img/avatar.png`} />}
+                // style={{height:"100% !important"}}
+                <div className="review">
+                    <div className="container ">
+                        <h2 className="text-center py-4">User Reviews</h2>
+                        <div className="row users">
+                            {placeReviews.slice(0,6).map((rev,index) =>(
+                                <div className="col-12 col-lg-6 ">
+                                    <div className="row align-items-center" style={{position: 'relative'}}>
+                                        <div className="col-3">
+                                            {userimg[index] ? (
+                                                <div 
+                                                  className="rounded-circle ml-auto"
+                                                  style={{
+                                                      width: '85px',
+                                                      height: '85px',
+                                                      backgroundImage: `url('http://localhost:8080/${userimg[index]}')`,
+                                                      backgroundPosition: 'center',
+                                                      backgroundSize: 'cover'
+                                                }}></div>)
+                                                : (
+                                                  <div 
+                                                  className="rounded-circle ml-auto"
+                                                  style={{
+                                                      width: '85px',
+                                                      height: '85px',
+                                                      backgroundImage: `url('/img/avatar.png')`,
+                                                      backgroundPosition: 'center',
+                                                      backgroundSize: 'cover'
+                                                }}></div>
+                                            )}
+                                        </div>
+                                        <div className="col-9">
+                                            <p className="h4">{username[index]}</p>
+                                            <p className="text-muted mb-0">{rev.createdAt.slice(0, 10)}</p>
+                                        </div>
+                                        <span
+                                            style={{
+                                                fontSize: '1.3em',
+                                                position: 'absolute',
+                                                top: '12%',
+                                                right: '10%'
+                                                }}>
+                                                <FaStar style={{marginBottom: '0.25em'}}/>&nbsp;{rev.rating}
+                                        </span>
+                                    </div>
+                                        
+                                    <div className="row">
+                                        <div className="col">
+                                            <p className="lead py-3" style={{marginLeft: '1.15em'}}>
+                                                {rev.comment}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-9">
-                            <p className="h4" >{username[index]}</p>
-                            <p className="h4">{rev.comment}</p>
-                            <p className="h4 pl-5 pb-2">{rev.rating} <span className="text-muted">/5</span></p>
-                            </div>
-                            
+                            ))}
                         </div>
-                        <hr style={{borderColor:"gray",width:"75%"}}/>
-                        </>
-                        ))}
-                    </div>  
+                    </div>
                 </div>
             )
         }
@@ -468,12 +470,13 @@ Model(){
     )
 }
 btnModel(){
-    return(<div className="row justify-content-end">
-            <button type="button" className="btn mr-5 mt-auto main-btn"
+    return(<div className="fixed-btns">
+            <button type="button" className="btn secondary-btn w-100 mb-2"
                 data-toggle="modal" data-target="#exampleModal">
                 Add Review
             </button>
-            <Link to={`/reservation/${this.props.match.params.id}`} type="button" className="btn mr-5 mt-auto main-btn" >
+            <Link to={`/reservation/${this.props.match.params.id}`} type="button"
+                className="btn secondary-btn w-100">
                 Make Reservation
             </Link>
         </div>)
@@ -481,9 +484,9 @@ btnModel(){
     render(){
     return (
         <section id="place-details" style={{position: 'relative', overflow: 'hidden',width:"100%"}}>
-            {this.PlaceSlider()}
-            {this.Placelocation()}
-            {this.Placefetcher()} 
+            {this.placeSlider()}
+            {this.placeLocation()}
+            {this.placeFeature()} 
             {this.state.isAuth && this.btnModel()}
             {this.Review()}
            {this.Model()}

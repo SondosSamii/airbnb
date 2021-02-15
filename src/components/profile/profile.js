@@ -18,9 +18,10 @@ import {  getReservationByID } from "../../actions/reservations";
 import {  updateClient , getclientById , updatePassword } from "../../actions/clients";
 
 import { ToastContainer, toast } from 'react-toastify';
-import { FaStar, FaTv, FaWifi, FaFan, FaHeart } from "react-icons/fa";
+import { FaStar, FaTv, FaWifi, FaHeart } from "react-icons/fa";
 import { MdPets } from "react-icons/md";
-import { GiHeatHaze } from "react-icons/gi";
+import { IoIosSnow } from "react-icons/io";
+import { GiFireplace } from "react-icons/gi";
 import { AiFillEdit } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
 import { ImPhone } from "react-icons/im";
@@ -304,8 +305,8 @@ class ViewProfile extends Component {
         {place.has_tv && <FaTv className="feature-icon" />}
         {place.has_wifi && <FaWifi className="feature-icon" />}
         {place.pets && <MdPets className="feature-icon" />}
-        {place.has_air_conditioner && <FaFan className="feature-icon" />}
-        {place.has_heating_system && <GiHeatHaze className="feature-icon" />}
+        {place.has_air_conditioner && <IoIosSnow className="feature-icon" />}
+        {place.has_heating_system && <GiFireplace className="feature-icon" />}
       </>
     );
   };
