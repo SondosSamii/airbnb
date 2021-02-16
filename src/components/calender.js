@@ -72,14 +72,27 @@ class CalenderComp extends Component {
         
       return (  
             <div className="mt-5">
+            {/* <Calendar onSelect= {(startDate, endDate,validDateRange) => {
+                console.log("lllll: " , startDate , "pppppppp" , endDate , " ooooo: " , validDateRange);
+             } } />  */}
+              {
+                   flag && (
+               <Calendar  onSelect= {(startDate, endDate,validDateRange) => {
+                console.log("lllll: " , startDate , "pppppppp" , endDate , " ooooo: " , validDateRange);
+             } } disabledDates= {() => { return this.state.Days  } } />
+                  )
+              }      
+
+
+
            	{/* <Calendar selectedRange= {["2019-03-03","2019-03-07"]} /> */}
             {/* <Calendar disabledDates= {() => { return [this.state.Days[0],"2021-02-07","2021-02-08"]  } } /> */}
-              
+{/*               
               {
                    flag && (
                <Calendar disabledDates= {() => { return this.state.Days  } } />
                   )
-              }
+              } */}
         </div>
         );
     }
