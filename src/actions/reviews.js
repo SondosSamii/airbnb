@@ -5,6 +5,7 @@ const baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb/reviews";
 
 const placeReviewsUrl = "http://localhost:8080/api/placeReviews";
 const reviewUrl = "http://localhost:8080/api/review";
+const placeRating_url = "http://localhost:8080/api/placeRating";
 
 export async function getAllReviews() {
     let payload = null;
@@ -33,6 +34,21 @@ export async function getPlaceReviews(id) {
          payload
         }
 }
+export async function getPlaceRatings(id) {
+    // console.log("yyyyyys");
+    let payload = null;
+    try {
+        let res = await fetch(`${placeRating_url}/${id}`);
+        payload = await res.json();
+        // console.log("getPlaceReviews Action: ", payload);
+    } catch (err) {
+        console.log(err);
+    }
+    return {
+        type: "PlaceRating",
+         payload
+        }
+}
 
 export async function getReviewDetails(id) {
     let payload = null;
@@ -45,6 +61,7 @@ export async function getReviewDetails(id) {
     }
     return {type: "ReviewDetails", payload}
 }
+
 
 // export async function getPlaceReviews(token,id) {
 //     var payload = null;

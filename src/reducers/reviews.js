@@ -7,6 +7,12 @@ function Reviews(state = {}, action) {
             return {...state,place_reviews:action.payload}
             // return action.payload
         }
+        case "PlaceRating": {
+            return {...state,place_ratings:action.payload}
+            // return action.payload
+        }
+        
+
         case "ReviewDetails": {
             return {...state,review_details:action.payload}
             // return action.payload

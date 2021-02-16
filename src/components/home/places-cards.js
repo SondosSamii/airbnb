@@ -6,7 +6,7 @@ import { FaRegHeart, FaHeart, FaStar } from "react-icons/fa";
 
 import { getAllPlaces } from '../../actions/places';
 import { getWishlistsByUserId, addWishlist, deleteWishlistById, deleteByID ,getWishlistByID} from '../../actions/wishlists';
-import { getAllReviews, getPlaceReviews, getReviewDetails } from '../../actions/reviews';
+import { getAllReviews, getPlaceReviews, getReviewDetails , getPlaceRatings} from '../../actions/reviews';
 import FeaturesIcons from './features-icons';
 
 class Cards extends Component {
@@ -74,71 +74,88 @@ class Cards extends Component {
 
         // console.log("000000 ", this.state.result);
         this.setState({token: localStorage.getItem("token")});
-
+           let  places = this.props.cards;
+    
         // Error Here
-        this.state.places.slice(0,6).map(async(place)=>{
-            // console.log("place: " , place);
-            var id = place._id;
-            await this.props.getPlaceReviews(id);
-            // console.log("...............", this.props.placeReviews);
-            // return id;
-            const reviews = this.props.placeReviews.reviews;
-            // console.log("reviews: ", reviews)
-            if (reviews && reviews.length > 0) {
-                let rate = 0;
-                var avg =0;
-                var result =0;
-                result = await reviews.map(async rev => {
-                    // console.log("rev: ", rev);
-                    await this.props.getReviewDetails(rev);
-                    if(this.props.reviewDetails) {
-                        var rating =  this.props.reviewDetails.review.rating;
-                        // console.log("ratingggggggg : ", this.props.reviewDetails.review.rating);
-                        rate += rating;
-                        // console.log("rate: ", rate);
-                        return rate;
-                    }
-                })
-                var sum =0;
-                // console.log("kkkkkkkkk:   ",result[result.length-1]);
-                result[result.length-1].then((promise)=>{
-                    // console.log("promise: " , promise);
-                    avg = promise / reviews.length;
-                    // console.log("avg: ", avg);
-                    this.setState({result: avg});
-                    this.setState((state) => {
-                        const avrgs = state.avrgs.push(avg.toFixed(1));
-                        return avrgs;
-                    })
+        // console.log("place:############# " , places);
+        // places.slice(0,6).map(async(place)=>{
+        //     var id = place._id;
+        //     await this.props.getPlaceReviews(id);
+        //     console.log("...............", this.props.placeReviews);
+        //     // return id;
+        //     const reviews = this.props.placeReviews.reviews;
+        //     // console.log("reviews: ", reviews)
+        //     if (reviews && reviews.length > 0) {
+        //         console.log("@@@@@@@@@@@@@@@@22222222");
+        //         let rate = 0;
+        //         var avg =0;
+        //         var result =0;
+        //         result = await reviews.map(async rev => {
+        //             // console.log("rev: ", rev);
+        //             await this.props.getReviewDetails(rev);
+        //             if(this.props.reviewDetails) {
+        //                 var rating =  this.props.reviewDetails.review.rating;
+        //                 // console.log("ratingggggggg : ", this.props.reviewDetails.review.rating);
+        //                 rate += rating;
+        //                 // console.log("rate: ", rate);
+        //                 return rate;
+        //             }
+        //         })
+        //         var sum =0;
+        //         // console.log("kkkkkkkkk:   ",result[result.length-1]);
+        //         result[result.length-1].then((promise)=>{
+        //             // console.log("promise: " , promise);
+        //             avg = promise / reviews.length;
+        //             console.log("avg..................: ", avg);
+        //             this.setState({result: avg});
+        //             this.setState((state) => {
+        //                 const avrgs = state.avrgs.push(avg.toFixed(1));
+        //                 return avrgs;
+        //             })
 
-                })
+        //         })
 
-                    // result.map((promise)=>{
-                    //     // console.log("promiiiiiiiseeeee:  ",promise)
-                    //     promise.then((ava)=>{
-                    //         console.log("../.,,,,,,:  " ,ava);
-                    //             sum += ava;
-                    //             console.log("summm:   ",sum);
-                    //             return sum;
-                    //     }).then((sum)=>{
-                    //         var avg = sum / reviews.length;
-                    //         console.log("avg: ", avg);
-                    //     })
-                    // })
+        //             // result.map((promise)=>{
+        //             //     // console.log("promiiiiiiiseeeee:  ",promise)
+        //             //     promise.then((ava)=>{
+        //             //         console.log("../.,,,,,,:  " ,ava);
+        //             //             sum += ava;
+        //             //             console.log("summm:   ",sum);
+        //             //             return sum;
+        //             //     }).then((sum)=>{
+        //             //         var avg = sum / reviews.length;
+        //             //         console.log("avg: ", avg);
+        //             //     })
+        //             // })
 
-                    // console.log("reviews.length: ", reviews.length ,  "   " , result);
-                    // var avg = result / reviews.length;
-                    // console.log("avg: ", avg);
+        //             // console.log("reviews.length: ", reviews.length ,  "   " , result);
+        //             // var avg = result / reviews.length;
+        //             // console.log("avg: ", avg);
 
-                // var res = result.then(
-                // })
-                // return avg;
-            }
+        //         // var res = result.then(
+        //         // })
+        //         // return avg;
+        //     }
        
-            // console.log("result: " , this.state.result);
-        })
+        //     // console.log("result: " , this.state.result);
+        // })
+            await this.getPlace_Reviews();
+
+
        
         await this.userWishlists();
+    }
+
+    getPlace_Reviews = ()=>{
+        let places  = this.props.cards;
+        places.slice(0,6).map(async(place)=>{
+            var id = place._id;
+            console.log("id:  " , id);
+            await this.props.getPlaceRatings(id);
+            console.log("!!!!!!!!!!!!!!11:  ",id , "   "  , this.props.placeRatings);
+            
+            // [1, 2, 3, 4].reduce((a, b) => a + b, 0
+        })
     }
 
     eventHandle = async (id) =>{
@@ -423,7 +440,8 @@ class Cards extends Component {
         let places = this.props.cards;
         // let places = this.state.places;
         // console.log("/////////////", places);
-
+        // console.log("place://///////////////////////// " , this.state.places);
+       
         if (places && places.length > 0) {
             // console.log("Inside if");
             return places.slice(0, 6).map((place,index) => {
@@ -455,8 +473,8 @@ class Cards extends Component {
                                 <p className="desc">{place.description}</p>
                                 <p className="price">${place.price}</p>
                                 <p className="rating">
-                                    { this.state.avrgs[index] > 0 && <FaStar className="mr-1" /> }
-                                    { this.state.avrgs[index] > 0 && this.state.avrgs[index] }
+                                    {/* { this.state.avrgs[index] > 0 && <FaStar className="mr-1" /> }
+                                    { this.state.avrgs[index] > 0 && this.state.avrgs[index] } */}
                                     {/* <FaStar className="mr-1" /> 4.3 */}
                                 </p>
                             </div>
@@ -482,7 +500,8 @@ const mapActionToProps = (dispatch) => {
         deleteByID,
         getPlaceReviews,
         getReviewDetails,
-        getWishlistByID
+        getWishlistByID,
+        getPlaceRatings
     }, dispatch);
 };
 
@@ -499,7 +518,8 @@ const mapStateToProps = (state) => {
         // reviewDetails: state.Reviews
         userWishlists: state.Wishlists.wishlistsByUserId,
         addWishlist: state.Wishlists,
-        wishlistDetails: state.Wishlists.wishlist_details
+        wishlistDetails: state.Wishlists.wishlist_details,
+        placeRatings : state.Reviews.place_ratings
     };
 };
 

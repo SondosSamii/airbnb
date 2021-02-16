@@ -82,7 +82,7 @@ class ReviewAdding extends Component{
           });
           setTimeout(()=>{
             // this.props.history.push(`/place-details/${this.state.Place_id}`);
-            window.location.reload();
+            // window.location.reload();
         }, 5500)
     }
 
