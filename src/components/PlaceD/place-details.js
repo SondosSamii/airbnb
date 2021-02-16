@@ -46,7 +46,7 @@ class GetPlaceDetails extends Component {
             userimg:[],
             owner:false,
             isAuth: false,
-            rate: 'New'
+            rate:"new"
         }
     }
     async componentDidMount(){
@@ -78,6 +78,7 @@ class GetPlaceDetails extends Component {
         this.setState({img:place.images});
         this.setState({placedata:place});
         this.setState({users:this.props.users.users});
+        this.state({rate:this.place.ratingsValue})
         if(localStorage.user_id === this.state.placedata.user_id){
             this.setState({owner:true})
         }
@@ -166,7 +167,7 @@ class GetPlaceDetails extends Component {
                     
                 </Slider>
                 <h1 className="Place-name" >{this.state.placedata.name}</h1> 
-                <span className="place-rate"><FaStar/> {this.state.rate}</span>
+                <span className="place-rate"><FaStar/> {this.state.placedata.ratingsValue}</span>
                 </div>
             )
         }

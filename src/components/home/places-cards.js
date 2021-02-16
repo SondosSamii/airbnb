@@ -48,7 +48,8 @@ class Cards extends Component {
         if(localStorage.getItem("token")){
             this.setState({isAuth : true});
         }
-        
+        // await this.props.getPlaceRatings("602b20e1a3869c4c8ca35280");
+        //     console.log("!!!!!!!!!!!!!!11:   "  , this.props.placeRatings);
         
         // await this.props.getAllReviews();
         // await this.setState({reviews: this.props.reviews});
@@ -147,15 +148,22 @@ class Cards extends Component {
     }
 
     getPlace_Reviews = ()=>{
-        let places  = this.props.cards;
-        places.slice(0,6).map(async(place)=>{
-            var id = place._id;
-            console.log("id:  " , id);
-            await this.props.getPlaceRatings(id);
-            console.log("!!!!!!!!!!!!!!11:  ",id , "   "  , this.props.placeRatings);
+        // let places  = this.props.cards;
+        // places.slice(0,6).map(async(place)=>{
+        //     var id = place._id;
+        //     console.log("id:  " , id);
+        //     await this.props.getPlaceRatings(id);
+        //     console.log("!!!!!!!!!!!!!!11:  ",id , "   "  , this.props.placeRatings);
+        //     var avg=this.props.placeRatings.rating;
+        //      this.setState((state) => {
+        //         const avrgs = state.avrgs.push(avg);
+        //         return avrgs;
+        //          })
             
-            // [1, 2, 3, 4].reduce((a, b) => a + b, 0
-        })
+        //     console.log(this.state.avrgs)
+
+        //})
+         
     }
 
     eventHandle = async (id) =>{
@@ -441,7 +449,7 @@ class Cards extends Component {
         // let places = this.state.places;
         // console.log("/////////////", places);
         // console.log("place://///////////////////////// " , this.state.places);
-       
+       console.log(this.state.avrgs)
         if (places && places.length > 0) {
             // console.log("Inside if");
             return places.slice(0, 6).map((place,index) => {
@@ -473,6 +481,7 @@ class Cards extends Component {
                                 <p className="desc">{place.description}</p>
                                 <p className="price">${place.price}</p>
                                 <p className="rating">
+                                    {place.ratingsValue}
                                     {/* { this.state.avrgs[index] > 0 && <FaStar className="mr-1" /> }
                                     { this.state.avrgs[index] > 0 && this.state.avrgs[index] } */}
                                     {/* <FaStar className="mr-1" /> 4.3 */}

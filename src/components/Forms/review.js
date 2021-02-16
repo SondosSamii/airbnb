@@ -69,11 +69,11 @@ class ReviewAdding extends Component{
         var formData = new FormData();
         formData.append("rating", this.state.Rate);
         formData.append("comment", this.state.Comment);
-        let url="http://localhost:8080/api/review/"+this.state.Place_id
+        let url="https://node-airbnb.herokuapp.com/api/review/"+this.state.Place_id
         await this.props.AddReview(formData,url,localStorage.token);
         toast.success('🤩 Review added Successfully!', {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 8000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -82,8 +82,8 @@ class ReviewAdding extends Component{
           });
           setTimeout(()=>{
             // this.props.history.push(`/place-details/${this.state.Place_id}`);
-            // window.location.reload();
-        }, 5500)
+            window.location.reload();
+        }, 8500)
     }
 
 render(){
