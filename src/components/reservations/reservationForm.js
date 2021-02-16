@@ -7,7 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import React, { Component } from "react";
-import moment from "moment"
+import moment from "moment";
+import CalenderComp  from "../calender";
 
 // const Reservastion = () => {
     class Reservastion extends Component {
@@ -282,6 +283,7 @@ import moment from "moment"
       <>
         <section id="login">
             <div className="container py-5">
+              <CalenderComp />
               <ToastContainer />
                 <div id="login-row" className="row justify-content-center align-items-center py-5">
                     <div id="login-column" className="col-md-6">
