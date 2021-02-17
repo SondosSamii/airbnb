@@ -63,9 +63,9 @@ class ViewProfile extends Component {
     else{
 
       await this.props.getclientById(localStorage.getItem("token"));
-      if(this.props.client.message === "jwt expired"){
-        this.props.history.push("/login");
-      }
+      // if(this.props.client.message === "jwt expired"){
+      //   this.props.history.push("/login");
+      // }
       this.setState({user: this.props.client.user });
       await this.get_Wishlist_places();
       await this.get_Trips_places();

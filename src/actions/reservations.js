@@ -46,7 +46,7 @@ export async function getReservationByID(token , id){
      }
      
  }
-export async function getReservationByID_NotAuth(id){ //for calender
+export async function getReservationByID_NotAuth(id){ //for calendar
     var payload = null;
     try{
         let response = await fetch(`${get_Reservation_Details_Not_Auth}/${id}`, {

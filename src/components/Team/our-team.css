@@ -9,7 +9,7 @@
 #team .about-team{
     font-size: 1.5em;
     font-family: 'Sriracha', cursive;
-    color: var(--secondary-color);
+    color: var(--primary-lighter-color);
 
 }
 
@@ -52,7 +52,7 @@
 }
 #team .about-div p{
     font-size: 1.4em;
-    color: var(--primary-lighter-color);
+    color: var(--primary-light-color);
     /* font-weight: bold; */
     font-family: "Dosis","sans-serif";
 }

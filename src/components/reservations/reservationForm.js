@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import React, { Component } from "react";
 import moment from "moment";
-import CalenderComp  from "../calender";
+import CalendarComp from "../calendar";
 
 // const Reservastion = () => {
     class Reservastion extends Component {
@@ -257,14 +257,14 @@ import CalenderComp  from "../calender";
         });
     }
     if(flag){
-      console.log(reservation);
+      console.log("______-_________", reservation);
       await this.props.addReservation(this.state.token , this.state.placeID,reservation);
-      console.log("^^^^^^^^", this.props.msg);
+      // console.log("^^^^^^^^", this.props.msg);
       // if(this.props.msg === "reservation created successfully!") {
       if(this.props.msg === "success") {
         toast.success('🤩 Reservation created Successfully!', {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -273,19 +273,72 @@ import CalenderComp  from "../calender";
           });
           setTimeout(()=>{
             this.props.history.push(`/place-details/${this.state.placeID}`);
-        }, 5500)
+        }, 3500)
       }
     }
   }
 
-  render() {      
+  recieveDates = (startDate, endDate, validRange) => {
+    // console.log("********", startDate, endDate, validRange);
+    let range = validRange.length;
+    this.setState({
+      start_date: startDate,
+      end_date: endDate,
+      total_nights: range
+    })
+  }
+
+  render() {
+    console.log("***", this.state.placeID);
     return (
       <>
         <section id="login">
-            <div className="container py-5">
-              <CalenderComp />
+          <div className="container py-5">
               <ToastContainer />
-                <div id="login-row" className="row justify-content-center align-items-center py-5">
+              <div id="login-row" className="row justify-content-center align-items-center py-5 mx-1 mx-md-0">
+                        <div id="login-box" className="col-12 col-md-10 col-lg-8">
+                            <form id="login-form" className="form" action="" method="post">
+                                <h3 className="text-center reservation-header mb-3">Reservation</h3>
+                                <div className="row justify-content-center">
+                                  <label htmlFor="calendar" className="label mb-0">Select Range</label>
+                                </div>
+                                <div id="calendar" className="row justify-content-center calendar">
+                                  <CalendarComp dates={this.recieveDates} props={this.props}/>
+                                </div>
+
+                                <div className="row justify-content-center">
+                                  <div className="col-10 col-md-8 col-lg-4 text-center">
+                                    <div className="form-group">
+                                      <label htmlFor="guests" className="label">Number of Guests</label>
+                                      <input type="number"
+                                      value={this.state.num_of_guests}
+                                      className="form-control"
+                                      id="guests"
+                                      onChange={(e) => {
+                                          this.setState({ num_of_guests: e.target.value });
+                                          document.getElementById('num_guests_err').innerHTML = "";
+                                        }}/>
+                                        <small id="num_guests_err"></small>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row justify-content-center">
+                                  <div className="col-auto">
+                                    <div className="form-group">
+                                      <button id="submit" type="button"
+                                        className="btn secondary-btn"
+                                        onClick= {()=>{
+                                        this.handleClick()
+                                      }}>Submit</button>
+                                    </div>
+                                  </div>
+                                </div>
+                            </form>
+                        </div>
+                </div>
+
+                {/* <div id="login-row" className="row justify-content-center align-items-center py-5">
                     <div id="login-column" className="col-md-6">
                         <div id="login-box" className="col-md-12 ">
                             <form id="login-form" className="form" action="" method="post">
@@ -297,19 +350,11 @@ import CalenderComp  from "../calender";
                                     id="start_date"
                                      className="form-control"
                                      value={this.state.start_date}
-                                    //  placeholder={this.state.user.start_date}
                                      onChange={(e) => {
                                         this.setState({start_date : e.target.value });
                                         document.getElementById('start_err').innerHTML = "";
                                       }}/>
-                                         {/* {this.state.errors.start_date && (
-                                          <div className="alert alert-danger form-control">
-                                         {this.state.errors.start_date}
-                                        </div>
-                                       )} */}
-                                <small id="start_err">
-
-                                </small>
+                                <small id="start_err"></small>
                                 </div>
                                 <div className="form-group">
                                     <label className="label">Check Out :</label>
@@ -317,19 +362,11 @@ import CalenderComp  from "../calender";
                                     id="end_date"
                                      className="form-control" 
                                      value={this.state.end_date}
-                                    //  placeholder={this.state.user.end_date}
                                      onChange={(e) => {
                                         this.setState({ end_date: e.target.value });
                                         document.getElementById('end_err').innerHTML = "";
                                       }}/>
-                                         {/* {this.state.errors.end_date && (
-                                          <div className="alert alert-danger form-control">
-                                         {this.state.errors.end_date}
-                                        </div>
-                                       )} */}
-                                <small id="end_err">
-                                  
-                                </small>
+                                <small id="end_err"></small>
                                 </div>
 
                                 <div className="form-group">
@@ -337,39 +374,22 @@ import CalenderComp  from "../calender";
                                     <input type="number" 
                                     className="form-control"
                                     value={this.state.total_nights} 
-                                    // placeholder={this.state.user.total_nights}
                                     onChange={(e) => {
                                         this.setState({ total_nights: e.target.value });
                                         document.getElementById('total_nights_err').innerHTML = "";
                                       }}/>
-                                       {/* {this.state.errors.total_nights && (
-                                          <div className="alert alert-danger form-control">
-                                         {this.state.errors.total_nights}
-                                        </div>
-                                       )} */}
-                                      <small id="total_nights_err">
-                                  
-                                  </small>
+                                      <small id="total_nights_err"></small>
                                 </div>
                                 <div className="form-group">
                                     <label className="label">Number of guests :</label>
                                     <input type="number" 
-                                    // placeholder={this.state.user.num_of_guests}
                                     value={this.state.num_of_guests}
                                     className="form-control" 
                                     onChange={(e) => {
                                         this.setState({ num_of_guests: e.target.value });
                                         document.getElementById('num_guests_err').innerHTML = "";
                                       }}/>
-                                       {/* {this.state.errors.num_of_guests && (
-                                          <div className="alert alert-danger form-control">
-                                         {this.state.errors.num_of_guests}
-                                        </div>
-                                       )} */}
-                                      <small id="num_guests_err">
-                                  
-                                    </small>
-
+                                      <small id="num_guests_err"></small>
 
                                     <div className="form-group">
                                     <div className="col-auto my-2">
@@ -381,17 +401,10 @@ import CalenderComp  from "../calender";
                                     </div>
                                 </div>
                                 </div>
-                                {/* <div className="form-group">
-                                    <div className="col-auto my-1">
-                                        <button  id="submit" type="button" className="btn btn-primary float-right  bg-info"  onClick= {()=>{
-                                          this.handleClick()
-                                        }}>Submit</button>
-                                    </div>
-                                </div> */}
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </section>
       </>

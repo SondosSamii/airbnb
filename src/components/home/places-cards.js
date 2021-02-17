@@ -447,9 +447,9 @@ class Cards extends Component {
     render() {
         let places = this.props.cards;
         // let places = this.state.places;
-        // console.log("/////////////", places);
+        console.log("/////////////", places);
         // console.log("place://///////////////////////// " , this.state.places);
-       console.log(this.state.avrgs)
+    //    console.log(this.state.avrgs)
         if (places && places.length > 0) {
             // console.log("Inside if");
             return places.slice(0, 6).map((place,index) => {

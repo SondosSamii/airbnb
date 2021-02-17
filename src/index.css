@@ -1,10 +1,12 @@
 :root {
   --primary-color: #156268;
   --primary-dark-color: hsl(184, 66%, 20%);
-  --primary-light-color: hsl(184, 66%, 97%);
-  --primary-lighter-color: #24787e;
-  --secondary-color: #28BAC5;
-  /* --secondary-color: #fff; */
+  --primary-light-color: #24787e;
+  --primary-lighter-color: #28BAC5;
+  --primary-lightest-color: hsl(184, 66%, 97%);
+  --secondary-color: #d35d6e;
+  --secondary-dark-color: hsl(351, 57%, 65%);
+  --secondary-light-color: hsl(351, 57%, 75%);
   --border-radius: 20px;
   --shadow: 0 0 20px 1px #aaa;
   --dark-shadow: 0 0 20px 1px #333;
@@ -38,7 +40,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   box-sizing: content-box;
   color: var(--primary-dark-color);
-  background-color: var(--primary-light-color);
+  background-color: var(--primary-lightest-color);
 }
 
 code {
@@ -62,11 +64,18 @@ code {
   width: fit-content;
 }
 
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand:focus,
+.navbar-light .navbar-brand:hover {
+  color: rgba(0,0,0,.9) !important;
+  background-color: transparent !important;
+}
+
 .main-btn,
 .navbar-light .navbar-nav .nav-link.main-btn {
-  color: var(--primary-light-color);
-  background-color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  color: var(--primary-lightest-color) !important;
+  background-color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
   transition: var(--transition);
 }
 
@@ -78,8 +87,20 @@ code {
 .main-btn:hover,
 .navbar-light .navbar-nav .nav-link.main-btn:focus,
 .navbar-light .navbar-nav .nav-link.main-btn:hover {
-  color: var(--primary-color);
-  background-color: transparent;
+  color: var(--primary-color) !important;
+  background-color: transparent !important;
+}
+
+.secondary-btn {
+  color: #fff !important;
+  background-color: var(--secondary-color) !important;
+  border: 1px solid var(--secondary-color) !important;
+}
+
+.secondary-btn:hover,
+.secondary-btn:focus {
+  color: var(--secondary-color) !important;
+  background-color: transparent !important;
 }
 
 .user-icon{
@@ -203,7 +224,7 @@ code {
 .card-item-details .rating {
   position: absolute;
   right: 5%;
-  color: var(--secondary-color);
+  color: var(--primary-lighter-color);
 }
 
 .card-item-details .price {
@@ -235,7 +256,7 @@ footer .nav-link {
 /* ///////////////////// for Team Page///////////////////////////////// */
 .place-info{
   background-color: var(--primary-dark-color);
-  color: var(--primary-light-color);
+  color: var(--primary-lightest-color);
 }
 
 .place-desc{
@@ -247,7 +268,7 @@ footer .nav-link {
 }
 .review{
   background-color: var(--primary-dark-color);
-  color: var(--primary-light-color) !important;
+  color: var(--primary-lightest-color) !important;
 
 }
 .users{
@@ -268,7 +289,7 @@ footer .nav-link {
   border-radius: 50%;
 }
 .review h2{
-  color: var(--primary-light-color) !important;
+  color: var(--primary-lightest-color) !important;
 }
 
 #place-details .slideshow-bg {
@@ -289,7 +310,7 @@ footer .nav-link {
 .Place-name {
   font-family: cursive;
   font-size: 50px;
-  color:var(--primary-light-color) !important;
+  color:var(--primary-lightest-color) !important;
   -webkit-text-stroke: 3px var(--primary-dark-color);;
   position: absolute;
   top: 11%;

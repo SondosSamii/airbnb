@@ -7,12 +7,13 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {getPlaceReservations  , getReservationByID_NotAuth} from "../actions/reservations"
-class CalenderComp extends Component {
+class CalendarComp extends Component {
     constructor(props) {
         super(props);
         this.state ={
             Days:[],
-            place_id:"60277eabacc6543214610236",
+            // place_id:"60277eabacc6543214610236",
+            place_id:"",
             token : "",
             startDate : "",
             endDate : "",
@@ -34,11 +35,14 @@ class CalenderComp extends Component {
             // console.log("Days: " , this.state.Days);
             this.setState({length : this.state.Days.length});
             return a;
-    };
+          };
+
        async componentDidMount(){
            this.setState({token: localStorage.getItem("token")})
-
-        //    this.setState({place_id : this.props.place_id})
+          //  console.log("//////", this.props);
+           this.setState({place_id : await this.props.props.match.params.id});
+          //  this.setState({place_id : await this.props.placeId});
+           console.log("))))))))", this.state.place_id);
 
            await this.props.getPlaceReservations(this.state.place_id);
            console.log("place_Reservaitons:   " , this.props.place_reservations.reservations);
@@ -65,35 +69,37 @@ class CalenderComp extends Component {
 
 
     render() { 
-        console.log("Days:  " , this.state.length);
-        var length = this.state.Days.length;
-        var flag = (this.state.length === this.state.Days.length);
-        
-        
+      console.log("Days:  " , this.state.length);
+      var flag = (this.state.length === this.state.Days.length);
+                
       return (  
-            <div className="mt-5">
-            {/* <Calendar onSelect= {(startDate, endDate,validDateRange) => {
-                console.log("lllll: " , startDate , "pppppppp" , endDate , " ooooo: " , validDateRange);
-             } } />  */}
-              {
-                   flag && (
-               <Calendar  onSelect= {(startDate, endDate,validDateRange) => {
-                console.log("lllll: " , startDate , "pppppppp" , endDate , " ooooo: " , validDateRange);
-             } } disabledDates= {() => { return this.state.Days  } } />
-                  )
-              }      
-
-
-
-           	{/* <Calendar selectedRange= {["2019-03-03","2019-03-07"]} /> */}
-            {/* <Calendar disabledDates= {() => { return [this.state.Days[0],"2021-02-07","2021-02-08"]  } } /> */}
-{/*               
-              {
-                   flag && (
-               <Calendar disabledDates= {() => { return this.state.Days  } } />
-                  )
-              } */}
-        </div>
+        <>
+              {flag && (
+                <Calendar
+                  disabledDates= {() => {
+                    if(this.state.Days.length > 0) {
+                      return this.state.Days;
+                    }
+                    else {
+                      return [];
+                    }
+                  }}
+                  onSelect = {(startDate, endDate,validDateRange) => {
+                    this.props.dates(startDate, endDate, validDateRange);
+                    // console.log("lllll: " , startDate , "pppppppp" , endDate , " ooooo: " , validDateRange);
+                  }}
+                  rightArrowCss = "padding-left: 5px; &:hover { background: var(--secondary-color); }"
+                  leftArrowCss = "padding-left: 5px; &:hover { background: var(--secondary-color); }"
+                  thCss = "color:var(--secondary-color); }"
+                  startDateTdCssObj = {{backgroundColor:'var(--secondary-color)', color: '#fff'}}
+                  endDateTdCssObj = {{backgroundColor:'var(--secondary-color)', color: '#fff'}}
+                  inRangedTdCssObj = {{backgroundColor:'var(--secondary-light-color)', color:'#fff'}}
+                  onHoverTdCssObj = {{backgroundColor:'var(--secondary-color)', color: '#fff'}}
+                  disablePrevDates
+                  // globalCss = "*{ font-size: 14px; background-color: transparent; } tr{ background: blue; }"
+                />)
+              }   
+              </>
         );
     }
 }
@@ -116,7 +122,7 @@ const mapactiontoprops = (disptch) => {
     };
   };
   
-  export default connect(mapstatetoprops, mapactiontoprops)(CalenderComp);
+  export default connect(mapstatetoprops, mapactiontoprops)(CalendarComp);
   
   
    

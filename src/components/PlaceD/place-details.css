@@ -2,7 +2,7 @@
     position: relative;
     height: 140px;
     width: 140px;
-    background: linear-gradient(var(--primary-color), var(--secondary-color), var(--primary-color));
+    background: linear-gradient(var(--primary-color), var(--primary-lighter-color), var(--primary-color));
     border-radius: 50%;
     /* animation: rotate 1.5s linear infinite; */
 }
@@ -16,7 +16,7 @@
 .outer-circle.second {
     height: 170px;
     width: 170px;
-    background: linear-gradient(var(--secondary-color), var(--primary-color), var(--secondary-color));
+    background: linear-gradient(var(--primary-lighter-color), var(--primary-color), var(--primary-lighter-color));
 }
 
 .outer-circle.third {
@@ -29,12 +29,12 @@
     position: absolute;
     height: 140px;
     width: 140px;
-    background: linear-gradient(var(--primary-color), var(--secondary-color), var(--primary-color));
+    background: linear-gradient(var(--primary-color), var(--primary-lighter-color), var(--primary-color));
     border-radius: 50%;
 }
 
 .outer-circle.second span {
-    background: linear-gradient(var(--secondary-color), var(--primary-color), var(--secondary-color));
+    background: linear-gradient(var(--primary-lighter-color), var(--primary-color), var(--primary-lighter-color));
 }
 
 .outer-circle.second span {
@@ -67,7 +67,7 @@
     height: 130px;
     width: 130px;
     position: absolute;
-    background: var(--primary-light-color);
+    background: var(--primary-lightest-color);
     top: 5px;
     left: 5px;
     border-radius: 50%;
@@ -157,18 +157,6 @@
     padding: 1em;
     box-shadow: var( --shadow);
     z-index: 9;
-}
-
-.secondary-btn {
-    color: #fff;
-    background-color: #d35d6e;
-    border: 1px solid #d35d6e;
-}
-
-.secondary-btn:hover,
-.secondary-btn:focus {
-    color: #d35d6e;
-    background-color: #fff;
 }
 
 .place-rate {

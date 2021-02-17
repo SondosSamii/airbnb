@@ -140,7 +140,7 @@ class Navbar extends Component {
                             height="60"
                             alt="Logo"
                             style={{
-                            marginRight: '0.5em'
+                            backgroundColor: 'transparent !important'
                         }}/>
                         </Link>
                     <button

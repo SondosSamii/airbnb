@@ -15,7 +15,7 @@ import Reservastion from './reservations/reservationForm';
 import NotFound from './not-found';
 import Footer from './footer';
 import PlaceDetails from './PlaceD/place-details';
-import CalenderComp from "./calender";
+import CalendarComp from "./calendar";
 
 const Routes = ()=> {
     const [session, setSession] = useState(getSessionCookie());
@@ -44,7 +44,6 @@ const Routes = ()=> {
                     <Route path="/login" component={Login}></Route>
                     <Route path="/place-edit/:id" component={EditPlace}></Route>
                     <Route path="/place-details/:id" component={PlaceDetails}></Route>
-                    <Route path="/calender" component={CalenderComp}></Route>
                     <Route path="*" component={NotFound}></Route>
                 </Switch>
                 <Footer/>
