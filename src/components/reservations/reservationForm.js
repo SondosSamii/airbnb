@@ -1,216 +1,53 @@
-import "./reservationForm.css";
-import { getAllReservation , addReservation } from "../../actions/reservations";
-import { getAllClients, updateClient } from "../../actions/clients";
-import { getAllPlaces, getPlaceById } from "../../actions/places";
-import Joi, { validate } from "joi-browser";
-import { ToastContainer, toast } from 'react-toastify';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import React, { Component } from "react";
-import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
+
+import { getAllReservation, addReservation } from "../../actions/reservations";
+import { getAllClients, updateClient } from "../../actions/clients";
+import { getAllPlaces, getPlaceById } from "../../actions/places";
 import CalendarComp from "../calendar";
+import "./reservationForm.css";
 
-// const Reservastion = () => {
-    class Reservastion extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          // Places: [],
-          // reserve_Places: [],
-          // Reservations: [],
-          user_Id: "",
-          place_Id: "",
-          user: {},
-          start_date: "",
-          end_date: "",
-          total_nights: "",
-          num_of_guests: "",
-          token: "",
-          isAuth: false,
-          isOpen: false,
-          isLogin: true,
-          placeID : ""
-          
-        };
-        this.baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/reservations";
-    }
-
-
-
-    Submit = async  () => {
-      var client = {
-        _id: this.state.user._id,
-        _id: this.state.places._id,
-        start_date: this.state.start_date,
-        end_date: this.state.end_date,
-        total_nights: this.state.total_nights,
-        num_of_guests: this.state.num_of_guests
-      };
-        
-      // await this.props.updateClient(client);
-      // window.location.reload();
-    }
-
-
-    handelReservations = async (e) => {
-      e.preventDefault();
-  
-      // const errors = this.Validations();
-      // const valid=this.LoginValidations();
-      // if (errors) return;
-      // if(!valid)return;
-      // var formData = new FormData();
-      // formData.append("email", "moataz3@gmail.com");
-      // formData.append("password", this.state.Password);
-      // console.log(this.state.Email);
-      console.log("esraaaaaaaaaaa",localStorage.token);
-  
-      fetch("http://localhost:8080/api/reservation", {
-        method: "POST",
-        headers: {
-          Authorization: 'Bearer ' + localStorage.token,
-          "Content-Type": "application/json",
-               },
-        body: JSON.stringify({
-          start_date: this.state.start_date,
-          end_date: this.state.end_date,
-          total_nights: this.state.total_nights,
-          num_of_guests: this.state.num_of_guests,
-        }),
-      })
-        .then((response) => {
-          if (response.statusText === "created") {
-            this.props.handleSuccessfulAuth(response.data);
-          }
-          return response.json();
-        })
-        .then((response) => {
-          console.log("response: ", response);
-         
-        })
-        .catch((error) => {
-          console.log("registration error", error);
-        });
-      // this.props.history.push("/");
+class Reservastion extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user_Id: "",
+      place_Id: "",
+      user: {},
+      start_date: "",
+      end_date: "",
+      total_nights: "",
+      num_of_guests: "",
+      token: "",
+      isAuth: false,
+      isOpen: false,
+      isLogin: true,
+      placeID: "",
     };
-    
-        openModal = () => this.setState({ isOpen: true });
-        closeModal = () => this.setState({ isOpen: false });
+  }
 
+  async componentDidMount() {
+    document.title = "Reservation";
+    await this.setState({
+      token: localStorage.getItem("token"),
+      placeID: this.props.match.params.id,
+    });
+  }
 
-
-        
-
-        async componentDidMount() {
-            // console.log(",,,,,,,:  ",this.props.match.params.id);
-          await this.setState({
-              token: localStorage.getItem("token") ,
-              placeID :  this.props.match.params.id
-        });
-          console.log("token: "  , this.state.token);
-          // console.log(moment(document.getElementById("")))
-          // await this.props.getAllPlaces();
-      
-          // this.UserPlaces();
-         
-      
-          // await this.props.getAllReservation();
-          // await this.setState({ Reservations: this.props.reservations });
-          // // this.get_reserve_places();
-          // await this.props.getAllClients();
-          // this.getUser();
-        }
-
-        // getPlaces = async () => {
-        //     var arr = [];
-        //     var place = null;
-        //     if (this.state.Wishlists.length > 0) {
-        //       this.state.Wishlists.map(async (wishlist) => {
-        //         place = await this.props.places.filter((place) => {
-        //           if (place._id === wishlist.place_id) {
-        //             arr.push(place);
-        //           }
-        //         });
-        //       });
-        //       await this.setState({ Places: arr });
-        //       console.log("array: ", this.state.Places);
-        //     }
-        //   };
-            
-              
-//   async get_reserve_places() {
-//     var arr = [];
-//    var place = null;
-//    if (this.state.Reservations.length > 0) {
-//      this.state.Reservations.map(async (reservation) => {
-//        place = await this.props.places.filter((place) => {
-//          if (place._id === reservation.place_id) {
-//           arr.push(place);
-//          }
-//        });
-//        await this.setState({ reserve_Places: arr });
-//      });
-//    }
-//  }
-
-
-//  getUser = async () => {
-//     if(this.props.clients > 0){
-//         var user = this.props.clients.find(
-//           (client) => client._id === this.state.userId
-//         );
-//         this.setState({
-//           user,
-//           start_date: user.start_date,
-//           end_date: user.end_date,
-//           total_nights: user.total_nights,
-//           num_of_guests: user.num_of_guests,
-//         });
-//     }
-//   };
-
-// Validations = () => {
-//   const errors = {};
-//   let state = { ...this.state };
-//   delete state.errors;
-//   var res = Joi.validate(state, this.schema, { abortEarly: false });
-//   if (res.error === null || res.error <= 0 ) {
-//     this.setState({ errors: {} });
-//     return null;
-//   }
-//   for (const error of res.error.details) {
-//     errors[error.path] = error.message;
-//   }
-//   // console.log(res.error.details);
-//   // console.log(state);
-//   this.setState({ errors: errors });
-//   // console.log(this.state.errors.Password);
-// };
-
-  handleClick = async ()=>{
+  handleClick = async () => {
     var reservation = {
       start_date: this.state.start_date,
       end_date: this.state.end_date,
       total_nights: this.state.total_nights,
-      num_of_guests: this.state.num_of_guests
+      num_of_guests: this.state.num_of_guests,
     };
-    var flag= true;
-    if(reservation.start_date && reservation.end_date <= reservation.start_date) {
-      flag = false;
-      toast.error('🙄 Select Valid Dates', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
-    }
+    var flag = true;
 
-    if(!reservation.start_date){
-      flag=false;
-      toast.error('🙄 Select Start Date', {
+    if (!reservation.start_date || !reservation.end_date) {
+      flag = false;
+      toast.error("🙂 Select Valid Dates", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -218,11 +55,11 @@ import CalendarComp from "../calendar";
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+      });
     }
-    if(!reservation.end_date){
-      flag=false;
-      toast.error('😏 Select End Date', {
+    if (!reservation.num_of_guests || reservation.num_of_guests <= 0) {
+      flag = false;
+      toast.error("🤨 Enter Valid Number of Guests", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -230,39 +67,16 @@ import CalendarComp from "../calendar";
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+      });
     }
-    if(!reservation.total_nights || reservation.total_nights < 0 ){
-      flag=false;
-      toast.error('🤔 Enter Valid Number', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
-    }
-    if(!reservation.num_of_guests || reservation.num_of_guests <= 0  ){
-      flag=false;
-      toast.error('🤨 Enter Valid Number of Guests', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        });
-    }
-    if(flag){
-      console.log("______-_________", reservation);
-      await this.props.addReservation(this.state.token , this.state.placeID,reservation);
-      // console.log("^^^^^^^^", this.props.msg);
-      // if(this.props.msg === "reservation created successfully!") {
-      if(this.props.msg === "success") {
-        toast.success('🤩 Reservation created Successfully!', {
+    if (flag) {
+      await this.props.addReservation(
+        this.state.token,
+        this.state.placeID,
+        reservation
+      );
+      if (this.props.msg === "success") {
+        toast.success("🤩 Reservation created Successfully!", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -270,170 +84,114 @@ import CalendarComp from "../calendar";
           pauseOnHover: false,
           draggable: true,
           progress: undefined,
-          });
-          setTimeout(()=>{
-            this.props.history.push(`/place-details/${this.state.placeID}`);
-        }, 3500)
+        });
+        setTimeout(() => {
+          this.props.history.push(`/place-details/${this.state.placeID}`);
+        }, 3500);
       }
     }
-  }
+  };
 
   recieveDates = (startDate, endDate, validRange) => {
-    // console.log("********", startDate, endDate, validRange);
     let range = validRange.length;
     this.setState({
       start_date: startDate,
       end_date: endDate,
-      total_nights: range
-    })
-  }
+      total_nights: range,
+    });
+  };
 
   render() {
-    console.log("***", this.state.placeID);
     return (
-      <>
-        <section id="login">
-          <div className="container py-5">
-              <ToastContainer />
-              <div id="login-row" className="row justify-content-center align-items-center py-5 mx-1 mx-md-0">
-                        <div id="login-box" className="col-12 col-md-10 col-lg-8">
-                            <form id="login-form" className="form" action="" method="post">
-                                <h3 className="text-center reservation-header mb-3">Reservation</h3>
-                                <div className="row justify-content-center">
-                                  <label htmlFor="calendar" className="label mb-0">👇 Please Select the Range of your visit 👇</label>
-                                </div>
-                                <div id="calendar" className="row justify-content-center calendar">
-                                  <CalendarComp dates={this.recieveDates} props={this.props}/>
-                                </div>
-
-                                <div className="row justify-content-center">
-                                  <div className="col-10 col-md-8 col-lg-4 text-center">
-                                    <div className="form-group">
-                                      <label htmlFor="guests" className="label">Number of Guests</label>
-                                      <input type="number"
-                                      value={this.state.num_of_guests}
-                                      className="form-control"
-                                      id="guests"
-                                      onChange={(e) => {
-                                          this.setState({ num_of_guests: e.target.value });
-                                          document.getElementById('num_guests_err').innerHTML = "";
-                                        }}/>
-                                        <small id="num_guests_err"></small>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div className="row justify-content-center">
-                                  <div className="col-auto">
-                                    <div className="form-group">
-                                      <button id="submit" type="button"
-                                        className="btn secondary-btn"
-                                        onClick= {()=>{
-                                        this.handleClick()
-                                      }}>Submit</button>
-                                    </div>
-                                  </div>
-                                </div>
-                            </form>
-                        </div>
+      <section id="login">
+        <div className="container py-5">
+          <ToastContainer />
+          <div
+            id="login-row"
+            className="row justify-content-center align-items-center py-5 mx-1 mx-md-0"
+          >
+            <div id="login-box" className="col-12 col-md-10 col-lg-8">
+              <form id="login-form" className="form" action="" method="post">
+                <h3 className="text-center reservation-header mb-3">
+                  Reservation
+                </h3>
+                <div className="row justify-content-center">
+                  <label htmlFor="calendar" className="label mb-0">
+                    👇 Please Select the Range of your visit 👇
+                  </label>
+                </div>
+                <div
+                  id="calendar"
+                  className="row justify-content-center calendar"
+                >
+                  <CalendarComp dates={this.recieveDates} props={this.props} />
                 </div>
 
-                {/* <div id="login-row" className="row justify-content-center align-items-center py-5">
-                    <div id="login-column" className="col-md-6">
-                        <div id="login-box" className="col-md-12 ">
-                            <form id="login-form" className="form" action="" method="post">
-                                <h3 className="text-center label">Reservation</h3>
-
-                                <div className="form-group">
-                                    <label className="label">Check In :</label>
-                                    <input type="date"
-                                    id="start_date"
-                                     className="form-control"
-                                     value={this.state.start_date}
-                                     onChange={(e) => {
-                                        this.setState({start_date : e.target.value });
-                                        document.getElementById('start_err').innerHTML = "";
-                                      }}/>
-                                <small id="start_err"></small>
-                                </div>
-                                <div className="form-group">
-                                    <label className="label">Check Out :</label>
-                                    <input type="date"
-                                    id="end_date"
-                                     className="form-control" 
-                                     value={this.state.end_date}
-                                     onChange={(e) => {
-                                        this.setState({ end_date: e.target.value });
-                                        document.getElementById('end_err').innerHTML = "";
-                                      }}/>
-                                <small id="end_err"></small>
-                                </div>
-
-                                <div className="form-group">
-                                    <label className="label">Total Nights :</label>
-                                    <input type="number" 
-                                    className="form-control"
-                                    value={this.state.total_nights} 
-                                    onChange={(e) => {
-                                        this.setState({ total_nights: e.target.value });
-                                        document.getElementById('total_nights_err').innerHTML = "";
-                                      }}/>
-                                      <small id="total_nights_err"></small>
-                                </div>
-                                <div className="form-group">
-                                    <label className="label">Number of guests :</label>
-                                    <input type="number" 
-                                    value={this.state.num_of_guests}
-                                    className="form-control" 
-                                    onChange={(e) => {
-                                        this.setState({ num_of_guests: e.target.value });
-                                        document.getElementById('num_guests_err').innerHTML = "";
-                                      }}/>
-                                      <small id="num_guests_err"></small>
-
-                                    <div className="form-group">
-                                    <div className="col-auto my-2">
-                                        <button  id="submit" type="button"
-                                          className="btn float-right"
-                                          onClick= {()=>{
-                                          this.handleClick()
-                                        }}>Submit</button>
-                                    </div>
-                                </div>
-                                </div>
-                            </form>
-                        </div>
+                <div className="row justify-content-center">
+                  <div className="col-10 col-md-8 col-lg-4 text-center">
+                    <div className="form-group">
+                      <label htmlFor="guests" className="label">
+                        Number of Guests
+                      </label>
+                      <input
+                        type="number"
+                        value={this.state.num_of_guests}
+                        className="form-control"
+                        id="guests"
+                        onChange={(e) => {
+                          this.setState({ num_of_guests: e.target.value });
+                        }}
+                      />
                     </div>
-                </div> */}
+                  </div>
+                </div>
+
+                <div className="row justify-content-center">
+                  <div className="col-auto">
+                    <div className="form-group">
+                      <button
+                        id="submit"
+                        type="button"
+                        className="btn secondary-btn"
+                        onClick={() => {
+                          this.handleClick();
+                        }}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
-        </section>
-      </>
-);
-}
+          </div>
+        </div>
+      </section>
+    );
+  }
 }
 
 const mapactiontoprops = (disptch) => {
-    return bindActionCreators(
-      {
-        getAllPlaces,
-        getAllClients,
-        updateClient,
-        getPlaceById,
-        getAllReservation,
-        addReservation
-      },
-      disptch
-    );
+  return bindActionCreators(
+    {
+      getAllPlaces,
+      getAllClients,
+      updateClient,
+      getPlaceById,
+      getAllReservation,
+      addReservation,
+    },
+    disptch
+  );
+};
+const mapstatetoprops = (state) => {
+  return {
+    places: state.Places,
+    clients: state.Clients,
+    placeDetails: state.Places,
+    reservations: state.Reservations,
+    msg: state.Reservations.message,
   };
-  const mapstatetoprops = (state) => {
-    return {
-      places: state.Places,
-      clients: state.Clients,
-      placeDetails: state.Places,
-      reservations: state.Reservations,
-      msg: state.Reservations.message
-    };
-  };
+};
 
-// export default Reservastion
 export default connect(mapstatetoprops, mapactiontoprops)(Reservastion);
