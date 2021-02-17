@@ -29,7 +29,6 @@ class Reservastion extends Component {
   }
 
   async componentDidMount() {
-    document.title = "Reservation";
     await this.setState({
       token: localStorage.getItem("token"),
       placeID: this.props.match.params.id,
@@ -102,6 +101,7 @@ class Reservastion extends Component {
   };
 
   render() {
+    document.title = "Reservation";
     return (
       <section id="login">
         <div className="container py-5">
