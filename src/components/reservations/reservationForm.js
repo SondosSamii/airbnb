@@ -300,7 +300,7 @@ import CalendarComp from "../calendar";
                             <form id="login-form" className="form" action="" method="post">
                                 <h3 className="text-center reservation-header mb-3">Reservation</h3>
                                 <div className="row justify-content-center">
-                                  <label htmlFor="calendar" className="label mb-0">Select Range</label>
+                                  <label htmlFor="calendar" className="label mb-0">👇 Please Select the Range of your visit 👇</label>
                                 </div>
                                 <div id="calendar" className="row justify-content-center calendar">
                                   <CalendarComp dates={this.recieveDates} props={this.props}/>
