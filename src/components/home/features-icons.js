@@ -10,7 +10,7 @@ const FeaturesIcons = (placeObj) => {
       {place.has_tv && <FaTv className="feature-icon" />}
       {place.has_wifi && <FaWifi className="feature-icon" />}
       {place.pets && <MdPets className="feature-icon" />}
-      {place.has_air_conditioner && <IoIosSnow className="feature-icon" />}
+      {place.has_airconditioner && <IoIosSnow className="feature-icon" />}
       {place.has_heating_system && <GiFireplace className="feature-icon" />}
     </>
   );

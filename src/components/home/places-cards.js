@@ -161,7 +161,7 @@ class Cards extends Component {
                 <p className="price">${place.price}</p>
                 <p className="rating">
                   <FaStar className="mr-1" />
-                  {place.ratingsValue ? place.ratingsValue : "New"}
+                  {place.ratingsValue ? place.ratingsValue.toFixed(1) : "New"}
                 </p>
               </div>
             </div>

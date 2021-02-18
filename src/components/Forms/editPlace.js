@@ -1,18 +1,12 @@
 import React, { Component }  from 'react';
-// import React, { Component, createRef }  from 'react';
 import ReactDOM from 'react-dom';
 import './form.css';
-// import { BsCheckAll } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
-// import { event } from 'jquery';
 import Joi from 'joi-browser';
-// import Joi, { validate } from 'joi-browser';
 import axios from "axios";
 import { getPlaceById ,updatePlace } from "../../actions/places";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {SessionContext ,getSessionCookie} from '../session'
-// import { useContext } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 
 var params = {
@@ -20,9 +14,7 @@ var params = {
     query: '1600 Pennsylvania Ave NW'
     }
 
-class EditPlace extends Component {
-    //static contextType = SessionContext();
-    
+class EditPlace extends Component {   
   
     constructor(props) {
 
@@ -35,17 +27,7 @@ class EditPlace extends Component {
         this.maxGuests=React.createRef();
         this.rooms =0;
         const placedata={};
-        // const session = getSessionCookie();
-        // console.log(session)
-        //login session validation
-        // this.getUserId=()=>{
-        //     for(const data of this.data.data){
-        //         if(session.email===data.email){
-        //             this.state.UserId=data.id;
-        //         }
-        //     }
-        //   }
-         
+                 
           this.handleInputChange = this.handleInputChange.bind(this);
         }
         
@@ -87,19 +69,9 @@ class EditPlace extends Component {
                 this.props.history.push("/login");
             }
             await this.props.getPlaceById(this.props.match.params.id);
-            console.log("1111111", this.props.placeDetails.place_details.place);
-            // console.log("2222222", this.props.placeDetails.message);
-            // console.log("3333333", this.props.placeDetails.place);
-            // console.log("2222222", this.props.placeDetails.address);
             var place= this.props.placeDetails.place_details.place;
-            console.log(place);
             this.setState({placedata:place});
-            console.log(this.state.placedata)
-            console.log(this.state.photo);
-            console.log("**************", this.props.placeDetails.name);
-            // const address = this.state.address
-
-            // if(this.state.placedata) {
+            
                 this.setState({
                     name:this.state.placedata.name,
                     description:this.state.placedata.description,
@@ -156,31 +128,23 @@ class EditPlace extends Component {
             let newfiles = document.getElementById("files").files;
             let newfilesArr = Array.from(newfiles);
             this.state.photo=document.getElementById("files").files;
-            console.log(document.getElementById("files").files.length)
             await this.setState({ files: newfiles, filesArr: newfilesArr });
             this.RenderFileList();
         };
         //delete photo
         deleteImg(index){
-            console.log(this.state.photo);
             let key = index;
             let curArr = this.state.filesArr;
             let newfiles=new DataTransfer();
-            // for (let file of document.getElementById("files").files){
-            //     if (file !== document.getElementById("files").files[index]) {
-            //         newfiles.items.add(file);
-            //     }}
             for (var i = 0; i < document.getElementById("files").files.length; i++) {
                 if(i !== key.index){
                 var file = document.getElementById("files").files[i];
-                console.log(file);
                 newfiles.items.add(file);
                 }
             }
             curArr.splice(key, 1);
             this.setState({ filesArr: curArr });
             this.state.photo=newfiles.files;
-            console.log(this.state.photo);
             this.RenderFileList();
         }
        
@@ -192,15 +156,12 @@ class EditPlace extends Component {
           let state={...this.state};
           state[targetname]=value;
           await this.setState(state);
-          console.log(this.state);
-          console.log(targetname);
         }
         handelchange= async e=>{
             this.state.errors[e.currentTarget.name]=null;
             let state={...this.state};
             state[e.currentTarget.name]=e.currentTarget.value;
             await this.setState(state)
-            console.log(this.state)
         }
     
       addActiveClass(i) {
@@ -263,16 +224,11 @@ class EditPlace extends Component {
         params.query = this.state.country;
         await axios.get('http://api.positionstack.com/v1/forward', {params})
         .then(async response => {
-            console.log(response.data.data[0]);
              coordinates ={
                 lat: response.data.data[0].latitude,
                 lng: response.data.data[0].longitude,
             }  
             await this.setState({coordinates});
-            console.log(coordinates);
-            console.log(this.state.coordinates.lat)
-            console.log(this.state.coordinates)
-
         }).catch(error => {
             console.log(error);
         });
@@ -321,17 +277,13 @@ class EditPlace extends Component {
             errors[error.path]=error.message;
         }
         this.setState({errors:errors})
-        console.log(this.state.errors);
     }
       handelSubmit=async e=>{
         e.preventDefault();
         const errors= this.Validations();
         if(errors !== null) return;
         await this.handleClick();
-        console.log(this.state.coordinates)
-        //var address={country:"egy",city:"tanta"}
         var ins =this.state.photo.length;
-        // console.log("^^^^^", this.state.name);
         var formData = new FormData();
         formData.append("name", this.state.name);
         formData.append("type", this.state.type);
@@ -354,17 +306,11 @@ class EditPlace extends Component {
         formData.append("max_guests", this.state.guests);
         for (var x = 0; x < ins; x++) {
             formData.append("images[]", this.state.photo[x]);
-            console.log(this.state.photo[x])
         }
-        //formData.append("images", this.state.photo);
         for (var key of formData.entries()) {
-            console.log(key[0] + ", " + key[1]);
           }
         let url = "https://node-airbnb.herokuapp.com/api/place/"+this.props.match.params.id;
-        console.log(url);
         await this.props.updatePlace(formData,url,this.state.token);
-        console.log("place data",this.props.placeDetails);
-        // await this.props.history.push(`/place-details/${this.props.match.params.id}`);
         toast.success('Updating... 😁', {
             position: "top-center",
             autoClose: 3000,
@@ -378,40 +324,7 @@ class EditPlace extends Component {
               this.props.history.push(`/place-details/${this.props.match.params.id}`);
           }, 3500)  
 
-        {/* 
-        // const  obj={
-        // "user_id": this.state.UserId,
-        // "type": this.state.type,
-        // "description": this.state.description ,
-        // "total_rooms":  this.state.room,
-        // "total_kitchens":  this.state.kitchen,
-        // "total_bathrooms":  this.state.bathroom,
-        // "total_beds":  this.state.bedroom,
-        // "price":  this.state.price,
-        // "address": this.state.address,
-        // "location": {
-        //   "lat": "30.013056",
-        //   "long": "31.208853"
-        // },
-        // "pets":  this.state.pets,
-        // "has_tv":  this.state.tv,
-        // "has_wifi":  this.state.wifi,
-        // "has_heating_system":  this.state.heat,
-        // "has_air_conditioner":  this.state.aircon,
-        // "max_guests":  this.state.guests,
-        // "images":  this.state.photo}
-        // console.log(obj);
-        // await axios.post("http://localhost:3000/places/",obj)
-        //     .then(response => {
-        //         if (response.data.status === "created") {
-        //         this.props.handleSuccessfulAuth(response.data);
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log("registration error", error);
-        //     });
-        //     console.log("dome"); */}
-        //this.props.history.push("/");   
+         
     }
     render() { 
         return (

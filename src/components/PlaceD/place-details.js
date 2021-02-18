@@ -72,7 +72,7 @@ class GetPlaceDetails extends Component {
     await this.props.AllReviews();
     this.setState({ allreviews: this.props.allreviews.reviews });
     var place = this.props.placeDetails.place;
-    localStorage.setItem("place_id", place._id);
+    await localStorage.setItem("place_id", this.props.match.params.id);
     this.setState({ address: place.address });
     this.setState({ img: place.images });
     this.setState({ placedata: place });
@@ -80,8 +80,9 @@ class GetPlaceDetails extends Component {
       await  this.setState({ owner: true });
       }
     this.setState({ users: this.props.users.users });
+    if(this.props.placeDetails.place.ratingsValue ){
      var rate=this.props.placeDetails.place.ratingsValue.toFixed(1);
-    await this.setState({ rate});
+    await this.setState({ rate});}
   }
 
   placeSlider = () => {
@@ -98,7 +99,6 @@ class GetPlaceDetails extends Component {
         <div style={{ position: "relative", overflow: "hidden" }}>
           <Slider {...settings}>
             {this.state.img.map((images) => {
-              console.log(images);
               return (
                 <div>
                   <img
@@ -239,7 +239,6 @@ class GetPlaceDetails extends Component {
 
   placeFeature = () => {
     if (this.state.placedata) var place = this.state.placedata;
-    console.log("place>>>>>", place);
     return (
       <div className="container">
         <div className="row py-5">
@@ -329,10 +328,7 @@ class GetPlaceDetails extends Component {
       var allreviews = this.state.allreviews;
       var reviews = this.state.reviews;
       var allusers = this.state.users;
-      console.log(allreviews);
-      console.log(reviews);
       var placeReviews = [];
-      let rate = 0;
       let username = [];
       let userimg = [];
       reviews.map((r) => {
@@ -342,26 +338,15 @@ class GetPlaceDetails extends Component {
           }
         });
       });
-      console.log(placeReviews);
       placeReviews.map((r) => {
         allusers.map((oneuser) => {
           if (r.user_id === oneuser._id) {
             username.push(oneuser.name);
             userimg.push(oneuser.profile_image);
-            console.log(oneuser);
           }
         });
-        rate += r.rating;
       });
-      const avg = rate / placeReviews.length;
-      const newavg = avg.toFixed(1);
-      console.log(newavg);
-      // this.setState({rate: newavg});
-      //this.state.rate = newavg;
-      var uName = [];
-      var uImg = [];
-      //console.log("22222222222222",user)
-      //console.log("333333333333", placeReviews)
+      
 
       if (placeReviews.length > 0) {
         return (
@@ -462,7 +447,7 @@ class GetPlaceDetails extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <ReviewAdding history={this.props.history} />
+              <ReviewAdding history={this.props.history} id={this.props.match.params.id} />
             </div>
           </div>
         </div>
@@ -527,7 +512,5 @@ const mapstatetoprops = (state) => {
     allreviews: state.Reviews.allreviews,
   };
 };
-//   export default connect(mapstatetoprops, mapactiontoprops)(GoogleApiWrapper({
-//     apiKey: "AIzaSyDED1xIAqSktQ5LAnZ5BCVIkwtKbJPT31U" })(GetPlaceDetails)) ;
 
 export default connect(mapstatetoprops, mapactiontoprops)(GetPlaceDetails);

@@ -18,7 +18,7 @@ class ReviewAdding extends Component{
       state = {
         Rate:0,
         Comment:"",
-        Place_id:localStorage.place_id,
+        Place_id:this.props.id,
         errors:[]        
       };
       schema = {

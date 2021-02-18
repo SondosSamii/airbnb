@@ -31,14 +31,11 @@ class Login extends Component {
     if(localStorage.checked==="true"){
       await this.setState({Email:localStorage.email,
         Password:localStorage.password,
-        isChecked:localStorage.checked});
-        // console.log(localStorage)
-        console.log("here true")
+        isChecked:true});
     }else{
       await this.setState({Email:"",
         Password:"",
         isChecked:false});
-        console.log("here false")
     }
     
   }
@@ -79,54 +76,24 @@ class Login extends Component {
     this.setState({ errors: errors });
     console.log(this.state.errors.Password);
   };
-  //  LoginValidations(){
-  //     console.log(this.data.data);
-  //     for(const data of this.data.data){
-  //         if(this.state.Email==data.email ){
-  //             var validEmail= true;
-  //             if(this.state.Password==data.password ){
-  //                 var validPass= true;
-  //             }
-  //         }
-  //     }
-  //     if(validEmail){
-  //         if(validPass){
-  //             return true;
-  //         }
-  //         else{
-  //             this.setState({errors:{Password:"The Password is not correct!"}})
-  //         }
-
-  //     }
-  //     else{
-  //         this.setState({errors:{Email:"This Email is not exists!"}})
-  //     }
-  // }
-
+  
   handleInputChange=async e=> {
-    const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const targetname = target.name;
-    let state={...this.state};
-    state[targetname]=value;
-    await this.setState(state);
-    console.log(state)
-    console.log(value)
+     this.setState({isChecked: e.currentTarget.checked});
+    console.log(e.currentTarget.checked)
   }
 
   handelLogin = async (e) => {
     e.preventDefault();
 
+    console.log(this.state.isChecked)
     const errors = this.Validations();
     // const valid=this.LoginValidations();
     if (errors !== null) return;
     var formData = new FormData();
     formData.append("email", this.state.Email);
     formData.append("password", this.state.Password);
-    console.log(this.state.Email);
     let url = "https://node-airbnb.herokuapp.com/api/login";
     await this.props.login(formData,url);
-    console.log("login data",this.props.client)
 
     if(this.props.client.message === "A user with this email could not be found.") {
       window.alert("A user with this email could not be found.");
@@ -138,7 +105,7 @@ class Login extends Component {
       await localStorage.setItem("token", this.props.client.token);
       await localStorage.setItem("user_id", this.props.client.user_id);  
     }
-    if(this.state.isChecked==="true"){
+    if(this.state.isChecked===true){
       await localStorage.setItem("email", this.state.Email);
       await localStorage.setItem("password", this.state.Password);
       await localStorage.setItem("checked", this.state.isChecked);
@@ -154,50 +121,8 @@ class Login extends Component {
         user_id: this.props.client.user_id,
         
       })
-      console.log(this.state);
       this.props.history.push("/");
-      // <Redirect push to="/"/>
     }
-
-
-    // fetch("http://localhost:8080/api/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email: this.state.Email,
-    //     password: this.state.Password,
-    //   }),
-    // })
-    //   .then((response) => {
-    //     if (response.statusText === "created") {
-    //       this.props.handleSuccessfulAuth(response.data);
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((response) => {
-    //     console.log("response: ", response);
-    //     console.log("token: ", response.token);
-    //     this.setState({
-    //       isAuth: true,
-    //       token: response.token,
-    //       user_id: response.user_id,
-    //     });
-    //     localStorage.setItem("token", response.token);
-    //     localStorage.setItem("user_id", response.user_id);
-    //     // const remainingMilliseconds = 60 * 60 * 1000;
-    //     // const expiryDate = new Date(
-    //     //   new Date().getTime() + remainingMilliseconds
-    //     // );
-    //     // localStorage.setItem("expiryDate", expiryDate.toISOString());
-    //     // this.setAutoLogout(remainingMilliseconds);
-    //   })
-    //   .catch((error) => {
-    //     console.log("login error", error);
-    //   });
-    // var email=this.state.Email;
-    // setSessionCookie({ email });
   };
 
  

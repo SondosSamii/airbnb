@@ -40,11 +40,6 @@ class Signup extends Component {
       .regex(/^[0-9]+$/)
       .required(),
   };
-  // data = {};
-  // async componentDidMount() {
-  //   this.data = await axios.get("http://localhost:8080/api/clients");
-  //   console.log(this.data);
-  // }
 
   signupValidations = () => {
     const errors = {};
@@ -60,21 +55,13 @@ class Signup extends Component {
     }
     console.log(res.error.details);
     this.setState({ Signup_errors: errors });
-    console.log(this.state.Signup_errors.Email);
   };
 
   handelsignup = async (e) => {
     e.preventDefault();
     const errors = this.signupValidations();
-    console.log("1111111111111111111111", errors);
     if (errors !== null) return;
-    // const obj = {
-    //   name: this.state.UserName,
-    //   email: this.state.Email,
-    //   password: this.state.Password,
-    //   phone: this.state.PhoneNumber,
-    //   is_host: false,
-    // };
+    
 
     var formData = new FormData();
     formData.append("name", this.state.UserName);
@@ -82,65 +69,19 @@ class Signup extends Component {
     formData.append("password", this.state.Password);
     formData.append("phone", this.state.PhoneNumber);
     formData.append("is_host", false);
-    for (var key of formData.entries()) {
-      console.log(key[0] + ", " + key[1]);
-    }
+    // for (var key of formData.entries()) {
+    //   console.log(key[0] + ", " + key[1]);
+    // }
     let url = "https://node-airbnb.herokuapp.com/api/signup";
     await this.props.addclient(formData,url);
     console.log("signup data",this.props.client);
-
-    // console.log("^^^^^^^^^^^", this.props.client.data[0].msg)
     if(this.props.client.message === "Validation failed.") {
       window.alert(this.props.client.data[0].msg);
-      // this.state.errors.email
-      // this.setState({Signup_errors:this.props.client.data[0][1] })
     }
     
-    // let url = "http://localhost:8080/api/signup";
-    // let method = "POST";
-    // fetch(url, {
-    //   method: method,
-    //   body: formData,
-    //   //   headers: {
-    //   //     Authorization: "Bearer " + this.props.token,
-    //   //   },
-    // })
-    //   .then((response) => {
-    //     if (response.statusText === "created") {
-    //       this.props.handleSuccessfulAuth(response.data);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("registration error", error);
-    //   });
-
-    // fetch(url, {
-    //   method: method,
-    //   body: formData,
-    //   headers: {
-    //     Authorization: "Bearer " + this.props.token,
-    //   },
-    // });
-
-    // await axios
-    //   .post(
-    //     "http://localhost:3001/api/signup",
-    //     { data: formData },
-    //     { headers: { "content-type": "multipart/form-data" } }
-    //   )
-    //   .then((response) => {
-    //     if (response.statusText === "created") {
-    //       this.props.handleSuccessfulAuth(response.data);
-    //       console.log("done");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("registration error", error);
-    //   });
     var email = this.state.Email;
     var password= this.state.password;
     setSessionCookie({ email,password });
-    //await  this.props.history.push("/");
     window.location.reload();
   };
 
@@ -266,8 +207,6 @@ class Signup extends Component {
     );
   }
 }
-
-
 
 const mapactiontoprops = (disptch) => {
   return bindActionCreators(

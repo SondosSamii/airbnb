@@ -261,7 +261,6 @@ class Host extends Component {
         wifi: Joi.boolean().required(),
         heat:Joi.boolean().required(),
         pets:Joi.boolean().required(),
-        // photo:Joi.array().items(Joi.object().keys().min(3))
         photo:Joi.required()
     };
     Validations = () =>{
@@ -313,16 +312,9 @@ class Host extends Component {
         formData.append("max_guests", this.state.guests);
         for (var x = 0; x < ins; x++) {
             formData.append("images[]", this.state.photo[x]);
-            console.log(this.state.photo[x])
         }
-        //formData.append("images", this.state.photo);
-        for (var key of formData.entries()) {
-            console.log(key[0] + ", " + key[1]);
-          }
         let url = "https://node-airbnb.herokuapp.com/api/place";
         await this.props.addplace(formData,url,this.state.token);
-        console.log("place data",this.props.placeDetails);
-        console.log("^^^^^^^^", this.props.msg.message);
         if(this.props.msg.message === "place created successfully!") {
           toast.success('👌 Place added Successfully!', {
             position: "top-center",
@@ -337,42 +329,6 @@ class Host extends Component {
                 this.props.history.push(`/place-details/${this.props.msg.place._id}`);
             }, 5500)
         }
-        // <Redirect push to="/"/>
-        
-        {/* 
-        // const  obj={
-        // "user_id": this.state.UserId,
-        // "type": this.state.type,
-        // "description": this.state.description ,
-        // "total_rooms":  this.state.room,
-        // "total_kitchens":  this.state.kitchen,
-        // "total_bathrooms":  this.state.bathroom,
-        // "total_beds":  this.state.bedroom,
-        // "price":  this.state.price,
-        // "address": this.state.address,
-        // "location": {
-        //   "lat": "30.013056",
-        //   "long": "31.208853"
-        // },
-        // "pets":  this.state.pets,
-        // "has_tv":  this.state.tv,
-        // "has_wifi":  this.state.wifi,
-        // "has_heating_system":  this.state.heat,
-        // "has_air_conditioner":  this.state.aircon,
-        // "max_guests":  this.state.guests,
-        // "images":  this.state.photo}
-        // console.log(obj);
-        // await axios.post("http://localhost:3000/places/",obj)
-        //     .then(response => {
-        //         if (response.data.status === "created") {
-        //         this.props.handleSuccessfulAuth(response.data);
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log("registration error", error);
-        //     });
-        //     console.log("dome"); */}
-        //this.props.history.push("/");   
     }
     render() { 
         return (

@@ -22,8 +22,6 @@ const Routes = ()=> {
     useEffect(
         () => {
             const cookie = getSessionCookie();
-            console.log(cookie);
-            console.log(session);
             if(cookie.email !== session.email) {
             setSession(getSessionCookie());} 
     },
