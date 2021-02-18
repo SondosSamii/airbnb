@@ -66,7 +66,6 @@ class GetPlaceDetails extends Component {
       this.setState({ isAuth: true });
     }
     await this.props.getPlaceById(this.props.match.params.id);
-    document.title = this.props.placeDetails.place.name;
     await this.props.AllClients();
     await this.props.getPlaceReviews(this.props.match.params.id);
     this.setState({ reviews: this.props.reviews.reviews });
@@ -495,6 +494,7 @@ class GetPlaceDetails extends Component {
     );
   }
   render() {
+    document.title = this.props.placeDetails.place.name;
     return (
       <section
         id="place-details"
