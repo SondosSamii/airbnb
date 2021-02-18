@@ -85,7 +85,7 @@ class Signup extends Component {
     for (var key of formData.entries()) {
       console.log(key[0] + ", " + key[1]);
     }
-    let url = "http://localhost:8080/api/signup";
+    let url = "https://node-airbnb.herokuapp.com/api/signup";
     await this.props.addclient(formData,url);
     console.log("signup data",this.props.client);
 

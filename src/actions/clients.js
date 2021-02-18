@@ -1,9 +1,9 @@
 import axios from "axios";
 
 // const baseUrl = "http://localhost:1337/api/clients";
-const url = "http://localhost:8080/api/client";
+const url = "https://node-airbnb.herokuapp.com/api/client";
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/clients";
-const update_pass_url = "http://localhost:8080/api/clientPassword"
+const update_pass_url = "https://node-airbnb.herokuapp.com/api/clientPassword"
 // const baseUrl = "http://localhost:4200/students";
 
 
@@ -26,7 +26,7 @@ export async function getAllClients(){
 export async function AllClients() {
     var payload = null;
     try {
-        let url="http://localhost:8080/api/clients"
+        let url="https://node-airbnb.herokuapp.com/api/clients"
         const res = await fetch(url);
         payload = await res.json();
         console.log("clients: ", payload);

@@ -1,9 +1,9 @@
 import axios from "axios";
  
 // const baseUrl = "http://localhost:1337/api/reservations";
-const url = "http://localhost:8080/api/reservation";
-const get_Place_reservations_url = "http://localhost:8080/api/placeReservations";
-const get_Reservation_Details_Not_Auth = "http://localhost:8080/api/reservationNotAuth";
+const url = "https://node-airbnb.herokuapp.com/api/reservation";
+const get_Place_reservations_url = "https://node-airbnb.herokuapp.com/api/placeReservations";
+const get_Reservation_Details_Not_Auth = "https://node-airbnb.herokuapp.com/api/reservationNotAuth";
 
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/reservations";
 

@@ -76,11 +76,12 @@ class GetPlaceDetails extends Component {
     this.setState({ address: place.address });
     this.setState({ img: place.images });
     this.setState({ placedata: place });
-    this.setState({ users: this.props.users.users });
-    this.state({ rate: this.place.ratingsValue });
     if (localStorage.user_id === this.state.placedata.user_id) {
-      this.setState({ owner: true });
-    }
+      await  this.setState({ owner: true });
+      }
+    this.setState({ users: this.props.users.users });
+     var rate=this.props.placeDetails.place.ratingsValue.toFixed(1);
+    await this.setState({ rate});
   }
 
   placeSlider = () => {
@@ -102,20 +103,16 @@ class GetPlaceDetails extends Component {
                 <div>
                   <img
                     className="slideshow-bg w-100"
-                    src={`http://localhost:8080/${images}`}
+                    src={`https://node-airbnb.herokuapp.com/${images}`}
                     alt=""
                   />
                 </div>
-                // <div className="slideshow-bg"
-                //     style={{backgroundImage: `url('http://localhost:8080/${images}')`}}
-                // >
-                // </div>
               );
             })}
           </Slider>
           <h1 className="Place-name">{this.state.placedata.name}</h1>
           <span className="place-rate">
-            <FaStar /> {this.state.placedata.ratingsValue}
+            <FaStar /> {this.state.rate}
           </span>
         </div>
       );
@@ -356,11 +353,11 @@ class GetPlaceDetails extends Component {
         });
         rate += r.rating;
       });
-      const avg = rate / allreviews.length;
+      const avg = rate / placeReviews.length;
       const newavg = avg.toFixed(1);
       console.log(newavg);
       // this.setState({rate: newavg});
-      this.state.rate = newavg;
+      //this.state.rate = newavg;
       var uName = [];
       var uImg = [];
       //console.log("22222222222222",user)
@@ -386,7 +383,7 @@ class GetPlaceDetails extends Component {
                             style={{
                               width: "85px",
                               height: "85px",
-                              backgroundImage: `url('http://localhost:8080/${userimg[index]}')`,
+                              backgroundImage: `url('https://node-airbnb.herokuapp.com/${userimg[index]}')`,
                               backgroundPosition: "center",
                               backgroundSize: "cover",
                             }}
@@ -494,7 +491,7 @@ class GetPlaceDetails extends Component {
     );
   }
   render() {
-    document.title = this.props.placeDetails.place.name;
+    //document.title = this.props.placeDetails.place.name;
     return (
       <section
         id="place-details"
@@ -503,7 +500,7 @@ class GetPlaceDetails extends Component {
         {this.placeSlider()}
         {this.placeLocation()}
         {this.placeFeature()}
-        {this.state.isAuth && this.btnModel()}
+        {this.state.isAuth && !this.state.owner && this.btnModel()}
         {this.Review()}
         {this.Model()}
       </section>

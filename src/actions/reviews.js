@@ -3,9 +3,9 @@ const baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb/reviews";
 // const placeReviewsUrl = "https://node-airbnb.herokuapp.com/api/placeReviews";
 // const reviewUrl = "https://node-airbnb.herokuapp.com/api/review";
 
-const placeReviewsUrl = "http://localhost:8080/api/placeReviews";
-const reviewUrl = "http://localhost:8080/api/review";
-const placeRating_url = "http://localhost:8080/api/placeRating";
+const placeReviewsUrl = "https://node-airbnb.herokuapp.com/api/placeReviews";
+const reviewUrl = "https://node-airbnb.herokuapp.com/api/review";
+const placeRating_url = "https://node-airbnb.herokuapp.com/api/placeRating";
 
 export async function getAllReviews() {
     let payload = null;
@@ -84,7 +84,7 @@ export async function getReviewDetails(id) {
 export async function AllReviews() {
     var payload = null;
     try {
-        let url="http://localhost:8080/api/allReviews"
+        let url="https://node-airbnb.herokuapp.com/api/allReviews"
         const res = await fetch(url,{
         method: "GET",
         headers: {

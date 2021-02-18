@@ -360,7 +360,7 @@ class EditPlace extends Component {
         for (var key of formData.entries()) {
             console.log(key[0] + ", " + key[1]);
           }
-        let url = "http://localhost:8080/api/place/"+this.props.match.params.id;
+        let url = "https://node-airbnb.herokuapp.com/api/place/"+this.props.match.params.id;
         console.log(url);
         await this.props.updatePlace(formData,url,this.state.token);
         console.log("place data",this.props.placeDetails);

@@ -319,7 +319,7 @@ class Host extends Component {
         for (var key of formData.entries()) {
             console.log(key[0] + ", " + key[1]);
           }
-        let url = "http://localhost:8080/api/place";
+        let url = "https://node-airbnb.herokuapp.com/api/place";
         await this.props.addplace(formData,url,this.state.token);
         console.log("place data",this.props.placeDetails);
         console.log("^^^^^^^^", this.props.msg.message);

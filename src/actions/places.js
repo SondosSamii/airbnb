@@ -1,7 +1,7 @@
 // import axios from "axios";
  
 // const baseUrl = "http://localhost:1337/api/places";
-const url = "http://localhost:8080/api/place";
+const url = "https://node-airbnb.herokuapp.com/api/place";
 
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
 
@@ -9,7 +9,7 @@ const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
 
 // const allPlacesUrl = "https://node-airbnb.herokuapp.com/api/allPlaces";
 
-const allPlacesUrl = "http://localhost:8080/api/allPlaces";
+const allPlacesUrl = "https://node-airbnb.herokuapp.com/api/allPlaces";
 
 export async function getAllPlaces(){
     let payload = null;
@@ -73,22 +73,22 @@ export async function getPlaceById (id){
      
 }
 
-export async function getPlaceByID (id){
-    let payload=null;
-     try{
-         let response = await fetch(`${baseUrl}/${id}`);
-         payload = await response.json();
-          console.log("id", id , " " , payload);
+// export async function getPlaceByID (id){
+//     let payload=null;
+//      try{
+//          let response = await fetch(`${baseUrl}/${id}`);
+//          payload = await response.json();
+//           console.log("id", id , " " , payload);
          
-     }catch(e){
-         console.log("errrrroooooooooooorrrrrrr",id , e);
-     }
-     return {
-         type:"PlaceDetails",
-         payload
-     }
+//      }catch(e){
+//          console.log("errrrroooooooooooorrrrrrr",id , e);
+//      }
+//      return {
+//          type:"PlaceDetails",
+//          payload
+//      }
      
-}
+// }
 
 export async function addplace (formData,url,token){
     var payload=null;

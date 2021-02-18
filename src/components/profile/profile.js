@@ -204,7 +204,7 @@ class ViewProfile extends Component {
                   <div
                     className="card-item-highlight"
                     style={{
-                      backgroundImage: `url('http://localhost:8080/${this.state.Places[index].images[0]}')`,
+                      backgroundImage: `url('https://node-airbnb.herokuapp.com/${this.state.Places[index].images[0]}')`,
                     }}
                   >
                     <h3 className="card-item-name">
@@ -270,7 +270,7 @@ class ViewProfile extends Component {
                     to={`/place-details/${this.state.reserve_Places[index]._id}`}
                     className="card-item-bg"
                     style={{
-                      backgroundImage: `url('http://localhost:8080/${this.state.reserve_Places[index].images[0]}')`,
+                      backgroundImage: `url('https://node-airbnb.herokuapp.com/${this.state.reserve_Places[index].images[0]}')`,
                     }}
                   >
                     <h3 className="card-item-name">
@@ -430,7 +430,7 @@ class ViewProfile extends Component {
                   className="user_img "
                   style={{
                     // backgroundImage: `url('https://i.stack.imgur.com/l60Hf.png')`,
-                    backgroundImage: `url('http://localhost:8080/${this.state.user.profile_image}')`,
+                    backgroundImage: `url('https://node-airbnb.herokuapp.com/${this.state.user.profile_image}')`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundPosition: "center",

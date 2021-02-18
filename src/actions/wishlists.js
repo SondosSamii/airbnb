@@ -1,16 +1,16 @@
 import axios from "axios";
  
 // const baseUrl = "http://localhost:1337/api/wishlists";
-const url = "http://localhost:8080/api/wishlist";
+const url = "https://node-airbnb.herokuapp.com/api/wishlist";
 
-const deleteByID_url = "http://localhost:8080/api/wishlist";
+const deleteByID_url = "https://node-airbnb.herokuapp.com/api/wishlist";
 
-const getById_url = "http://localhost:8080/api/wishlist"
+const getById_url = "https://node-airbnb.herokuapp.com/api/wishlist"
 // const Url = "http://localhost:1337/api/wishlist";
 
 const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
 
-const wishlistsUrl = "http://localhost:8080/api/wishlists";
+const wishlistsUrl = "https://node-airbnb.herokuapp.com/api/wishlists";
 // const wishlistsUrl = "https://node-airbnb.herokuapp.com/api/wishlists";
 
 // const baseUrl = " http://localhost:2400/wishlists";

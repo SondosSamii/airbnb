@@ -137,7 +137,7 @@ class Cards extends Component {
                 className="card-item-highlight"
                 style={{
                   // backgroundImage: `url(/images/places/place1-2.jpeg)`
-                  backgroundImage: `url(http://localhost:8080/${place.images[0]})`,
+                  backgroundImage: `url(https://node-airbnb.herokuapp.com/${place.images[0]})`,
                 }}
               >
                 <h3 className="card-item-name">

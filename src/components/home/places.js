@@ -34,7 +34,7 @@ class Places extends Component {
                   to={`/place-details/${this.state.places[0]._id}`}
                   className="card-item-bg"
                   style={{
-                    backgroundImage: `url(http://localhost:8080/${this.state.places[0].images[0]})`,
+                    backgroundImage: `url(https://node-airbnb.herokuapp.com/${this.state.places[0].images[0]})`,
                   }}
                 >
                   <h3 className="card-item-name">
@@ -54,7 +54,7 @@ class Places extends Component {
                       to={`/place-details/${this.state.places[1]._id}`}
                       className="card-item-bg"
                       style={{
-                        backgroundImage: `url(http://localhost:8080/${this.state.places[1].images[0]})`,
+                        backgroundImage: `url(https://node-airbnb.herokuapp.com/${this.state.places[1].images[0]})`,
                       }}
                     >
                       <h3 className="card-item-name">
@@ -72,7 +72,7 @@ class Places extends Component {
                       to={`/place-details/${this.state.places[2]._id}`}
                       className="card-item-bg"
                       style={{
-                        backgroundImage: `url(http://localhost:8080/${this.state.places[2].images[0]})`,
+                        backgroundImage: `url(https://node-airbnb.herokuapp.com/${this.state.places[2].images[0]})`,
                       }}
                     >
                       <h3 className="card-item-name">
@@ -92,7 +92,7 @@ class Places extends Component {
                       to={`/place-details/${this.state.places[3]._id}`}
                       className="card-item-bg"
                       style={{
-                        backgroundImage: `url(http://localhost:8080/${this.state.places[3].images[0]})`,
+                        backgroundImage: `url(https://node-airbnb.herokuapp.com/${this.state.places[3].images[0]})`,
                       }}
                     >
                       <h3 className="card-item-name">
