@@ -405,6 +405,18 @@ class ViewProfile extends Component {
     }
     if (check) {
       this.props.updatePassword(this.state.token, clientPasswords);
+      toast("Updating... 😇", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 5500);
     }
   };
 
@@ -416,10 +428,11 @@ class ViewProfile extends Component {
         <div
           style={{
             // backgroundImage: `url('https://cdn.pixabay.com/photo/2017/07/29/13/24/background-2551501_960_720.jpg')`,
-            backgroundImage: `url('/images/pexels-photo-2088203.jpeg')`,
+            backgroundImage: `url('https://images.unsplash.com/photo-1527904219733-fddc74937915?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80')`,
+            // backgroundImage: `url('/images/pexels-photo-2088203.jpeg')`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            backgroundPosition: "bottom",
+            backgroundPosition: "center",
           }}
           className="bg-light about-content"
         >
@@ -642,16 +655,17 @@ class ViewProfile extends Component {
                   <div className="modal-footer">
                     <button
                       type="button"
-                      className="btn btn-primary"
+                      className="btn main-btn"
                       data-toggle="modal"
                       data-target="#exampleModal2"
+                      data-dismiss="modal"
                     >
                       Update Password
                     </button>
                     <button
                       type="button"
                       className="btn btn-secondary"
-                      data-dismiss="modal2"
+                      data-dismiss="modal"
                     >
                       Close
                     </button>
@@ -726,7 +740,7 @@ class ViewProfile extends Component {
 
                       <button
                         type="button"
-                        className="btn update-btn"
+                        className="btn main-btn"
                         onClick={async () => {
                           this.handleUpdatePassword();
                         }}

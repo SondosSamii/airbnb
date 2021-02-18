@@ -24,9 +24,13 @@ const Routes = ()=> {
             const cookie = getSessionCookie();
             if(cookie.email !== session.email) {
             setSession(getSessionCookie());} 
+            console.log("/////!!!!!!!!!!!!!!!!11/////");
     },
     [session]
   );
+  useEffect(()=>{
+      console.log("......0000000......");
+  })
     return(
         <SessionContext.Provider value={session}>
             <Router>

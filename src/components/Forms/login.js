@@ -39,6 +39,7 @@ class Login extends Component {
     }
     
   }
+
   schema = {
     Email: Joi.string().required().email(),
     Password: Joi.string().required(),
@@ -85,7 +86,7 @@ class Login extends Component {
   handelLogin = async (e) => {
     e.preventDefault();
 
-    console.log(this.state.isChecked)
+    // console.log(this.state.isChecked)
     const errors = this.Validations();
     // const valid=this.LoginValidations();
     if (errors !== null) return;
@@ -121,7 +122,9 @@ class Login extends Component {
         user_id: this.props.client.user_id,
         
       })
-      this.props.history.push("/");
+      this.props.history.replace("/");
+      // setTimeout(()=>{
+      // },4000)
     }
   };
 

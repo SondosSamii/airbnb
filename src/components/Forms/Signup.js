@@ -78,11 +78,13 @@ class Signup extends Component {
     if(this.props.client.message === "Validation failed.") {
       window.alert(this.props.client.data[0].msg);
     }
+    else{
+      var email = this.state.Email;
+      var password= this.state.password;
+      setSessionCookie({ email,password });
+      window.location.reload();
+    }
     
-    var email = this.state.Email;
-    var password= this.state.password;
-    setSessionCookie({ email,password });
-    window.location.reload();
   };
 
   render() {
