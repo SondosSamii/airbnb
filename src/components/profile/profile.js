@@ -21,10 +21,6 @@ import {
 } from "../../actions/clients";
 
 import { ToastContainer, toast } from "react-toastify";
-import { FaStar, FaTv, FaWifi, FaHeart } from "react-icons/fa";
-import { MdPets } from "react-icons/md";
-import { IoIosSnow } from "react-icons/io";
-import { GiFireplace } from "react-icons/gi";
 import { AiFillEdit } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
 import { ImPhone } from "react-icons/im";
@@ -177,85 +173,7 @@ class ViewProfile extends Component {
     // });
   };
 
-  renderWishlist = () => {
-    // var i = 0;
-    console.log("Wishlist_Places: ", this.state.Places);
-    // if(this.state.wishlists > 0) {
-    if (this.state.user.wishlists) {
-      return this.state.user.wishlists
-        .slice(0, 3)
-        .map((wishlist_Element, index) => {
-          console.log("aaaaaaaaaaaaaa:  ", wishlist_Element);
-
-          if (this.state.Places[index]) {
-            var flag = false;
-            if (
-              this.state.Places[index].address !== "undefined" &&
-              this.state.Places[index].address !== "undefined"
-            ) {
-              flag = true;
-            }
-            return (
-              <div
-                className="col-9 col-sm-6 col-lg-4 mt-4"
-                key={wishlist_Element._id}
-              >
-                <div className="card-item">
-                  <div
-                    className="card-item-highlight"
-                    style={{
-                      backgroundImage: `url('https://node-airbnb.herokuapp.com/${this.state.Places[index].images[0]}')`,
-                    }}
-                  >
-                    <h3 className="card-item-name">
-                      {this.state.Places[index].name}
-                      <br />
-                      {this.icons(this.state.Places[index])}
-                    </h3>
-                    <h4 className="card-item-type">
-                      {this.state.Places[index].type}
-                    </h4>
-                    <FaHeart
-                      className="wishlist-icon"
-                      title="Remove from wishlist"
-                      onClick={() => {
-                        this.setState({
-                          isWishlisted: !this.state.isWishlisted,
-                        });
-                        console.log("klklll:    ", wishlist_Element);
-                        this.props.deleteWishlistById(
-                          this.state.token,
-                          wishlist_Element
-                        );
-                        this.renderWishlist();
-                        window.location.reload();
-                      }}
-                    />
-                  </div>
-                  <div className="card-item-details">
-                    {flag && (
-                      <h4>
-                        {this.state.Places[index].address.city},{" "}
-                        {this.state.Places[index].address.country}
-                      </h4>
-                    )}
-                    <p className="desc">
-                      {this.state.Places[index].description}
-                    </p>
-                    <p className="price">${this.state.Places[index].price}</p>
-                    <p className="rating">
-                      <FaStar />
-                      &nbsp;4.8
-                    </p>
-                    {/* {this.renderRating(this.state.Places[index]._id)} */}
-                  </div>
-                </div>
-              </div>
-            );
-          }
-        });
-    }
-  };
+  
   renderTrips = () => {
     if (this.state.user.reservations) {
       return this.state.user.reservations
@@ -289,50 +207,6 @@ class ViewProfile extends Component {
     }
   };
 
-  icons = (place) => {
-    return (
-      <>
-        {place.has_tv && <FaTv className="feature-icon" />}
-        {place.has_wifi && <FaWifi className="feature-icon" />}
-        {place.pets && <MdPets className="feature-icon" />}
-        {place.has_air_conditioner && <IoIosSnow className="feature-icon" />}
-        {place.has_heating_system && <GiFireplace className="feature-icon" />}
-      </>
-    );
-  };
-
-  schema = {
-    name: Joi.string().required(),
-    phone: Joi.string().required(),
-  };
-  validation = (state) => {
-    const errors = {};
-    var myState = { ...state };
-    // delete myState.User_wishlists;
-    // delete myState.Places;
-    // delete myState.reserve_Places;
-    // delete myState.All_User_places;
-    // delete myState.isLogin;
-    // delete myState.token;
-    // delete myState.new_pass;
-    // delete myState.user;
-    // delete myState.old_pass;
-    delete myState.profile_image;
-
-    var res = Joi.validate(myState, this.schema, { abortEarly: false });
-    if (res.error === null) {
-      this.setState({ errors: {} });
-      return null;
-    }
-    for (const error of res.error.details) {
-      errors[error.path] = error.message;
-    }
-    console.log(res.error.details);
-    console.log(state);
-    this.setState({ errors: errors });
-    console.log(this.state.errors.Password);
-  };
-
   handleUpdate = () => {
     var client = {
       name: this.state.name,
@@ -361,8 +235,7 @@ class ViewProfile extends Component {
       document.getElementById("phoneError").innerHTML = "Not Valid";
     }
     if (flag) {
-      // this.setState({profile_image: e.target.files[0]});
-      // client.profile_image =
+
       var formData = new FormData();
       formData.append("name", client.name);
       formData.append("phone", client.phone);
@@ -483,24 +356,7 @@ class ViewProfile extends Component {
               />
             )}
           </div>
-          <div className="row justify-content-center">
-            {/* <div className="col-6 col-md-4 col-lg-3 p-3 mt-2 text-center">
-              
-              <p className="about-text h2">{this.state.user.name}</p>
-              <p className="about-text h4"><HiOutlineMail className="mr-2"/>{this.state.user.email}</p>
-              <p className="about-text h4"><ImPhone className="mr-2 mb-2"/>{this.state.user.phone}</p>
-              
-              {this.state.isLogin && (
-                <div className="row justify-content-center">
-                  <AiFillEdit
-                    className="edit-icon"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                  />
-                </div>
-              )}
-            </div> */}
-          </div>
+
         </div>
         <div className="row justify-content-center p-4 ">
           <div className="col-6 text-center m-5 ">
@@ -513,9 +369,7 @@ class ViewProfile extends Component {
 
           <div className="container ">
             <div className="row justify-content-center">
-              {/* {this.renderWishlist()} */}
               <Cards cards={this.state.Places} />
-              {/* {console.log("********** ", this.state.Places)} */}
             </div>
           </div>
         </div>
