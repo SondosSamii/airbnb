@@ -3,7 +3,7 @@
 // const baseUrl = "http://localhost:1337/api/places";
 const url = "https://node-airbnb.herokuapp.com/api/place";
 
-const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
+// const baseUrl = "http://my-json-server.typicode.com/sondossamii/airbnb/places";
 
 // const baseUrl = "http://localhost:8080/api/allPlaces";
 

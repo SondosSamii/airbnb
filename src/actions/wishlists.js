@@ -8,27 +8,27 @@ const deleteByID_url = "https://node-airbnb.herokuapp.com/api/wishlist";
 const getById_url = "https://node-airbnb.herokuapp.com/api/wishlist";
 // const Url = "http://localhost:1337/api/wishlist";
 
-const baseUrl =
-  "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
+// const baseUrl =
+//   "http://my-json-server.typicode.com/sondossamii/airbnb/wishlists";
 
 const wishlistsUrl = "https://node-airbnb.herokuapp.com/api/wishlists";
 // const wishlistsUrl = "https://node-airbnb.herokuapp.com/api/wishlists";
 
 // const baseUrl = " http://localhost:2400/wishlists";
 
-export async function getAllWishlists() {
-  var payload = null;
-  try {
-    let response = await fetch(`${baseUrl}`);
-    payload = await response.json();
-  } catch (e) {
-    console.log(e);
-  }
-  return {
-    type: "AllWishlists",
-    payload,
-  };
-}
+// export async function getAllWishlists() {
+//   var payload = null;
+//   try {
+//     let response = await fetch(`${baseUrl}`);
+//     payload = await response.json();
+//   } catch (e) {
+//     console.log(e);
+//   }
+//   return {
+//     type: "AllWishlists",
+//     payload,
+//   };
+// }
 export async function getWishlistByID(token, id) {
   var payload = null;
   try {

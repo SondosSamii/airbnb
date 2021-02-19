@@ -1,4 +1,4 @@
-const baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb/reviews";
+// const baseURL = "http://my-json-server.typicode.com/sondossamii/airbnb/reviews";
 
 // const placeReviewsUrl = "https://node-airbnb.herokuapp.com/api/placeReviews";
 // const reviewUrl = "https://node-airbnb.herokuapp.com/api/review";
@@ -7,16 +7,16 @@ const placeReviewsUrl = "https://node-airbnb.herokuapp.com/api/placeReviews";
 const reviewUrl = "https://node-airbnb.herokuapp.com/api/review";
 const placeRating_url = "https://node-airbnb.herokuapp.com/api/placeRating";
 
-export async function getAllReviews() {
-  let payload = null;
-  try {
-    let res = await fetch(baseURL);
-    payload = await res.json();
-  } catch (err) {
-    console.log(err);
-  }
-  return { type: "AllReviews", payload };
-}
+// export async function getAllReviews() {
+//   let payload = null;
+//   try {
+//     let res = await fetch(baseURL);
+//     payload = await res.json();
+//   } catch (err) {
+//     console.log(err);
+//   }
+//   return { type: "AllReviews", payload };
+// }
 
 export async function getPlaceReviews(id) {
   let payload = null;
