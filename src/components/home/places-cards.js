@@ -13,7 +13,6 @@ import {
   getWishlistByID,
 } from "../../actions/wishlists";
 import {
-  getAllReviews,
   getPlaceReviews,
   getReviewDetails,
   getPlaceRatings,
@@ -181,7 +180,6 @@ const mapActionToProps = (dispatch) => {
       getAllPlaces,
       deleteWishlistById,
       getWishlistsByUserId,
-      getAllReviews,
       addWishlist,
       deleteByID,
       getPlaceReviews,

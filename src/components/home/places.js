@@ -4,23 +4,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { getAllPlaces } from "../../actions/places";
-import { getAllWishlists } from "../../actions/wishlists";
 
 class Places extends Component {
   constructor(props) {
     super(props);
     this.state = {
       places: [],
-      wishlists: [],
     };
   }
 
   async componentDidMount() {
     await this.props.getAllPlaces();
     await this.setState({ places: this.props.places.places });
-
-    await this.props.getAllWishlists();
-    await this.setState({ wishlists: this.props.wishlists });
   }
 
   renderPlaces = () => {
@@ -122,7 +117,6 @@ const mapActionToProps = (disptch) => {
   return bindActionCreators(
     {
       getAllPlaces,
-      getAllWishlists,
     },
     disptch
   );
@@ -131,7 +125,6 @@ const mapActionToProps = (disptch) => {
 const mapStateToProps = (state) => {
   return {
     places: state.Places,
-    wishlists: state.Wishlists,
   };
 };
 
