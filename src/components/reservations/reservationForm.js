@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ToastContainer, toast } from "react-toastify";
 
-import { getAllReservation, addReservation } from "../../actions/reservations";
-import { getAllClients, updateClient } from "../../actions/clients";
-import { getAllPlaces, getPlaceById } from "../../actions/places";
+import { addReservation } from "../../actions/reservations";
 import CalendarComp from "../calendar";
 import "./reservationForm.css";
 
@@ -101,7 +99,7 @@ class Reservastion extends Component {
   };
 
   render() {
-    document.title = "Reservation";
+    document.title = "Reservation 📝";
     return (
       <section id="login">
         <div className="container py-5">
@@ -174,11 +172,6 @@ class Reservastion extends Component {
 const mapactiontoprops = (disptch) => {
   return bindActionCreators(
     {
-      getAllPlaces,
-      getAllClients,
-      updateClient,
-      getPlaceById,
-      getAllReservation,
       addReservation,
     },
     disptch
@@ -186,9 +179,6 @@ const mapactiontoprops = (disptch) => {
 };
 const mapstatetoprops = (state) => {
   return {
-    places: state.Places,
-    clients: state.Clients,
-    placeDetails: state.Places,
     reservations: state.Reservations,
     msg: state.Reservations.message,
   };

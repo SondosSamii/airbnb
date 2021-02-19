@@ -9,11 +9,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { NavLink as Link } from "react-router-dom";
 
-
 class Signup extends Component {
   constructor(props) {
-      super(props);
-    }
+    super(props);
+  }
   state = {
     UserName: "",
     Email: "",
@@ -22,6 +21,7 @@ class Signup extends Component {
     Password_confirm: "",
     Signup_errors: {},
   };
+
   ///start login form functions
   handelchange = (e) => {
     this.state.Signup_errors[e.currentTarget.name] = null;
@@ -61,7 +61,6 @@ class Signup extends Component {
     e.preventDefault();
     const errors = this.signupValidations();
     if (errors !== null) return;
-    
 
     var formData = new FormData();
     formData.append("name", this.state.UserName);
@@ -73,18 +72,16 @@ class Signup extends Component {
     //   console.log(key[0] + ", " + key[1]);
     // }
     let url = "https://node-airbnb.herokuapp.com/api/signup";
-    await this.props.addclient(formData,url);
-    console.log("signup data",this.props.client);
-    if(this.props.client.message === "Validation failed.") {
+    await this.props.addclient(formData, url);
+    console.log("signup data", this.props.client);
+    if (this.props.client.message === "Validation failed.") {
       window.alert(this.props.client.data[0].msg);
-    }
-    else{
+    } else {
       var email = this.state.Email;
-      var password= this.state.password;
-      setSessionCookie({ email,password });
+      var password = this.state.password;
+      setSessionCookie({ email, password });
       window.location.reload();
     }
-    
   };
 
   render() {
@@ -181,7 +178,7 @@ class Signup extends Component {
                   )}
                 </div>
 
-                <div className="custom-control custom-checkbox text-center mt-2 mb-4">
+                {/* <div className="custom-control custom-checkbox text-center mt-2 mb-4">
                   <input
                     type="checkbox"
                     className="custom-control-input"
@@ -193,7 +190,7 @@ class Signup extends Component {
                   >
                     Agree to <Link to="/terms">Terms and Conditions</Link>
                   </label>
-                </div>
+                </div> */}
 
                 <button
                   className="mybtn btn-lg btn-block text-uppercase submit-button"
@@ -213,14 +210,14 @@ class Signup extends Component {
 const mapactiontoprops = (disptch) => {
   return bindActionCreators(
     {
-      addclient
+      addclient,
     },
     disptch
   );
 };
 const mapstatetoprops = (state) => {
   return {
-    client: state.Clients    
+    client: state.Clients,
   };
-}
-export default  connect(mapstatetoprops, mapactiontoprops)(Signup);
+};
+export default connect(mapstatetoprops, mapactiontoprops)(Signup);

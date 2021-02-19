@@ -1,17 +1,10 @@
 import React, { Component } from "react";
-import Joi, { validate } from "joi-browser";
 import { NavLink as Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { getAllPlaces, getPlaceById } from "../../actions/places";
-import {
-  getAllWishlists,
-  // getWishlistsByUserId,
-  deleteWishlistById,
-  getWishlistsByUserId,
-  getWishlistByID,
-} from "../../actions/wishlists";
+import { getPlaceById } from "../../actions/places";
+import { deleteWishlistById, getWishlistByID } from "../../actions/wishlists";
 import "./profile.css";
 import { getReservationByID } from "../../actions/reservations";
 import {
@@ -49,36 +42,25 @@ class ViewProfile extends Component {
 
   async componentDidMount() {
     this.setState({ token: localStorage.getItem("token") });
-    console.log("here token:  ", localStorage.getItem("token"));
     if (!localStorage.getItem("token")) {
       this.setState({ isLogin: false });
       this.props.history.push("/login");
     } else {
       await this.props.getclientById(localStorage.getItem("token"));
-      // if(this.props.client.message === "jwt expired"){
-      //   this.props.history.push("/login");
-      // }
       this.setState({ user: this.props.client.user });
       await this.get_Wishlist_places();
       await this.get_Trips_places();
       await this.get_user_places();
-      console.log(".......", this.state.reserve_Places);
     }
   }
 
   get_Wishlist_places = async () => {
-    var arr = [];
-    var place = null;
-    console.log("userWishslits:   ", this.state.user.wishlists);
-
     if (this.state.user.wishlists && this.state.user.wishlists.length > 0) {
       await this.state.user.wishlists.map(async (wishlist_id) => {
         await this.props.getWishlistByID(this.state.token, wishlist_id);
-        // console.log("............" , this.props.wishlistDetails.wishlist);
         var wishlistItem = this.props.wishlistDetails.wishlist.place_id;
         await this.props.getPlaceById(wishlistItem);
         var placeItem = this.props.placeDetails.place;
-        // arr.push(placeItem);
         this.setState((state) => {
           const Places = state.Places.push(placeItem);
           return Places;
@@ -88,22 +70,16 @@ class ViewProfile extends Component {
   };
 
   get_Trips_places = async () => {
-    var arr = [];
-    var place = null;
-    console.log("userTrips:   ", this.state.user.reservations);
-
     if (
       this.state.user.reservations &&
       this.state.user.reservations.length > 0
     ) {
       await this.state.user.reservations.map(async (reservation_id) => {
         await this.props.getReservationByID(this.state.token, reservation_id);
-        // console.log("............" , this.props.wishlistDetails.wishlist);
         var reservationItem = this.props.reservationDetails.reservation
           .place_id;
         await this.props.getPlaceById(reservationItem);
         var placeItem = this.props.placeDetails.place;
-        // arr.push(placeItem);
         this.setState((state) => {
           const reserve_Places = state.reserve_Places.push(placeItem);
           return reserve_Places;
@@ -113,15 +89,10 @@ class ViewProfile extends Component {
   };
 
   get_user_places = async () => {
-    var arr = [];
-    var place = null;
-    console.log("userTrips:   ", this.state.user.places);
-
     if (this.state.user.places && this.state.user.places.length > 0) {
       await this.state.user.places.map(async (place_id) => {
         await this.props.getPlaceById(place_id);
         var placeItem = this.props.placeDetails.place;
-        // arr.push(placeItem);
         this.setState((state) => {
           const All_User_places = state.All_User_places.push(placeItem);
           return All_User_places;
@@ -130,60 +101,19 @@ class ViewProfile extends Component {
     }
   };
 
-  ///////////////////////////////////////////////////////////
-
   renderPlaces = () => {
     return <Cards cards={this.state.All_User_places} />;
-    // return this.state.All_User_places.slice(0, 3).map((placeElement, index) => {
-    //   if (placeElement) {
-    //     return (
-    // <div className="col-9 col-sm-6 col-lg-4 mt-4" key={placeElement._id}>
-    //   <div className="card-item">
-    //     <Link
-    //         to={`/place-details/${placeElement._id}`}
-    //       className="card-item-highlight"
-    //       style={{
-    //         backgroundImage: `url(http://localhost:8080/${placeElement.images[0]})`
-    //       }}
-    //     >
-    //       <h3 className="card-item-name">
-    //         {placeElement.name}
-    //         <br />
-    //         {this.icons(placeElement)}
-    //       </h3>
-    //       <h4 className="card-item-type">{placeElement.type}</h4>
-    //     </Link>
-    //     <div className="card-item-details">
-    //       <h4>
-    //         {placeElement.address.city}, {placeElement.address.country}
-    //       </h4>
-    //       <p className="desc">{placeElement.description}</p>
-    //       <p className="price">${placeElement.price}</p>
-    //       <p className="rating">
-    //         <FaStar />
-    //         &nbsp;4.8
-    //       </p>
-    //       {/* {this.renderRating(this.state.Places[index]._id)} */}
-    //     </div>
-    //   </div>
-    // </div>
-
-    // );
-    // }
-    // });
   };
 
-  
   renderTrips = () => {
     if (this.state.user.reservations) {
       return this.state.user.reservations
         .slice(0, 4)
         .map((reservation_Element, index) => {
           if (this.state.reserve_Places[index]) {
-            // console.log("jjjj: " ,this.state.reserve_Places[index]);
             return (
-              <div className=" col-9 col-sm-6  col-lg-4 mt-4 " key={index}>
-                <div className=" card-item card-item-sm ">
+              <div className="col-9 col-sm-6 col-lg-4 mt-4" key={index}>
+                <div className="card-item card-item-sm">
                   <Link
                     to={`/place-details/${this.state.reserve_Places[index]._id}`}
                     className="card-item-bg"
@@ -198,7 +128,6 @@ class ViewProfile extends Component {
                       {this.state.reserve_Places[index].type}
                     </h4>
                   </Link>
-                  {/* <AiOutlineHeart /> */}
                 </div>
               </div>
             );
@@ -222,7 +151,6 @@ class ViewProfile extends Component {
     }
     if (!this.state.profile_image) {
       client.profile_image = this.state.user.profile_image;
-      console.log("typeof:   ", typeof client.profile_image);
     }
 
     var flag = true;
@@ -235,12 +163,10 @@ class ViewProfile extends Component {
       document.getElementById("phoneError").innerHTML = "Not Valid";
     }
     if (flag) {
-
       var formData = new FormData();
       formData.append("name", client.name);
       formData.append("phone", client.phone);
       formData.append("profile_image", client.profile_image);
-      console.log("yes", client);
 
       var confirm = window.confirm("are you sure you want to update");
       if (confirm) {
@@ -260,25 +186,17 @@ class ViewProfile extends Component {
       }
     }
   };
-  handleUpdatePassword = () => {
+
+  handleUpdatePassword = async () => {
     var clientPasswords = {
       oldPassword: this.state.old_pass,
       newPassword: this.state.new_pass,
     };
+
     var check = true;
-    if (!clientPasswords.oldPassword && clientPasswords.newPassword) {
+    if (!clientPasswords.oldPassword) {
       check = false;
-      document.getElementById("old_pass_Error").innerHTML =
-        "you should enter your old password";
-    }
-    if (clientPasswords.oldPassword && !clientPasswords.newPassword) {
-      check = false;
-      document.getElementById("old_pass_Error").innerHTML =
-        "you should enter your new password";
-    }
-    if (check) {
-      this.props.updatePassword(this.state.token, clientPasswords);
-      toast("Updating... 😇", {
+      toast.error("You should enter your old password", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -287,9 +205,55 @@ class ViewProfile extends Component {
         draggable: true,
         progress: undefined,
       });
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 5500);
+    }
+    if (!clientPasswords.newPassword) {
+      check = false;
+      toast.error("You should enter your new password", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    if (clientPasswords.oldPassword === clientPasswords.newPassword) {
+      check = false;
+      toast.info("You should enter a new password!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    if (check) {
+      await this.props.updatePassword(this.state.token, clientPasswords);
+      console.log("*********", this.props.passwordMsg);
+      if (this.props.passwordMsg === "Wrong password!") {
+        toast.error("Your old password is wrong!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast("Updating... 😇", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   };
 
@@ -356,7 +320,6 @@ class ViewProfile extends Component {
               />
             )}
           </div>
-
         </div>
         <div className="row justify-content-center p-4 ">
           <div className="col-6 text-center m-5 ">
@@ -433,15 +396,6 @@ class ViewProfile extends Component {
                   <div className="modal-body">
                     <form className="update-form">
                       <div className="form-group">
-                        {/* <label htmlFor="img" className="btn main-btn text-white">
-                        Upload Your Photo
-                        <input type="file" id="img" name="img" accept="image/*"
-                          onChange={(e) => {
-                            this.setState({ profile_image: e.target.files[0] });
-                          }}/>
-                      </label>
-                      <small>{this.state.profile_image}</small> */}
-
                         <label htmlFor="img" className="btn main-btn">
                           Upload Your Photo
                         </label>
@@ -496,7 +450,6 @@ class ViewProfile extends Component {
 
                       <button
                         type="button"
-                        // className="btn update-btn"
                         className="btn main-btn"
                         onClick={async () => {
                           this.handleUpdate();
@@ -562,15 +515,8 @@ class ViewProfile extends Component {
                           className="form-control"
                           onChange={(e) => {
                             this.setState({ old_pass: e.target.value });
-                            document.getElementById(
-                              "old_pass_Error"
-                            ).innerHTML = "";
                           }}
                         />
-                        <small
-                          id="old_pass_Error"
-                          style={{ color: "red" }}
-                        ></small>
                       </div>
                       <div className="form-group">
                         <label htmlFor="pass">New Password </label>
@@ -581,15 +527,8 @@ class ViewProfile extends Component {
                           className="form-control"
                           onChange={(e) => {
                             this.setState({ new_pass: e.target.value });
-                            document.getElementById(
-                              "new_pass_Error"
-                            ).innerHTML = "";
                           }}
                         />
-                        <small
-                          id="new_pass_Error"
-                          style={{ color: "red" }}
-                        ></small>
                       </div>
 
                       <button
@@ -642,6 +581,7 @@ const mapstatetoprops = (state) => {
     wishlistDetails: state.Wishlists.wishlist_details,
     placeDetails: state.Places.place_details,
     reservationDetails: state.Reservations.reservation_details,
+    passwordMsg: state.Clients.msg,
   };
 };
 

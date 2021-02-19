@@ -7,7 +7,7 @@ import { login } from "../../actions/clients";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Joi, { validate } from "joi-browser";
-import {Redirect} from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -25,19 +25,18 @@ class Login extends Component {
     token: "",
     isAuth: false,
     user_id: "",
-    isChecked:false
+    isChecked: false,
   };
-  async componentDidMount(){
-    if(localStorage.checked==="true"){
-      await this.setState({Email:localStorage.email,
-        Password:localStorage.password,
-        isChecked:true});
-    }else{
-      await this.setState({Email:"",
-        Password:"",
-        isChecked:false});
+  async componentDidMount() {
+    if (localStorage.checked === "true") {
+      await this.setState({
+        Email: localStorage.email,
+        Password: localStorage.password,
+        isChecked: true,
+      });
+    } else {
+      await this.setState({ Email: "", Password: "", isChecked: false });
     }
-    
   }
 
   schema = {
@@ -77,11 +76,11 @@ class Login extends Component {
     this.setState({ errors: errors });
     console.log(this.state.errors.Password);
   };
-  
-  handleInputChange=async e=> {
-     this.setState({isChecked: e.currentTarget.checked});
-    console.log(e.currentTarget.checked)
-  }
+
+  handleInputChange = async (e) => {
+    this.setState({ isChecked: e.currentTarget.checked });
+    console.log(e.currentTarget.checked);
+  };
 
   handelLogin = async (e) => {
     e.preventDefault();
@@ -94,41 +93,38 @@ class Login extends Component {
     formData.append("email", this.state.Email);
     formData.append("password", this.state.Password);
     let url = "https://node-airbnb.herokuapp.com/api/login";
-    await this.props.login(formData,url);
+    await this.props.login(formData, url);
 
-    if(this.props.client.message === "A user with this email could not be found.") {
+    if (
+      this.props.client.message === "A user with this email could not be found."
+    ) {
       window.alert("A user with this email could not be found.");
-    }
-    else if(this.props.client.message === "Wrong password!") {
+    } else if (this.props.client.message === "Wrong password!") {
       window.alert("Wrong password!");
-    }
-    else {
+    } else {
       await localStorage.setItem("token", this.props.client.token);
-      await localStorage.setItem("user_id", this.props.client.user_id);  
+      await localStorage.setItem("user_id", this.props.client.user_id);
     }
-    if(this.state.isChecked===true){
+    if (this.state.isChecked === true) {
       await localStorage.setItem("email", this.state.Email);
       await localStorage.setItem("password", this.state.Password);
       await localStorage.setItem("checked", this.state.isChecked);
-    }else{
+    } else {
       await localStorage.removeItem("email");
       await localStorage.removeItem("password");
       await localStorage.removeItem("checked");
     }
-    if(this.props.client.token){
+    if (this.props.client.token) {
       this.setState({
         isAuth: true,
         token: this.props.client.token,
         user_id: this.props.client.user_id,
-        
-      })
+      });
       this.props.history.replace("/");
       // setTimeout(()=>{
       // },4000)
     }
   };
-
- 
 
   addActiveClass(i) {
     var li1 = document.getElementById("li1");
@@ -154,6 +150,7 @@ class Login extends Component {
     }
   }
   render() {
+    document.title = "Where To? - Login or Sign Up";
     return (
       <section
         id="login_form"
@@ -232,13 +229,12 @@ class Login extends Component {
                       </div>
                       <div className="custom-control custom-checkbox text-center mt-2 mb-2">
                         <input
-                        name="isChecked"
+                          name="isChecked"
                           type="checkbox"
                           className="custom-control-input"
                           id="customCheck1"
                           checked={this.state.isChecked}
                           onChange={this.handleInputChange}
-
                         />
                         <label
                           className="custom-control-label"
@@ -272,14 +268,14 @@ class Login extends Component {
 const mapactiontoprops = (disptch) => {
   return bindActionCreators(
     {
-      login
+      login,
     },
     disptch
   );
 };
 const mapstatetoprops = (state) => {
   return {
-    client: state.Clients    
+    client: state.Clients,
   };
-}
-export default connect(mapstatetoprops, mapactiontoprops) (Login);
+};
+export default connect(mapstatetoprops, mapactiontoprops)(Login);

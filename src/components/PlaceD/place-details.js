@@ -28,7 +28,7 @@ import { AllClients } from "../../actions/clients";
 import { getPlaceReviews, AllReviews } from "../../actions/reviews";
 import ReviewAdding from "../Forms/review";
 import "./place-details.css";
-// import { Map, GoogleApiWrapper,InfoWindow, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 
 const mapStyles = {
   width: "100%",
@@ -56,7 +56,7 @@ class GetPlaceDetails extends Component {
       userimg: [],
       owner: false,
       isAuth: false,
-      rate: "new",
+      rate: "New",
     };
   }
   async componentDidMount() {
@@ -77,12 +77,13 @@ class GetPlaceDetails extends Component {
     this.setState({ img: place.images });
     this.setState({ placedata: place });
     if (localStorage.user_id === this.state.placedata.user_id) {
-      await  this.setState({ owner: true });
-      }
+      await this.setState({ owner: true });
+    }
     this.setState({ users: this.props.users.users });
-    if(this.props.placeDetails.place.ratingsValue ){
-     var rate=this.props.placeDetails.place.ratingsValue.toFixed(1);
-    await this.setState({ rate});}
+    if (this.props.placeDetails.place.ratingsValue) {
+      var rate = this.props.placeDetails.place.ratingsValue.toFixed(1);
+      await this.setState({ rate });
+    }
   }
 
   placeSlider = () => {
@@ -110,7 +111,7 @@ class GetPlaceDetails extends Component {
               );
             })}
           </Slider>
-          <h1 className="Place-name">{this.state.placedata.name}</h1>
+          {/* <h1 className="Place-name">{this.state.placedata.name}</h1> */}
           <span className="place-rate">
             <FaStar /> {this.state.rate}
           </span>
@@ -129,6 +130,8 @@ class GetPlaceDetails extends Component {
           <div className="row justify-content-center align-items-center py-5">
             <h2
               style={{
+                fontSize: "2.5rem",
+                fontFamily: "'Merienda', cursive",
                 width: "fit-content",
                 padding: "0.5em 1em",
                 borderRadius: "var(--border-radius)",
@@ -136,7 +139,7 @@ class GetPlaceDetails extends Component {
                 marginBottom: 0,
               }}
             >
-              Place Information
+              {this.state.placedata.name}
             </h2>
             {this.state.owner && (
               <>
@@ -210,25 +213,25 @@ class GetPlaceDetails extends Component {
                 </div>
               </div>
 
-              <div
-                className="col-12 col-md-6 bg-dark"
-                style={{ height: "350px" }}
-              >
+              <div className="col-12 col-md-6" style={{ height: "350px" }}>
                 {/* Don't Delete */}
-                {/* <Map
-                                    google={this.props.google}
-                                    zoom={8}
-                                    style={mapStyles}
-                                    containerStyle={containerStyle}
-                                    initialCenter={{
-                                    lat:47.49855629475769,
-                                    lng: -122.14184416996333
-                                    }}
-                                    center={this.state.placedata.location}
-                                    onClick={this.mapClicked}>
-                                    <Marker  position={this.state.placedata.location}
-                                    onClick={() => console.log("You clicked me!")} />
-                                </Map>  */}
+                <Map
+                  google={this.props.google}
+                  zoom={8}
+                  style={mapStyles}
+                  containerStyle={containerStyle}
+                  initialCenter={{
+                    lat: 47.49855629475769,
+                    lng: -122.14184416996333,
+                  }}
+                  center={this.state.placedata.location}
+                  onClick={this.mapClicked}
+                >
+                  <Marker
+                    position={this.state.placedata.location}
+                    onClick={() => console.log("You clicked me!")}
+                  />
+                </Map>
               </div>
             </div>
           </div>
@@ -291,7 +294,7 @@ class GetPlaceDetails extends Component {
             <h2 className="py-3">Features</h2>
             {this.state.placedata.has_tv && (
               <h4>
-                <FaTv /> TV{" "}
+                <FaTv /> TV
               </h4>
             )}
 
@@ -303,19 +306,19 @@ class GetPlaceDetails extends Component {
 
             {this.state.placedata.pets && (
               <h4>
-                <MdPets /> Allow Pets{" "}
+                <MdPets /> Allow Pets
               </h4>
             )}
 
             {this.state.placedata.has_airconditioner && (
               <h4>
-                <IoIosSnow /> Air Conditioner{" "}
+                <IoIosSnow /> Air Conditioner
               </h4>
             )}
 
             {this.state.placedata.has_heating_system && (
               <h4>
-                <GiFireplace /> Heating System{" "}
+                <GiFireplace /> Heating System
               </h4>
             )}
           </div>
@@ -346,7 +349,6 @@ class GetPlaceDetails extends Component {
           }
         });
       });
-      
 
       if (placeReviews.length > 0) {
         return (
@@ -447,7 +449,10 @@ class GetPlaceDetails extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <ReviewAdding history={this.props.history} id={this.props.match.params.id} />
+              <ReviewAdding
+                history={this.props.history}
+                id={this.props.match.params.id}
+              />
             </div>
           </div>
         </div>
@@ -476,7 +481,9 @@ class GetPlaceDetails extends Component {
     );
   }
   render() {
-    //document.title = this.props.placeDetails.place.name;
+    if (this.props.placeDetails) {
+      document.title = this.props.placeDetails.place.name;
+    }
     return (
       <section
         id="place-details"
@@ -513,4 +520,11 @@ const mapstatetoprops = (state) => {
   };
 };
 
-export default connect(mapstatetoprops, mapactiontoprops)(GetPlaceDetails);
+export default connect(
+  mapstatetoprops,
+  mapactiontoprops
+)(
+  GoogleApiWrapper({
+    apiKey: "AIzaSyDED1xIAqSktQ5LAnZ5BCVIkwtKbJPT31U",
+  })(GetPlaceDetails)
+);

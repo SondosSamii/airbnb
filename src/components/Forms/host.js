@@ -331,6 +331,7 @@ class Host extends Component {
         }
     }
     render() { 
+        document.title = "Add Place";
         return (
             <div id="host_form" className="background" style={{ backgroundImage: "url(/bg.jpg)", height:"100%" }}>
                 <div className="background py-5" style={{  height:"100%" }} >
