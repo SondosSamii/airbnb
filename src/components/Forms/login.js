@@ -6,8 +6,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { login } from "../../actions/clients";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Joi, { validate } from "joi-browser";
-import { Redirect } from "react-router-dom";
+import Joi from "joi-browser";
 
 class Login extends Component {
   constructor(props) {
@@ -43,12 +42,6 @@ class Login extends Component {
     Email: Joi.string().required().email(),
     Password: Joi.string().required(),
   };
-  //data = {};
-  //   async componentDidMount() {
-  //     this.data = await axios.get("http://localhost:3000/clients/");
-  //     //const SessionContext = this.context;
-  //   }
-  ///start login form functions
   handelchange = (e) => {
     this.state.errors[e.currentTarget.name] = null;
     let state = { ...this.state };
@@ -72,22 +65,16 @@ class Login extends Component {
     for (const error of res.error.details) {
       errors[error.path] = error.message;
     }
-    console.log(res.error.details);
     this.setState({ errors: errors });
-    console.log(this.state.errors.Password);
   };
 
   handleInputChange = async (e) => {
     this.setState({ isChecked: e.currentTarget.checked });
-    console.log(e.currentTarget.checked);
   };
 
   handelLogin = async (e) => {
     e.preventDefault();
-
-    // console.log(this.state.isChecked)
     const errors = this.Validations();
-    // const valid=this.LoginValidations();
     if (errors !== null) return;
     var formData = new FormData();
     formData.append("email", this.state.Email);
@@ -121,8 +108,6 @@ class Login extends Component {
         user_id: this.props.client.user_id,
       });
       this.props.history.replace("/");
-      // setTimeout(()=>{
-      // },4000)
     }
   };
 
@@ -176,7 +161,7 @@ class Login extends Component {
 
                 <li onClick={() => this.addActiveClass("2")} id="li2">
                   <a id="a2">
-                    <FaUserPlus />{" "}
+                    <FaUserPlus />
                   </a>
                 </li>
               </ul>

@@ -40,7 +40,6 @@ class Search extends Component {
     } else {
       this.setState({ filteredPlaces: this.props.places.places });
     }
-    console.log("searched: ", this.state.filteredPlaces);
   };
 
   checkFilteredPlaces = (string) => {

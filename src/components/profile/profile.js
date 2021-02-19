@@ -107,36 +107,39 @@ class ViewProfile extends Component {
 
   renderTrips = () => {
     if (this.state.user.reservations) {
-      return this.state.user.reservations
-        .slice(0, 4)
-        .map((reservation_Element, index) => {
-          if (this.state.reserve_Places[index]) {
-            return (
-              <div className="col-9 col-sm-6 col-lg-4 mt-4" key={index}>
-                <div className="card-item card-item-sm">
-                  <Link
-                    to={`/place-details/${this.state.reserve_Places[index]._id}`}
-                    className="card-item-bg"
-                    style={{
-                      backgroundImage: `url('https://node-airbnb.herokuapp.com/${this.state.reserve_Places[index].images[0]}')`,
-                    }}
-                  >
-                    <h3 className="card-item-name">
-                      {this.state.reserve_Places[index].name}
-                    </h3>
-                    <h4 className="card-item-type">
-                      {this.state.reserve_Places[index].type}
-                    </h4>
-                  </Link>
+      return (
+        this.state.user.reservations
+          .slice(0, 4)
+          // eslint-disable-next-line
+          .map((reservation_Element, index) => {
+            if (this.state.reserve_Places[index]) {
+              return (
+                <div className="col-9 col-sm-6 col-lg-4 mt-4" key={index}>
+                  <div className="card-item card-item-sm">
+                    <Link
+                      to={`/place-details/${this.state.reserve_Places[index]._id}`}
+                      className="card-item-bg"
+                      style={{
+                        backgroundImage: `url('https://node-airbnb.herokuapp.com/${this.state.reserve_Places[index].images[0]}')`,
+                      }}
+                    >
+                      <h3 className="card-item-name">
+                        {this.state.reserve_Places[index].name}
+                      </h3>
+                      <h4 className="card-item-type">
+                        {this.state.reserve_Places[index].type}
+                      </h4>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            );
-          }
-        });
+              );
+            }
+          })
+      );
     }
   };
 
-  handleUpdate = () => {
+  handleUpdate = async () => {
     var client = {
       name: this.state.name,
       phone: this.state.phone,
@@ -170,10 +173,10 @@ class ViewProfile extends Component {
 
       var confirm = window.confirm("are you sure you want to update");
       if (confirm) {
-        this.props.updateClient(this.state.token, formData);
+        await this.props.updateClient(this.state.token, formData);
         toast("Updating... 😇", {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 2500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -182,7 +185,7 @@ class ViewProfile extends Component {
         });
         setTimeout(() => {
           window.location.reload();
-        }, 5500);
+        }, 3000);
       }
     }
   };

@@ -28,7 +28,7 @@ import { AllClients } from "../../actions/clients";
 import { getPlaceReviews, AllReviews } from "../../actions/reviews";
 import ReviewAdding from "../Forms/review";
 import "./place-details.css";
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
+import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
 const mapStyles = {
   width: "100%",
@@ -334,14 +334,18 @@ class GetPlaceDetails extends Component {
       var placeReviews = [];
       let username = [];
       let userimg = [];
+      // eslint-disable-next-line
       reviews.map((r) => {
+        // eslint-disable-next-line
         allreviews.map((r2) => {
           if (r2._id === r) {
             placeReviews.push(r2);
           }
         });
       });
+      // eslint-disable-next-line
       placeReviews.map((r) => {
+        // eslint-disable-next-line
         allusers.map((oneuser) => {
           if (r.user_id === oneuser._id) {
             username.push(oneuser.name);

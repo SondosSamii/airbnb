@@ -102,7 +102,6 @@ class Cards extends Component {
               user_id: this.state.userId,
               place_id: id,
             };
-            console.log(wishlist_Obj, "   id ", wishlist_id);
             await this.props.deleteWishlistById(this.state.token, wishlist_id);
             window.location.reload();
           }}

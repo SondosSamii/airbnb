@@ -68,12 +68,8 @@ class Signup extends Component {
     formData.append("password", this.state.Password);
     formData.append("phone", this.state.PhoneNumber);
     formData.append("is_host", false);
-    // for (var key of formData.entries()) {
-    //   console.log(key[0] + ", " + key[1]);
-    // }
     let url = "https://node-airbnb.herokuapp.com/api/signup";
     await this.props.addclient(formData, url);
-    console.log("signup data", this.props.client);
     if (this.props.client.message === "Validation failed.") {
       window.alert(this.props.client.data[0].msg);
     } else {
