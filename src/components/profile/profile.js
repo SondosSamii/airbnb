@@ -174,7 +174,7 @@ class ViewProfile extends Component {
       var confirm = window.confirm("are you sure you want to update");
       if (confirm) {
         await this.props.updateClient(this.state.token, formData);
-        toast("Updating... 😇", {
+        toast("Updated... 😇", {
           position: "top-center",
           autoClose: 2500,
           hideProgressBar: false,
