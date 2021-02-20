@@ -273,6 +273,7 @@ class ViewProfile extends Component {
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            position: "relative",
           }}
           className="bg-light about-content"
         >
@@ -314,15 +315,13 @@ class ViewProfile extends Component {
               </p>
             </div>
           </div>
-          <div style={{ position: "relative" }}>
-            {this.state.isLogin && (
-              <AiFillEdit
-                className="edit-icon"
-                data-toggle="modal"
-                data-target="#exampleModal"
-              />
-            )}
-          </div>
+          {this.state.isLogin && (
+            <AiFillEdit
+              className="edit-icon"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            />
+          )}
         </div>
         <div className="row justify-content-center p-4 ">
           <div className="col-12 col-md-6 text-center m-5 ">

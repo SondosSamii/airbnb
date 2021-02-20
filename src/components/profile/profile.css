@@ -33,7 +33,7 @@
 .edit-icon {
   position: absolute;
   right: 3%;
-  bottom: 5%;
+  bottom: 3%;
   font-size: 2em;
   cursor: pointer;
   color: var(--primary-dark-color);
