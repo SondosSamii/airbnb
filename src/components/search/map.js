@@ -133,7 +133,7 @@ export class Mapp extends Component {
       <>
         <div className="container mb-4">
           <div className="row justify-content-center">
-            <div className="col-8 col-md-7">
+            <div className="col-12 col-md-7">
               <input
                 type="search"
                 name="search"
@@ -143,7 +143,7 @@ export class Mapp extends Component {
                 onChange={(e) => this.handleValueChange(e.target.value)}
               />
             </div>
-            <div className="col-4">
+            <div className="col-auto col-md-4 mt-2 mt-md-0">
               <button
                 type="button"
                 className="btn main-btn"

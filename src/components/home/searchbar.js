@@ -23,7 +23,12 @@ class SearchBar extends Component {
       >
         <div className="row justify-content-center">
           <div className="col-11 col-sm-10 col-md-8 col-lg-5">
-            <h1 className="text-center">Let's Explore</h1>
+            <h1
+              className="text-center"
+              style={{ textShadow: "1px 0px 3px #fff" }}
+            >
+              Let's Explore
+            </h1>
             <p className="text-center">
               Search for your favourite country&nbsp;
               <AiFillHeart />

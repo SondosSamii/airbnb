@@ -179,20 +179,20 @@ class Search extends Component {
     return (
       <section
         id="search"
-        className="py-5"
+        className="pt-3 pb-5"
         style={{
           marginTop: "70px", // Header Height
         }}
       >
         <div className="container">
           <div className="row mb-5">
-            <div className="col-8 mb-3" style={{ height: "350px" }}>
+            <div className="col-12 col-md-8 mb-3" style={{ height: "350px" }}>
               {/* The same height of map */}
               {/* Don't Delete */}
               <Mapp word={this.getPlacesBySearch} />
             </div>
-            <div className="col-4 mt-5 pt-3">
-              <h4>Filters</h4>
+            <div className="col-12 col-md-4 mt-5 pt-5">
+              <h4 className="mt-3">Filters</h4>
               <hr />
               {this.renderFeatures()}
             </div>

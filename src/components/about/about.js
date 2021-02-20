@@ -8,6 +8,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { RiLinkedinBoxFill } from "react-icons/ri";
+import { NavLink as Link } from "react-router-dom";
 
 export default class About extends Component {
   render() {
@@ -38,18 +39,10 @@ export default class About extends Component {
             <div className="banner-text my-5">
               <h1 className="responsive-headline">Where To ?</h1>
               <h3>
-                I'm a Manila based <span>graphic designer</span>,{" "}
-                <span>illustrator</span> and <span>webdesigner</span> creating
-                awesome and effective visual identities for companies of all
-                sizes around the globe. Let's{" "}
-                <a className="smoothscroll" href="#about">
-                  start scrolling
-                </a>
-                and learn more{" "}
-                <a className="smoothscroll" href="#about">
-                  about me
-                </a>
-                .
+                Experiences are not your typical tour. Whether you’re on a trip,
+                exploring your own city, or staying at home, learn something new
+                from an expert host. You can learn more&nbsp;
+                <Link to="/">about us</Link>
               </h3>
               <div className="social">
                 <div className="d1 mt-1">

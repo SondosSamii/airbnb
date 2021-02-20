@@ -154,7 +154,10 @@ class GetPlaceDetails extends Component {
           </div>
           <div className="container">
             <div className="row">
-              <div className="col-12 col-md-6" style={{ position: "relative" }}>
+              <div
+                className="col-12 col-md-5 col-lg-6 mb-3"
+                style={{ position: "relative" }}
+              >
                 <div className="row justify-content-center mb-5 pb-5 mb-md-0 pb-md-0">
                   <div className="outer-circle first">
                     <div className="inner-circle">
@@ -213,7 +216,10 @@ class GetPlaceDetails extends Component {
                 </div>
               </div>
 
-              <div className="col-12 col-md-6" style={{ height: "350px" }}>
+              <div
+                className="col-12 col-md-7 col-lg-6 mt-5 mt-md-0"
+                style={{ height: "350px" }}
+              >
                 {/* Don't Delete */}
                 <Map
                   google={this.props.google}
@@ -244,7 +250,7 @@ class GetPlaceDetails extends Component {
     if (this.state.placedata) var place = this.state.placedata;
     return (
       <div className="container">
-        <div className="row py-5">
+        <div className="row justify-content-center pt-3 pb-5">
           <div className="col-12 col-md-8">
             <div className="row">
               <div className="col">
@@ -290,7 +296,7 @@ class GetPlaceDetails extends Component {
             </div>
           </div>
 
-          <div className="col-12 col-md-4">
+          <div className="col-11 col-md-4">
             <h2 className="py-3">Features</h2>
             {this.state.placedata.has_tv && (
               <h4>
@@ -364,7 +370,7 @@ class GetPlaceDetails extends Component {
                 {placeReviews.slice(0, 6).map((rev, index) => (
                   <div className="col-12 col-lg-6 ">
                     <div
-                      className="row align-items-center"
+                      className="row justify-content-between align-items-center"
                       style={{ position: "relative" }}
                     >
                       <div className="col-3">
@@ -392,7 +398,7 @@ class GetPlaceDetails extends Component {
                           ></div>
                         )}
                       </div>
-                      <div className="col-9">
+                      <div className="col-8 col-sm-9">
                         <p className="h4">{username[index]}</p>
                         <p className="text-muted mb-0">
                           {rev.createdAt.slice(0, 10)}
@@ -413,10 +419,7 @@ class GetPlaceDetails extends Component {
 
                     <div className="row">
                       <div className="col">
-                        <p
-                          className="lead py-3"
-                          style={{ marginLeft: "1.15em" }}
-                        >
+                        <p className="lead py-3 ml-0 ml-sm-5 pl-0 pl-sm-3">
                           {rev.comment}
                         </p>
                       </div>
