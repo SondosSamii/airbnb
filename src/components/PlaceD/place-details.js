@@ -41,6 +41,10 @@ const containerStyle = {
   height: "350px", // The same height of its parent in render
 };
 
+const bg = {
+  backgroundImage: `url('https://node-airbnb.herokuapp.com/images/f422d8e2-2553-4713-9e79-0d778c6bd701-27482105741007777776989.jpg')`,
+};
+
 class GetPlaceDetails extends Component {
   constructor(props) {
     super(props);
@@ -92,7 +96,7 @@ class GetPlaceDetails extends Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      autoplay: true,
+      // autoplay: true,
       autoplaySpeed: 2500,
     };
     if (this.state.img) {
@@ -100,15 +104,24 @@ class GetPlaceDetails extends Component {
         <div style={{ position: "relative", overflow: "hidden" }}>
           <Slider {...settings}>
             {this.state.img.map((images) => {
-              return (
-                <div>
-                  <img
-                    className="slideshow-bg w-100"
-                    src={`https://node-airbnb.herokuapp.com/${images}`}
-                    alt=""
-                  />
-                </div>
-              );
+              if (images) {
+                return (
+                  <div
+                    // style={{
+                    //   backgroundImage: `url('https://node-airbnb.herokuapp.com/${images}')`,
+                    //   backgroundSize: "cover",
+                    //   backgroundPosition: "center",
+                    // }}
+                    className="slideshow-bg"
+                  >
+                    <img
+                      className="slideshow-bg"
+                      src={`https://node-airbnb.herokuapp.com/${images}`}
+                      alt=""
+                    />
+                  </div>
+                );
+              }
             })}
           </Slider>
           {/* <h1 className="Place-name">{this.state.placedata.name}</h1> */}

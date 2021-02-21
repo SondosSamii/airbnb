@@ -324,7 +324,7 @@ class ViewProfile extends Component {
           )}
         </div>
         <div className="row justify-content-center p-4 ">
-          <div className="col-12 col-md-6 text-center m-5 ">
+          <div className="col-12 col-md-6 text-center mt-5 mb-3">
             <span className="wishlist_header">My WishList</span>
             <img
               src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png"
@@ -342,7 +342,7 @@ class ViewProfile extends Component {
         <div className="container pb-5">
           <div className="row justify-content-center">
             {this.state.reserve_Places.length > 0 && (
-              <div className="col-12 col-md-6 text-center m-5 ">
+              <div className="col-12 col-md-6 text-center mt-5 mb-3">
                 <span className="wishlist_header">My Trips</span>
                 <img
                   src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png"
@@ -358,7 +358,7 @@ class ViewProfile extends Component {
               </div>
             )}
             {this.state.All_User_places.length > 0 && (
-              <div className="col-12 col-md-6 text-center m-5 ">
+              <div className="col-12 col-md-6 text-center mt-5 mb-3">
                 <span className="wishlist_header">My Places</span>
                 <img
                   src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png"
