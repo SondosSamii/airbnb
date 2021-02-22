@@ -68,6 +68,7 @@ class Navbar extends Component {
     localStorage.removeItem("token");
     localStorage.removeItem("user_id");
     this.setState({ isAuth: false });
+    window.location.reload();
   }
 
   handleClick(val) {
