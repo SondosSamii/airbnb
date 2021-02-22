@@ -140,30 +140,36 @@ class GetPlaceDetails extends Component {
       //   const place = this.state.placedata;
       return (
         <>
-          <div className="row justify-content-center align-items-center py-5">
-            <h2
-              style={{
-                fontSize: "2.5rem",
-                fontFamily: "'Merienda', cursive",
-                width: "fit-content",
-                padding: "0.5em 1em",
-                borderRadius: "var(--border-radius)",
-                boxShadow: "var(--shadow)",
-                marginBottom: 0,
-              }}
-            >
-              {this.state.placedata.name}
-            </h2>
-            {this.state.owner && (
-              <>
-                <Link
-                  to={`/place-edit/${this.props.match.params.id}`}
-                  className="place-edit-icon"
+          <div className="container">
+            <div className="row justify-content-center align-items-center py-5">
+              <div className="col-auto">
+                <h2
+                  style={{
+                    fontSize: "2.5rem",
+                    fontFamily: "'Merienda', cursive",
+                    width: "fit-content",
+                    padding: "0.5em 1em",
+                    borderRadius: "var(--border-radius)",
+                    boxShadow: "var(--shadow)",
+                    marginBottom: 0,
+                  }}
                 >
-                  <FiEdit />
-                </Link>
-              </>
-            )}
+                  {this.state.placedata.name}
+                </h2>
+              </div>
+              <div className="col-auto mt-3 mt-sm-0">
+                {this.state.owner && (
+                  <>
+                    <Link
+                      to={`/place-edit/${this.props.match.params.id}`}
+                      className="place-edit-icon"
+                    >
+                      <FiEdit />
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
           <div className="container">
             <div className="row">
@@ -264,7 +270,7 @@ class GetPlaceDetails extends Component {
     return (
       <div className="container">
         <div className="row justify-content-center pt-3 pb-5">
-          <div className="col-12 col-md-8">
+          <div className="col-12 col-lg-8">
             <div className="row">
               <div className="col">
                 <h2 className="py-3">Description</h2>
@@ -272,7 +278,7 @@ class GetPlaceDetails extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col">
+              <div className="col-12 col-md-6">
                 <h4 className="place-header">
                   <IoIosBed />
                   <br />
@@ -292,7 +298,7 @@ class GetPlaceDetails extends Component {
                   <span>{place.total_bathrooms}</span>
                 </h4>
               </div>
-              <div className="col">
+              <div className="col-12 col-md-6">
                 <h4 className="place-header">
                   <GiForkKnifeSpoon />
                   <br />
@@ -309,7 +315,7 @@ class GetPlaceDetails extends Component {
             </div>
           </div>
 
-          <div className="col-11 col-md-4">
+          <div className="col-12 col-lg-4">
             <h2 className="py-3">Features</h2>
             {this.state.placedata.has_tv && (
               <h4>

@@ -220,7 +220,7 @@ class EditPlace extends Component {
       lat: "",
       lng: "",
     };
-    params.query = this.state.country;
+    params.query = this.state.city;
     await axios
       .get("http://api.positionstack.com/v1/forward", { params })
       .then(async (response) => {

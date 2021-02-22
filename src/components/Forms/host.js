@@ -58,7 +58,7 @@ class Host extends Component {
   async componentDidMount() {
     this.setState({ token: localStorage.getItem("token") });
     if (!localStorage.getItem("token")) {
-      alert("please login frist!");
+      alert("please login first!");
       this.props.history.push("/login");
     }
   }
@@ -195,7 +195,7 @@ class Host extends Component {
       lat: "",
       lng: "",
     };
-    params.query = this.state.country;
+    params.query = this.state.city;
     await axios
       .get("http://api.positionstack.com/v1/forward", { params })
       .then(async (response) => {
