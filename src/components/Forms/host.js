@@ -311,8 +311,8 @@ class Host extends Component {
           <ToastContainer />
           <form className="form-signin" action="" method="POST">
             <div className="container signinClass">
-              <div className="row">
-                <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+              <div className="row justify-content-center">
+                <div className="col-12 col-md-9 col-lg-8">
                   <div className="card card-signin my-5">
                     <div
                       className=" toggel "
@@ -394,8 +394,8 @@ class Host extends Component {
               </div>
             </div>
             <div className="container signinClass">
-              <div className="row">
-                <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+              <div className="row justify-content-center">
+                <div className="col-12 col-md-9 col-lg-8">
                   <div className="card card-signin ">
                     <div
                       className=" toggel "
@@ -457,8 +457,8 @@ class Host extends Component {
               </div>
             </div>
             <div className="container signinClass">
-              <div className="row">
-                <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+              <div className="row justify-content-center">
+                <div className="col-12 col-md-9 col-lg-8">
                   <div className="card card-signin my-5">
                     <div
                       className=" toggel "
@@ -470,7 +470,7 @@ class Host extends Component {
                     </div>
                     <div className="card-body" id="rooms">
                       <div className="form-label-group">
-                        <label className="ml-5">Number of Rooms:</label>
+                        <label className="ml-0 ml-md-5">Number of Rooms:</label>
                         <div
                           className="plus btn"
                           onClick={() => this.AddNumber("room")}
@@ -500,7 +500,9 @@ class Host extends Component {
                       )}
 
                       <div className="form-label-group">
-                        <label className="ml-5">Number of Bathrooms:</label>
+                        <label className="ml-0 ml-md-5">
+                          Number of Bathrooms:
+                        </label>
                         <div
                           className="plus btn "
                           onClick={() => this.AddNumber("bath")}
@@ -530,7 +532,7 @@ class Host extends Component {
                       )}
 
                       <div className="form-label-group">
-                        <label className="ml-5">Number of Beds:</label>
+                        <label className="ml-0 ml-md-5">Number of Beds:</label>
                         <div
                           className="plus btn "
                           onClick={() => this.AddNumber("bed")}
@@ -560,7 +562,9 @@ class Host extends Component {
                       )}
 
                       <div className="form-label-group">
-                        <label className="ml-5">Number of Kitchens:</label>
+                        <label className="ml-0 ml-md-5">
+                          Number of Kitchens:
+                        </label>
                         <div
                           className="plus btn "
                           onClick={() => this.AddNumber("kit")}
@@ -590,7 +594,9 @@ class Host extends Component {
                       )}
 
                       <div className="form-label-group">
-                        <label className="ml-5">Number of Max Guests:</label>
+                        <label className="ml-0 ml-md-5">
+                          Number of Max Guests:
+                        </label>
                         <div
                           className="plus btn "
                           onClick={() => this.AddNumber("guest")}
@@ -625,8 +631,8 @@ class Host extends Component {
             </div>
 
             <div className="container signinClass">
-              <div className="row">
-                <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+              <div className="row justify-content-center">
+                <div className="col-12 col-md-9 col-lg-8">
                   <div className="card card-signin ">
                     <div
                       className=" toggel "
@@ -646,7 +652,7 @@ class Host extends Component {
                           checked={this.state.tv}
                           onChange={this.handleInputChange}
                         />
-                        <label className="ml-5">Tv</label>
+                        <label className="ml-3 ml-md-4 ml-lg-5">TV</label>
                       </div>
                       <div className="form-label-group">
                         <input
@@ -656,7 +662,7 @@ class Host extends Component {
                           checked={this.state.wifi}
                           onChange={this.handleInputChange}
                         />
-                        <label className="ml-5">WI FI</label>
+                        <label className="ml-3 ml-md-4 ml-lg-5">Wi-Fi</label>
                       </div>
                       <div className="form-label-group">
                         <input
@@ -666,7 +672,9 @@ class Host extends Component {
                           checked={this.state.aircon}
                           onChange={this.handleInputChange}
                         />
-                        <label className="ml-5">Air Conditioner</label>
+                        <label className="ml-3 ml-md-4 ml-lg-5">
+                          Air Conditioner
+                        </label>
                       </div>
                       <div className="form-label-group">
                         <input
@@ -676,7 +684,9 @@ class Host extends Component {
                           checked={this.state.heat}
                           onChange={this.handleInputChange}
                         />
-                        <label className="ml-5">Heat System</label>
+                        <label className="ml-3 ml-md-4 ml-lg-5">
+                          Heating System
+                        </label>
                       </div>
                       <div className="form-label-group">
                         <input
@@ -686,7 +696,9 @@ class Host extends Component {
                           checked={this.state.pets}
                           onChange={this.handleInputChange}
                         />
-                        <label className="ml-5">Allow Pets</label>
+                        <label className="ml-3 ml-md-4 ml-lg-5">
+                          Allow Pets
+                        </label>
                       </div>
                     </div>
                   </div>
@@ -695,8 +707,8 @@ class Host extends Component {
             </div>
 
             <div className="container signinClass mt-5">
-              <div className="row">
-                <div className="col-sm-9 col-md-8 col-lg-8 mx-auto">
+              <div className="row justify-content-center">
+                <div className="col-12 col-md-9 col-lg-8">
                   <div className="card card-signin ">
                     <div
                       className=" toggel "

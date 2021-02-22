@@ -8,6 +8,26 @@ import Places from "./places";
 import Cards from "./places-cards";
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  async componentDidMount() {
+    if (this.props.location.state) {
+      // this.props.location.state = null;
+      // console.log("yyyyyys");
+      // const previousPath = this.props.location;
+      // console.log("previous path:  "  , previousPath);
+      this.props.history.push({
+        pathname: "/",
+        state: null,
+      });
+      window.location.reload();
+    } else {
+      console.log("previous path:  ", this.props.location);
+      console.log("noooooooooooo");
+    }
+  }
   render() {
     document.title = "Where To?";
     return (

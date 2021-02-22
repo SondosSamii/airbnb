@@ -129,7 +129,7 @@ class Cards extends Component {
     if (places && places.length > 0) {
       return places.slice(0, 6).map((place, index) => {
         return (
-          <div className="col-9 col-sm-6 col-lg-4 mt-4" key={place._id}>
+          <div className="col-12 col-sm-6 col-lg-4 mt-4" key={place._id}>
             <div className="card-item">
               <div
                 className="card-item-highlight"

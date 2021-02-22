@@ -13,7 +13,7 @@ const Footer = () => {
         <div
           className="row align-items-center"
           style={{
-            justifyContent: "space-evenly",
+            justifyContent: "space-around",
           }}
         >
           <div>
@@ -24,27 +24,22 @@ const Footer = () => {
             <Link to="/team" className="nav-link">
               Our Team
             </Link>
-          </div>
-          <div>
             {/* <Link to="/terms" className="nav-link">Terms and Conditions</Link> */}
-            <p className="nav-link mb-0">
-              All Rights Reserved &copy; {new Date().getFullYear()}
-            </p>
           </div>
           <div>
-            <a
-              href="https://github.com/SondosSamii/airbnb"
-              className="nav-link h5 m-0"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <p className="nav-link h5 text-center m-0 icons">
               Powered By&nbsp;
-              <SiGithub />
-            </a>
-            <p className="nav-link text-center m-0">
               <a
                 href="https://github.com/SondosSamii/airbnb"
-                className="text-white h5"
+                className="text-white h5 ml-3"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <SiGithub />
+              </a>
+              <a
+                href="https://github.com/SondosSamii/airbnb"
+                className="text-white h5 ml-3"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -52,7 +47,7 @@ const Footer = () => {
               </a>
               <a
                 href="https://github.com/SondosSamii/airbnb"
-                className="text-white h5 mx-3"
+                className="text-white h5 ml-3"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -60,12 +55,15 @@ const Footer = () => {
               </a>
               <a
                 href="https://github.com/SondosSamii/airbnb"
-                className="text-white h5"
+                className="text-white h5 ml-3"
                 target="_blank"
                 rel="noreferrer"
               >
                 <SiInstagram />
               </a>
+            </p>
+            <p className="nav-link text-center small mb-0">
+              &copy; {new Date().getFullYear()} All Rights Reserved
             </p>
           </div>
         </div>

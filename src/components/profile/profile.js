@@ -114,7 +114,7 @@ class ViewProfile extends Component {
           .map((reservation_Element, index) => {
             if (this.state.reserve_Places[index]) {
               return (
-                <div className="col-9 col-sm-6 col-lg-4 mt-4" key={index}>
+                <div className="col-12 col-sm-6 col-lg-4 mt-4" key={index}>
                   <div className="card-item card-item-sm">
                     <Link
                       to={`/place-details/${this.state.reserve_Places[index]._id}`}
@@ -273,6 +273,7 @@ class ViewProfile extends Component {
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            position: "relative",
           }}
           className="bg-light about-content"
         >
@@ -314,19 +315,17 @@ class ViewProfile extends Component {
               </p>
             </div>
           </div>
-          <div style={{ position: "relative" }}>
-            {this.state.isLogin && (
-              <AiFillEdit
-                className="edit-icon"
-                data-toggle="modal"
-                data-target="#exampleModal"
-              />
-            )}
-          </div>
+          {this.state.isLogin && (
+            <AiFillEdit
+              className="edit-icon"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            />
+          )}
         </div>
         <div className="row justify-content-center p-4 ">
-          <div className="col-6 text-center m-5 ">
-            <span className="wishlist_header ">My WishList</span>
+          <div className="col-12 col-md-6 text-center mt-5 mb-3">
+            <span className="wishlist_header">My WishList</span>
             <img
               src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png"
               alt=""
@@ -343,8 +342,8 @@ class ViewProfile extends Component {
         <div className="container pb-5">
           <div className="row justify-content-center">
             {this.state.reserve_Places.length > 0 && (
-              <div className="col-6 text-center m-5 ">
-                <span className="wishlist_header ">My Trips</span>
+              <div className="col-12 col-md-6 text-center mt-5 mb-3">
+                <span className="wishlist_header">My Trips</span>
                 <img
                   src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png"
                   alt=""
@@ -359,8 +358,8 @@ class ViewProfile extends Component {
               </div>
             )}
             {this.state.All_User_places.length > 0 && (
-              <div className="col-6 text-center m-5 ">
-                <span className="wishlist_header ">My Places</span>
+              <div className="col-12 col-md-6 text-center mt-5 mb-3">
+                <span className="wishlist_header">My Places</span>
                 <img
                   src="https://educlever.beplusthemes.com/high-school/wp-content/uploads/2019/05/sapec.png"
                   alt=""

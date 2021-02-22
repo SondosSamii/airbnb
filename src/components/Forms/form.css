@@ -191,7 +191,7 @@
 }
 .form-label-group {
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 #host_form .form-control,
@@ -208,6 +208,7 @@ label {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
   font-weight: 200;
+  margin-top: 0.5em;
 }
 
 .checkboxs {
@@ -293,4 +294,63 @@ span.file-size {
   right: 40px;
   color: #999;
   padding-left: 0.5rem;
+}
+
+@media only screen and (max-width: 540px) {
+  .plus {
+    right: 0;
+  }
+
+  .number {
+    right: 50px;
+  }
+
+  .minus {
+    right: 100px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  label {
+    font-size: 1.2em;
+  }
+
+  .plus,
+  .number,
+  .minus {
+    width: 35px !important;
+    height: 35px !important;
+    line-height: 1;
+    padding: 0.25em;
+  }
+
+  .number {
+    right: 40px;
+  }
+
+  .minus {
+    right: 80px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  label {
+    font-size: 0.9em;
+  }
+
+  .plus,
+  .number,
+  .minus {
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0.15em;
+  }
+
+  .number {
+    right: 35px;
+  }
+
+  .minus {
+    right: 70px;
+  }
 }

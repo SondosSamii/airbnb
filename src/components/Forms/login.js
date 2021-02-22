@@ -107,7 +107,13 @@ class Login extends Component {
         token: this.props.client.token,
         user_id: this.props.client.user_id,
       });
-      this.props.history.replace("/");
+      // this.props.history.replace("/");
+      this.props.history.replace({
+        pathname: '/',
+        state: { 
+            from: this.props.location.pathname
+        }
+      })
     }
   };
 
